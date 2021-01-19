@@ -1,0 +1,161 @@
+type User 
+    @model 
+    @auth(rules: [{ allow: owner }]) {
+    id: ID!
+    username: String!
+    email: AWSEmail!
+    phoneNumber: AWSPhone
+    homes: [HomeOwner] @connection(keyName: "byHomeOwner", fields: ["id"])
+    ownElectricVehicle: Boolean!
+}
+
+# Create a join model and disable queries as we don't need them
+# can query through User.homes and Home.owners
+type HomeOwner
+    @model(queries: null)
+    @auth(rules: [{ allow: owner }])
+    @key(name: "byHome", fields: ["homeID", "homeOwnerID"]) 
+    @key(name: "byHomeOwner", fields: ["homeOwnerID", "homeID"]) {
+    id: ID!
+    homeID: ID!
+    homeOwnerID: ID!
+    home: Home! @connection(fields: ["homeID"])
+    homeOwner: User! @connection(fields: ["homeOwnerID"])
+}
+
+enum HomeType {
+    SINGLE_FAMILY
+    DUPLEX
+    TOWNHOUSE
+    APARTMENT_CONDO
+}
+
+enum HeatingFuelType {
+    GAS
+    ELECTRIC
+    PROPANE
+    OTHER
+}
+
+enum WaterHeaterFuelType {
+    GAS
+    ELECTRIC
+    OTHER
+}
+
+type Home 
+    @model 
+    @auth(rules: [
+        { allow: owner }, # defaults to use the "owner" field, can access any operation
+        { allow: owner, ownerField: "homeowners", operations: [update, read]} # all other homeowners can update and read
+    ]){
+    id: ID!
+    homeOwners: [HomeOwner] @connection(keyName: "byHome", fields: ["id"])
+    responses: [Response] @connection(keyName: "byHome", fields: ["id"])
+    badges: [HomeBadge] @connection(keyName: "byHome", fields: ["id"])
+    homeType: HomeType!
+    addressLine1: String!
+    addressLine2: String
+    city: String!
+    addressState: String!
+    country: String! # only support united states for now
+    zipcode: String!
+    yearBuilt: Int!
+    electricProvider: String!
+    gasProvider: String!
+    outDoorArea: Float!
+    livableArea: Float!
+    bedroomCount: Int!
+    bathroomCount: Int!
+    heatingFuelType: HeatingFuelType!
+    heaterAge: Int!
+    waterHeaterFuelType: WaterHeaterFuelType!
+    waterHeaterAge: Int!
+    hasAirConditioner: Boolean!
+    hasPool: Boolean!
+    hasHotTub: Boolean!
+    annualElectricalEnergyUsage: Float!
+    annualGasPropaneEnergyUsage: Float!
+    annualWaterUsage: Float!
+}
+
+# Available questions/questions to score a home's efficiency
+enum Tag {
+    ENERGY
+    RESILIENCY
+    HEALTH
+    MATERIALS
+    EMBODIED_CARBON
+    WATER
+}
+
+
+type Question 
+    @model 
+    @auth(rules: [
+        { allow: owner }, # defaults to use the "owner" field, can access any operation
+        { allow: groups, groups: ["Admin"] }, # Admin users can access any operation
+        { allow: private, operations: [read] } # allow all authenticated users to read questions
+    ]) {
+    id: ID!
+    text: String!
+    tags: [Tag]
+    responses: [Response] @connection(keyName: "byQuestion", fields: ["id"])
+    options: [AWSJSON] # options here is mostly used for multiple choice questions
+    metadata: AWSJSON # used to store info regarding how to score a question or weather it should have popup e.g. {"format": "percentage", "increment_step": 5, "minPercentage": 0, "maxPercentage": 100, popup": true }
+}
+
+# A home's response to a question
+# query all of a home's responses: home.responses (a home has responses for some questions)
+# query all of a question's responses: question.responses (a question has responses from various homes, p.s. currently not needed for user app, but might be helpful for future analytics)
+type Response 
+    @model 
+    @key(name: "byHome", fields: ["homeID", "questionID"]) 
+    @key(name: "byQuestion", fields: ["questionID", "homeID"])
+    @auth(rules: [
+        { allow: owner }, # defaults to use the "owner" field
+        { allow: groups, groups: ["Admin"] }  # Admin users can access any operation
+    ]) {
+    id: ID!
+    homeID: ID!
+    questionID: ID!
+    home: Home @connection(fields: ["homeID"])
+    question: Question @connection(fields: ["questionID"])
+    answers: [AWSJSON] # answers in this response, use array in case of question allowing multiple answers within a response
+}
+
+# used to hold info for any assets/images in S3
+# will be used for future image uploads (user generated/dynamic assets)
+type S3Object {
+    bucket: String!
+    region: String!
+    key: String!
+}
+
+type Badge 
+    @model 
+    @auth(rules: [
+        { allow: owner }, # defaults to use the "owner" field, can access any operation
+        { allow: groups, groups: ["Admin"] }, # Admin users can access any operation
+        { allow: private, operations: [read] } # allow all authenticated users to read badges
+    ]) {
+    id: ID!
+    name: String!
+    type: Tag!
+    criteria: Int! # number of points needed to earn the badge
+    logoName: String! # logo name should follow the convention similar to {badge.name}.{svg|png|jpg}, these static assets can be stored in the frontend
+    homes: [HomeBadge] @connection(keyName: "byBadge", fields: ["id"]) # all homes that owns this badge (currently not needed for user app, but might be helpful for future analytics)
+}
+
+# Create a join model and disable queries as we don't need them
+type HomeBadge
+    @model(queries: null)
+    @auth(rules: [{ allow: owner }])
+    @key(name: "byHome", fields: ["homeID", "badgeID"])
+    @key(name: "byBadge", fields: ["badgeID", "homeID"]) {
+    id: ID!
+    homeID: ID!
+    badgeID: ID!
+    home: Home! @connection(fields: ["homeID"])
+    badge: Badge! @connection(fields: ["badgeID"])
+}
