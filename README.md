@@ -48,10 +48,10 @@ git clone https://github.com/TritonSE/Your-Clear-Way.git
 npm install
 ```
 
-4. Pull the amplify project
+4. Pull the amplify project with dev environment
 
 ```sh
-amplify pull
+amplify pull --appId dimr97ah3agc5 --envName dev
 ```
 
 > `amplify pull` is similar to `git pull`, fetching upstream backend environment definition changes from the cloud and updating the local environment to match that definition.
