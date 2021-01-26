@@ -1,4 +1,4 @@
-## Your Clear Way Mobile App
+# Your Clear Way Mobile App
 
 A mobile application that homeowners can use to show progress on making their home more eco-friendly and achieving different levels based on the significance and number of upgrades they make. This app will implement a point rating system behind-the-scenes and have badges and levels to indicate user progress. The application is written with GraphQL, AWS AppSync, & AWS Amplify.
 
@@ -11,6 +11,11 @@ A mobile application that homeowners can use to show progress on making their ho
 - React Apollo
 - Expo
 
+Dependencies you'll need:
+* Node 14+
+* NPM 6+
+* Expo SDK 40
+
 ## Screens
 
 WIP
@@ -19,13 +24,17 @@ WIP
 
 This project contains an Amplify project (`/amplify`) already configured & ready to be deployed. Deploying this project will create the following resources in your account: an authentication configuration using Amazon Cognito, an AWS AppSync GraphQL API, & a DynamoDB table.
 
-1. Make sure you are on the newest version of the AWS Amplify CLI
+1. Make sure you are on the newest version of the AWS Amplify CLI and Expo CLI
 
 ```sh
 npm install -g @aws-amplify/cli
 ```
-
 > You must also have the CLI configured with a user from your AWS account (`amplify configure`). For a walkthrough of how to do this, check out [this](https://www.youtube.com/watch?v=fWbM5DLh25U) video.
+
+```sh
+npm install --global expo-cli
+```
+> For more information with Expo installation, check out [this](https://docs.expo.io/get-started/installation/) documentation.
 
 2. Clone Your Clear Way
 
@@ -60,7 +69,7 @@ amplify api gql-compile
 ? Choose the code generation language target typescript
 ? Enter the file name pattern of graphql queries, mutations and subscriptions src\graphql\**\*.ts     
 ? Do you want to generate/update all possible GraphQL operations - queries, mutations and subscriptions Yes
-? Enter maximum statement depth [increase from default if your schema is deeply nested] 10
+? Enter maximum statement depth [increase from default if your schema is deeply nested] 3
 ? Enter the file name for the generated code src\API.ts
 ? Do you want to generate code for your newly created GraphQL API Yes
 √ Generated GraphQL operations successfully and saved at src\graphql
