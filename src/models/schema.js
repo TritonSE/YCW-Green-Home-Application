@@ -636,6 +636,7 @@ export const schema = {
                             },
                             {
                                 "allow": "private",
+                                "provider": "iam",
                                 "operations": [
                                     "read"
                                 ]
@@ -826,6 +827,7 @@ export const schema = {
                             },
                             {
                                 "allow": "private",
+                                "provider": "iam",
                                 "operations": [
                                     "read"
                                 ]

@@ -95,7 +95,7 @@ type Question
     @auth(rules: [
         { allow: owner }, # defaults to use the "owner" field, can access any operation
         { allow: groups, groups: ["Admin"] }, # Admin users can access any operation
-        { allow: private, operations: [read] } # allow all authenticated users to read questions
+        { allow: private, provider: iam, operations: [read] } # allow all authenticated users (Cognito User Pools) and IAM roles to read questions
     ]) {
     id: ID!
     text: String!
@@ -137,7 +137,7 @@ type Badge
     @auth(rules: [
         { allow: owner }, # defaults to use the "owner" field, can access any operation
         { allow: groups, groups: ["Admin"] }, # Admin users can access any operation
-        { allow: private, operations: [read] } # allow all authenticated users to read badges
+        { allow: private, provider: iam, operations: [read] } # allow all authenticated users (Cognito User Pools) and IAM roles to read badges
     ]) {
     id: ID!
     name: String!

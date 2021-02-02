@@ -14,6 +14,34 @@
     "categories": {
       "auth": {
         "yourclearway677feefc": {}
+      },
+      "function": {
+        "yourclearwaygamification": {
+          "deploymentBucketName": "amplify-yourclearway-dev-225606-deployment",
+          "s3Key": "amplify-builds/yourclearwaygamification-build.zip"
+        }
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "yourclearwaygamification": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "awsAccounts",
+                  "accounts": [
+                    "506173601430"
+                  ]
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "WA7ifF3fry3Zgyj1nlgwepgxhvMKbuDxllQdC2DrcK0="
+            }
+          }
+        }
       }
     }
   }
