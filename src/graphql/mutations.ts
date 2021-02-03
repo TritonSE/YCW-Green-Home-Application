@@ -2,6 +2,178 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createResponse = /* GraphQL */ `
+  mutation CreateResponse($input: CreateResponseInput!) {
+    createResponse(input: $input) {
+      response {
+        id
+        homeID
+        questionID
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        home {
+          id
+          homeType
+          addressLine1
+          addressLine2
+          city
+          addressState
+          country
+          zipcode
+          yearBuilt
+          electricProvider
+          gasProvider
+          outDoorArea
+          livableArea
+          bedroomCount
+          bathroomCount
+          heatingFuelType
+          heaterAge
+          waterHeaterFuelType
+          waterHeaterAge
+          hasAirConditioner
+          hasPool
+          hasHotTub
+          annualElectricalEnergyUsage
+          annualGasPropaneEnergyUsage
+          annualWaterUsage
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+          homeowners
+        }
+        question {
+          id
+          text
+          tags
+          options
+          metadata
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      rewards {
+        points
+        tag
+      }
+      newBadges {
+        id
+        name
+        type
+        criteria
+        logoName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        homes {
+          nextToken
+          startedAt
+        }
+      }
+    }
+  }
+`;
+export const updateResponse = /* GraphQL */ `
+  mutation UpdateResponse($input: UpdateResponseInput!) {
+    updateResponse(input: $input) {
+      response {
+        id
+        homeID
+        questionID
+        answers
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        home {
+          id
+          homeType
+          addressLine1
+          addressLine2
+          city
+          addressState
+          country
+          zipcode
+          yearBuilt
+          electricProvider
+          gasProvider
+          outDoorArea
+          livableArea
+          bedroomCount
+          bathroomCount
+          heatingFuelType
+          heaterAge
+          waterHeaterFuelType
+          waterHeaterAge
+          hasAirConditioner
+          hasPool
+          hasHotTub
+          annualElectricalEnergyUsage
+          annualGasPropaneEnergyUsage
+          annualWaterUsage
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+          homeowners
+        }
+        question {
+          id
+          text
+          tags
+          options
+          metadata
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      rewards {
+        points
+        tag
+      }
+      newBadges {
+        id
+        name
+        type
+        criteria
+        logoName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        homes {
+          nextToken
+          startedAt
+        }
+      }
+    }
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!
@@ -716,252 +888,6 @@ export const deleteQuestion = /* GraphQL */ `
         nextToken
         startedAt
       }
-    }
-  }
-`;
-export const createResponse = /* GraphQL */ `
-  mutation CreateResponse(
-    $input: CreateResponseInput!
-    $condition: ModelResponseConditionInput
-  ) {
-    createResponse(input: $input, condition: $condition) {
-      id
-      homeID
-      questionID
-      answers
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      home {
-        id
-        homeType
-        addressLine1
-        addressLine2
-        city
-        addressState
-        country
-        zipcode
-        yearBuilt
-        electricProvider
-        gasProvider
-        outDoorArea
-        livableArea
-        bedroomCount
-        bathroomCount
-        heatingFuelType
-        heaterAge
-        waterHeaterFuelType
-        waterHeaterAge
-        hasAirConditioner
-        hasPool
-        hasHotTub
-        annualElectricalEnergyUsage
-        annualGasPropaneEnergyUsage
-        annualWaterUsage
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        homeOwners {
-          nextToken
-          startedAt
-        }
-        owner
-        homeowners
-        responses {
-          nextToken
-          startedAt
-        }
-        badges {
-          nextToken
-          startedAt
-        }
-      }
-      question {
-        id
-        text
-        tags
-        options
-        metadata
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-        responses {
-          nextToken
-          startedAt
-        }
-      }
-      owner
-    }
-  }
-`;
-export const updateResponse = /* GraphQL */ `
-  mutation UpdateResponse(
-    $input: UpdateResponseInput!
-    $condition: ModelResponseConditionInput
-  ) {
-    updateResponse(input: $input, condition: $condition) {
-      id
-      homeID
-      questionID
-      answers
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      home {
-        id
-        homeType
-        addressLine1
-        addressLine2
-        city
-        addressState
-        country
-        zipcode
-        yearBuilt
-        electricProvider
-        gasProvider
-        outDoorArea
-        livableArea
-        bedroomCount
-        bathroomCount
-        heatingFuelType
-        heaterAge
-        waterHeaterFuelType
-        waterHeaterAge
-        hasAirConditioner
-        hasPool
-        hasHotTub
-        annualElectricalEnergyUsage
-        annualGasPropaneEnergyUsage
-        annualWaterUsage
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        homeOwners {
-          nextToken
-          startedAt
-        }
-        owner
-        homeowners
-        responses {
-          nextToken
-          startedAt
-        }
-        badges {
-          nextToken
-          startedAt
-        }
-      }
-      question {
-        id
-        text
-        tags
-        options
-        metadata
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-        responses {
-          nextToken
-          startedAt
-        }
-      }
-      owner
-    }
-  }
-`;
-export const deleteResponse = /* GraphQL */ `
-  mutation DeleteResponse(
-    $input: DeleteResponseInput!
-    $condition: ModelResponseConditionInput
-  ) {
-    deleteResponse(input: $input, condition: $condition) {
-      id
-      homeID
-      questionID
-      answers
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      home {
-        id
-        homeType
-        addressLine1
-        addressLine2
-        city
-        addressState
-        country
-        zipcode
-        yearBuilt
-        electricProvider
-        gasProvider
-        outDoorArea
-        livableArea
-        bedroomCount
-        bathroomCount
-        heatingFuelType
-        heaterAge
-        waterHeaterFuelType
-        waterHeaterAge
-        hasAirConditioner
-        hasPool
-        hasHotTub
-        annualElectricalEnergyUsage
-        annualGasPropaneEnergyUsage
-        annualWaterUsage
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        homeOwners {
-          nextToken
-          startedAt
-        }
-        owner
-        homeowners
-        responses {
-          nextToken
-          startedAt
-        }
-        badges {
-          nextToken
-          startedAt
-        }
-      }
-      question {
-        id
-        text
-        tags
-        options
-        metadata
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-        responses {
-          nextToken
-          startedAt
-        }
-      }
-      owner
     }
   }
 `;

@@ -1,0 +1,53 @@
+{
+  "permissions": {
+    "auth": {
+      "yourclearway677feefc": [
+        "read"
+      ]
+    },
+    "api": {
+      "YourClearWayAPI": [
+        "create",
+        "read",
+        "update"
+      ]
+    },
+    "storage": {
+      "User:@model(appsync)": [
+        "read"
+      ],
+      "HomeOwner:@model(appsync)": [
+        "read"
+      ],
+      "Home:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "Question:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "Response:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "Badge:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "HomeBadge:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "yourclearwaybusinesslogic",
+      "version": 1
+    }
+  ]
+}

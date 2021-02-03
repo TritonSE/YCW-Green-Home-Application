@@ -43,7 +43,7 @@
         },
         "LayerName": {
           "Fn::Sub": [
-            "yourclearwaygamification-${env}",
+            "yourclearwaybusinesslogic-${env}",
             {
               "env": {
                 "Ref": "env"

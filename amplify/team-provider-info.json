@@ -16,15 +16,15 @@
         "yourclearway677feefc": {}
       },
       "function": {
-        "yourclearwaygamification": {
+        "yourclearwaybusinesslogic": {
           "deploymentBucketName": "amplify-yourclearway-dev-225606-deployment",
-          "s3Key": "amplify-builds/yourclearwaygamification-build.zip"
+          "s3Key": "amplify-builds/yourclearwaybusinesslogic-build.zip"
         }
       }
     },
     "nonCFNdata": {
       "function": {
-        "yourclearwaygamification": {
+        "yourclearwaybusinesslogic": {
           "layerVersionMap": {
             "1": {
               "permissions": [
@@ -38,7 +38,7 @@
                   "type": "private"
                 }
               ],
-              "hash": "WA7ifF3fry3Zgyj1nlgwepgxhvMKbuDxllQdC2DrcK0="
+              "hash": "X/6hs1Zl11FsygNh/V2ZK06oxth3hVGYXeAAzS+VpSo="
             }
           }
         }

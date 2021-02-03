@@ -1,9 +1,0 @@
-{
-  "lambdaLayers": [
-    {
-      "type": "ProjectLayer",
-      "resourceName": "yourclearwaygamification",
-      "version": 1
-    }
-  ]
-}

@@ -2,6 +2,53 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
+export type CreateResponseInput = {
+  id?: string | null,
+  homeID: string,
+  questionID: string,
+  answers?: Array< string | null > | null,
+};
+
+export enum HomeType {
+  SINGLE_FAMILY = "SINGLE_FAMILY",
+  DUPLEX = "DUPLEX",
+  TOWNHOUSE = "TOWNHOUSE",
+  APARTMENT_CONDO = "APARTMENT_CONDO",
+}
+
+
+export enum HeatingFuelType {
+  GAS = "GAS",
+  ELECTRIC = "ELECTRIC",
+  PROPANE = "PROPANE",
+  OTHER = "OTHER",
+}
+
+
+export enum WaterHeaterFuelType {
+  GAS = "GAS",
+  ELECTRIC = "ELECTRIC",
+  OTHER = "OTHER",
+}
+
+
+export enum Tag {
+  ENERGY = "ENERGY",
+  RESILIENCY = "RESILIENCY",
+  HEALTH = "HEALTH",
+  MATERIALS = "MATERIALS",
+  EMBODIED_CARBON = "EMBODIED_CARBON",
+  WATER = "WATER",
+}
+
+
+export type UpdateResponseInput = {
+  id: string,
+  homeID?: string | null,
+  questionID?: string | null,
+  answers?: Array< string | null > | null,
+};
+
 export type CreateUserInput = {
   id?: string | null,
   username: string,
@@ -112,29 +159,6 @@ export type ModelIDInput = {
   attributeType?: ModelAttributeTypes | null,
   size?: ModelSizeInput | null,
 };
-
-export enum HomeType {
-  SINGLE_FAMILY = "SINGLE_FAMILY",
-  DUPLEX = "DUPLEX",
-  TOWNHOUSE = "TOWNHOUSE",
-  APARTMENT_CONDO = "APARTMENT_CONDO",
-}
-
-
-export enum HeatingFuelType {
-  GAS = "GAS",
-  ELECTRIC = "ELECTRIC",
-  PROPANE = "PROPANE",
-  OTHER = "OTHER",
-}
-
-
-export enum WaterHeaterFuelType {
-  GAS = "GAS",
-  ELECTRIC = "ELECTRIC",
-  OTHER = "OTHER",
-}
-
 
 export type UpdateHomeOwnerInput = {
   id: string,
@@ -289,16 +313,6 @@ export type CreateQuestionInput = {
   _version?: number | null,
 };
 
-export enum Tag {
-  ENERGY = "ENERGY",
-  RESILIENCY = "RESILIENCY",
-  HEALTH = "HEALTH",
-  MATERIALS = "MATERIALS",
-  EMBODIED_CARBON = "EMBODIED_CARBON",
-  WATER = "WATER",
-}
-
-
 export type ModelQuestionConditionInput = {
   text?: ModelStringInput | null,
   tags?: ModelTagListInput | null,
@@ -326,36 +340,6 @@ export type UpdateQuestionInput = {
 };
 
 export type DeleteQuestionInput = {
-  id?: string | null,
-  _version?: number | null,
-};
-
-export type CreateResponseInput = {
-  id?: string | null,
-  homeID: string,
-  questionID: string,
-  answers?: Array< string | null > | null,
-  _version?: number | null,
-};
-
-export type ModelResponseConditionInput = {
-  homeID?: ModelIDInput | null,
-  questionID?: ModelIDInput | null,
-  answers?: ModelStringInput | null,
-  and?: Array< ModelResponseConditionInput | null > | null,
-  or?: Array< ModelResponseConditionInput | null > | null,
-  not?: ModelResponseConditionInput | null,
-};
-
-export type UpdateResponseInput = {
-  id: string,
-  homeID?: string | null,
-  questionID?: string | null,
-  answers?: Array< string | null > | null,
-  _version?: number | null,
-};
-
-export type DeleteResponseInput = {
   id?: string | null,
   _version?: number | null,
 };
@@ -515,6 +499,198 @@ export type ModelHomeBadgeFilterInput = {
   and?: Array< ModelHomeBadgeFilterInput | null > | null,
   or?: Array< ModelHomeBadgeFilterInput | null > | null,
   not?: ModelHomeBadgeFilterInput | null,
+};
+
+export type CreateResponseMutationVariables = {
+  input: CreateResponseInput,
+};
+
+export type CreateResponseMutation = {
+  createResponse:  {
+    __typename: "MutateResponseOutput",
+    response:  {
+      __typename: "Response",
+      id: string,
+      homeID: string,
+      questionID: string,
+      answers: Array< string | null > | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      home:  {
+        __typename: "Home",
+        id: string,
+        homeType: HomeType,
+        addressLine1: string,
+        addressLine2: string | null,
+        city: string,
+        addressState: string,
+        country: string,
+        zipcode: string,
+        yearBuilt: number,
+        electricProvider: string,
+        gasProvider: string,
+        outDoorArea: number,
+        livableArea: number,
+        bedroomCount: number,
+        bathroomCount: number,
+        heatingFuelType: HeatingFuelType,
+        heaterAge: number,
+        waterHeaterFuelType: WaterHeaterFuelType,
+        waterHeaterAge: number,
+        hasAirConditioner: boolean,
+        hasPool: boolean,
+        hasHotTub: boolean,
+        annualElectricalEnergyUsage: number,
+        annualGasPropaneEnergyUsage: number,
+        annualWaterUsage: number,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner: string | null,
+        homeowners: string | null,
+      } | null,
+      question:  {
+        __typename: "Question",
+        id: string,
+        text: string,
+        tags: Array< Tag | null > | null,
+        options: Array< string | null > | null,
+        metadata: string | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner: string | null,
+      } | null,
+      owner: string | null,
+    } | null,
+    rewards:  Array< {
+      __typename: "Reward",
+      points: number,
+      tag: Tag,
+    } | null > | null,
+    newBadges:  Array< {
+      __typename: "Badge",
+      id: string,
+      name: string,
+      type: Tag,
+      criteria: number,
+      logoName: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+      homes:  {
+        __typename: "ModelHomeBadgeConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+    } | null > | null,
+  } | null,
+};
+
+export type UpdateResponseMutationVariables = {
+  input: UpdateResponseInput,
+};
+
+export type UpdateResponseMutation = {
+  updateResponse:  {
+    __typename: "MutateResponseOutput",
+    response:  {
+      __typename: "Response",
+      id: string,
+      homeID: string,
+      questionID: string,
+      answers: Array< string | null > | null,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      home:  {
+        __typename: "Home",
+        id: string,
+        homeType: HomeType,
+        addressLine1: string,
+        addressLine2: string | null,
+        city: string,
+        addressState: string,
+        country: string,
+        zipcode: string,
+        yearBuilt: number,
+        electricProvider: string,
+        gasProvider: string,
+        outDoorArea: number,
+        livableArea: number,
+        bedroomCount: number,
+        bathroomCount: number,
+        heatingFuelType: HeatingFuelType,
+        heaterAge: number,
+        waterHeaterFuelType: WaterHeaterFuelType,
+        waterHeaterAge: number,
+        hasAirConditioner: boolean,
+        hasPool: boolean,
+        hasHotTub: boolean,
+        annualElectricalEnergyUsage: number,
+        annualGasPropaneEnergyUsage: number,
+        annualWaterUsage: number,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner: string | null,
+        homeowners: string | null,
+      } | null,
+      question:  {
+        __typename: "Question",
+        id: string,
+        text: string,
+        tags: Array< Tag | null > | null,
+        options: Array< string | null > | null,
+        metadata: string | null,
+        _version: number,
+        _deleted: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        owner: string | null,
+      } | null,
+      owner: string | null,
+    } | null,
+    rewards:  Array< {
+      __typename: "Reward",
+      points: number,
+      tag: Tag,
+    } | null > | null,
+    newBadges:  Array< {
+      __typename: "Badge",
+      id: string,
+      name: string,
+      type: Tag,
+      criteria: number,
+      logoName: string,
+      _version: number,
+      _deleted: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner: string | null,
+      homes:  {
+        __typename: "ModelHomeBadgeConnection",
+        nextToken: string | null,
+        startedAt: number | null,
+      } | null,
+    } | null > | null,
+  } | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -1303,276 +1479,6 @@ export type DeleteQuestionMutation = {
       nextToken: string | null,
       startedAt: number | null,
     } | null,
-  } | null,
-};
-
-export type CreateResponseMutationVariables = {
-  input: CreateResponseInput,
-  condition?: ModelResponseConditionInput | null,
-};
-
-export type CreateResponseMutation = {
-  createResponse:  {
-    __typename: "Response",
-    id: string,
-    homeID: string,
-    questionID: string,
-    answers: Array< string | null > | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    home:  {
-      __typename: "Home",
-      id: string,
-      homeType: HomeType,
-      addressLine1: string,
-      addressLine2: string | null,
-      city: string,
-      addressState: string,
-      country: string,
-      zipcode: string,
-      yearBuilt: number,
-      electricProvider: string,
-      gasProvider: string,
-      outDoorArea: number,
-      livableArea: number,
-      bedroomCount: number,
-      bathroomCount: number,
-      heatingFuelType: HeatingFuelType,
-      heaterAge: number,
-      waterHeaterFuelType: WaterHeaterFuelType,
-      waterHeaterAge: number,
-      hasAirConditioner: boolean,
-      hasPool: boolean,
-      hasHotTub: boolean,
-      annualElectricalEnergyUsage: number,
-      annualGasPropaneEnergyUsage: number,
-      annualWaterUsage: number,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      homeOwners:  {
-        __typename: "ModelHomeOwnerConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      owner: string | null,
-      homeowners: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      badges:  {
-        __typename: "ModelHomeBadgeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    question:  {
-      __typename: "Question",
-      id: string,
-      text: string,
-      tags: Array< Tag | null > | null,
-      options: Array< string | null > | null,
-      metadata: string | null,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    owner: string | null,
-  } | null,
-};
-
-export type UpdateResponseMutationVariables = {
-  input: UpdateResponseInput,
-  condition?: ModelResponseConditionInput | null,
-};
-
-export type UpdateResponseMutation = {
-  updateResponse:  {
-    __typename: "Response",
-    id: string,
-    homeID: string,
-    questionID: string,
-    answers: Array< string | null > | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    home:  {
-      __typename: "Home",
-      id: string,
-      homeType: HomeType,
-      addressLine1: string,
-      addressLine2: string | null,
-      city: string,
-      addressState: string,
-      country: string,
-      zipcode: string,
-      yearBuilt: number,
-      electricProvider: string,
-      gasProvider: string,
-      outDoorArea: number,
-      livableArea: number,
-      bedroomCount: number,
-      bathroomCount: number,
-      heatingFuelType: HeatingFuelType,
-      heaterAge: number,
-      waterHeaterFuelType: WaterHeaterFuelType,
-      waterHeaterAge: number,
-      hasAirConditioner: boolean,
-      hasPool: boolean,
-      hasHotTub: boolean,
-      annualElectricalEnergyUsage: number,
-      annualGasPropaneEnergyUsage: number,
-      annualWaterUsage: number,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      homeOwners:  {
-        __typename: "ModelHomeOwnerConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      owner: string | null,
-      homeowners: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      badges:  {
-        __typename: "ModelHomeBadgeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    question:  {
-      __typename: "Question",
-      id: string,
-      text: string,
-      tags: Array< Tag | null > | null,
-      options: Array< string | null > | null,
-      metadata: string | null,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    owner: string | null,
-  } | null,
-};
-
-export type DeleteResponseMutationVariables = {
-  input: DeleteResponseInput,
-  condition?: ModelResponseConditionInput | null,
-};
-
-export type DeleteResponseMutation = {
-  deleteResponse:  {
-    __typename: "Response",
-    id: string,
-    homeID: string,
-    questionID: string,
-    answers: Array< string | null > | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    home:  {
-      __typename: "Home",
-      id: string,
-      homeType: HomeType,
-      addressLine1: string,
-      addressLine2: string | null,
-      city: string,
-      addressState: string,
-      country: string,
-      zipcode: string,
-      yearBuilt: number,
-      electricProvider: string,
-      gasProvider: string,
-      outDoorArea: number,
-      livableArea: number,
-      bedroomCount: number,
-      bathroomCount: number,
-      heatingFuelType: HeatingFuelType,
-      heaterAge: number,
-      waterHeaterFuelType: WaterHeaterFuelType,
-      waterHeaterAge: number,
-      hasAirConditioner: boolean,
-      hasPool: boolean,
-      hasHotTub: boolean,
-      annualElectricalEnergyUsage: number,
-      annualGasPropaneEnergyUsage: number,
-      annualWaterUsage: number,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      homeOwners:  {
-        __typename: "ModelHomeOwnerConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      owner: string | null,
-      homeowners: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      badges:  {
-        __typename: "ModelHomeBadgeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    question:  {
-      __typename: "Question",
-      id: string,
-      text: string,
-      tags: Array< Tag | null > | null,
-      options: Array< string | null > | null,
-      metadata: string | null,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    owner: string | null,
   } | null,
 };
 
@@ -3670,273 +3576,6 @@ export type OnDeleteQuestionSubscription = {
       nextToken: string | null,
       startedAt: number | null,
     } | null,
-  } | null,
-};
-
-export type OnCreateResponseSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnCreateResponseSubscription = {
-  onCreateResponse:  {
-    __typename: "Response",
-    id: string,
-    homeID: string,
-    questionID: string,
-    answers: Array< string | null > | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    home:  {
-      __typename: "Home",
-      id: string,
-      homeType: HomeType,
-      addressLine1: string,
-      addressLine2: string | null,
-      city: string,
-      addressState: string,
-      country: string,
-      zipcode: string,
-      yearBuilt: number,
-      electricProvider: string,
-      gasProvider: string,
-      outDoorArea: number,
-      livableArea: number,
-      bedroomCount: number,
-      bathroomCount: number,
-      heatingFuelType: HeatingFuelType,
-      heaterAge: number,
-      waterHeaterFuelType: WaterHeaterFuelType,
-      waterHeaterAge: number,
-      hasAirConditioner: boolean,
-      hasPool: boolean,
-      hasHotTub: boolean,
-      annualElectricalEnergyUsage: number,
-      annualGasPropaneEnergyUsage: number,
-      annualWaterUsage: number,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      homeOwners:  {
-        __typename: "ModelHomeOwnerConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      owner: string | null,
-      homeowners: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      badges:  {
-        __typename: "ModelHomeBadgeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    question:  {
-      __typename: "Question",
-      id: string,
-      text: string,
-      tags: Array< Tag | null > | null,
-      options: Array< string | null > | null,
-      metadata: string | null,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    owner: string | null,
-  } | null,
-};
-
-export type OnUpdateResponseSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnUpdateResponseSubscription = {
-  onUpdateResponse:  {
-    __typename: "Response",
-    id: string,
-    homeID: string,
-    questionID: string,
-    answers: Array< string | null > | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    home:  {
-      __typename: "Home",
-      id: string,
-      homeType: HomeType,
-      addressLine1: string,
-      addressLine2: string | null,
-      city: string,
-      addressState: string,
-      country: string,
-      zipcode: string,
-      yearBuilt: number,
-      electricProvider: string,
-      gasProvider: string,
-      outDoorArea: number,
-      livableArea: number,
-      bedroomCount: number,
-      bathroomCount: number,
-      heatingFuelType: HeatingFuelType,
-      heaterAge: number,
-      waterHeaterFuelType: WaterHeaterFuelType,
-      waterHeaterAge: number,
-      hasAirConditioner: boolean,
-      hasPool: boolean,
-      hasHotTub: boolean,
-      annualElectricalEnergyUsage: number,
-      annualGasPropaneEnergyUsage: number,
-      annualWaterUsage: number,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      homeOwners:  {
-        __typename: "ModelHomeOwnerConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      owner: string | null,
-      homeowners: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      badges:  {
-        __typename: "ModelHomeBadgeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    question:  {
-      __typename: "Question",
-      id: string,
-      text: string,
-      tags: Array< Tag | null > | null,
-      options: Array< string | null > | null,
-      metadata: string | null,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    owner: string | null,
-  } | null,
-};
-
-export type OnDeleteResponseSubscriptionVariables = {
-  owner?: string | null,
-};
-
-export type OnDeleteResponseSubscription = {
-  onDeleteResponse:  {
-    __typename: "Response",
-    id: string,
-    homeID: string,
-    questionID: string,
-    answers: Array< string | null > | null,
-    _version: number,
-    _deleted: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    home:  {
-      __typename: "Home",
-      id: string,
-      homeType: HomeType,
-      addressLine1: string,
-      addressLine2: string | null,
-      city: string,
-      addressState: string,
-      country: string,
-      zipcode: string,
-      yearBuilt: number,
-      electricProvider: string,
-      gasProvider: string,
-      outDoorArea: number,
-      livableArea: number,
-      bedroomCount: number,
-      bathroomCount: number,
-      heatingFuelType: HeatingFuelType,
-      heaterAge: number,
-      waterHeaterFuelType: WaterHeaterFuelType,
-      waterHeaterAge: number,
-      hasAirConditioner: boolean,
-      hasPool: boolean,
-      hasHotTub: boolean,
-      annualElectricalEnergyUsage: number,
-      annualGasPropaneEnergyUsage: number,
-      annualWaterUsage: number,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      homeOwners:  {
-        __typename: "ModelHomeOwnerConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      owner: string | null,
-      homeowners: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-      badges:  {
-        __typename: "ModelHomeBadgeConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    question:  {
-      __typename: "Question",
-      id: string,
-      text: string,
-      tags: Array< Tag | null > | null,
-      options: Array< string | null > | null,
-      metadata: string | null,
-      _version: number,
-      _deleted: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner: string | null,
-      responses:  {
-        __typename: "ModelResponseConnection",
-        nextToken: string | null,
-        startedAt: number | null,
-      } | null,
-    } | null,
-    owner: string | null,
   } | null,
 };
 

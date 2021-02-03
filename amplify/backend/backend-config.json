@@ -29,29 +29,29 @@
     }
   },
   "function": {
-    "yourclearwaygamification": {
+    "yourclearwaybusinesslogic": {
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer",
       "build": true
     },
-    "pointsreward": {
+    "gamification": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
       "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "yourclearway677feefc",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
         {
           "category": "api",
           "resourceName": "YourClearWayAPI",
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "yourclearwaygamification",
-          "attributes": [
-            "Arn"
           ]
         }
       ]
