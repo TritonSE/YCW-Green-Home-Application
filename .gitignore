@@ -1,5 +1,6 @@
 #amplify
 amplify/\#current-cloud-backend
+amplify/team-provider-info.json
 amplify/.config/local-*
 amplify/logs
 amplify/mock-data
@@ -81,3 +82,4 @@ src/ios/Pods/
 # Expo
 src/.expo/*
 src/web-build/
+src/.eslintcache

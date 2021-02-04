@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "User": {
-            "name": "User",
+        "Response": {
+            "name": "Response",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,55 +10,69 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "username": {
-                    "name": "username",
+                "home": {
+                    "name": "home",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "email": {
-                    "name": "email",
-                    "isArray": false,
-                    "type": "AWSEmail",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "phoneNumber": {
-                    "name": "phoneNumber",
-                    "isArray": false,
-                    "type": "AWSPhone",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "homes": {
-                    "name": "homes",
-                    "isArray": true,
                     "type": {
-                        "model": "HomeOwner"
+                        "model": "Home"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "homeOwner"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "homeID"
                     }
                 },
-                "ownElectricVehicle": {
-                    "name": "ownElectricVehicle",
+                "question": {
+                    "name": "question",
                     "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": true,
-                    "attributes": []
+                    "type": {
+                        "model": "Question"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "questionID"
+                    }
+                },
+                "answers": {
+                    "name": "answers",
+                    "isArray": true,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
                 }
             },
             "syncable": true,
-            "pluralName": "Users",
+            "pluralName": "Responses",
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {}
+                    "properties": {
+                        "mutations": null
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byHome",
+                        "fields": [
+                            "homeID",
+                            "questionID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byQuestion",
+                        "fields": [
+                            "questionID",
+                            "homeID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -75,87 +89,14 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "HomeOwner": {
-            "name": "HomeOwner",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "home": {
-                    "name": "home",
-                    "isArray": false,
-                    "type": {
-                        "model": "Home"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "homeID"
-                    }
-                },
-                "homeOwner": {
-                    "name": "homeOwner",
-                    "isArray": false,
-                    "type": {
-                        "model": "User"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "homeOwnerID"
-                    }
-                }
-            },
-            "syncable": true,
-            "pluralName": "HomeOwners",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {
-                        "queries": null
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byHome",
-                        "fields": [
-                            "homeID",
-                            "homeOwnerID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byHomeOwner",
-                        "fields": [
-                            "homeOwnerID",
-                            "homeID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
+                            },
                             {
+                                "groupClaim": "cognito:groups",
                                 "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
                                 "operations": [
                                     "create",
                                     "update",
@@ -433,8 +374,8 @@ export const schema = {
                 }
             ]
         },
-        "Response": {
-            "name": "Response",
+        "HomeOwner": {
+            "name": "HomeOwner",
             "fields": {
                 "id": {
                     "name": "id",
@@ -449,41 +390,35 @@ export const schema = {
                     "type": {
                         "model": "Home"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
                         "targetName": "homeID"
                     }
                 },
-                "question": {
-                    "name": "question",
+                "homeOwner": {
+                    "name": "homeOwner",
                     "isArray": false,
                     "type": {
-                        "model": "Question"
+                        "model": "User"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "questionID"
+                        "targetName": "homeOwnerID"
                     }
-                },
-                "answers": {
-                    "name": "answers",
-                    "isArray": true,
-                    "type": "AWSJSON",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
                 }
             },
             "syncable": true,
-            "pluralName": "Responses",
+            "pluralName": "HomeOwners",
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {}
+                    "properties": {
+                        "queries": null
+                    }
                 },
                 {
                     "type": "key",
@@ -491,16 +426,16 @@ export const schema = {
                         "name": "byHome",
                         "fields": [
                             "homeID",
-                            "questionID"
+                            "homeOwnerID"
                         ]
                     }
                 },
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byQuestion",
+                        "name": "byHomeOwner",
                         "fields": [
-                            "questionID",
+                            "homeOwnerID",
                             "homeID"
                         ]
                     }
@@ -520,28 +455,14 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
-                            },
-                            {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "Admin"
-                                ],
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
                             }
                         ]
                     }
                 }
             ]
         },
-        "Question": {
-            "name": "Question",
+        "User": {
+            "name": "User",
             "fields": {
                 "id": {
                     "name": "id",
@@ -550,55 +471,51 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "text": {
-                    "name": "text",
+                "username": {
+                    "name": "username",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
-                "tags": {
-                    "name": "tags",
-                    "isArray": true,
-                    "type": {
-                        "enum": "Tag"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": true,
+                    "attributes": []
                 },
-                "responses": {
-                    "name": "responses",
+                "phoneNumber": {
+                    "name": "phoneNumber",
+                    "isArray": false,
+                    "type": "AWSPhone",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "homes": {
+                    "name": "homes",
                     "isArray": true,
                     "type": {
-                        "model": "Response"
+                        "model": "HomeOwner"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "question"
+                        "associatedWith": "homeOwner"
                     }
                 },
-                "options": {
-                    "name": "options",
-                    "isArray": true,
-                    "type": "AWSJSON",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "metadata": {
-                    "name": "metadata",
+                "ownElectricVehicle": {
+                    "name": "ownElectricVehicle",
                     "isArray": false,
-                    "type": "AWSJSON",
-                    "isRequired": false,
+                    "type": "Boolean",
+                    "isRequired": true,
                     "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Questions",
+            "pluralName": "Users",
             "attributes": [
                 {
                     "type": "model",
@@ -617,26 +534,6 @@ export const schema = {
                                     "create",
                                     "update",
                                     "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "Admin"
-                                ],
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
                                     "read"
                                 ]
                             }
@@ -826,6 +723,113 @@ export const schema = {
                             },
                             {
                                 "allow": "private",
+                                "provider": "iam",
+                                "operations": [
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Question": {
+            "name": "Question",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "text": {
+                    "name": "text",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "tags": {
+                    "name": "tags",
+                    "isArray": true,
+                    "type": {
+                        "enum": "Tag"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "responses": {
+                    "name": "responses",
+                    "isArray": true,
+                    "type": {
+                        "model": "Response"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "question"
+                    }
+                },
+                "options": {
+                    "name": "options",
+                    "isArray": true,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "metadata": {
+                    "name": "metadata",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "Questions",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "provider": "iam",
                                 "operations": [
                                     "read"
                                 ]
@@ -876,6 +880,61 @@ export const schema = {
         }
     },
     "nonModels": {
+        "MutateResponseOutput": {
+            "name": "MutateResponseOutput",
+            "fields": {
+                "response": {
+                    "name": "response",
+                    "isArray": false,
+                    "type": {
+                        "model": "Response"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "rewards": {
+                    "name": "rewards",
+                    "isArray": true,
+                    "type": {
+                        "nonModel": "Reward"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "newBadges": {
+                    "name": "newBadges",
+                    "isArray": true,
+                    "type": {
+                        "model": "Badge"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                }
+            }
+        },
+        "Reward": {
+            "name": "Reward",
+            "fields": {
+                "points": {
+                    "name": "points",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "tag": {
+                    "name": "tag",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Tag"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                }
+            }
+        },
         "S3Object": {
             "name": "S3Object",
             "fields": {
@@ -903,5 +962,5 @@ export const schema = {
             }
         }
     },
-    "version": "70c6f37abaac494d702a5a68ba80096a"
+    "version": "3a2ff8de77d0010908bb07d1651be06c"
 };

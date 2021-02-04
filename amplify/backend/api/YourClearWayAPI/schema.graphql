@@ -95,7 +95,7 @@ type Question
     @auth(rules: [
         { allow: owner }, # defaults to use the "owner" field, can access any operation
         { allow: groups, groups: ["Admin"] }, # Admin users can access any operation
-        { allow: private, operations: [read] } # allow all authenticated users to read questions
+        { allow: private, provider: iam, operations: [read] } # allow all authenticated users (Cognito User Pools) and IAM roles to read questions
     ]) {
     id: ID!
     text: String!
@@ -109,7 +109,7 @@ type Question
 # query all of a home's responses: home.responses (a home has responses for some questions)
 # query all of a question's responses: question.responses (a question has responses from various homes, p.s. currently not needed for user app, but might be helpful for future analytics)
 type Response 
-    @model 
+    @model(mutations: null) 
     @key(name: "byHome", fields: ["homeID", "questionID"]) 
     @key(name: "byQuestion", fields: ["questionID", "homeID"])
     @auth(rules: [
@@ -122,6 +122,36 @@ type Response
     home: Home @connection(fields: ["homeID"])
     question: Question @connection(fields: ["questionID"])
     answers: [AWSJSON] # answers in this response, use array in case of question allowing multiple answers within a response
+}
+
+input CreateResponseInput {
+    id: ID
+    homeID: ID!
+    questionID: ID!
+    answers: [AWSJSON]
+}
+
+input UpdateResponseInput {
+    id: ID!
+    homeID: ID
+    questionID: ID
+    answers: [AWSJSON]
+}
+
+type Reward {
+    points: Int!
+    tag: Tag!
+}
+
+type MutateResponseOutput {
+    response: Response
+    rewards: [Reward] # points by tag type rewarded to this response, resolved with a direct lambda resolver
+    newBadges: [Badge] # new badges earned from this response, resolved with a direct lambda resolver
+}
+
+type Mutation {
+    createResponse(input: CreateResponseInput!): MutateResponseOutput @aws_iam @aws_cognito_user_pools @function(name: "gamification-${env}") 
+    updateResponse(input: UpdateResponseInput!): MutateResponseOutput @aws_iam @aws_cognito_user_pools @function(name: "gamification-${env}")
 }
 
 # used to hold info for any assets/images in S3
@@ -137,7 +167,7 @@ type Badge
     @auth(rules: [
         { allow: owner }, # defaults to use the "owner" field, can access any operation
         { allow: groups, groups: ["Admin"] }, # Admin users can access any operation
-        { allow: private, operations: [read] } # allow all authenticated users to read badges
+        { allow: private, provider: iam, operations: [read] } # allow all authenticated users (Cognito User Pools) and IAM roles to read badges
     ]) {
     id: ID!
     name: String!

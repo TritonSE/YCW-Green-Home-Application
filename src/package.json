@@ -25,6 +25,8 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
+    "@babel/eslint-parser": "^7.12.1",
+    "@babel/eslint-plugin": "^7.12.1",
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
@@ -55,6 +57,7 @@
     }
   },
   "lint-staged": {
-    "src/*.{ts,tsx,js,jsx}": "eslint --cache --fix"
+    "*.{ts,tsx}": "eslint --cache --fix",
+    "../amplify/backend/function/**/*.js": "eslint --cache --fix --parser @babel/eslint-parser"
   }
 }
