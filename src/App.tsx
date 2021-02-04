@@ -1,18 +1,27 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports';
+import { withAuthenticator } from 'aws-amplify-react-native';
 Amplify.configure(awsconfig);
 
 import { SignUp } from './components/sign-up';
 
-export default function App() {
+function App() {
+  /*
   return (
     <View style={styles.container}>
       <SignUp />
     </View>
+  );*/
+  return (
+    <View>
+      <Text>Hello world.</Text>
+    </View>
   );
 }
+
+export default withAuthenticator(App);
 
 const styles = StyleSheet.create({
   container: {
