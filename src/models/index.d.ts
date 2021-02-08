@@ -29,6 +29,19 @@ export enum WaterHeaterFuelType {
   OTHER = "OTHER"
 }
 
+export declare class MutateResponseOutput {
+  readonly response?: Response;
+  readonly rewards?: (Reward | null)[];
+  readonly newBadges?: (Badge | null)[];
+  constructor(init: ModelInit<MutateResponseOutput>);
+}
+
+export declare class Reward {
+  readonly points: number;
+  readonly tag: Tag | keyof typeof Tag;
+  constructor(init: ModelInit<Reward>);
+}
+
 export declare class S3Object {
   readonly bucket: string;
   readonly region: string;
@@ -36,23 +49,13 @@ export declare class S3Object {
   constructor(init: ModelInit<S3Object>);
 }
 
-export declare class User {
+export declare class Response {
   readonly id: string;
-  readonly username: string;
-  readonly email: string;
-  readonly phoneNumber?: string;
-  readonly homes?: (HomeOwner | null)[];
-  readonly ownElectricVehicle: boolean;
-  constructor(init: ModelInit<User>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
-}
-
-export declare class HomeOwner {
-  readonly id: string;
-  readonly home: Home;
-  readonly homeOwner: User;
-  constructor(init: ModelInit<HomeOwner>);
-  static copyOf(source: HomeOwner, mutator: (draft: MutableModel<HomeOwner>) => MutableModel<HomeOwner> | void): HomeOwner;
+  readonly home?: Home;
+  readonly question?: Question;
+  readonly answers?: (string | null)[];
+  constructor(init: ModelInit<Response>);
+  static copyOf(source: Response, mutator: (draft: MutableModel<Response>) => MutableModel<Response> | void): Response;
 }
 
 export declare class Home {
@@ -88,24 +91,23 @@ export declare class Home {
   static copyOf(source: Home, mutator: (draft: MutableModel<Home>) => MutableModel<Home> | void): Home;
 }
 
-export declare class Response {
+export declare class HomeOwner {
   readonly id: string;
-  readonly home?: Home;
-  readonly question?: Question;
-  readonly answers?: (string | null)[];
-  constructor(init: ModelInit<Response>);
-  static copyOf(source: Response, mutator: (draft: MutableModel<Response>) => MutableModel<Response> | void): Response;
+  readonly home: Home;
+  readonly homeOwner: User;
+  constructor(init: ModelInit<HomeOwner>);
+  static copyOf(source: HomeOwner, mutator: (draft: MutableModel<HomeOwner>) => MutableModel<HomeOwner> | void): HomeOwner;
 }
 
-export declare class Question {
+export declare class User {
   readonly id: string;
-  readonly text: string;
-  readonly tags?: (Tag | null)[] | keyof typeof Tag;
-  readonly responses?: (Response | null)[];
-  readonly options?: (string | null)[];
-  readonly metadata?: string;
-  constructor(init: ModelInit<Question>);
-  static copyOf(source: Question, mutator: (draft: MutableModel<Question>) => MutableModel<Question> | void): Question;
+  readonly username: string;
+  readonly email: string;
+  readonly phoneNumber?: string;
+  readonly homes?: (HomeOwner | null)[];
+  readonly ownElectricVehicle: boolean;
+  constructor(init: ModelInit<User>);
+  static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
 }
 
 export declare class HomeBadge {
@@ -125,4 +127,15 @@ export declare class Badge {
   readonly homes?: (HomeBadge | null)[];
   constructor(init: ModelInit<Badge>);
   static copyOf(source: Badge, mutator: (draft: MutableModel<Badge>) => MutableModel<Badge> | void): Badge;
+}
+
+export declare class Question {
+  readonly id: string;
+  readonly text: string;
+  readonly tags?: (Tag | null)[] | keyof typeof Tag;
+  readonly responses?: (Response | null)[];
+  readonly options?: (string | null)[];
+  readonly metadata?: string;
+  constructor(init: ModelInit<Question>);
+  static copyOf(source: Question, mutator: (draft: MutableModel<Question>) => MutableModel<Question> | void): Question;
 }

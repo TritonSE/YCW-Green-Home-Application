@@ -14,6 +14,34 @@
     "categories": {
       "auth": {
         "yourclearway677feefc": {}
+      },
+      "function": {
+        "yourclearwaybusinesslogic": {
+          "deploymentBucketName": "amplify-yourclearway-dev-225606-deployment",
+          "s3Key": "amplify-builds/yourclearwaybusinesslogic-build.zip"
+        }
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "yourclearwaybusinesslogic": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "awsAccounts",
+                  "accounts": [
+                    "506173601430"
+                  ]
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "X/6hs1Zl11FsygNh/V2ZK06oxth3hVGYXeAAzS+VpSo="
+            }
+          }
+        }
       }
     }
   }

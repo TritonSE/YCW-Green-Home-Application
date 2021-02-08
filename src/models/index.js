@@ -31,19 +31,21 @@ const WaterHeaterFuelType = {
   "OTHER": "OTHER"
 };
 
-const { User, HomeOwner, Home, Response, Question, HomeBadge, Badge, S3Object } = initSchema(schema);
+const { Response, Home, HomeOwner, User, HomeBadge, Badge, Question, MutateResponseOutput, Reward, S3Object } = initSchema(schema);
 
 export {
-  User,
-  HomeOwner,
-  Home,
   Response,
-  Question,
+  Home,
+  HomeOwner,
+  User,
   HomeBadge,
   Badge,
+  Question,
   Tag,
   HomeType,
   HeatingFuelType,
   WaterHeaterFuelType,
+  MutateResponseOutput,
+  Reward,
   S3Object
 };
