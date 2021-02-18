@@ -6,7 +6,17 @@ import awsconfig from './aws-exports';
 import AuthContainer from './components/auth-container';
 import SplashScreen from './components/splash-screen';
 
-Amplify.configure(awsconfig);
+/*
+   Analytics manually disabled so no event is fired
+   on sign-in/sign-out. Else, AWS analytics tries to
+   publish an event with no analytics config.
+*/
+Amplify.configure({
+  ...awsconfig,
+  Analytics: {
+    disabled: true,
+  },
+});
 
 export default function App() {
   return (
