@@ -83,3 +83,9 @@ src/ios/Pods/
 src/.expo/*
 src/web-build/
 src/.eslintcache
+
+# vscode
+.vscode/
+
+# git
+.gitattributes

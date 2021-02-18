@@ -16,10 +16,6 @@ Dependencies you'll need:
 * NPM 6+
 * Expo SDK 40
 
-## Screens
-
-WIP
-
 ## Running/Developing the App
 
 This project contains an Amplify project (`/amplify`) already configured & ready to be deployed. Deploying this project will create the following resources in your account: an authentication configuration using Amazon Cognito, an AWS AppSync GraphQL API, & a DynamoDB table.
@@ -118,7 +114,3 @@ This application utilizes 7 database tables:
 - Response table (stores each home's response for a question)
 - Badge table (stores the available badges)
 - HomeBadge table (stores relations between home & badges)
-
-## License
-
-WIP
