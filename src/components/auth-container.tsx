@@ -4,6 +4,8 @@ import { Button, Text, View } from 'react-native';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import { Auth } from 'aws-amplify';
 
+Auth.configure({ mandatorySignIn: true });
+
 function SignOut(): void {
   try {
     Auth.signOut();

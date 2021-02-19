@@ -1,8 +1,8 @@
 {
-  "name": "frontend",
-  "displayName": "frontend",
+  "name": "YourClearWay",
+  "displayName": "Your Clear Way",
   "expo": {
-    "name": "frontend",
+    "name": "YourClearWay",
     "slug": "frontend",
     "version": "1.0.0",
     "assetBundlePatterns": [
