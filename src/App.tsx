@@ -7,6 +7,8 @@ import awsconfig from './aws-exports';
 import AuthContainer from './components/auth-container';
 import SplashScreen from './components/splash-screen';
 
+const ApolloURI = 'localhost:4000/graphql';
+
 /*
    Analytics manually disabled so no event is fired
    on sign-in/sign-out. Else, AWS analytics tries to
@@ -21,7 +23,7 @@ Amplify.configure({
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: 'localhost:4000/graphql',
+  uri: ApolloURI,
   cache: new InMemoryCache(),
 });
 
