@@ -4,7 +4,6 @@
   "expo": {
     "name": "YourClearWay",
     "slug": "frontend",
-    "icon": "./images/splash_icon.png",
     "splash": {
       "image": "./images/splash_icon.png",
       "resizeMode": "contain"
