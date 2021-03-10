@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import { StyleSheet, SafeAreaView, View, AppRegistry } from 'react-native';
+import React from 'react';
+import { SafeAreaView, View, AppRegistry } from 'react-native';
 import Amplify from 'aws-amplify';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import awsconfig from './aws-exports';
@@ -7,7 +7,9 @@ import awsconfig from './aws-exports';
 import AuthContainer from './components/auth-container';
 import SplashScreen from './components/splash-screen';
 
-const ApolloURI = 'localhost:4000/graphql';
+import getEnvVars from './environment';
+
+const { apolloURI } = getEnvVars();
 
 /*
    Analytics manually disabled so no event is fired
@@ -23,7 +25,7 @@ Amplify.configure({
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: ApolloURI,
+  uri: apolloURI,
   cache: new InMemoryCache(),
 });
 
@@ -39,14 +41,5 @@ export default function App() {
     </ApolloProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 AppRegistry.registerComponent('MyApplication', () => App);
