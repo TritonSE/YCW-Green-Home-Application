@@ -10,12 +10,12 @@ const Difficulty = {
 
 const Cost = {
   "ONE": "ONE",
-  "TWI": "TWI",
+  "TWO": "TWO",
   "THREE": "THREE",
   "FOUR": "FOUR"
 };
 
-const Type = {
+const QuestionType = {
   "HOME_IMPROVEMENT": "HOME_IMPROVEMENT",
   "GREEN_LIFESTYLE": "GREEN_LIFESTYLE"
 };
@@ -59,7 +59,7 @@ export {
   Question,
   Difficulty,
   Cost,
-  Type,
+  QuestionType,
   Tag,
   HeatingFuelType,
   AgeType,

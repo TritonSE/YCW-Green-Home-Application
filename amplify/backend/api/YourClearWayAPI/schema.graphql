@@ -90,12 +90,12 @@ enum Difficulty {
 
 enum Cost {
     ONE
-    TWI
+    TWO
     THREE
     FOUR
 }
 
-enum Type {
+enum QuestionType {
     HOME_IMPROVEMENT
     GREEN_LIFESTYLE
 }
@@ -113,7 +113,7 @@ type Question
     rewardText: String! # statement if the question is completed
     difficulty: Difficulty!
     cost: Cost!
-    type: Type!
+    type: QuestionType!
     tags: [Tag!]!
     responses: [Response] @connection(keyName: "byQuestion", fields: ["id"])
     answer: String! # options here is mostly used for multiple choice questions
@@ -125,7 +125,7 @@ type Question
 # query all of a question's responses: question.responses (a question has responses from various homes, p.s. currently not needed for user app, but might be helpful for future analytics)
 # sort recent activities by createdAt:
 # query GetRecentActivities {
-#     getResponsesByCreatedAt(homeID: "some_home_id", sortDirection: DESC) {
+#     getResponsesByCreatedAt(homeID: "some_home_id", limit: 10, sortDirection: DESC) {
 #         items {
 #             id
 #             homeID

@@ -565,7 +565,7 @@ export const schema = {
                     "name": "type",
                     "isArray": false,
                     "type": {
-                        "enum": "Type"
+                        "enum": "QuestionType"
                     },
                     "isRequired": true,
                     "attributes": []
@@ -672,13 +672,13 @@ export const schema = {
             "name": "Cost",
             "values": [
                 "ONE",
-                "TWI",
+                "TWO",
                 "THREE",
                 "FOUR"
             ]
         },
-        "Type": {
-            "name": "Type",
+        "QuestionType": {
+            "name": "QuestionType",
             "values": [
                 "HOME_IMPROVEMENT",
                 "GREEN_LIFESTYLE"
@@ -750,5 +750,5 @@ export const schema = {
             }
         }
     },
-    "version": "42359e60a66115c28f9eb7efcce5faff"
+    "version": "9386bc5ee59d0a134cd93d4e8eecd9eb"
 };

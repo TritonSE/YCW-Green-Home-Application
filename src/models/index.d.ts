@@ -8,12 +8,12 @@ export enum Difficulty {
 
 export enum Cost {
   ONE = "ONE",
-  TWI = "TWI",
+  TWO = "TWO",
   THREE = "THREE",
   FOUR = "FOUR"
 }
 
-export enum Type {
+export enum QuestionType {
   HOME_IMPROVEMENT = "HOME_IMPROVEMENT",
   GREEN_LIFESTYLE = "GREEN_LIFESTYLE"
 }
@@ -117,7 +117,7 @@ export declare class Question {
   readonly rewardText: string;
   readonly difficulty: Difficulty | keyof typeof Difficulty;
   readonly cost: Cost | keyof typeof Cost;
-  readonly type: Type | keyof typeof Type;
+  readonly type: QuestionType | keyof typeof QuestionType;
   readonly tags: Tag[] | keyof typeof Tag;
   readonly responses?: (Response | null)[];
   readonly answer: string;
