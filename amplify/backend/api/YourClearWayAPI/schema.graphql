@@ -2,11 +2,9 @@ type User
     @model 
     @auth(rules: [{ allow: owner }]) {
     id: ID!
-    username: String!
-    email: AWSEmail!
-    phoneNumber: AWSPhone
+    username: AWSEmail! # email address is used as an username
+    displayName: String! # display this name on the frontend so email is not exposed
     homes: [HomeOwner] @connection(keyName: "byHomeOwner", fields: ["id"])
-    ownElectricVehicle: Boolean!
 }
 
 # Create a join model and disable queries as we don't need them
@@ -23,13 +21,6 @@ type HomeOwner
     homeOwner: User! @connection(fields: ["homeOwnerID"])
 }
 
-enum HomeType {
-    SINGLE_FAMILY
-    DUPLEX
-    TOWNHOUSE
-    APARTMENT_CONDO
-}
-
 enum HeatingFuelType {
     GAS
     ELECTRIC
@@ -43,6 +34,13 @@ enum WaterHeaterFuelType {
     OTHER
 }
 
+enum AgeType {
+    LESS_THAN_5,
+    MORE_THAN_5,
+    MORE_THAN_10,
+    MORE_THAN_20
+}
+
 type Home 
     @model 
     @auth(rules: [
@@ -52,34 +50,29 @@ type Home
     id: ID!
     homeOwners: [HomeOwner] @connection(keyName: "byHome", fields: ["id"])
     responses: [Response] @connection(keyName: "byHome", fields: ["id"])
-    badges: [HomeBadge] @connection(keyName: "byHome", fields: ["id"])
-    homeType: HomeType!
-    addressLine1: String!
+    addressLine1: String
     addressLine2: String
-    city: String!
-    addressState: String!
-    country: String! # only support united states for now
+    city: String
+    addressState: String
+    country: String # only support united states for now
     zipcode: String!
-    yearBuilt: Int!
-    electricProvider: String!
-    gasProvider: String!
-    outDoorArea: Float!
+    yearBuilt: Int
+    outDoorArea: Float
     livableArea: Float!
     bedroomCount: Int!
-    bathroomCount: Int!
-    heatingFuelType: HeatingFuelType!
-    heaterAge: Int!
-    waterHeaterFuelType: WaterHeaterFuelType!
-    waterHeaterAge: Int!
-    hasAirConditioner: Boolean!
-    hasPool: Boolean!
-    hasHotTub: Boolean!
-    annualElectricalEnergyUsage: Float!
-    annualGasPropaneEnergyUsage: Float!
-    annualWaterUsage: Float!
+    bathroomCount: Int
+    heatingFuelType: HeatingFuelType
+    heaterAge: AgeType
+    waterHeaterFuelType: WaterHeaterFuelType
+    waterHeaterAge: AgeType
+    hasAirConditioner: Boolean
+    hasPool: Boolean
+    hasHotTub: Boolean
+    annualElectricalEnergyUsage: Float
+    annualGasPropaneEnergyUsage: Float
+    annualWaterUsage: Float
 }
 
-# Available questions/questions to score a home's efficiency
 enum Tag {
     ENERGY
     RESILIENCY
@@ -89,6 +82,23 @@ enum Tag {
     WATER
 }
 
+enum Difficulty {
+    BEGINNER
+    INTERMEDIATE
+    ADVANCED
+}
+
+enum Cost {
+    ONE
+    TWI
+    THREE
+    FOUR
+}
+
+enum Type {
+    HOME_IMPROVEMENT
+    GREEN_LIFESTYLE
+}
 
 type Question 
     @model 
@@ -98,20 +108,44 @@ type Question
         { allow: private, provider: iam, operations: [read] } # allow all authenticated users (Cognito User Pools) and IAM roles to read questions
     ]) {
     id: ID!
-    text: String!
-    tags: [Tag]
+    title: String! # short title of the question
+    questionText: String! # the content of the question
+    rewardText: String! # statement if the question is completed
+    difficulty: Difficulty!
+    cost: Cost!
+    type: Type!
+    tags: [Tag!]!
     responses: [Response] @connection(keyName: "byQuestion", fields: ["id"])
-    options: [AWSJSON] # options here is mostly used for multiple choice questions
-    metadata: AWSJSON # used to store info regarding how to score a question or weather it should have popup e.g. {"format": "percentage", "increment_step": 5, "minPercentage": 0, "maxPercentage": 100, popup": true }
+    answer: String! # options here is mostly used for multiple choice questions
+    metadata: AWSJSON # used to store info specific to this question
 }
 
 # A home's response to a question
 # query all of a home's responses: home.responses (a home has responses for some questions)
 # query all of a question's responses: question.responses (a question has responses from various homes, p.s. currently not needed for user app, but might be helpful for future analytics)
+# sort recent activities by createdAt:
+# query GetRecentActivities {
+#     getResponsesByCreatedAt(homeID: "some_home_id", sortDirection: DESC) {
+#         items {
+#             id
+#             homeID
+#             questionID
+#             answer
+#             createdAt
+#             updatedAt
+#             question {
+#                 id
+#                 title
+#             }
+#         }
+#     }
+# }   
+
 type Response 
     @model(mutations: null) 
     @key(name: "byHome", fields: ["homeID", "questionID"]) 
     @key(name: "byQuestion", fields: ["questionID", "homeID"])
+    @key(name: "byCreatedAt", fields: ["homeID", "createdAt"], queryField: "getResponsesByCreatedAt")
     @auth(rules: [
         { allow: owner }, # defaults to use the "owner" field
         { allow: groups, groups: ["Admin"] }  # Admin users can access any operation
@@ -121,37 +155,8 @@ type Response
     questionID: ID!
     home: Home @connection(fields: ["homeID"])
     question: Question @connection(fields: ["questionID"])
-    answers: [AWSJSON] # answers in this response, use array in case of question allowing multiple answers within a response
-}
-
-input CreateResponseInput {
-    id: ID
-    homeID: ID!
-    questionID: ID!
-    answers: [AWSJSON]
-}
-
-input UpdateResponseInput {
-    id: ID!
-    homeID: ID
-    questionID: ID
-    answers: [AWSJSON]
-}
-
-type Reward {
-    points: Int!
-    tag: Tag!
-}
-
-type MutateResponseOutput {
-    response: Response
-    rewards: [Reward] # points by tag type rewarded to this response, resolved with a direct lambda resolver
-    newBadges: [Badge] # new badges earned from this response, resolved with a direct lambda resolver
-}
-
-type Mutation {
-    createResponse(input: CreateResponseInput!): MutateResponseOutput @aws_iam @aws_cognito_user_pools @function(name: "gamification-${env}") 
-    updateResponse(input: UpdateResponseInput!): MutateResponseOutput @aws_iam @aws_cognito_user_pools @function(name: "gamification-${env}")
+    answer: String!
+    createdAt: AWSDateTime!
 }
 
 # used to hold info for any assets/images in S3
@@ -160,32 +165,4 @@ type S3Object {
     bucket: String!
     region: String!
     key: String!
-}
-
-type Badge 
-    @model 
-    @auth(rules: [
-        { allow: owner }, # defaults to use the "owner" field, can access any operation
-        { allow: groups, groups: ["Admin"] }, # Admin users can access any operation
-        { allow: private, provider: iam, operations: [read] } # allow all authenticated users (Cognito User Pools) and IAM roles to read badges
-    ]) {
-    id: ID!
-    name: String!
-    type: Tag!
-    criteria: Int! # number of points needed to earn the badge
-    logoName: String! # logo name should follow the convention similar to {badge.name}.{svg|png|jpg}, these static assets can be stored in the frontend
-    homes: [HomeBadge] @connection(keyName: "byBadge", fields: ["id"]) # all homes that owns this badge (currently not needed for user app, but might be helpful for future analytics)
-}
-
-# Create a join model and disable queries as we don't need them
-type HomeBadge
-    @model(queries: null)
-    @auth(rules: [{ allow: owner }])
-    @key(name: "byHome", fields: ["homeID", "badgeID"])
-    @key(name: "byBadge", fields: ["badgeID", "homeID"]) {
-    id: ID!
-    homeID: ID!
-    badgeID: ID!
-    home: Home! @connection(fields: ["homeID"])
-    badge: Badge! @connection(fields: ["badgeID"])
 }
