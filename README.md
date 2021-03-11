@@ -41,7 +41,7 @@ git clone https://github.com/TritonSE/Your-Clear-Way.git
 3. Install dependencies in the `src` directory
 
 ```sh
-npm install
+yarn install
 ```
 
 4. Pull the amplify project with dev environment
@@ -65,7 +65,7 @@ amplify api gql-compile
 ? Choose the code generation language target typescript
 ? Enter the file name pattern of graphql queries, mutations and subscriptions src\graphql\**\*.ts     
 ? Do you want to generate/update all possible GraphQL operations - queries, mutations and subscriptions Yes
-? Enter maximum statement depth [increase from default if your schema is deeply nested] 5
+? Enter maximum statement depth [increase from default if your schema is deeply nested] 4
 ? Enter the file name for the generated code src\API.ts
 ? Do you want to generate code for your newly created GraphQL API Yes
 √ Generated GraphQL operations successfully and saved at src\graphql
