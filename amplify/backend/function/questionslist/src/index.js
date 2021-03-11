@@ -6,6 +6,8 @@ const parse = require('csv-parse');
 AWS.config.update({ region: 'us-west-2' });
 
 const questionsCSV = '../data/questions.csv'
+const docClient = new AWS.DynamoDB.DocumentClient();
+const MAX_ITEMS_PER_BATCH_TRANSACTION = 25;
 
 const parseQuestions = async () => {
   const questions = [];
@@ -16,6 +18,7 @@ const parseQuestions = async () => {
     );
   for await (const row of parser) {
     const question = {
+      // FIXME: uncomment these once schema is updated
       // difficulty: row[0],
       // cost: row[1],
       // type: row[2],
@@ -33,32 +36,37 @@ const parseQuestions = async () => {
   return questions;
 }
 
-exports.handler = async (event) => {
-  const docClient = new AWS.DynamoDB.DocumentClient();
-  const questions = await parseQuestions();
+const batchWriteQuestions = async (questions, from, to) => {
+  const q = questions.map((question) => ({
+    PutRequest: {
+      Item: {
+        id: uuid.v4(),
+        __typename: 'Question',
+        _lastChangedAt: Date.now(),
+        _version: 1,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        ...question,
+      }
+    }
+  })).slice(from, to);
   const params = {
     RequestItems: {
-      'Question-esd3vkp2bbfdpiczmujceuqmke-dev': questions.map((question) => ({
-        PutRequest: {
-          Item: {
-            id: uuid.v4(),
-            __typename: 'Question',
-            __lastChangedAt: Date.now(),
-            version: 1,
-            createdAt: Date.now(),
-            updatedAt: Date.now(),
-            ...question,
-          }
-        }
-      })),
+      'Question-esd3vkp2bbfdpiczmujceuqmke-dev': q
     }
   }
 
-  const data = await docClient.batchWrite(params).promise();
+  return docClient.batchWrite(params).promise();
+}
 
-  const response = {
-    statusCode: 200,
-    data,
-  };
-  return response;
+exports.handler = async (event) => {
+  const questions = await parseQuestions();
+  for (let i = 0; i < questions.length / MAX_ITEMS_PER_BATCH_TRANSACTION; i += 1) {
+    const from = MAX_ITEMS_PER_BATCH_TRANSACTION * i
+    const to =  MAX_ITEMS_PER_BATCH_TRANSACTION * (i + 1);
+    console.log(from + ' ' + to);
+    await batchWriteQuestions(questions, from, to);
+  }
+
+  return { error: null };
 };
