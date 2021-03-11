@@ -9,13 +9,16 @@ const questionsCSV = '../data/questions.csv'
 
 const parseQuestions = async () => {
   const questions = [];
-  const parser = fs.createReadStream(questionsCSV)
-    .pipe(parse({ delimiter: ',' }));
+  const parser = fs
+    .createReadStream(questionsCSV)
+    .pipe(
+      parse({ delimiter: ',' })
+    );
   for await (const row of parser) {
     const question = {
-      difficulty: row[0],
-      cost: row[1],
-      type: row[2],
+      // difficulty: row[0],
+      // cost: row[1],
+      // type: row[2],
       tags: row[3].split(','),
       text: row[4],
       metadata: {
@@ -31,23 +34,31 @@ const parseQuestions = async () => {
 }
 
 exports.handler = async (event) => {
-  // const docClient = new AWS.DynamoDB.DocumentClient();
-  // const params = {
-  //   TableName: 'User-esd3vkp2bbfdpiczmujceuqmke-dev',
-  //   Item: {
-  //     id: uuid.v4(),
-  //     email: 'shravanhariharan2@gmail.com',
-  //     ownElectricVehicle: false,
-  //   }
-  // }
-
-  // const data = await docClient.put(params).promise();
-
-  // const response = {
-  //   statusCode: 200,
-  //   data,
-  // };
-  // return response;
+  const docClient = new AWS.DynamoDB.DocumentClient();
   const questions = await parseQuestions();
-  return questions;
+  const params = {
+    RequestItems: {
+      'Question-esd3vkp2bbfdpiczmujceuqmke-dev': questions.map((question) => ({
+        PutRequest: {
+          Item: {
+            id: uuid.v4(),
+            __typename: 'Question',
+            __lastChangedAt: Date.now(),
+            version: 1,
+            createdAt: Date.now(),
+            updatedAt: Date.now(),
+            ...question,
+          }
+        }
+      })),
+    }
+  }
+
+  const data = await docClient.batchWrite(params).promise();
+
+  const response = {
+    statusCode: 200,
+    data,
+  };
+  return response;
 };
