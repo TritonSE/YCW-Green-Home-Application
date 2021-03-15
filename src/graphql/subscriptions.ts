@@ -7,9 +7,7 @@ export const onCreateUser = /* GraphQL */ `
     onCreateUser(owner: $owner) {
       id
       username
-      email
-      phoneNumber
-      ownElectricVehicle
+      displayName
       _version
       _deleted
       _lastChangedAt
@@ -26,7 +24,49 @@ export const onCreateUser = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
         }
         nextToken
         startedAt
@@ -39,9 +79,7 @@ export const onUpdateUser = /* GraphQL */ `
     onUpdateUser(owner: $owner) {
       id
       username
-      email
-      phoneNumber
-      ownElectricVehicle
+      displayName
       _version
       _deleted
       _lastChangedAt
@@ -58,7 +96,49 @@ export const onUpdateUser = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
         }
         nextToken
         startedAt
@@ -71,9 +151,7 @@ export const onDeleteUser = /* GraphQL */ `
     onDeleteUser(owner: $owner) {
       id
       username
-      email
-      phoneNumber
-      ownElectricVehicle
+      displayName
       _version
       _deleted
       _lastChangedAt
@@ -90,7 +168,49 @@ export const onDeleteUser = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
         }
         nextToken
         startedAt
@@ -112,9 +232,7 @@ export const onCreateHomeOwner = /* GraphQL */ `
       homeOwner {
         id
         username
-        email
-        phoneNumber
-        ownElectricVehicle
+        displayName
         _version
         _deleted
         _lastChangedAt
@@ -122,6 +240,17 @@ export const onCreateHomeOwner = /* GraphQL */ `
         updatedAt
         owner
         homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
           startedAt
         }
@@ -129,7 +258,6 @@ export const onCreateHomeOwner = /* GraphQL */ `
       owner
       home {
         id
-        homeType
         addressLine1
         addressLine2
         city
@@ -137,8 +265,6 @@ export const onCreateHomeOwner = /* GraphQL */ `
         country
         zipcode
         yearBuilt
-        electricProvider
-        gasProvider
         outDoorArea
         livableArea
         bedroomCount
@@ -159,16 +285,35 @@ export const onCreateHomeOwner = /* GraphQL */ `
         createdAt
         updatedAt
         homeOwners {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
           startedAt
         }
         owner
         homeowners
         responses {
-          nextToken
-          startedAt
-        }
-        badges {
+          items {
+            id
+            homeID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
           nextToken
           startedAt
         }
@@ -190,9 +335,7 @@ export const onUpdateHomeOwner = /* GraphQL */ `
       homeOwner {
         id
         username
-        email
-        phoneNumber
-        ownElectricVehicle
+        displayName
         _version
         _deleted
         _lastChangedAt
@@ -200,6 +343,17 @@ export const onUpdateHomeOwner = /* GraphQL */ `
         updatedAt
         owner
         homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
           startedAt
         }
@@ -207,7 +361,6 @@ export const onUpdateHomeOwner = /* GraphQL */ `
       owner
       home {
         id
-        homeType
         addressLine1
         addressLine2
         city
@@ -215,8 +368,6 @@ export const onUpdateHomeOwner = /* GraphQL */ `
         country
         zipcode
         yearBuilt
-        electricProvider
-        gasProvider
         outDoorArea
         livableArea
         bedroomCount
@@ -237,16 +388,35 @@ export const onUpdateHomeOwner = /* GraphQL */ `
         createdAt
         updatedAt
         homeOwners {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
           startedAt
         }
         owner
         homeowners
         responses {
-          nextToken
-          startedAt
-        }
-        badges {
+          items {
+            id
+            homeID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
           nextToken
           startedAt
         }
@@ -268,9 +438,7 @@ export const onDeleteHomeOwner = /* GraphQL */ `
       homeOwner {
         id
         username
-        email
-        phoneNumber
-        ownElectricVehicle
+        displayName
         _version
         _deleted
         _lastChangedAt
@@ -278,6 +446,17 @@ export const onDeleteHomeOwner = /* GraphQL */ `
         updatedAt
         owner
         homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
           startedAt
         }
@@ -285,7 +464,6 @@ export const onDeleteHomeOwner = /* GraphQL */ `
       owner
       home {
         id
-        homeType
         addressLine1
         addressLine2
         city
@@ -293,8 +471,6 @@ export const onDeleteHomeOwner = /* GraphQL */ `
         country
         zipcode
         yearBuilt
-        electricProvider
-        gasProvider
         outDoorArea
         livableArea
         bedroomCount
@@ -315,16 +491,35 @@ export const onDeleteHomeOwner = /* GraphQL */ `
         createdAt
         updatedAt
         homeOwners {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           nextToken
           startedAt
         }
         owner
         homeowners
         responses {
-          nextToken
-          startedAt
-        }
-        badges {
+          items {
+            id
+            homeID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
           nextToken
           startedAt
         }
@@ -336,7 +531,6 @@ export const onCreateHome = /* GraphQL */ `
   subscription OnCreateHome($owner: String, $homeowners: String) {
     onCreateHome(owner: $owner, homeowners: $homeowners) {
       id
-      homeType
       addressLine1
       addressLine2
       city
@@ -344,8 +538,6 @@ export const onCreateHome = /* GraphQL */ `
       country
       zipcode
       yearBuilt
-      electricProvider
-      gasProvider
       outDoorArea
       livableArea
       bedroomCount
@@ -375,7 +567,49 @@ export const onCreateHome = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
         }
         nextToken
         startedAt
@@ -387,27 +621,61 @@ export const onCreateHome = /* GraphQL */ `
           id
           homeID
           questionID
-          answers
+          answer
+          createdAt
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      badges {
-        items {
-          id
-          homeID
-          badgeID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+          question {
+            id
+            title
+            questionText
+            rewardText
+            difficulty
+            cost
+            type
+            tags
+            answer
+            metadata
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
         }
         nextToken
@@ -420,7 +688,6 @@ export const onUpdateHome = /* GraphQL */ `
   subscription OnUpdateHome($owner: String, $homeowners: String) {
     onUpdateHome(owner: $owner, homeowners: $homeowners) {
       id
-      homeType
       addressLine1
       addressLine2
       city
@@ -428,8 +695,6 @@ export const onUpdateHome = /* GraphQL */ `
       country
       zipcode
       yearBuilt
-      electricProvider
-      gasProvider
       outDoorArea
       livableArea
       bedroomCount
@@ -459,7 +724,49 @@ export const onUpdateHome = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
         }
         nextToken
         startedAt
@@ -471,27 +778,61 @@ export const onUpdateHome = /* GraphQL */ `
           id
           homeID
           questionID
-          answers
+          answer
+          createdAt
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      badges {
-        items {
-          id
-          homeID
-          badgeID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+          question {
+            id
+            title
+            questionText
+            rewardText
+            difficulty
+            cost
+            type
+            tags
+            answer
+            metadata
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
         }
         nextToken
@@ -504,7 +845,6 @@ export const onDeleteHome = /* GraphQL */ `
   subscription OnDeleteHome($owner: String, $homeowners: String) {
     onDeleteHome(owner: $owner, homeowners: $homeowners) {
       id
-      homeType
       addressLine1
       addressLine2
       city
@@ -512,8 +852,6 @@ export const onDeleteHome = /* GraphQL */ `
       country
       zipcode
       yearBuilt
-      electricProvider
-      gasProvider
       outDoorArea
       livableArea
       bedroomCount
@@ -543,7 +881,49 @@ export const onDeleteHome = /* GraphQL */ `
           _lastChangedAt
           createdAt
           updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
         }
         nextToken
         startedAt
@@ -555,27 +935,61 @@ export const onDeleteHome = /* GraphQL */ `
           id
           homeID
           questionID
-          answers
+          answer
+          createdAt
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      badges {
-        items {
-          id
-          homeID
-          badgeID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+          question {
+            id
+            title
+            questionText
+            rewardText
+            difficulty
+            cost
+            type
+            tags
+            answer
+            metadata
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
         }
         nextToken
@@ -588,9 +1002,14 @@ export const onCreateQuestion = /* GraphQL */ `
   subscription OnCreateQuestion($owner: String) {
     onCreateQuestion(owner: $owner) {
       id
-      text
+      title
+      questionText
+      rewardText
+      difficulty
+      cost
+      type
       tags
-      options
+      answer
       metadata
       _version
       _deleted
@@ -603,12 +1022,61 @@ export const onCreateQuestion = /* GraphQL */ `
           id
           homeID
           questionID
-          answers
+          answer
+          createdAt
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+          question {
+            id
+            title
+            questionText
+            rewardText
+            difficulty
+            cost
+            type
+            tags
+            answer
+            metadata
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
         }
         nextToken
@@ -621,9 +1089,14 @@ export const onUpdateQuestion = /* GraphQL */ `
   subscription OnUpdateQuestion($owner: String) {
     onUpdateQuestion(owner: $owner) {
       id
-      text
+      title
+      questionText
+      rewardText
+      difficulty
+      cost
+      type
       tags
-      options
+      answer
       metadata
       _version
       _deleted
@@ -636,12 +1109,61 @@ export const onUpdateQuestion = /* GraphQL */ `
           id
           homeID
           questionID
-          answers
+          answer
+          createdAt
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+          question {
+            id
+            title
+            questionText
+            rewardText
+            difficulty
+            cost
+            type
+            tags
+            answer
+            metadata
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
         }
         nextToken
@@ -654,9 +1176,14 @@ export const onDeleteQuestion = /* GraphQL */ `
   subscription OnDeleteQuestion($owner: String) {
     onDeleteQuestion(owner: $owner) {
       id
-      text
+      title
+      questionText
+      rewardText
+      difficulty
+      cost
+      type
       tags
-      options
+      answer
       metadata
       _version
       _deleted
@@ -669,347 +1196,66 @@ export const onDeleteQuestion = /* GraphQL */ `
           id
           homeID
           questionID
-          answers
+          answer
+          createdAt
           _version
           _deleted
           _lastChangedAt
-          createdAt
           updatedAt
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+          question {
+            id
+            title
+            questionText
+            rewardText
+            difficulty
+            cost
+            type
+            tags
+            answer
+            metadata
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
           owner
         }
         nextToken
         startedAt
       }
-    }
-  }
-`;
-export const onCreateBadge = /* GraphQL */ `
-  subscription OnCreateBadge($owner: String) {
-    onCreateBadge(owner: $owner) {
-      id
-      name
-      type
-      criteria
-      logoName
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-      homes {
-        items {
-          id
-          homeID
-          badgeID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onUpdateBadge = /* GraphQL */ `
-  subscription OnUpdateBadge($owner: String) {
-    onUpdateBadge(owner: $owner) {
-      id
-      name
-      type
-      criteria
-      logoName
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-      homes {
-        items {
-          id
-          homeID
-          badgeID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onDeleteBadge = /* GraphQL */ `
-  subscription OnDeleteBadge($owner: String) {
-    onDeleteBadge(owner: $owner) {
-      id
-      name
-      type
-      criteria
-      logoName
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-      homes {
-        items {
-          id
-          homeID
-          badgeID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onCreateHomeBadge = /* GraphQL */ `
-  subscription OnCreateHomeBadge($owner: String) {
-    onCreateHomeBadge(owner: $owner) {
-      id
-      homeID
-      badgeID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      home {
-        id
-        homeType
-        addressLine1
-        addressLine2
-        city
-        addressState
-        country
-        zipcode
-        yearBuilt
-        electricProvider
-        gasProvider
-        outDoorArea
-        livableArea
-        bedroomCount
-        bathroomCount
-        heatingFuelType
-        heaterAge
-        waterHeaterFuelType
-        waterHeaterAge
-        hasAirConditioner
-        hasPool
-        hasHotTub
-        annualElectricalEnergyUsage
-        annualGasPropaneEnergyUsage
-        annualWaterUsage
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        homeOwners {
-          nextToken
-          startedAt
-        }
-        owner
-        homeowners
-        responses {
-          nextToken
-          startedAt
-        }
-        badges {
-          nextToken
-          startedAt
-        }
-      }
-      badge {
-        id
-        name
-        type
-        criteria
-        logoName
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-        homes {
-          nextToken
-          startedAt
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onUpdateHomeBadge = /* GraphQL */ `
-  subscription OnUpdateHomeBadge($owner: String) {
-    onUpdateHomeBadge(owner: $owner) {
-      id
-      homeID
-      badgeID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      home {
-        id
-        homeType
-        addressLine1
-        addressLine2
-        city
-        addressState
-        country
-        zipcode
-        yearBuilt
-        electricProvider
-        gasProvider
-        outDoorArea
-        livableArea
-        bedroomCount
-        bathroomCount
-        heatingFuelType
-        heaterAge
-        waterHeaterFuelType
-        waterHeaterAge
-        hasAirConditioner
-        hasPool
-        hasHotTub
-        annualElectricalEnergyUsage
-        annualGasPropaneEnergyUsage
-        annualWaterUsage
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        homeOwners {
-          nextToken
-          startedAt
-        }
-        owner
-        homeowners
-        responses {
-          nextToken
-          startedAt
-        }
-        badges {
-          nextToken
-          startedAt
-        }
-      }
-      badge {
-        id
-        name
-        type
-        criteria
-        logoName
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-        homes {
-          nextToken
-          startedAt
-        }
-      }
-      owner
-    }
-  }
-`;
-export const onDeleteHomeBadge = /* GraphQL */ `
-  subscription OnDeleteHomeBadge($owner: String) {
-    onDeleteHomeBadge(owner: $owner) {
-      id
-      homeID
-      badgeID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      home {
-        id
-        homeType
-        addressLine1
-        addressLine2
-        city
-        addressState
-        country
-        zipcode
-        yearBuilt
-        electricProvider
-        gasProvider
-        outDoorArea
-        livableArea
-        bedroomCount
-        bathroomCount
-        heatingFuelType
-        heaterAge
-        waterHeaterFuelType
-        waterHeaterAge
-        hasAirConditioner
-        hasPool
-        hasHotTub
-        annualElectricalEnergyUsage
-        annualGasPropaneEnergyUsage
-        annualWaterUsage
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        homeOwners {
-          nextToken
-          startedAt
-        }
-        owner
-        homeowners
-        responses {
-          nextToken
-          startedAt
-        }
-        badges {
-          nextToken
-          startedAt
-        }
-      }
-      badge {
-        id
-        name
-        type
-        criteria
-        logoName
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-        homes {
-          nextToken
-          startedAt
-        }
-      }
-      owner
     }
   }
 `;

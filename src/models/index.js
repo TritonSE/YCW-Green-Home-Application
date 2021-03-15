@@ -2,6 +2,24 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
+const Difficulty = {
+  "BEGINNER": "BEGINNER",
+  "INTERMEDIATE": "INTERMEDIATE",
+  "ADVANCED": "ADVANCED"
+};
+
+const Cost = {
+  "ONE": "ONE",
+  "TWO": "TWO",
+  "THREE": "THREE",
+  "FOUR": "FOUR"
+};
+
+const QuestionType = {
+  "HOME_IMPROVEMENT": "HOME_IMPROVEMENT",
+  "GREEN_LIFESTYLE": "GREEN_LIFESTYLE"
+};
+
 const Tag = {
   "ENERGY": "ENERGY",
   "RESILIENCY": "RESILIENCY",
@@ -11,18 +29,18 @@ const Tag = {
   "WATER": "WATER"
 };
 
-const HomeType = {
-  "SINGLE_FAMILY": "SINGLE_FAMILY",
-  "DUPLEX": "DUPLEX",
-  "TOWNHOUSE": "TOWNHOUSE",
-  "APARTMENT_CONDO": "APARTMENT_CONDO"
-};
-
 const HeatingFuelType = {
   "GAS": "GAS",
   "ELECTRIC": "ELECTRIC",
   "PROPANE": "PROPANE",
   "OTHER": "OTHER"
+};
+
+const AgeType = {
+  "LESS_THAN_5": "LESS_THAN_5",
+  "MORE_THAN_5": "MORE_THAN_5",
+  "MORE_THAN_10": "MORE_THAN_10",
+  "MORE_THAN_20": "MORE_THAN_20"
 };
 
 const WaterHeaterFuelType = {
@@ -31,21 +49,20 @@ const WaterHeaterFuelType = {
   "OTHER": "OTHER"
 };
 
-const { Response, Home, HomeOwner, User, HomeBadge, Badge, Question, MutateResponseOutput, Reward, S3Object } = initSchema(schema);
+const { User, HomeOwner, Home, Response, Question, S3Object } = initSchema(schema);
 
 export {
-  Response,
-  Home,
-  HomeOwner,
   User,
-  HomeBadge,
-  Badge,
+  HomeOwner,
+  Home,
+  Response,
   Question,
+  Difficulty,
+  Cost,
+  QuestionType,
   Tag,
-  HomeType,
   HeatingFuelType,
+  AgeType,
   WaterHeaterFuelType,
-  MutateResponseOutput,
-  Reward,
   S3Object
 };
