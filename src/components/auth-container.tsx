@@ -1,18 +1,18 @@
-import React, { Fragment } from 'react';
-import { Button, Text, View } from 'react-native';
-import { withAuthenticator } from 'aws-amplify-react-native';
-import { Auth } from 'aws-amplify';
-import Onboarding from './Onboarding';
+import React, { Fragment } from "react";
+//import { Button, Text, View } from "react-native";
+import { withAuthenticator } from "aws-amplify-react-native";
+import { Auth } from "aws-amplify";
+import Onboarding from "./Onboarding/Onboarding";
 
 Auth.configure({ mandatorySignIn: true });
 
-function SignOut(): void {
-  try {
-    Auth.signOut();
-  } catch (error) {
-    console.error('Error sign out: ', error);
-  }
-}
+// function SignOut(): void {
+//   try {
+//     Auth.signOut();
+//   } catch (error) {
+//     console.error("Error sign out: ", error);
+//   }
+// }
 
 function AuthContainer() {
   return (
@@ -25,21 +25,21 @@ function AuthContainer() {
 
 export default withAuthenticator(AuthContainer, {
   signUpConfig: {
-    hiddenDefaults: ['email', 'phone_number'],
+    hiddenDefaults: ["email", "phone_number"],
     signUpFields: [
       {
-        label: 'Email',
-        key: 'username',
+        label: "Email",
+        key: "username",
         required: true,
         displayOrder: 3,
-        type: 'string',
+        type: "string",
       },
       {
-        label: 'Password',
-        key: 'password',
+        label: "Password",
+        key: "password",
         required: true,
         displayOrder: 4,
-        type: 'password',
+        type: "password",
       },
     ],
   },
