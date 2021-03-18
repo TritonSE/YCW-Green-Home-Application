@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Button, Text, View } from 'react-native';
-
 import { withAuthenticator } from 'aws-amplify-react-native';
 import { Auth } from 'aws-amplify';
+import Onboarding from './Onboarding';
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -16,9 +16,10 @@ function SignOut(): void {
 
 function AuthContainer() {
   return (
-    <View>
-      <Button title="Sign Out" onPress={SignOut} />
-    </View>
+    <>
+      {/* <Button title="Sign Out" onPress={SignOut} /> */}
+      <Onboarding />
+    </>
   );
 }
 
