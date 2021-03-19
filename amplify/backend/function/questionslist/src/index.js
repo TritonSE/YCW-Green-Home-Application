@@ -2,6 +2,7 @@ const AWS = require('aws-sdk');
 const uuid = require('uuid');
 const fs = require('fs');
 const parse = require('csv-parse');
+const { Difficulty, Cost, QuestionType, textToTag } = require('./enums');
 
 AWS.config.update({ region: 'us-west-2' });
 
@@ -10,6 +11,8 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const MAX_ITEMS_PER_BATCH_TRANSACTION = 25;
 
 const parseQuestions = async () => {
+  
+  console.log('hi')
   const questions = [];
   const parser = fs
     .createReadStream(questionsCSV)
@@ -18,12 +21,14 @@ const parseQuestions = async () => {
     );
   for await (const row of parser) {
     const question = {
-      // FIXME: uncomment these once schema is updated
-      // difficulty: row[0],
-      // cost: row[1],
-      // type: row[2],
-      tags: row[3].split(','),
-      text: row[4],
+      title: row[4], // TODO: change this once title row in measure list
+      questionText: row[4],
+      rewardText: row[4], // TODO: change this once reward row in measure list
+      difficulty: Difficulty[row[0]],
+      cost: Cost[row[1]],
+      type: QuestionType[row[2]],
+      tags: textToTag(row[3]),
+      answer: 'Answer1, Answer2, Answer3, Answer4', // TODO: change this once answers in measure list
       metadata: {
         additionalQuestionInfo: row[5],
         isPopup: row[6] === 'Yes',
@@ -37,7 +42,7 @@ const parseQuestions = async () => {
 }
 
 const batchWriteQuestions = async (questions, from, to) => {
-  const q = questions.map((question) => ({
+  const payload = questions.map((question) => ({
     PutRequest: {
       Item: {
         id: uuid.v4(),
@@ -52,7 +57,7 @@ const batchWriteQuestions = async (questions, from, to) => {
   })).slice(from, to);
   const params = {
     RequestItems: {
-      'Question-esd3vkp2bbfdpiczmujceuqmke-dev': q
+      'Question-esd3vkp2bbfdpiczmujceuqmke-dev': payload,
     }
   }
 
@@ -64,7 +69,6 @@ exports.handler = async (event) => {
   for (let i = 0; i < questions.length / MAX_ITEMS_PER_BATCH_TRANSACTION; i += 1) {
     const from = MAX_ITEMS_PER_BATCH_TRANSACTION * i
     const to =  MAX_ITEMS_PER_BATCH_TRANSACTION * (i + 1);
-    console.log(from + ' ' + to);
     await batchWriteQuestions(questions, from, to);
   }
 

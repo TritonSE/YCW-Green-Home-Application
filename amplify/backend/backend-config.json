@@ -29,7 +29,7 @@
     }
   },
   "function": {
-      "questionslist": {
+    "questionslist": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
