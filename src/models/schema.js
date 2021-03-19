@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Response": {
-            "name": "Response",
+        "User": {
+            "name": "User",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,117 +10,22 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "home": {
-                    "name": "home",
+                "username": {
+                    "name": "username",
                     "isArray": false,
-                    "type": {
-                        "model": "Home"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "homeID"
-                    }
-                },
-                "question": {
-                    "name": "question",
-                    "isArray": false,
-                    "type": {
-                        "model": "Question"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "questionID"
-                    }
-                },
-                "answers": {
-                    "name": "answers",
-                    "isArray": true,
-                    "type": "AWSJSON",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Responses",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {
-                        "mutations": null
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byHome",
-                        "fields": [
-                            "homeID",
-                            "questionID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byQuestion",
-                        "fields": [
-                            "questionID",
-                            "homeID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "Admin"
-                                ],
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Home": {
-            "name": "Home",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
+                    "type": "AWSEmail",
                     "isRequired": true,
                     "attributes": []
                 },
-                "homeOwners": {
-                    "name": "homeOwners",
+                "displayName": {
+                    "name": "displayName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "homes": {
+                    "name": "homes",
                     "isArray": true,
                     "type": {
                         "model": "HomeOwner"
@@ -130,214 +35,12 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "home"
+                        "associatedWith": "homeOwner"
                     }
-                },
-                "responses": {
-                    "name": "responses",
-                    "isArray": true,
-                    "type": {
-                        "model": "Response"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "home"
-                    }
-                },
-                "badges": {
-                    "name": "badges",
-                    "isArray": true,
-                    "type": {
-                        "model": "HomeBadge"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "home"
-                    }
-                },
-                "homeType": {
-                    "name": "homeType",
-                    "isArray": false,
-                    "type": {
-                        "enum": "HomeType"
-                    },
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "addressLine1": {
-                    "name": "addressLine1",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "addressLine2": {
-                    "name": "addressLine2",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "city": {
-                    "name": "city",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "addressState": {
-                    "name": "addressState",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "country": {
-                    "name": "country",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "zipcode": {
-                    "name": "zipcode",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "yearBuilt": {
-                    "name": "yearBuilt",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "electricProvider": {
-                    "name": "electricProvider",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "gasProvider": {
-                    "name": "gasProvider",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "outDoorArea": {
-                    "name": "outDoorArea",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "livableArea": {
-                    "name": "livableArea",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "bedroomCount": {
-                    "name": "bedroomCount",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "bathroomCount": {
-                    "name": "bathroomCount",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "heatingFuelType": {
-                    "name": "heatingFuelType",
-                    "isArray": false,
-                    "type": {
-                        "enum": "HeatingFuelType"
-                    },
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "heaterAge": {
-                    "name": "heaterAge",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "waterHeaterFuelType": {
-                    "name": "waterHeaterFuelType",
-                    "isArray": false,
-                    "type": {
-                        "enum": "WaterHeaterFuelType"
-                    },
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "waterHeaterAge": {
-                    "name": "waterHeaterAge",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "hasAirConditioner": {
-                    "name": "hasAirConditioner",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "hasPool": {
-                    "name": "hasPool",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "hasHotTub": {
-                    "name": "hasHotTub",
-                    "isArray": false,
-                    "type": "Boolean",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "annualElectricalEnergyUsage": {
-                    "name": "annualElectricalEnergyUsage",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "annualGasPropaneEnergyUsage": {
-                    "name": "annualGasPropaneEnergyUsage",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "annualWaterUsage": {
-                    "name": "annualWaterUsage",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": true,
-                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Homes",
+            "pluralName": "Users",
             "attributes": [
                 {
                     "type": "model",
@@ -358,16 +61,6 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
-                            },
-                            {
-                                "provider": "userPools",
-                                "ownerField": "homeowners",
-                                "allow": "owner",
-                                "operations": [
-                                    "update",
-                                    "read"
-                                ],
-                                "identityClaim": "cognito:username"
                             }
                         ]
                     }
@@ -461,8 +154,8 @@ export const schema = {
                 }
             ]
         },
-        "User": {
-            "name": "User",
+        "Home": {
+            "name": "Home",
             "fields": {
                 "id": {
                     "name": "id",
@@ -471,29 +164,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "username": {
-                    "name": "username",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "email": {
-                    "name": "email",
-                    "isArray": false,
-                    "type": "AWSEmail",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "phoneNumber": {
-                    "name": "phoneNumber",
-                    "isArray": false,
-                    "type": "AWSPhone",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "homes": {
-                    "name": "homes",
+                "homeOwners": {
+                    "name": "homeOwners",
                     "isArray": true,
                     "type": {
                         "model": "HomeOwner"
@@ -503,19 +175,181 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "homeOwner"
+                        "associatedWith": "home"
                     }
                 },
-                "ownElectricVehicle": {
-                    "name": "ownElectricVehicle",
+                "responses": {
+                    "name": "responses",
+                    "isArray": true,
+                    "type": {
+                        "model": "Response"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "home"
+                    }
+                },
+                "addressLine1": {
+                    "name": "addressLine1",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "addressLine2": {
+                    "name": "addressLine2",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "city": {
+                    "name": "city",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "addressState": {
+                    "name": "addressState",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "country": {
+                    "name": "country",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "zipcode": {
+                    "name": "zipcode",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "yearBuilt": {
+                    "name": "yearBuilt",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "outDoorArea": {
+                    "name": "outDoorArea",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "livableArea": {
+                    "name": "livableArea",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "bedroomCount": {
+                    "name": "bedroomCount",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "bathroomCount": {
+                    "name": "bathroomCount",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "heatingFuelType": {
+                    "name": "heatingFuelType",
+                    "isArray": false,
+                    "type": {
+                        "enum": "HeatingFuelType"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "heaterAge": {
+                    "name": "heaterAge",
+                    "isArray": false,
+                    "type": {
+                        "enum": "AgeType"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "waterHeaterFuelType": {
+                    "name": "waterHeaterFuelType",
+                    "isArray": false,
+                    "type": {
+                        "enum": "WaterHeaterFuelType"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "waterHeaterAge": {
+                    "name": "waterHeaterAge",
+                    "isArray": false,
+                    "type": {
+                        "enum": "AgeType"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hasAirConditioner": {
+                    "name": "hasAirConditioner",
                     "isArray": false,
                     "type": "Boolean",
-                    "isRequired": true,
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hasPool": {
+                    "name": "hasPool",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "hasHotTub": {
+                    "name": "hasHotTub",
+                    "isArray": false,
+                    "type": "Boolean",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "annualElectricalEnergyUsage": {
+                    "name": "annualElectricalEnergyUsage",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "annualGasPropaneEnergyUsage": {
+                    "name": "annualGasPropaneEnergyUsage",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "annualWaterUsage": {
+                    "name": "annualWaterUsage",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
                     "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Users",
+            "pluralName": "Homes",
             "attributes": [
                 {
                     "type": "model",
@@ -536,14 +370,24 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
+                            },
+                            {
+                                "provider": "userPools",
+                                "ownerField": "homeowners",
+                                "allow": "owner",
+                                "operations": [
+                                    "update",
+                                    "read"
+                                ],
+                                "identityClaim": "cognito:username"
                             }
                         ]
                     }
                 }
             ]
         },
-        "HomeBadge": {
-            "name": "HomeBadge",
+        "Response": {
+            "name": "Response",
             "fields": {
                 "id": {
                     "name": "id",
@@ -558,34 +402,48 @@ export const schema = {
                     "type": {
                         "model": "Home"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
                         "targetName": "homeID"
                     }
                 },
-                "badge": {
-                    "name": "badge",
+                "question": {
+                    "name": "question",
                     "isArray": false,
                     "type": {
-                        "model": "Badge"
+                        "model": "Question"
                     },
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "badgeID"
+                        "targetName": "questionID"
                     }
+                },
+                "answer": {
+                    "name": "answer",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "HomeBadges",
+            "pluralName": "Responses",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {
-                        "queries": null
+                        "mutations": null
                     }
                 },
                 {
@@ -594,102 +452,30 @@ export const schema = {
                         "name": "byHome",
                         "fields": [
                             "homeID",
-                            "badgeID"
+                            "questionID"
                         ]
                     }
                 },
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byBadge",
+                        "name": "byQuestion",
                         "fields": [
-                            "badgeID",
+                            "questionID",
                             "homeID"
                         ]
                     }
                 },
                 {
-                    "type": "auth",
+                    "type": "key",
                     "properties": {
-                        "rules": [
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
+                        "name": "byCreatedAt",
+                        "fields": [
+                            "homeID",
+                            "createdAt"
+                        ],
+                        "queryField": "getResponsesByCreatedAt"
                     }
-                }
-            ]
-        },
-        "Badge": {
-            "name": "Badge",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "type": {
-                    "name": "type",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Tag"
-                    },
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "criteria": {
-                    "name": "criteria",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "logoName": {
-                    "name": "logoName",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "homes": {
-                    "name": "homes",
-                    "isArray": true,
-                    "type": {
-                        "model": "HomeBadge"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "badge"
-                    }
-                }
-            },
-            "syncable": true,
-            "pluralName": "Badges",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
                 },
                 {
                     "type": "auth",
@@ -720,13 +506,6 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
-                            },
-                            {
-                                "allow": "private",
-                                "provider": "iam",
-                                "operations": [
-                                    "read"
-                                ]
                             }
                         ]
                     }
@@ -743,10 +522,51 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "text": {
-                    "name": "text",
+                "title": {
+                    "name": "title",
                     "isArray": false,
                     "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "questionText": {
+                    "name": "questionText",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "rewardText": {
+                    "name": "rewardText",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "difficulty": {
+                    "name": "difficulty",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Difficulty"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "cost": {
+                    "name": "cost",
+                    "isArray": false,
+                    "type": {
+                        "enum": "Cost"
+                    },
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": {
+                        "enum": "QuestionType"
+                    },
                     "isRequired": true,
                     "attributes": []
                 },
@@ -756,9 +576,9 @@ export const schema = {
                     "type": {
                         "enum": "Tag"
                     },
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": [],
-                    "isArrayNullable": true
+                    "isArrayNullable": false
                 },
                 "responses": {
                     "name": "responses",
@@ -774,13 +594,12 @@ export const schema = {
                         "associatedWith": "question"
                     }
                 },
-                "options": {
-                    "name": "options",
-                    "isArray": true,
-                    "type": "AWSJSON",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                "answer": {
+                    "name": "answer",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "metadata": {
                     "name": "metadata",
@@ -841,6 +660,30 @@ export const schema = {
         }
     },
     "enums": {
+        "Difficulty": {
+            "name": "Difficulty",
+            "values": [
+                "BEGINNER",
+                "INTERMEDIATE",
+                "ADVANCED"
+            ]
+        },
+        "Cost": {
+            "name": "Cost",
+            "values": [
+                "ONE",
+                "TWO",
+                "THREE",
+                "FOUR"
+            ]
+        },
+        "QuestionType": {
+            "name": "QuestionType",
+            "values": [
+                "HOME_IMPROVEMENT",
+                "GREEN_LIFESTYLE"
+            ]
+        },
         "Tag": {
             "name": "Tag",
             "values": [
@@ -852,15 +695,6 @@ export const schema = {
                 "WATER"
             ]
         },
-        "HomeType": {
-            "name": "HomeType",
-            "values": [
-                "SINGLE_FAMILY",
-                "DUPLEX",
-                "TOWNHOUSE",
-                "APARTMENT_CONDO"
-            ]
-        },
         "HeatingFuelType": {
             "name": "HeatingFuelType",
             "values": [
@@ -868,6 +702,15 @@ export const schema = {
                 "ELECTRIC",
                 "PROPANE",
                 "OTHER"
+            ]
+        },
+        "AgeType": {
+            "name": "AgeType",
+            "values": [
+                "LESS_THAN_5",
+                "MORE_THAN_5",
+                "MORE_THAN_10",
+                "MORE_THAN_20"
             ]
         },
         "WaterHeaterFuelType": {
@@ -880,61 +723,6 @@ export const schema = {
         }
     },
     "nonModels": {
-        "MutateResponseOutput": {
-            "name": "MutateResponseOutput",
-            "fields": {
-                "response": {
-                    "name": "response",
-                    "isArray": false,
-                    "type": {
-                        "model": "Response"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "rewards": {
-                    "name": "rewards",
-                    "isArray": true,
-                    "type": {
-                        "nonModel": "Reward"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
-                "newBadges": {
-                    "name": "newBadges",
-                    "isArray": true,
-                    "type": {
-                        "model": "Badge"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
-                }
-            }
-        },
-        "Reward": {
-            "name": "Reward",
-            "fields": {
-                "points": {
-                    "name": "points",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "tag": {
-                    "name": "tag",
-                    "isArray": false,
-                    "type": {
-                        "enum": "Tag"
-                    },
-                    "isRequired": true,
-                    "attributes": []
-                }
-            }
-        },
         "S3Object": {
             "name": "S3Object",
             "fields": {
@@ -962,5 +750,5 @@ export const schema = {
             }
         }
     },
-    "version": "3a2ff8de77d0010908bb07d1651be06c"
+    "version": "da84ca4a89147fad52aa9fbc0b9e2738"
 };
