@@ -1,6 +1,9 @@
 {
+  "providers": [
+    "awscloudformation"
+  ],
   "projectName": "YourClearWay",
-  "version": "3.0",
+  "version": "3.1",
   "frontend": "javascript",
   "javascript": {
     "framework": "react-native",
@@ -10,8 +13,5 @@
       "BuildCommand": "npm run-script build",
       "StartCommand": "npm run-script start"
     }
-  },
-  "providers": [
-    "awscloudformation"
-  ]
+  }
 }
