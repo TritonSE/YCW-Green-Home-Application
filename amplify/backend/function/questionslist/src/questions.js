@@ -9,6 +9,19 @@ AWS.config.update({ region: Config.AWS_REGION });
 
 const questionsCSV = '../data/questions.csv'
 const docClient = new AWS.DynamoDB.DocumentClient();
+const DATA_COLUMNS = {
+  difficulty: 0,
+  cost: 1,
+  type: 2,
+  tags: 3,
+  title: 4, // TODO: change this once title row in measure list
+  questionText: 4,
+  rewardText: 4, // TODO: change this once reward row in measure list
+  additionalQuestionInfo: 5,
+  isPopup: 6,
+  responseFormat: 7,
+  notes: 8,
+}
 
 const parseQuestions = async () => {
   const questions = [];
@@ -17,25 +30,27 @@ const parseQuestions = async () => {
     .pipe(
       parse({ delimiter: ',' })
     );
+  
   for await (const row of parser) {
     const question = {
-      title: row[4], // TODO: change this once title row in measure list
-      questionText: row[4],
-      rewardText: row[4], // TODO: change this once reward row in measure list
-      difficulty: Difficulty[row[0]],
-      cost: Cost[row[1]],
-      type: QuestionType[row[2]],
-      tags: textToTag(row[3]),
+      title: row[DATA_COLUMNS.title], 
+      questionText: row[DATA_COLUMNS.questionText],
+      rewardText: row[DATA_COLUMNS.rewardText], 
+      difficulty: Difficulty[row[DATA_COLUMNS.difficulty]],
+      cost: Cost[row[DATA_COLUMNS.cost]],
+      type: QuestionType[row[DATA_COLUMNS.type]],
+      tags: textToTag(row[DATA_COLUMNS.tags]),
       answer: 'Answer1, Answer2, Answer3, Answer4', // TODO: change this once answers in measure list
       metadata: {
-        additionalQuestionInfo: row[5],
-        isPopup: row[6] === 'Yes',
-        responseFormat: row[7],
-        notes: row[8] 
+        additionalQuestionInfo: row[DATA_COLUMNS.additionalQuestionInfo],
+        isPopup: row[DATA_COLUMNS.isPopup] === 'Yes',
+        responseFormat: row[DATA_COLUMNS.responseFormat],
+        notes: row[DATA_COLUMNS.notes], 
       }
     };
     questions.push(question);
   }
+
   return questions;
 }
 

@@ -23,7 +23,7 @@ const Tag = {
 
 const QuestionType = {
   'Home Improvement': 'HOME_IMPROVEMENT',
-  'Behavioral': 'GREEN_LIFESTYLE', //TODO: change this once measure list is updated
+  'Behavioral': 'GREEN_LIFESTYLE', // TODO: change this once measure list is updated
 }
 
 const textToTag = (row) => {
