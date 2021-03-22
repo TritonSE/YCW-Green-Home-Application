@@ -11,8 +11,6 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 const MAX_ITEMS_PER_BATCH_TRANSACTION = 25;
 
 const parseQuestions = async () => {
-  
-  console.log('hi')
   const questions = [];
   const parser = fs
     .createReadStream(questionsCSV)

@@ -31,4 +31,4 @@ const textToTag = (row) => {
   return tags.map((tag) => Tag[tag]);
 }
 
-export { Cost, Tag, QuestionType, Difficulty, textToTag };
+module.exports = { Cost, Tag, QuestionType, Difficulty, textToTag };
