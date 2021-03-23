@@ -1,8 +1,8 @@
 // Map of sheet values to enums in database
 const Difficulty = {
-  'Beginner': 'Beginner',
-  'Intermediate': 'Intermediate',
-  'Expert': 'Advanced',
+  'Beginner': 'BEGINNER',
+  'Intermediate': 'INTERMEDIATE',
+  'Expert': 'ADVANCED',
 }
 
 const Cost = {

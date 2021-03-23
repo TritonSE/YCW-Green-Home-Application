@@ -54,7 +54,7 @@ const parseQuestions = async () => {
   return questions;
 }
 
-const batchWriteQuestions = async (questions, from, to) => {
+const batchWriteQuestions = async (questions) => {
   const payload = questions.map((question) => ({
     PutRequest: {
       Item: {
@@ -67,7 +67,7 @@ const batchWriteQuestions = async (questions, from, to) => {
         ...question,
       }
     }
-  })).slice(from, to);
+  }));
   const params = {
     RequestItems: {
       [Config.TABLE_NAME]: payload,
