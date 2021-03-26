@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "api": {
+      "YourClearWayAPI": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
