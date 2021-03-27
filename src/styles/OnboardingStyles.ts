@@ -69,6 +69,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  compactFormComponent: {
+    paddingTop: '3.5%',
+    alignSelf: 'flex-start',
+    paddingLeft: '5%',
+    fontSize: 16,
+    color: '#6C6B6B',
+    paddingBottom: '2.5%',
+  },
 });
 
 export default styles;

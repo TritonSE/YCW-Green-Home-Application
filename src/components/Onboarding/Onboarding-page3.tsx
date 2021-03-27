@@ -69,7 +69,12 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                 paddingLeft: '2.5%',
               }}
               containerStyle={{ height: 40 }}
-              items={[{ label: 'test', value: 'test' }]}
+              items={[
+                { label: 'Gas', value: 'Gas' },
+                { label: 'Electric', value: 'Electric' },
+                { label: 'Propane', value: 'Propane' },
+                { label: 'Other', value: 'Other' },
+              ]}
               dropDownStyle={{ width: '90%' }}
               itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
@@ -93,7 +98,11 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                 paddingLeft: '2.5%',
               }}
               containerStyle={{ height: 40 }}
-              items={[{ label: 'test', value: 'test' }]}
+              items={[
+                { label: 'Gas', value: 'Gas' },
+                { label: 'Electric', value: 'Electric' },
+                { label: 'Other', value: 'Other' },
+              ]}
               dropDownStyle={{ width: '90%' }}
               itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""

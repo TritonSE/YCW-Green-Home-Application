@@ -1,11 +1,24 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Page1 from './Onboarding-page1';
 import Page2 from './Onboarding-page2';
 import Page3 from './Onboarding-page3';
+import Page4 from './Onboarding-page4';
 
-const Onboarding = () => {
+interface Props {
+  setAppState(page: string): void;
+}
+
+const Onboarding: React.FC<Props> = ({ setAppState }) => {
   const [page, setPage] = useState('page1');
   const [homeData, setHomeData] = useState({});
+
+  useEffect(() => {
+    if (page === 'submit') {
+      // submit home info to backend here
+      console.log(homeData);
+      setAppState('App');
+    }
+  }, [page, homeData, setAppState]);
 
   return (
     <>
@@ -30,9 +43,13 @@ const Onboarding = () => {
           homeData={homeData}
         />
       )}
-      {/* {page === "page4" && (
-        
-      )} */}
+      {page === 'page4' && (
+        <Page4
+          setPage={setPage}
+          setHomeData={setHomeData}
+          homeData={homeData}
+        />
+      )}
     </>
   );
 };

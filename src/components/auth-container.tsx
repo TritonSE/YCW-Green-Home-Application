@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
-//import { Button, Text, View } from "react-native";
-import { withAuthenticator } from "aws-amplify-react-native";
-import { Auth } from "aws-amplify";
-import Onboarding from "./Onboarding/Onboarding";
+import React, { useState } from 'react';
+import { SafeAreaView, Text } from 'react-native';
+import { withAuthenticator } from 'aws-amplify-react-native';
+import { Auth } from 'aws-amplify';
+import Onboarding from './Onboarding/Onboarding';
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -15,31 +15,37 @@ Auth.configure({ mandatorySignIn: true });
 // }
 
 function AuthContainer() {
+  const [appState, setAppState] = useState('Onboarding');
   return (
     <>
       {/* <Button title="Sign Out" onPress={SignOut} /> */}
-      <Onboarding />
+      {appState === 'Onboarding' && <Onboarding setAppState={setAppState} />}
+      {appState === 'App' && (
+        <SafeAreaView>
+          <Text>Use React Navigation here</Text>
+        </SafeAreaView>
+      )}
     </>
   );
 }
 
 export default withAuthenticator(AuthContainer, {
   signUpConfig: {
-    hiddenDefaults: ["email", "phone_number"],
+    hiddenDefaults: ['email', 'phone_number'],
     signUpFields: [
       {
-        label: "Email",
-        key: "username",
+        label: 'Email',
+        key: 'username',
         required: true,
         displayOrder: 3,
-        type: "string",
+        type: 'string',
       },
       {
-        label: "Password",
-        key: "password",
+        label: 'Password',
+        key: 'password',
         required: true,
         displayOrder: 4,
-        type: "password",
+        type: 'password',
       },
     ],
   },
