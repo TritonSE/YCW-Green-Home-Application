@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, TextInput, View } from 'react-native';
+import { SafeAreaView, Image, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -7,24 +7,35 @@ import styles from '../../styles/OnboardingStyles';
 
 interface Props {
   setPage(page: string): void;
-  setHomeData(data: Record<string, unknown>): void;
-  homeData: Record<string, unknown>;
+  setHomeData({}): void;
+  homeData: Record<string, string>;
 }
 
 const Page2: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
-  const [squareFeet, setSquareFeet] = useState('');
-  const [outdoor, setOutdoor] = useState('');
-  const [bedrooms, setBedrooms] = useState('');
-  const [bathrooms, setBathrooms] = useState('');
+  const [squareFeet, setSquareFeet] = useState(homeData.squareFeet);
+  const [outdoor, setOutdoor] = useState(homeData.outdoor);
+  const [bedrooms, setBedrooms] = useState(homeData.bedrooms);
+  const [bathrooms, setBathrooms] = useState(homeData.bathrooms);
+
+  const previousPage = () => {
+    setPage('page1');
+    setHomeData({
+      ...homeData,
+      squareFeet,
+      outdoor,
+      bedrooms,
+      bathrooms,
+    });
+  };
 
   const nextPage = () => {
     setPage('page3');
     setHomeData({
       ...homeData,
-      squareFeet: parseInt(squareFeet, 10),
-      outdoor: parseInt(outdoor, 10),
-      bedrooms: parseInt(bedrooms, 10),
-      bathrooms: parseInt(bathrooms, 10),
+      squareFeet,
+      outdoor,
+      bedrooms,
+      bathrooms,
     });
   };
 
@@ -35,7 +46,20 @@ const Page2: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       >
         <View style={styles.background} />
         <View style={styles.formContainer}>
-          <Text style={styles.title}>Home Info</Text>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              paddingTop: '20%',
+              alignItems: 'baseline',
+              justifyContent: 'space-between',
+            }}
+          >
+            <TouchableOpacity onPress={previousPage} style={{ flex: 1 }}>
+              <Image source={require('../../assets/backButton.png')} />
+            </TouchableOpacity>
+            <Text style={styles.title}>Home Info</Text>
+          </View>
           <Text style={styles.description}>
             Complete the following questions about your current home.
           </Text>

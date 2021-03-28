@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
-    paddingTop: '20%',
+    marginLeft: '28%',
+    flex: 2,
   },
   description: {
     fontSize: 16,

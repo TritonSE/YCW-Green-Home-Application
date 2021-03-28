@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, TextInput, View } from 'react-native';
+import { SafeAreaView, Text, TextInput, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -8,42 +8,46 @@ import styles from '../../styles/OnboardingStyles';
 
 interface Props {
   setPage(page: string): void;
-  setHomeData(data: Record<string, unknown>): void;
-  homeData: Record<string, unknown>;
+  setHomeData({}): void;
+  homeData: Record<string, string>;
 }
 
 const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
-  const [electricEnergyUsage, setElectricEnergyUsage] = useState('');
-  const [gasUsage, setGasUsage] = useState('');
-  const [AC, setAC] = useState({
-    label: '',
-    value: '',
-  });
-  const [pool, setPool] = useState({
-    label: '',
-    value: '',
-  });
-  const [hotTub, setHotTub] = useState({
-    label: '',
-    value: '',
-  });
-  const [EV, setEV] = useState({
-    label: '',
-    value: '',
-  });
+  const [electricEnergyUsage, setElectricEnergyUsage] = useState(
+    homeData.electricEnergyUsage,
+  );
+  const [gasUsage, setGasUsage] = useState(homeData.gasUsage);
+  const [AC, setAC] = useState(homeData.AC);
+  const [pool, setPool] = useState(homeData.pool);
+  const [hotTub, setHotTub] = useState(homeData.hotTub);
+  const [EV, setEV] = useState(homeData.EV);
   const [picker1, setPicker1] = useState(false);
   const [picker2, setPicker2] = useState(false);
   const [picker3, setPicker3] = useState(false);
+
+  const previousPage = () => {
+    setPage('page3');
+    setHomeData({
+      ...homeData,
+      electricEnergyUsage,
+      gasUsage,
+      AC,
+      pool,
+      hotTub,
+      EV,
+    });
+  };
+
   const nextPage = () => {
     setPage('submit');
     setHomeData({
       ...homeData,
-      electricEnergyUsage: parseInt(electricEnergyUsage, 10),
-      gasUsage: parseInt(gasUsage, 10),
-      AC: AC.value,
-      pool: pool.value,
-      hotTub: hotTub.value,
-      EV: EV.value,
+      electricEnergyUsage,
+      gasUsage,
+      AC,
+      pool,
+      hotTub,
+      EV,
     });
   };
 
@@ -54,7 +58,20 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       >
         <View style={styles.background} />
         <View style={styles.formContainer}>
-          <Text style={styles.title}>Home Info</Text>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              paddingTop: '20%',
+              alignItems: 'baseline',
+              justifyContent: 'space-between',
+            }}
+          >
+            <TouchableOpacity onPress={previousPage} style={{ flex: 1 }}>
+              <Image source={require('../../assets/backButton.png')} />
+            </TouchableOpacity>
+            <Text style={styles.title}>Home Info</Text>
+          </View>
           <Text style={styles.description}>
             Complete the following questions about your current home.
           </Text>
@@ -118,7 +135,8 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
               dropDownStyle={{ width: '90%' }}
               itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
-              onChangeItem={item => setAC(item)}
+              onChangeItem={item => setAC(item.value)}
+              defaultValue={homeData.AC}
               onOpen={() => setPicker1(true)}
               onClose={() => setPicker1(false)}
             />
@@ -143,10 +161,10 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                 dropDownStyle={{ width: '90%' }}
                 itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
                 placeholder=""
-                onChangeItem={item => setPool(item)}
-                zIndex={4000}
+                onChangeItem={item => setPool(item.value)}
                 onOpen={() => setPicker2(true)}
                 onClose={() => setPicker2(false)}
+                defaultValue={homeData.pool}
               />
             ) : (
               <Text style={{ height: 40 }} />
@@ -171,9 +189,10 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                 dropDownStyle={{ width: '90%' }}
                 itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
                 placeholder=""
-                onChangeItem={item => setHotTub(item)}
+                onChangeItem={item => setHotTub(item.value)}
                 onOpen={() => setPicker3(true)}
                 onClose={() => setPicker3(false)}
+                defaultValue={homeData.hotTub}
               />
             ) : (
               <Text style={{ height: 40 }} />
@@ -198,7 +217,8 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                 dropDownStyle={{ width: '90%' }}
                 itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
                 placeholder=""
-                onChangeItem={item => setEV(item)}
+                onChangeItem={item => setEV(item.value)}
+                defaultValue={homeData.EV}
               />
             ) : (
               <Text style={{ height: 40 }} />

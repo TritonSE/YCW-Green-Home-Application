@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, TextInput, View } from 'react-native';
+import { SafeAreaView, Text, Image, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -8,32 +8,38 @@ import styles from '../../styles/OnboardingStyles';
 
 interface Props {
   setPage(page: string): void;
-  setHomeData(data: Record<string, unknown>): void;
-  homeData: Record<string, unknown>;
+  setHomeData({}): void;
+  homeData: Record<string, string>;
 }
 
 const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
-  const [heatingFuelType, setHeatingFuelType] = useState({
-    label: '',
-    value: '',
-  });
-  const [heaterAge, setHeaterAge] = useState('');
-  const [waterFuelType, setWaterFuelType] = useState({
-    label: '',
-    value: '',
-  });
-  const [waterHeaterAge, setWaterHeaterAge] = useState('');
-  const [waterUse, setWaterUse] = useState('');
+  const [heatingFuelType, setHeatingFuelType] = useState(homeData.fuelType);
+  const [heaterAge, setHeaterAge] = useState(homeData.heaterAge);
+  const [waterFuelType, setWaterFuelType] = useState(homeData.waterFuelType);
+  const [waterHeaterAge, setWaterHeaterAge] = useState(homeData.waterHeaterAge);
+  const [waterUse, setWaterUse] = useState(homeData.waterUse);
+
+  const previousPage = () => {
+    setPage('page2');
+    setHomeData({
+      ...homeData,
+      fuelType: heatingFuelType,
+      heaterAge,
+      waterFuelType,
+      waterHeaterAge,
+      waterUse,
+    });
+  };
 
   const nextPage = () => {
     setPage('page4');
     setHomeData({
       ...homeData,
-      fuelType: heatingFuelType.value,
-      heaterAge: parseInt(heaterAge, 10),
-      waterFuelType: waterFuelType.value,
-      waterHeaterAge: parseInt(waterHeaterAge, 10),
-      waterUse: parseInt(waterUse, 10),
+      fuelType: heatingFuelType,
+      heaterAge,
+      waterFuelType,
+      waterHeaterAge,
+      waterUse,
     });
   };
 
@@ -44,7 +50,20 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       >
         <View style={styles.background} />
         <View style={styles.formContainer}>
-          <Text style={styles.title}>Home Info</Text>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              paddingTop: '20%',
+              alignItems: 'baseline',
+              justifyContent: 'space-between',
+            }}
+          >
+            <TouchableOpacity onPress={previousPage} style={{ flex: 1 }}>
+              <Image source={require('../../assets/backButton.png')} />
+            </TouchableOpacity>
+            <Text style={styles.title}>Home Info</Text>
+          </View>
           <Text style={styles.description}>
             Complete the following questions about your current home.
           </Text>
@@ -78,7 +97,8 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
               dropDownStyle={{ width: '90%' }}
               itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
-              onChangeItem={item => setHeatingFuelType(item)}
+              onChangeItem={item => setHeatingFuelType(item.value)}
+              defaultValue={homeData.fuelType}
             />
             <Text style={styles.formComponent}>Age of Heater</Text>
             <TextInput
@@ -106,7 +126,8 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
               dropDownStyle={{ width: '90%' }}
               itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
-              onChangeItem={item => setWaterFuelType(item)}
+              onChangeItem={item => setWaterFuelType(item.value)}
+              defaultValue={homeData.waterFuelType}
             />
             <Text style={styles.formComponent}>Age of Water Heater</Text>
             <TextInput

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Page1 from './Onboarding-page1';
 import Page2 from './Onboarding-page2';
 import Page3 from './Onboarding-page3';
@@ -10,7 +10,28 @@ interface Props {
 
 const Onboarding: React.FC<Props> = ({ setAppState }) => {
   const [page, setPage] = useState('page1');
-  const [homeData, setHomeData] = useState({});
+  const [homeData, setHomeData] = useState({
+    AC: '',
+    EV: '',
+    address: '',
+    bathrooms: '',
+    bedrooms: '',
+    city: '',
+    electricEnergyUsage: '',
+    fuelType: '',
+    gasUsage: '',
+    heaterAge: '',
+    hotTub: '',
+    outdoor: '',
+    pool: '',
+    squareFeet: '',
+    state: '',
+    waterFuelType: '',
+    waterHeaterAge: '',
+    waterUse: '',
+    year: '',
+    zipCode: '',
+  });
 
   useEffect(() => {
     if (page === 'submit') {

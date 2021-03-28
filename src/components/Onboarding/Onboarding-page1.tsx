@@ -9,26 +9,26 @@ import states from './states';
 
 interface Props {
   setPage(page: string): void;
-  setHomeData(data: Record<string, unknown>): void;
-  homeData: Record<string, unknown>;
+  setHomeData({}): void;
+  homeData: Record<string, string>;
 }
 
 const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
-  const [zipcode, setZipcode] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [year, setYear] = useState('');
-  const [state, setState] = useState({ label: '', value: '' });
+  const [zipcode, setZipcode] = useState(homeData.zipCode);
+  const [address, setAddress] = useState(homeData.address);
+  const [city, setCity] = useState(homeData.city);
+  const [year, setYear] = useState(homeData.year);
+  const [state, setState] = useState(homeData.state);
 
   const nextPage = () => {
     setPage('page2');
     setHomeData({
       ...homeData,
-      zipCode: parseInt(zipcode, 10),
+      zipCode: zipcode,
       address,
       city,
-      state: state.value,
-      year: parseInt(year, 10),
+      state,
+      year,
     });
   };
 
@@ -39,7 +39,7 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       >
         <View style={styles.background} />
         <View style={styles.formContainer}>
-          <Text style={styles.title}>Home Info</Text>
+          <Text style={{ fontSize: 26, paddingTop: '20%' }}>Home Info</Text>
           <Text style={styles.description}>
             Complete the following questions about your current home.
           </Text>
@@ -87,7 +87,8 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
               dropDownStyle={{ width: '90%' }}
               itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
-              onChangeItem={item => setState(item)}
+              onChangeItem={item => setState(item.value)}
+              defaultValue={homeData.state}
             />
             <Text style={styles.formComponent}>Year Home was Built</Text>
 
