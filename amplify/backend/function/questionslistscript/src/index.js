@@ -3,7 +3,7 @@ const AWS = require('aws-sdk');
 const UrlParse = require('url').URL;
 const { Config } = require('./config');
 const { loadQuestionsFromCSV } = require('./questions');
-const query = require('./query').mutation;
+const { getMutation } = require('./query');
 
 /* Amplify Params - DO NOT EDIT
 	API_YOURCLEARWAYAPI_GRAPHQLAPIENDPOINTOUTPUT
@@ -16,21 +16,18 @@ exports.handler = async (event) => {
   const req = new AWS.HttpRequest(Config.appsyncUrl, Config.region);
   const endpoint = new UrlParse(Config.appsyncUrl).hostname.toString();
   const questions = await loadQuestionsFromCSV();
-  const item = questions[0];
+
+  console.log(getMutation(questions.slice(0,2)));
 
   req.method = 'POST';
   req.path = '/graphql';
   req.headers.host = endpoint;
   req.headers['Content-Type'] = 'application/json';
   req.body = JSON.stringify({
-    query,
+    query: getMutation(questions),
     operationName: 'createQuestion',
-    variables: {
-      input: item,
-    }
   });
 
-  console.log(AWS.config.credentials);
   if (Config.apiKey) {
     req.headers["x-api-key"] = apiKey;
   } else {
