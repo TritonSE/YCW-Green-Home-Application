@@ -9,14 +9,6 @@
     },
     "env": {
       "Type": "String"
-    },
-    "apiYourClearWayAPIGraphQLAPIIdOutput": {
-      "Type": "String",
-      "Default": "apiYourClearWayAPIGraphQLAPIIdOutput"
-    },
-    "apiYourClearWayAPIGraphQLAPIEndpointOutput": {
-      "Type": "String",
-      "Default": "apiYourClearWayAPIGraphQLAPIEndpointOutput"
     }
   },
   "Conditions": {
@@ -41,12 +33,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "questionslistscript",
+            "questionslist",
             {
               "Fn::Join": [
                 "",
                 [
-                  "questionslistscript",
+                  "questionslist",
                   "-",
                   {
                     "Ref": "env"
@@ -63,12 +55,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "API_YOURCLEARWAYAPI_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apiYourClearWayAPIGraphQLAPIIdOutput"
-            },
-            "API_YOURCLEARWAYAPI_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apiYourClearWayAPIGraphQLAPIEndpointOutput"
             }
           }
         },
@@ -83,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-yourclearway-dev-225606-deployment",
-          "S3Key": "amplify-builds/questionslistscript-6c4f416773785043372f-build.zip"
+          "S3Key": "amplify-builds/questionslist-5334586e623230362b38-build.zip"
         }
       }
     },
@@ -93,12 +79,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "yourclearwayLambdaRole8ee9c793",
+            "yourclearwayLambdaRole332ff49e",
             {
               "Fn::Join": [
                 "",
                 [
-                  "yourclearwayLambdaRole8ee9c793",
+                  "yourclearwayLambdaRole332ff49e",
                   "-",
                   {
                     "Ref": "env"
@@ -164,59 +150,6 @@
                   }
                 ]
               }
-            }
-          ]
-        }
-      }
-    },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "appsync:Create*",
-                "appsync:StartSchemaCreation",
-                "appsync:GraphQL",
-                "appsync:Get*",
-                "appsync:List*",
-                "appsync:Update*",
-                "appsync:Delete*"
-              ],
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:aws:appsync:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":",
-                      {
-                        "Ref": "AWS::AccountId"
-                      },
-                      ":apis/",
-                      {
-                        "Ref": "apiYourClearWayAPIGraphQLAPIIdOutput"
-                      },
-                      "/*"
-                    ]
-                  ]
-                }
-              ]
             }
           ]
         }

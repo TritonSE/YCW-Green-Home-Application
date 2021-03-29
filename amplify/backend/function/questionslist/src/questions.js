@@ -1,8 +1,14 @@
+const AWS = require('aws-sdk');
+const uuid = require('uuid');
 const fs = require('fs');
 const parse = require('csv-parse');
+const { Config } = require('./config');
 const { Difficulty, Cost, QuestionType, textToTag } = require('./enums');
 
+AWS.config.update({ region: Config.region });
+
 const questionsCSV = '../data/questions.csv'
+const docClient = new AWS.DynamoDB.DocumentClient();
 const DATA_COLUMNS = {
   difficulty: 0,
   cost: 1,
@@ -17,7 +23,7 @@ const DATA_COLUMNS = {
   notes: 8,
 }
 
-const loadQuestionsFromCSV = async () => {
+const parseQuestions = async () => {
   const questions = [];
   const parser = fs
     .createReadStream(questionsCSV)
@@ -35,12 +41,12 @@ const loadQuestionsFromCSV = async () => {
       type: QuestionType[row[DATA_COLUMNS.type]],
       tags: textToTag(row[DATA_COLUMNS.tags]),
       answer: 'Answer1, Answer2, Answer3, Answer4', // TODO: change this once answers in measure list
-      // metadata: {
-      //   additionalQuestionInfo: row[DATA_COLUMNS.additionalQuestionInfo].toString(),
-      //   isPopup: (row[DATA_COLUMNS.isPopup] === 'Yes').toString(),
-      //   responseFormat: row[DATA_COLUMNS.responseFormat].toString(),
-      //   notes: row[DATA_COLUMNS.notes].toString(), 
-      // }
+      metadata: {
+        additionalQuestionInfo: row[DATA_COLUMNS.additionalQuestionInfo],
+        isPopup: row[DATA_COLUMNS.isPopup] === 'Yes',
+        responseFormat: row[DATA_COLUMNS.responseFormat],
+        notes: row[DATA_COLUMNS.notes], 
+      }
     };
     questions.push(question);
   }
@@ -48,5 +54,27 @@ const loadQuestionsFromCSV = async () => {
   return questions;
 }
 
+const batchWriteQuestions = async (questions) => {
+  const payload = questions.map((question) => ({
+    PutRequest: {
+      Item: {
+        id: uuid.v4(),
+        __typename: 'Question',
+        _lastChangedAt: Date.now(),
+        _version: 1,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        ...question,
+      }
+    }
+  }));
+  const params = {
+    RequestItems: {
+      [Config.tableName]: payload,
+    }
+  }
 
-module.exports = { loadQuestionsFromCSV };
+  return docClient.batchWrite(params).promise();
+}
+
+module.exports = { parseQuestions, batchWriteQuestions };
