@@ -7,7 +7,7 @@ const { Difficulty, Cost, QuestionType, textToTag } = require('./enums');
 
 AWS.config.update({ region: Config.region });
 
-const questionsCSV = '../data/questions.csv'
+const questionsCSV = './data/questions.csv'
 const docClient = new AWS.DynamoDB.DocumentClient();
 const DATA_COLUMNS = {
   difficulty: 0,
