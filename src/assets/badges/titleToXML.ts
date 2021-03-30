@@ -1,6 +1,10 @@
 import * as XMLs from './svgXMLs';
 
-const badgeXMLs = {
+interface badgeXMLObj {
+  [key: string]: string;
+}
+
+const badgeXMLs: badgeXMLObj = {
   'Ceiling Fans': XMLs.ceilingFansXML,
   'Smart Thermostat': XMLs.smartThermostatXML,
   'LED Lights': XMLs.ledLightsXML,
