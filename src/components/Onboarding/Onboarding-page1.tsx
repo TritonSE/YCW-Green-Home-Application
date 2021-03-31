@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, TextInput, View } from 'react-native';
+import { SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -33,7 +33,12 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
   };
 
   return (
-    <KeyboardAwareScrollView keyboardOpeningTime={0} extraScrollHeight={25}>
+    <KeyboardAwareScrollView
+      keyboardOpeningTime={0}
+      extraScrollHeight={25}
+      enableOnAndroid
+      contentContainerStyle={{ flexGrow: 1 }}
+    >
       <SafeAreaView
         style={{ alignItems: 'center', justifyContent: 'flex-start' }}
       >

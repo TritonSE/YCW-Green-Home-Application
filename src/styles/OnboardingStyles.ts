@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26,
     marginLeft: '28%',
-    flex: 2,
+    // flex: 2,
   },
   description: {
     fontSize: 16,
