@@ -4,7 +4,8 @@ import Amplify from 'aws-amplify';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import awsconfig from './aws-exports';
 
-import AuthContainer from './components/auth-container';
+// import AuthContainer from './components/auth-container';
+import NavFlow from './components/nav';
 import SplashScreen from './components/splash-screen';
 
 import getEnvVars from './environment';
@@ -35,7 +36,7 @@ export default function App() {
       <SafeAreaView style={{ flex: 1 }}>
         <SplashScreen />
         <View style={{ flex: 4 }}>
-          <AuthContainer />
+          <NavFlow />
         </View>
       </SafeAreaView>
     </ApolloProvider>
