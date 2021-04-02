@@ -40,7 +40,12 @@ const Page2: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
   };
 
   return (
-    <KeyboardAwareScrollView keyboardOpeningTime={0} extraScrollHeight={25}>
+    <KeyboardAwareScrollView
+      keyboardOpeningTime={0}
+      extraScrollHeight={25}
+      contentContainerStyle={{ flexGrow: 1, height: '125%' }}
+      scrollToOverflowEnabled
+    >
       <SafeAreaView
         style={{ alignItems: 'center', justifyContent: 'flex-start' }}
       >

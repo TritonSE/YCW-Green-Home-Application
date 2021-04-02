@@ -37,10 +37,14 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       keyboardOpeningTime={0}
       extraScrollHeight={25}
       enableOnAndroid
-      contentContainerStyle={{ flexGrow: 1 }}
+      contentContainerStyle={{ flexGrow: 1, height: '125%' }}
+      scrollToOverflowEnabled
     >
-      <SafeAreaView
-        style={{ alignItems: 'center', justifyContent: 'flex-start' }}
+      <View
+        style={{
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+        }}
       >
         <View style={styles.background} />
         <View style={styles.formContainer}>
@@ -113,7 +117,7 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </SafeAreaView>
+      </View>
     </KeyboardAwareScrollView>
   );
 };
