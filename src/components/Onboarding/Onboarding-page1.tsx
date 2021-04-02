@@ -74,6 +74,7 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
               style={styles.formInput}
               value={address}
               onChangeText={setAddress}
+              onTouchStart={() => console.log('here')}
             />
             <Text style={styles.formComponent}>City</Text>
             <TextInput

@@ -58,9 +58,7 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       contentContainerStyle={{ flexGrow: 1, height: '125%' }}
       scrollToOverflowEnabled
     >
-      <SafeAreaView
-        style={{ alignItems: 'center', justifyContent: 'flex-start' }}
-      >
+      <View style={{ alignItems: 'center', justifyContent: 'flex-start' }}>
         <View style={styles.background} />
         <View style={styles.formContainer}>
           <View
@@ -83,16 +81,17 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
 
           <View
             style={{
-              position: 'absolute',
+              // position: "absolute",
               borderWidth: 1,
               borderRadius: 20,
-              height: '330%',
+              // height: "330%",
               width: '100%',
-              backgroundColor: '#fff',
+              paddingBottom: '15%',
+              // backgroundColor: "#fff",
               borderColor: '#6C6B6B',
               alignItems: 'center',
               justifyContent: 'flex-start',
-              marginTop: '55%',
+              // marginTop: "55%",
             }}
           >
             <Text style={{ paddingVertical: '5%' }}>4 of 4</Text>
@@ -248,7 +247,7 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </SafeAreaView>
+      </View>
     </KeyboardAwareScrollView>
   );
 };
