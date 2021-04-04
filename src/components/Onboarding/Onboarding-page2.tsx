@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Image, Text, TextInput, View } from 'react-native';
+import { Image, Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -43,28 +43,22 @@ const Page2: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
     <KeyboardAwareScrollView
       keyboardOpeningTime={0}
       extraScrollHeight={25}
-      contentContainerStyle={{ flexGrow: 1, height: '125%' }}
+      contentContainerStyle={{ flexGrow: 1, height: 800 }}
       scrollToOverflowEnabled
     >
-      <SafeAreaView
-        style={{ alignItems: 'center', justifyContent: 'flex-start' }}
-      >
+      <View style={{ alignItems: 'center' }}>
         <View style={styles.background} />
         <View style={styles.formContainer}>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              paddingTop: '20%',
-              alignItems: 'baseline',
-              justifyContent: 'space-between',
-            }}
+          <TouchableOpacity onPress={previousPage} style={{ paddingTop: 70 }}>
+            <Image source={require('../../assets/backButton.png')} />
+          </TouchableOpacity>
+
+          <Text
+            style={{ ...styles.title, alignSelf: 'center', marginTop: -25 }}
           >
-            <TouchableOpacity onPress={previousPage} style={{ flex: 1 }}>
-              <Image source={require('../../assets/backButton.png')} />
-            </TouchableOpacity>
-            <Text style={styles.title}>Home Info</Text>
-          </View>
+            Home Info
+          </Text>
+
           <Text style={styles.description}>
             Complete the following questions about your current home.
           </Text>
@@ -130,7 +124,7 @@ const Page2: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
             </TouchableOpacity>
           </View>
         </View>
-      </SafeAreaView>
+      </View>
     </KeyboardAwareScrollView>
   );
 };

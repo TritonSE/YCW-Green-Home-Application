@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, TextInput, View, Image } from 'react-native';
+import { Text, TextInput, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -55,43 +55,34 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
     <KeyboardAwareScrollView
       keyboardOpeningTime={0}
       extraScrollHeight={25}
-      contentContainerStyle={{ flexGrow: 1, height: '125%' }}
+      contentContainerStyle={{ flexGrow: 1, height: 900 }}
       scrollToOverflowEnabled
     >
       <View style={{ alignItems: 'center', justifyContent: 'flex-start' }}>
         <View style={styles.background} />
         <View style={styles.formContainer}>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              paddingTop: '20%',
-              alignItems: 'baseline',
-              justifyContent: 'space-between',
-            }}
+          <TouchableOpacity onPress={previousPage} style={{ paddingTop: 70 }}>
+            <Image source={require('../../assets/backButton.png')} />
+          </TouchableOpacity>
+
+          <Text
+            style={{ ...styles.title, alignSelf: 'center', marginTop: -25 }}
           >
-            <TouchableOpacity onPress={previousPage} style={{ flex: 1 }}>
-              <Image source={require('../../assets/backButton.png')} />
-            </TouchableOpacity>
-            <Text style={styles.title}>Home Info</Text>
-          </View>
+            Home Info
+          </Text>
           <Text style={styles.description}>
             Complete the following questions about your current home.
           </Text>
 
           <View
             style={{
-              // position: "absolute",
               borderWidth: 1,
               borderRadius: 20,
-              // height: "330%",
               width: '100%',
               paddingBottom: '15%',
-              // backgroundColor: "#fff",
               borderColor: '#6C6B6B',
               alignItems: 'center',
               justifyContent: 'flex-start',
-              // marginTop: "55%",
             }}
           >
             <Text style={{ paddingVertical: '5%' }}>4 of 4</Text>

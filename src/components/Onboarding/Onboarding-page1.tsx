@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -37,7 +37,7 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       keyboardOpeningTime={0}
       extraScrollHeight={25}
       enableOnAndroid
-      contentContainerStyle={{ flexGrow: 1, height: '125%' }}
+      contentContainerStyle={{ flexGrow: 1, height: 800 }}
       scrollToOverflowEnabled
     >
       <View
@@ -47,14 +47,23 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
         }}
       >
         <View style={styles.background} />
-        <View style={styles.formContainer}>
-          <Text style={{ fontSize: 26, paddingTop: '20%' }}>Home Info</Text>
+        <View
+          style={{
+            position: 'absolute',
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            width: '90%',
+            borderBottomLeftRadius: 20,
+            borderBottomRightRadius: 20,
+          }}
+        >
+          <Text style={{ fontSize: 26, paddingTop: 61 }}>Home Info</Text>
           <Text style={styles.description}>
             Complete the following questions about your current home.
           </Text>
 
           <View style={styles.form}>
-            <Text style={{ paddingVertical: '5%' }}>1 of 4</Text>
+            <Text style={{ paddingVertical: 20 }}>1 of 4</Text>
             <Progress.Bar
               progress={0.25}
               width={null}
@@ -74,7 +83,6 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
               style={styles.formInput}
               value={address}
               onChangeText={setAddress}
-              onTouchStart={() => console.log('here')}
             />
             <Text style={styles.formComponent}>City</Text>
             <TextInput
