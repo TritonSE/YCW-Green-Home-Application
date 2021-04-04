@@ -32,12 +32,12 @@ const client = new ApolloClient({
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <SplashScreen />
-        <View style={{ flex: 4 }}>
-          <AuthContainer />
-        </View>
-      </SafeAreaView>
+      {/* <View style={{ flex: 1 }}> */}
+      {/* <SplashScreen /> */}
+      {/* <View style={{ flex: 4 }}> */}
+      <AuthContainer />
+      {/* </View>
+      </View> */}
     </ApolloProvider>
   );
 }

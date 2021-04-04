@@ -105,7 +105,8 @@ type Question
     @auth(rules: [
         { allow: owner }, # defaults to use the "owner" field, can access any operation
         { allow: groups, groups: ["Admin"] }, # Admin users can access any operation
-        { allow: private, provider: iam, operations: [read] } # allow all authenticated users (Cognito User Pools) and IAM roles to read questions
+        { allow: private, operations: [read] },  # allow all authenticated users (Cognito User Pools) to read
+        { allow: private, provider: iam, operations: [create, read] } # IAM (Lambda functions) can create and read
     ]) {
     id: ID!
     title: String! # short title of the question

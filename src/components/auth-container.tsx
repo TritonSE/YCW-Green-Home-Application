@@ -1,24 +1,31 @@
-import React from 'react';
-import { Button, Text, View } from 'react-native';
-
+import React, { useState } from 'react';
+import { SafeAreaView, Text } from 'react-native';
 import { withAuthenticator } from 'aws-amplify-react-native';
 import { Auth } from 'aws-amplify';
+import Onboarding from './Onboarding/Onboarding';
 
 Auth.configure({ mandatorySignIn: true });
 
-function SignOut(): void {
-  try {
-    Auth.signOut();
-  } catch (error) {
-    console.error('Error sign out: ', error);
-  }
-}
+// function SignOut(): void {
+//   try {
+//     Auth.signOut();
+//   } catch (error) {
+//     console.error("Error sign out: ", error);
+//   }
+// }
 
 function AuthContainer() {
+  const [appState, setAppState] = useState('Onboarding');
   return (
-    <View>
-      <Button title="Sign Out" onPress={SignOut} />
-    </View>
+    <>
+      {/* <Button title="Sign Out" onPress={SignOut} /> */}
+      {appState === 'Onboarding' && <Onboarding setAppState={setAppState} />}
+      {appState === 'App' && (
+        <SafeAreaView>
+          <Text>Use React Navigation here</Text>
+        </SafeAreaView>
+      )}
+    </>
   );
 }
 
