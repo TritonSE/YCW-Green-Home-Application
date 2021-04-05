@@ -30,12 +30,20 @@ function AuthContainer() {
 }
 
 export default withAuthenticator(AuthContainer, {
+  usernameAttributes: 'email',
   signUpConfig: {
-    hiddenDefaults: ['email', 'phone_number'],
+    hiddenDefaults: ['username', 'phone_number'],
     signUpFields: [
       {
+        label: 'Display Name',
+        key: 'custom:displayName',
+        required: true,
+        displayOrder: 2,
+        type: 'string',
+      },
+      {
         label: 'Email',
-        key: 'username',
+        key: 'email',
         required: true,
         displayOrder: 3,
         type: 'string',

@@ -4958,10 +4958,10 @@ available-typed-arrays@^1.0.2:
   dependencies:
     array-filter "^1.0.0"
 
-aws-amplify-react-native@^4.3.0:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/aws-amplify-react-native/-/aws-amplify-react-native-4.3.1.tgz#f4a452250965ea3d2335a0dc73cd49274bb883a4"
-  integrity sha512-L86VoOj7avVgRBlycQ1Z7ztXfAhlT8TzdZc0ewA4LG/qnv2P3wRgYWJwZWmBPTQMXsXu7o7MMPUDsM++B05yPg==
+aws-amplify-react-native@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/aws-amplify-react-native/-/aws-amplify-react-native-4.3.2.tgz#6be353e5c6baa4429977aae7751296cf83248cdd"
+  integrity sha512-bun4/UIEGoMIHzYrmQLHBQB4Ulifl7ITb2sCIKWVWgnjEKutUg5aoGJiE8dPtNovUDmW+Ws8clb6H2bTFyo2vQ==
   dependencies:
     babel-preset-es2015 "^6.24.1"
     buffer "^5.2.1"
