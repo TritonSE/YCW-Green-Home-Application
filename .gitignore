@@ -90,3 +90,6 @@ src/.eslintcache
 
 # git
 .gitattributes
+
+# .env
+.env
