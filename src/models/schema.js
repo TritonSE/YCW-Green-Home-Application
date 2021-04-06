@@ -44,7 +44,11 @@ export const schema = {
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {}
+                    "properties": {
+                        "mutations": {
+                            "update": "updateUser"
+                        }
+                    }
                 },
                 {
                     "type": "auth",
@@ -442,9 +446,7 @@ export const schema = {
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {
-                        "mutations": null
-                    }
+                    "properties": {}
                 },
                 {
                     "type": "key",
@@ -648,8 +650,15 @@ export const schema = {
                             },
                             {
                                 "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "private",
                                 "provider": "iam",
                                 "operations": [
+                                    "create",
                                     "read"
                                 ]
                             }
@@ -750,5 +759,5 @@ export const schema = {
             }
         }
     },
-    "version": "9386bc5ee59d0a134cd93d4e8eecd9eb"
+    "version": "da84ca4a89147fad52aa9fbc0b9e2738"
 };

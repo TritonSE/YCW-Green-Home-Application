@@ -449,12 +449,9 @@ export const getHome = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -562,12 +559,9 @@ export const listQuestions = /* GraphQL */ `
         title
         questionText
         rewardText
-        difficulty
+        level
         cost
-        type
-        tags
-        answer
-        metadata
+        categories
         _version
         _deleted
         _lastChangedAt
@@ -603,12 +597,9 @@ export const getQuestion = /* GraphQL */ `
       title
       questionText
       rewardText
-      difficulty
+      level
       cost
-      type
-      tags
-      answer
-      metadata
+      categories
       _version
       _deleted
       _lastChangedAt
@@ -662,12 +653,9 @@ export const getQuestion = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -701,12 +689,9 @@ export const syncQuestions = /* GraphQL */ `
         title
         questionText
         rewardText
-        difficulty
+        level
         cost
-        type
-        tags
-        answer
-        metadata
+        categories
         _version
         _deleted
         _lastChangedAt
@@ -814,12 +799,9 @@ export const getResponse = /* GraphQL */ `
         title
         questionText
         rewardText
-        difficulty
+        level
         cost
-        type
-        tags
-        answer
-        metadata
+        categories
         _version
         _deleted
         _lastChangedAt
@@ -908,12 +890,9 @@ export const listResponses = /* GraphQL */ `
           title
           questionText
           rewardText
-          difficulty
+          level
           cost
-          type
-          tags
-          answer
-          metadata
+          categories
           _version
           _deleted
           _lastChangedAt
@@ -1003,12 +982,9 @@ export const getResponsesByCreatedAt = /* GraphQL */ `
           title
           questionText
           rewardText
-          difficulty
+          level
           cost
-          type
-          tags
-          answer
-          metadata
+          categories
           _version
           _deleted
           _lastChangedAt
@@ -1094,12 +1070,9 @@ export const syncResponses = /* GraphQL */ `
           title
           questionText
           rewardText
-          difficulty
+          level
           cost
-          type
-          tags
-          answer
-          metadata
+          categories
           _version
           _deleted
           _lastChangedAt

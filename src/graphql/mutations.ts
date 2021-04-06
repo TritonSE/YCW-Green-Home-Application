@@ -2,162 +2,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    createUser(input: $input, condition: $condition) {
-      id
-      username
-      displayName
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-      homes {
-        items {
-          id
-          homeID
-          homeOwnerID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          homeOwner {
-            id
-            username
-            displayName
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
-          home {
-            id
-            addressLine1
-            addressLine2
-            city
-            addressState
-            country
-            zipcode
-            yearBuilt
-            outDoorArea
-            livableArea
-            bedroomCount
-            bathroomCount
-            heatingFuelType
-            heaterAge
-            waterHeaterFuelType
-            waterHeaterAge
-            hasAirConditioner
-            hasPool
-            hasHotTub
-            annualElectricalEnergyUsage
-            annualGasPropaneEnergyUsage
-            annualWaterUsage
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-            homeowners
-          }
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
 export const updateUser = /* GraphQL */ `
   mutation UpdateUser(
     $input: UpdateUserInput!
     $condition: ModelUserConditionInput
   ) {
     updateUser(input: $input, condition: $condition) {
-      id
-      username
-      displayName
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
-      homes {
-        items {
-          id
-          homeID
-          homeOwnerID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-          homeOwner {
-            id
-            username
-            displayName
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
-          home {
-            id
-            addressLine1
-            addressLine2
-            city
-            addressState
-            country
-            zipcode
-            yearBuilt
-            outDoorArea
-            livableArea
-            bedroomCount
-            bathroomCount
-            heatingFuelType
-            heaterAge
-            waterHeaterFuelType
-            waterHeaterAge
-            hasAirConditioner
-            hasPool
-            hasHotTub
-            annualElectricalEnergyUsage
-            annualGasPropaneEnergyUsage
-            annualWaterUsage
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-            homeowners
-          }
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    deleteUser(input: $input, condition: $condition) {
       id
       username
       displayName
@@ -684,12 +534,9 @@ export const createHome = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -844,12 +691,9 @@ export const updateHome = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -1004,12 +848,9 @@ export const deleteHome = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -1035,12 +876,9 @@ export const createQuestion = /* GraphQL */ `
       title
       questionText
       rewardText
-      difficulty
+      level
       cost
-      type
-      tags
-      answer
-      metadata
+      categories
       _version
       _deleted
       _lastChangedAt
@@ -1094,12 +932,9 @@ export const createQuestion = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -1125,12 +960,9 @@ export const updateQuestion = /* GraphQL */ `
       title
       questionText
       rewardText
-      difficulty
+      level
       cost
-      type
-      tags
-      answer
-      metadata
+      categories
       _version
       _deleted
       _lastChangedAt
@@ -1184,12 +1016,9 @@ export const updateQuestion = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -1215,12 +1044,9 @@ export const deleteQuestion = /* GraphQL */ `
       title
       questionText
       rewardText
-      difficulty
+      level
       cost
-      type
-      tags
-      answer
-      metadata
+      categories
       _version
       _deleted
       _lastChangedAt
@@ -1274,12 +1100,9 @@ export const deleteQuestion = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -1292,6 +1115,342 @@ export const deleteQuestion = /* GraphQL */ `
         nextToken
         startedAt
       }
+    }
+  }
+`;
+export const createResponse = /* GraphQL */ `
+  mutation CreateResponse(
+    $input: CreateResponseInput!
+    $condition: ModelResponseConditionInput
+  ) {
+    createResponse(input: $input, condition: $condition) {
+      id
+      homeID
+      questionID
+      answer
+      createdAt
+      _version
+      _deleted
+      _lastChangedAt
+      updatedAt
+      home {
+        id
+        addressLine1
+        addressLine2
+        city
+        addressState
+        country
+        zipcode
+        yearBuilt
+        outDoorArea
+        livableArea
+        bedroomCount
+        bathroomCount
+        heatingFuelType
+        heaterAge
+        waterHeaterFuelType
+        waterHeaterAge
+        hasAirConditioner
+        hasPool
+        hasHotTub
+        annualElectricalEnergyUsage
+        annualGasPropaneEnergyUsage
+        annualWaterUsage
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        homeOwners {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        owner
+        homeowners
+        responses {
+          items {
+            id
+            homeID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      question {
+        id
+        title
+        questionText
+        rewardText
+        level
+        cost
+        categories
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        responses {
+          items {
+            id
+            homeID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      owner
+    }
+  }
+`;
+export const updateResponse = /* GraphQL */ `
+  mutation UpdateResponse(
+    $input: UpdateResponseInput!
+    $condition: ModelResponseConditionInput
+  ) {
+    updateResponse(input: $input, condition: $condition) {
+      id
+      homeID
+      questionID
+      answer
+      createdAt
+      _version
+      _deleted
+      _lastChangedAt
+      updatedAt
+      home {
+        id
+        addressLine1
+        addressLine2
+        city
+        addressState
+        country
+        zipcode
+        yearBuilt
+        outDoorArea
+        livableArea
+        bedroomCount
+        bathroomCount
+        heatingFuelType
+        heaterAge
+        waterHeaterFuelType
+        waterHeaterAge
+        hasAirConditioner
+        hasPool
+        hasHotTub
+        annualElectricalEnergyUsage
+        annualGasPropaneEnergyUsage
+        annualWaterUsage
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        homeOwners {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        owner
+        homeowners
+        responses {
+          items {
+            id
+            homeID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      question {
+        id
+        title
+        questionText
+        rewardText
+        level
+        cost
+        categories
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        responses {
+          items {
+            id
+            homeID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      owner
+    }
+  }
+`;
+export const deleteResponse = /* GraphQL */ `
+  mutation DeleteResponse(
+    $input: DeleteResponseInput!
+    $condition: ModelResponseConditionInput
+  ) {
+    deleteResponse(input: $input, condition: $condition) {
+      id
+      homeID
+      questionID
+      answer
+      createdAt
+      _version
+      _deleted
+      _lastChangedAt
+      updatedAt
+      home {
+        id
+        addressLine1
+        addressLine2
+        city
+        addressState
+        country
+        zipcode
+        yearBuilt
+        outDoorArea
+        livableArea
+        bedroomCount
+        bathroomCount
+        heatingFuelType
+        heaterAge
+        waterHeaterFuelType
+        waterHeaterAge
+        hasAirConditioner
+        hasPool
+        hasHotTub
+        annualElectricalEnergyUsage
+        annualGasPropaneEnergyUsage
+        annualWaterUsage
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        homeOwners {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        owner
+        homeowners
+        responses {
+          items {
+            id
+            homeID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      question {
+        id
+        title
+        questionText
+        rewardText
+        level
+        cost
+        categories
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        responses {
+          items {
+            id
+            homeID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      owner
     }
   }
 `;
