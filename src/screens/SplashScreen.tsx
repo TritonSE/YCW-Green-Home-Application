@@ -2,9 +2,9 @@ import React from 'react';
 import { View } from 'react-native';
 import Logo from '../assets/logo';
 
-import SplashScreenStyles from '../styles/splash-screen-styles';
+import SplashScreenStyles from '../styles/SplashScreenStyles';
 
-export default function SplashScreen() {
+export default function SplashScreen(): JSX.Element | null {
   return (
     <View style={SplashScreenStyles.logoContainer}>
       <Logo
