@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Page1 from './Onboarding-page1';
-import Page2 from './Onboarding-page2';
-import Page3 from './Onboarding-page3';
-import Page4 from './Onboarding-page4';
+import React, { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../../contexts/AppContext';
+import Page1 from './OnboardingPage1';
+import Page2 from './OnboardingPage2';
+import Page3 from './OnboardingPage3';
+import Page4 from './OnboardingPage4';
 
-interface Props {
-  setAppState(page: string): void;
-}
-
-const Onboarding: React.FC<Props> = ({ setAppState }) => {
+const Onboarding: React.FC = () => {
   const [page, setPage] = useState('page1');
   const [homeData, setHomeData] = useState({
     AC: '',
@@ -32,6 +29,7 @@ const Onboarding: React.FC<Props> = ({ setAppState }) => {
     year: '',
     zipCode: '',
   });
+  const { setAppState } = useContext(AppContext);
 
   useEffect(() => {
     if (page === 'submit') {

@@ -1,5 +1,5 @@
 type User 
-    @model 
+    @model(mutations: { update: "updateUser" }) # only allow update mutation from client 
     @auth(rules: [{ allow: owner }]) {
     id: ID!
     username: AWSEmail! # email address is used as an username
@@ -143,7 +143,7 @@ type Question
 # }   
 
 type Response 
-    @model(mutations: null) 
+    @model
     @key(name: "byHome", fields: ["homeID", "questionID"]) 
     @key(name: "byQuestion", fields: ["questionID", "homeID"])
     @key(name: "byCreatedAt", fields: ["homeID", "createdAt"], queryField: "getResponsesByCreatedAt")
