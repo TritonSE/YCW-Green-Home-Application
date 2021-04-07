@@ -40,12 +40,8 @@
       },
       "Properties": {
         "Code": {
-          "S3Bucket": {
-            "Ref": "deploymentBucketName"
-          },
-          "S3Key": {
-            "Ref": "s3Key"
-          }
+          "S3Bucket": "amplify-yourclearway-dev-225606-deployment",
+          "S3Key": "amplify-builds/userCognitoTrigger-79557473486c33482b6d-build.zip"
         },
         "Handler": "index.handler",
         "FunctionName": {
