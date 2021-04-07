@@ -4,7 +4,6 @@ const MAX_ITEMS_PER_DB_WRITE = 25; // Maximum number of items DynamoDB allows pe
 
 exports.handler = async (event) => {
   const questions = await parseQuestions();
-  console.log(questions.length);
   // Write items to database in batches of size MAX_ITEMS_PER_DB_WRITE since DynamoDB restricts batch sizes
   for (let i = 0; i < questions.length / MAX_ITEMS_PER_DB_WRITE; i += 1) {
     const from = MAX_ITEMS_PER_DB_WRITE * i

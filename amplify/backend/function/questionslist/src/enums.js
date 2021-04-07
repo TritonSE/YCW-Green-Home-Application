@@ -1,34 +1,26 @@
 // Map of sheet values to enums in database
-const Difficulty = {
-  'Beginner': 'BEGINNER',
+const Levels = {
+  'Starter': 'STARTER',
   'Intermediate': 'INTERMEDIATE',
-  'Expert': 'ADVANCED',
+  'Guru': 'GURU',
 }
 
-const Cost = {
+const Costs = {
   '$': 'ONE',
   '$$': 'TWO',
   '$$$': 'THREE',
-  '$$$$': 'FOUR',
 }
 
-const Tag = {
+const Categories = {
   'Energy': 'ENERGY',
   'Resiliency': 'RESILIENCY',
   'Water': 'WATER',
   'Health': 'HEALTH',
-  'Materials': 'MATERIALS',
-  'Embodied Carbon': 'EMBODIED_CARBON'
 }
 
-const QuestionType = {
-  'Home Improvement': 'HOME_IMPROVEMENT',
-  'Behavioral': 'GREEN_LIFESTYLE', // TODO: change this once measure list is updated
+const textToCategory = (row) => {
+  const categories = row.split(', ');
+  return categories.map((category) => Categories[category]);
 }
 
-const textToTag = (row) => {
-  const tags = row.split(', ');
-  return tags.map((tag) => Tag[tag]);
-}
-
-module.exports = { Cost, Tag, QuestionType, Difficulty, textToTag };
+module.exports = { Costs, Categories, Levels, textToCategory };
