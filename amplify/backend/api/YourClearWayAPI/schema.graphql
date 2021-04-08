@@ -1,5 +1,5 @@
 type User 
-    @model(mutations: { update: "updateUser" }) # only allow update mutation from client 
+    @model(mutations: { update: "updateUser" }, subscriptions: {  onUpdate: ["onUpdateUser"] }) # only allow update mutation from client 
     @auth(rules: [{ allow: owner }]) {
     id: ID!
     username: AWSEmail! # email address is used as an username
