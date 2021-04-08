@@ -1,5 +1,5 @@
 type User
-    @model # only allow update mutation from client 
+    @model
     @auth(rules: [{ allow: owner }]) {
     id: ID!
     username: AWSEmail! # email address is used as an username
