@@ -18,15 +18,18 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email"
+        "email",
+        "custom:displayName"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
-        "email"
+        "email",
+        "custom:displayName"
     ],
     "userpoolClientReadAttributes": [
-        "email"
+        "email",
+        "custom:displayName"
     ],
     "userpoolClientLambdaRole": "yourcl677feefc_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
