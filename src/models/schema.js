@@ -44,16 +44,7 @@ export const schema = {
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {
-                        "mutations": {
-                            "update": "updateUser"
-                        },
-                        "subscriptions": {
-                            "onUpdate": [
-                                "onUpdateUser"
-                            ]
-                        }
-                    }
+                    "properties": {}
                 },
                 {
                     "type": "auth",

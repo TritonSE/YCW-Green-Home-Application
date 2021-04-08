@@ -2,9 +2,153 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser($owner: String) {
+    onCreateUser(owner: $owner) {
+      id
+      username
+      displayName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      homes {
+        items {
+          id
+          homeID
+          homeOwnerID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
 export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser($owner: String) {
     onUpdateUser(owner: $owner) {
+      id
+      username
+      displayName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      homes {
+        items {
+          id
+          homeID
+          homeOwnerID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser($owner: String) {
+    onDeleteUser(owner: $owner) {
       id
       username
       displayName

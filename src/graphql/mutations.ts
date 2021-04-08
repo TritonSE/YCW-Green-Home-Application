@@ -2,12 +2,162 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      username
+      displayName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      homes {
+        items {
+          id
+          homeID
+          homeOwnerID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
 export const updateUser = /* GraphQL */ `
   mutation UpdateUser(
     $input: UpdateUserInput!
     $condition: ModelUserConditionInput
   ) {
     updateUser(input: $input, condition: $condition) {
+      id
+      username
+      displayName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      homes {
+        items {
+          id
+          homeID
+          homeOwnerID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
       id
       username
       displayName

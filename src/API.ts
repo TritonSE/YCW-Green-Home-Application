@@ -2,10 +2,10 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type UpdateUserInput = {
-  id: string,
-  username?: string | null,
-  displayName?: string | null,
+export type CreateUserInput = {
+  id?: string | null,
+  username: string,
+  displayName: string,
   _version?: number | null,
 };
 
@@ -213,6 +213,18 @@ export enum Category {
   WATER = "WATER",
 }
 
+
+export type UpdateUserInput = {
+  id: string,
+  username?: string | null,
+  displayName?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteUserInput = {
+  id?: string | null,
+  _version?: number | null,
+};
 
 export type CreateHomeOwnerInput = {
   id?: string | null,
@@ -583,6 +595,87 @@ export enum ModelSortDirection {
 }
 
 
+export type CreateUserMutationVariables = {
+  input?: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type CreateUserMutation = {
+  createUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    displayName: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    homes?:  {
+      __typename: "ModelHomeOwnerConnection",
+      items?:  Array< {
+        __typename: "HomeOwner",
+        id: string,
+        homeID: string,
+        homeOwnerID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        homeOwner:  {
+          __typename: "User",
+          id: string,
+          username: string,
+          displayName: string,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        },
+        owner?: string | null,
+        home:  {
+          __typename: "Home",
+          id: string,
+          addressLine1?: string | null,
+          addressLine2?: string | null,
+          city?: string | null,
+          addressState?: string | null,
+          country?: string | null,
+          zipcode: string,
+          yearBuilt?: number | null,
+          outDoorArea?: number | null,
+          livableArea: number,
+          bedroomCount: number,
+          bathroomCount?: number | null,
+          heatingFuelType?: HeatingFuelType | null,
+          heaterAge?: AgeType | null,
+          waterHeaterFuelType?: WaterHeaterFuelType | null,
+          waterHeaterAge?: AgeType | null,
+          hasAirConditioner?: boolean | null,
+          hasPool?: boolean | null,
+          hasHotTub?: boolean | null,
+          annualElectricalEnergyUsage?: number | null,
+          annualGasPropaneEnergyUsage?: number | null,
+          annualWaterUsage?: number | null,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+          homeowners?: string | null,
+        },
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+  } | null,
+};
+
 export type UpdateUserMutationVariables = {
   input?: UpdateUserInput,
   condition?: ModelUserConditionInput | null,
@@ -590,6 +683,87 @@ export type UpdateUserMutationVariables = {
 
 export type UpdateUserMutation = {
   updateUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    displayName: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    homes?:  {
+      __typename: "ModelHomeOwnerConnection",
+      items?:  Array< {
+        __typename: "HomeOwner",
+        id: string,
+        homeID: string,
+        homeOwnerID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        homeOwner:  {
+          __typename: "User",
+          id: string,
+          username: string,
+          displayName: string,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        },
+        owner?: string | null,
+        home:  {
+          __typename: "Home",
+          id: string,
+          addressLine1?: string | null,
+          addressLine2?: string | null,
+          city?: string | null,
+          addressState?: string | null,
+          country?: string | null,
+          zipcode: string,
+          yearBuilt?: number | null,
+          outDoorArea?: number | null,
+          livableArea: number,
+          bedroomCount: number,
+          bathroomCount?: number | null,
+          heatingFuelType?: HeatingFuelType | null,
+          heaterAge?: AgeType | null,
+          waterHeaterFuelType?: WaterHeaterFuelType | null,
+          waterHeaterAge?: AgeType | null,
+          hasAirConditioner?: boolean | null,
+          hasPool?: boolean | null,
+          hasHotTub?: boolean | null,
+          annualElectricalEnergyUsage?: number | null,
+          annualGasPropaneEnergyUsage?: number | null,
+          annualWaterUsage?: number | null,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+          homeowners?: string | null,
+        },
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+  } | null,
+};
+
+export type DeleteUserMutationVariables = {
+  input?: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type DeleteUserMutation = {
+  deleteUser?:  {
     __typename: "User",
     id: string,
     username: string,
@@ -3312,12 +3486,172 @@ export type SyncResponsesQuery = {
   } | null,
 };
 
+export type OnCreateUserSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateUserSubscription = {
+  onCreateUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    displayName: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    homes?:  {
+      __typename: "ModelHomeOwnerConnection",
+      items?:  Array< {
+        __typename: "HomeOwner",
+        id: string,
+        homeID: string,
+        homeOwnerID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        homeOwner:  {
+          __typename: "User",
+          id: string,
+          username: string,
+          displayName: string,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        },
+        owner?: string | null,
+        home:  {
+          __typename: "Home",
+          id: string,
+          addressLine1?: string | null,
+          addressLine2?: string | null,
+          city?: string | null,
+          addressState?: string | null,
+          country?: string | null,
+          zipcode: string,
+          yearBuilt?: number | null,
+          outDoorArea?: number | null,
+          livableArea: number,
+          bedroomCount: number,
+          bathroomCount?: number | null,
+          heatingFuelType?: HeatingFuelType | null,
+          heaterAge?: AgeType | null,
+          waterHeaterFuelType?: WaterHeaterFuelType | null,
+          waterHeaterAge?: AgeType | null,
+          hasAirConditioner?: boolean | null,
+          hasPool?: boolean | null,
+          hasHotTub?: boolean | null,
+          annualElectricalEnergyUsage?: number | null,
+          annualGasPropaneEnergyUsage?: number | null,
+          annualWaterUsage?: number | null,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+          homeowners?: string | null,
+        },
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+  } | null,
+};
+
 export type OnUpdateUserSubscriptionVariables = {
   owner?: string | null,
 };
 
 export type OnUpdateUserSubscription = {
   onUpdateUser?:  {
+    __typename: "User",
+    id: string,
+    username: string,
+    displayName: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+    homes?:  {
+      __typename: "ModelHomeOwnerConnection",
+      items?:  Array< {
+        __typename: "HomeOwner",
+        id: string,
+        homeID: string,
+        homeOwnerID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+        homeOwner:  {
+          __typename: "User",
+          id: string,
+          username: string,
+          displayName: string,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        },
+        owner?: string | null,
+        home:  {
+          __typename: "Home",
+          id: string,
+          addressLine1?: string | null,
+          addressLine2?: string | null,
+          city?: string | null,
+          addressState?: string | null,
+          country?: string | null,
+          zipcode: string,
+          yearBuilt?: number | null,
+          outDoorArea?: number | null,
+          livableArea: number,
+          bedroomCount: number,
+          bathroomCount?: number | null,
+          heatingFuelType?: HeatingFuelType | null,
+          heaterAge?: AgeType | null,
+          waterHeaterFuelType?: WaterHeaterFuelType | null,
+          waterHeaterAge?: AgeType | null,
+          hasAirConditioner?: boolean | null,
+          hasPool?: boolean | null,
+          hasHotTub?: boolean | null,
+          annualElectricalEnergyUsage?: number | null,
+          annualGasPropaneEnergyUsage?: number | null,
+          annualWaterUsage?: number | null,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+          homeowners?: string | null,
+        },
+      } | null > | null,
+      nextToken?: string | null,
+      startedAt?: number | null,
+    } | null,
+  } | null,
+};
+
+export type OnDeleteUserSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteUserSubscription = {
+  onDeleteUser?:  {
     __typename: "User",
     id: string,
     username: string,
