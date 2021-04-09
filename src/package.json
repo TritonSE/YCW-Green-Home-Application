@@ -12,7 +12,7 @@
     "@aws-amplify/ui-components": "^1.1.1",
     "@aws-amplify/ui-react": "^0.2.37",
     "@react-native-community/netinfo": "^5.9.10",
-    "@react-navigation/bottom-tabs": "^5.11.8",
+    "@react-navigation/bottom-tabs": "^5.11.9",
     "@react-navigation/native": "^5.9.3",
     "aws-amplify": "^3.3.14",
     "aws-amplify-react-native": "^4.3.2",
