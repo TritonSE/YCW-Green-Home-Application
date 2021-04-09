@@ -1,14 +1,14 @@
 import React from 'react';
-import { SafeAreaView, View, AppRegistry } from 'react-native';
+import { AppRegistry } from 'react-native';
 import Amplify from 'aws-amplify';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import awsconfig from './aws-exports';
 
-// import AuthContainer from './components/auth-container';
-import NavFlow from './components/nav';
-import SplashScreen from './components/splash-screen';
+// import SplashScreen from './screens/SplashScreen';
 
 import getEnvVars from './environment';
+import AuthScreen from './screens/AuthScreen';
+import { AppProvider } from './contexts/AppContext';
 
 const { apolloURI } = getEnvVars();
 
@@ -30,15 +30,15 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export default function App() {
+export default function App(): JSX.Element | null {
   return (
     <ApolloProvider client={client}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <SplashScreen />
-        <View style={{ flex: 4 }}>
-          <NavFlow />
-        </View>
-      </SafeAreaView>
+      {/* <View style={{ flex: 1 }}> */}
+      {/* <SplashScreen /> */}
+      {/* <View style={{ flex: 4 }}> */}
+      <AppProvider>
+        <AuthScreen />
+      </AppProvider>
     </ApolloProvider>
   );
 }
