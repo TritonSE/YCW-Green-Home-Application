@@ -4,10 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import AuthContainer from './auth-container';
-import HomeScreen from './home';
-import TasksScreen from './tasks';
-import ProgressScreen from './progress';
+import HomeScreen from '../screens/HomeScreen';
+import TaskScreen from '../screens/TaskScreen';
+import BadgeScreen from '../screens/BadgeScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,31 +16,31 @@ export default function NavFlow() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
+          tabBarIcon: ({ color, size }) => {
             let iconName;
 
             if (route.name === 'Home') {
-              iconName = focused ? 'ios-home' : 'ios-home';
+              iconName = 'ios-home';
             } else if (route.name === 'Tasks') {
-              iconName = focused ? 'ios-list' : 'ios-list';
+              iconName = 'ios-list';
             } else if (route.name === 'Progress') {
-              iconName = focused ? 'ios-clipboard' : 'ios-clipboard';
+              iconName = 'ios-clipboard';
             } else if (route.name === 'Me') {
-              iconName = focused ? 'ios-person' : 'ios-person';
+              iconName = 'ios-person';
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
         tabBarOptions={{
-          activeTintColor: 'tomato',
+          activeTintColor: '#E96661',
           inactiveTintColor: 'gray',
         }}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Tasks" component={TasksScreen} />
-        <Tab.Screen name="Progress" component={ProgressScreen} />
-        <Tab.Screen name="Me" component={AuthContainer} />
+        <Tab.Screen name="Tasks" component={TaskScreen} />
+        <Tab.Screen name="Progress" component={BadgeScreen} />
+        <Tab.Screen name="Me" component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
