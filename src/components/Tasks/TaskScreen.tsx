@@ -6,12 +6,10 @@ import TaskBoard from './TaskBoard';
 
 const TaskScreen = () => {
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <TaskHeader />
-        <TaskBoard />
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView>
+      <TaskHeader />
+      <TaskBoard />
+    </ScrollView>
   );
 };
 
