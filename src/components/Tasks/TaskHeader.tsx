@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, Platform } from 'react-native';
-
+import DropDownPicker from 'react-native-dropdown-picker';
 /*
 enum LEVEL {
   beginner = "Beginner",
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     height: 184,
     left: 0,
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
   },
   title: {
@@ -49,6 +50,39 @@ const TaskHeader = () => {
       <View>
         <Text style={styles.title}>{TITLE}</Text>
         <Text style={styles.subtitle}>{SUBTITLE}</Text>
+
+        <View
+          style={{
+            paddingTop: 10,
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+          }}
+        >
+          <DropDownPicker
+            items={[
+              { label: 'Hello', value: 'item1' },
+              { label: 'Item 2', value: 'item2', selected: true },
+            ]}
+            containerStyle={{ width: 98, height: 28 }}
+            onChangeItem={item => console.log(item.label, item.value)}
+          />
+          <DropDownPicker
+            items={[
+              { label: 'Item 1', value: 'item1' },
+              { label: 'Item 2', value: 'item2' },
+            ]}
+            containerStyle={{ width: 98, height: 28 }}
+            onChangeItem={item => console.log(item.label, item.value)}
+          />
+          <DropDownPicker
+            items={[
+              { label: 'Item 1', value: 'item1' },
+              { label: 'Item 2', value: 'item2' },
+            ]}
+            containerStyle={{ width: 98, height: 28 }}
+            onChangeItem={item => console.log(item.label, item.value)}
+          />
+        </View>
       </View>
     </View>
   );
