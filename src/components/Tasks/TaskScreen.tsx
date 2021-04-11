@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import TaskHeader from './TaskHeader';
 import TaskBoard from './TaskBoard';

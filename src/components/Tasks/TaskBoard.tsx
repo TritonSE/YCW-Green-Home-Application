@@ -1,15 +1,23 @@
-// external imports
 import React from 'react';
-import { Text, View } from 'react-native';
+import { ImageSourcePropType, Text, View } from 'react-native';
 
-// internal imports
+import TaskCard from './TaskCard';
 
-const tasks = ['task', 'task', 'task', 'task', 'task'];
+const tasks = ['task1', 'task2', 'task3', 'task4', 'task5'];
+
+type TaskBoardProps = {
+  level: string;
+  tasks: Array<TaskCard>;
+};
 
 const TaskBoard = () => (
   <View>
     {tasks.map(task => {
-      return <Text>{task}</Text>;
+      return (
+        <View key={task}>
+          <Text>{task}</Text>
+        </View>
+      );
     })}
   </View>
 );
