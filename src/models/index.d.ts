@@ -1,29 +1,21 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
-export enum Difficulty {
-  BEGINNER = "BEGINNER",
+export enum Level {
+  STARTER = "STARTER",
   INTERMEDIATE = "INTERMEDIATE",
-  ADVANCED = "ADVANCED"
+  GURU = "GURU"
 }
 
 export enum Cost {
   ONE = "ONE",
   TWO = "TWO",
-  THREE = "THREE",
-  FOUR = "FOUR"
+  THREE = "THREE"
 }
 
-export enum QuestionType {
-  HOME_IMPROVEMENT = "HOME_IMPROVEMENT",
-  GREEN_LIFESTYLE = "GREEN_LIFESTYLE"
-}
-
-export enum Tag {
+export enum Category {
   ENERGY = "ENERGY",
   RESILIENCY = "RESILIENCY",
   HEALTH = "HEALTH",
-  MATERIALS = "MATERIALS",
-  EMBODIED_CARBON = "EMBODIED_CARBON",
   WATER = "WATER"
 }
 
@@ -115,13 +107,10 @@ export declare class Question {
   readonly title: string;
   readonly questionText: string;
   readonly rewardText: string;
-  readonly difficulty: Difficulty | keyof typeof Difficulty;
+  readonly level: Level | keyof typeof Level;
   readonly cost: Cost | keyof typeof Cost;
-  readonly type: QuestionType | keyof typeof QuestionType;
-  readonly tags: Tag[] | keyof typeof Tag;
+  readonly categories: Category[] | keyof typeof Category;
   readonly responses?: (Response | null)[];
-  readonly answer: string;
-  readonly metadata?: string;
   constructor(init: ModelInit<Question>);
   static copyOf(source: Question, mutator: (draft: MutableModel<Question>) => MutableModel<Question> | void): Question;
 }

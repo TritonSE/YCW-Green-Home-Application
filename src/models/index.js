@@ -2,30 +2,22 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
-const Difficulty = {
-  "BEGINNER": "BEGINNER",
+const Level = {
+  "STARTER": "STARTER",
   "INTERMEDIATE": "INTERMEDIATE",
-  "ADVANCED": "ADVANCED"
+  "GURU": "GURU"
 };
 
 const Cost = {
   "ONE": "ONE",
   "TWO": "TWO",
-  "THREE": "THREE",
-  "FOUR": "FOUR"
+  "THREE": "THREE"
 };
 
-const QuestionType = {
-  "HOME_IMPROVEMENT": "HOME_IMPROVEMENT",
-  "GREEN_LIFESTYLE": "GREEN_LIFESTYLE"
-};
-
-const Tag = {
+const Category = {
   "ENERGY": "ENERGY",
   "RESILIENCY": "RESILIENCY",
   "HEALTH": "HEALTH",
-  "MATERIALS": "MATERIALS",
-  "EMBODIED_CARBON": "EMBODIED_CARBON",
   "WATER": "WATER"
 };
 
@@ -57,10 +49,9 @@ export {
   Home,
   Response,
   Question,
-  Difficulty,
+  Level,
   Cost,
-  QuestionType,
-  Tag,
+  Category,
   HeatingFuelType,
   AgeType,
   WaterHeaterFuelType,

@@ -2,9 +2,153 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser($owner: String) {
+    onCreateUser(owner: $owner) {
+      id
+      username
+      displayName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      homes {
+        items {
+          id
+          homeID
+          homeOwnerID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
 export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser($owner: String) {
     onUpdateUser(owner: $owner) {
+      id
+      username
+      displayName
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+      homes {
+        items {
+          id
+          homeID
+          homeOwnerID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser($owner: String) {
+    onDeleteUser(owner: $owner) {
       id
       username
       displayName
@@ -519,12 +663,9 @@ export const onCreateHome = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -676,12 +817,9 @@ export const onUpdateHome = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -833,12 +971,9 @@ export const onDeleteHome = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -861,12 +996,9 @@ export const onCreateQuestion = /* GraphQL */ `
       title
       questionText
       rewardText
-      difficulty
+      level
       cost
-      type
-      tags
-      answer
-      metadata
+      categories
       _version
       _deleted
       _lastChangedAt
@@ -920,12 +1052,9 @@ export const onCreateQuestion = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -948,12 +1077,9 @@ export const onUpdateQuestion = /* GraphQL */ `
       title
       questionText
       rewardText
-      difficulty
+      level
       cost
-      type
-      tags
-      answer
-      metadata
+      categories
       _version
       _deleted
       _lastChangedAt
@@ -1007,12 +1133,9 @@ export const onUpdateQuestion = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -1035,12 +1158,9 @@ export const onDeleteQuestion = /* GraphQL */ `
       title
       questionText
       rewardText
-      difficulty
+      level
       cost
-      type
-      tags
-      answer
-      metadata
+      categories
       _version
       _deleted
       _lastChangedAt
@@ -1094,12 +1214,9 @@ export const onDeleteQuestion = /* GraphQL */ `
             title
             questionText
             rewardText
-            difficulty
+            level
             cost
-            type
-            tags
-            answer
-            metadata
+            categories
             _version
             _deleted
             _lastChangedAt
@@ -1194,12 +1311,9 @@ export const onCreateResponse = /* GraphQL */ `
         title
         questionText
         rewardText
-        difficulty
+        level
         cost
-        type
-        tags
-        answer
-        metadata
+        categories
         _version
         _deleted
         _lastChangedAt
@@ -1306,12 +1420,9 @@ export const onUpdateResponse = /* GraphQL */ `
         title
         questionText
         rewardText
-        difficulty
+        level
         cost
-        type
-        tags
-        answer
-        metadata
+        categories
         _version
         _deleted
         _lastChangedAt
@@ -1418,12 +1529,9 @@ export const onDeleteResponse = /* GraphQL */ `
         title
         questionText
         rewardText
-        difficulty
+        level
         cost
-        type
-        tags
-        answer
-        metadata
+        categories
         _version
         _deleted
         _lastChangedAt
