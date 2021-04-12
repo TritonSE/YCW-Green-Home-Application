@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yourclearway-dev-225606-authRole",
+      "UnauthRoleArn": "arn:aws:iam::506173601430:role/amplify-yourclearway-dev-225606-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::506173601430:role/amplify-yourclearway-dev-225606-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-yourclearway-dev-225606-deployment",
+      "UnauthRoleName": "amplify-yourclearway-dev-225606-unauthRole",
+      "StackName": "amplify-yourclearway-dev-225606",
+      "StackId": "arn:aws:cloudformation:us-west-2:506173601430:stack/amplify-yourclearway-dev-225606/93fb56b0-5635-11eb-9ceb-0a0eb3352a73",
+      "AmplifyAppId": "dimr97ah3agc5"
+    },
+    "categories": {
+      "auth": {
+        "yourclearway677feefc": {},
+        "userPoolGroups": {}
+      },
+      "function": {
+        "questionslist": {
+          "deploymentBucketName": "amplify-yourclearway-dev-225606-deployment",
+          "s3Key": "amplify-builds/questionslist-64525a464e2b49786b66-build.zip"
+        },
+        "userCognitoTrigger": {
+          "deploymentBucketName": "amplify-yourclearway-dev-225606-deployment",
+          "s3Key": "amplify-builds/userCognitoTrigger-6659496b502f494a6d7a-build.zip"
+        },
+        "questionslistscript": {}
+      }
+    }
+  }
+}

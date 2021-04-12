@@ -136,6 +136,12 @@ Resources:
         - Name: email
           Required: 'true'
           Mutable: 'true'
+        - Name: displayName
+          AttributeDataType: String
+          Mutable: 'true'
+          StringAttributeConstraints:
+            MaxLength: '256'
+            MinLength: '1'
       AutoVerifiedAttributes:
         Ref: autoVerifiedAttributes
       EmailVerificationMessage:
