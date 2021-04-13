@@ -15,20 +15,21 @@ const ENV = {
 /*
  * Uses Expo release channels to determine env var values.
  * As more release channels are added (ex: staging, prod), add
- * a if/else-if block to return the property in ENV corresponding to
+ * an if/else-if block to return the property in ENV corresponding to
  * the release channel.
  */
 const getEnvVars = (env = Constants.manifest.releaseChannel) => {
   return ENV.dev;
 
   /* Sample logic to determine env vars when multiple release channels are present:
-
-    if (__DEV__) {
-        return ENV.dev;
-    } else if (env === 'staging') {
-        return ENV.staging;
-    }
-    */
+   *
+   *  if (__DEV__) {
+   *      return ENV.dev;
+   *  } else if (env === 'staging') {
+   *      return ENV.staging;
+   *  }
+   *
+   */
 };
 
 export default getEnvVars;
