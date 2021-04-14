@@ -1,4 +1,4 @@
-const states = [
+export const states = [
   { label: 'AK', value: 'AK' },
   { label: 'AL', value: 'AL' },
   { label: 'AR', value: 'AR' },
@@ -52,4 +52,25 @@ const states = [
   { label: 'WY', value: 'WY' },
 ];
 
-export default states;
+export const homeInfo = {
+  bedroomCount: 0,
+  livableArea: 0,
+  zipcode: '',
+  addressLine1: '',
+  addressState: '',
+  annualElectricalEnergyUsage: 0,
+  annualGasPropaneEnergyUsage: 0,
+  annualWaterUsage: 0,
+  bathroomCount: 0,
+  city: '',
+  country: '',
+  hasAirConditioner: false,
+  hasHotTub: false,
+  hasPool: false,
+  heaterAge: 'LESS_THAN_5',
+  heatingFuelType: 'GAS',
+  outDoorArea: 0,
+  waterHeaterAge: 'LESS_THAN_5',
+  waterHeaterFuelType: 'GAS',
+  yearBuilt: 0,
+};

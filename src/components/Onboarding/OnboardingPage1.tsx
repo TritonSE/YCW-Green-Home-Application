@@ -5,12 +5,12 @@ import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import DropDownPicker from 'react-native-dropdown-picker';
 import styles from '../../styles/OnboardingStyles';
-import states from './states';
+import { states, homeInfo } from './onboardingData';
 
 interface Props {
   setPage(page: string): void;
   setHomeData({}): void;
-  homeData: Record<string, string>;
+  homeData: typeof homeInfo;
 }
 
 const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../contexts/AppContext';
+import { homeInfo } from './onboardingData';
 import Page1 from './OnboardingPage1';
 import Page2 from './OnboardingPage2';
 import Page3 from './OnboardingPage3';
@@ -7,28 +8,7 @@ import Page4 from './OnboardingPage4';
 
 const Onboarding: React.FC = () => {
   const [page, setPage] = useState('page1');
-  const [homeData, setHomeData] = useState({
-    AC: '',
-    EV: '',
-    address: '',
-    bathrooms: '',
-    bedrooms: '',
-    city: '',
-    electricEnergyUsage: '',
-    fuelType: '',
-    gasUsage: '',
-    heaterAge: '',
-    hotTub: '',
-    outdoor: '',
-    pool: '',
-    squareFeet: '',
-    state: '',
-    waterFuelType: '',
-    waterHeaterAge: '',
-    waterUse: '',
-    year: '',
-    zipCode: '',
-  });
+  const [homeData, setHomeData] = useState(homeInfo);
   const { setAppState } = useContext(AppContext);
 
   useEffect(() => {

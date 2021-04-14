@@ -9,6 +9,7 @@ import awsconfig from './aws-exports';
 import getEnvVars from './environment';
 import AuthScreen from './screens/AuthScreen';
 import { AppProvider } from './contexts/AppContext';
+import { UserProvider } from './contexts/UserContext';
 
 const { apolloURI } = getEnvVars();
 
@@ -36,8 +37,11 @@ export default function App(): JSX.Element | null {
       {/* <View style={{ flex: 1 }}> */}
       {/* <SplashScreen /> */}
       {/* <View style={{ flex: 4 }}> */}
+
       <AppProvider>
-        <AuthScreen />
+        <UserProvider>
+          <AuthScreen />
+        </UserProvider>
       </AppProvider>
     </ApolloProvider>
   );

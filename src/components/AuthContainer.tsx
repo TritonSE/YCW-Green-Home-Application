@@ -1,22 +1,39 @@
 import React, { useContext, useEffect } from 'react';
 import { Button, SafeAreaView, Text } from 'react-native';
 import { withAuthenticator, AmplifyTheme } from 'aws-amplify-react-native';
-import { Auth, I18n } from 'aws-amplify';
+import { Auth, I18n, API } from 'aws-amplify';
 import { Translations } from '@aws-amplify/ui-components';
 import Onboarding from './Onboarding/Onboarding';
 import AuthenticatorTheme from '../styles/AuthenticatorTheme';
 import { AppContext } from '../contexts/AppContext';
 
+import { getUser } from '../graphql/queries';
+import { UserContext } from '../contexts/UserContext';
+
 Auth.configure({ mandatorySignIn: true });
 
 function App(): JSX.Element | null {
   const { appState, setAppState } = useContext(AppContext);
+  const { userState, setUserState } = useContext(UserContext);
 
   useEffect(() => {
-    if (appState === 'Auth') {
-      setAppState('Onboarding'); // TODO: use datastore to check whether this user has at least one home
+    const getUserData = async () => {
+      const user = await Auth.currentAuthenticatedUser();
+      const result = await API.graphql({
+        query: getUser,
+        variables: { id: user.attributes.sub },
+      });
+      setUserState(result.data.getUser);
+    };
+
+    getUserData();
+    // console.log(userState);
+    if (userState.homes.items.length === 0) {
+      setAppState('Onboarding');
+    } else {
+      setAppState('App');
     }
-  }, [appState, setAppState]);
+  }, [appState, setAppState, userState, setUserState]);
 
   const signOut = async () => {
     try {

@@ -4,11 +4,12 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from '../../styles/OnboardingStyles';
+import { homeInfo } from './onboardingData';
 
 interface Props {
   setPage(page: string): void;
   setHomeData({}): void;
-  homeData: Record<string, string>;
+  homeData: typeof homeInfo;
 }
 
 const Page2: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
