@@ -1,15 +1,29 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import HomeScreen from '../screens/HomeScreen';
-import TaskScreen from '../screens/TaskScreen';
-import BadgeScreen from '../screens/BadgeScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import {
+  HomeScreen,
+  TaskScreen,
+  BadgeScreen,
+  ProfileScreen,
+} from '../screens/index';
 
 const Tab = createBottomTabNavigator();
+
+const NavRoutes = {
+  HOME: 'Home',
+  TASKS: 'Tasks',
+  PROGRESS: 'Progress',
+  ME: 'Me',
+};
+const NavRoutesToIcon = {
+  [NavRoutes.HOME]: 'ios-home',
+  [NavRoutes.TASKS]: 'ios-list',
+  [NavRoutes.PROGRESS]: 'ios-clipboard',
+  [NavRoutes.ME]: 'ios-person',
+};
 
 export default function NavFlow() {
   return (
@@ -17,18 +31,7 @@ export default function NavFlow() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = 'ios-home';
-            } else if (route.name === 'Tasks') {
-              iconName = 'ios-list';
-            } else if (route.name === 'Progress') {
-              iconName = 'ios-clipboard';
-            } else if (route.name === 'Me') {
-              iconName = 'ios-person';
-            }
-
+            const iconName = NavRoutesToIcon[route.name];
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
