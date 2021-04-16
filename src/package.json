@@ -8,7 +8,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.11",
     "@aws-amplify/ui-components": "^1.1.1",
     "@aws-amplify/ui-react": "^0.2.37",
     "@react-native-community/netinfo": "^5.9.10",
