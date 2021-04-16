@@ -40,10 +40,10 @@ export default function NavFlow() {
           inactiveTintColor: 'gray',
         }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Tasks" component={TaskScreen} />
-        <Tab.Screen name="Progress" component={BadgeScreen} />
-        <Tab.Screen name="Me" component={ProfileScreen} />
+        <Tab.Screen name={NavRoutes.HOME} component={HomeScreen} />
+        <Tab.Screen name={NavRoutes.TASKS} component={TaskScreen} />
+        <Tab.Screen name={NavRoutes.PROGRESS} component={BadgeScreen} />
+        <Tab.Screen name={NavRoutes.ME} component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
