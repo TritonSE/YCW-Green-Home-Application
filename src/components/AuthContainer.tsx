@@ -1,17 +1,14 @@
 import React, { useContext, useEffect } from 'react';
-import { Button, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { withAuthenticator, AmplifyTheme } from 'aws-amplify-react-native';
 import { Auth, I18n } from 'aws-amplify';
 import { Translations } from '@aws-amplify/ui-components';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Onboarding from './Onboarding/Onboarding';
 import AuthenticatorTheme from '../styles/AuthenticatorTheme';
 import { AppContext } from '../contexts/AppContext';
 import NavFlow from './NavContainer';
 
 Auth.configure({ mandatorySignIn: true });
-
-const Tab = createBottomTabNavigator();
 
 function App(): JSX.Element | null {
   const { appState, setAppState } = useContext(AppContext);
