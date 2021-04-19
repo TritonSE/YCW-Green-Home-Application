@@ -44,11 +44,7 @@ export const schema = {
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {
-                        "mutations": {
-                            "update": "updateUser"
-                        }
-                    }
+                    "properties": {}
                 },
                 {
                     "type": "auth",
@@ -545,11 +541,11 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "difficulty": {
-                    "name": "difficulty",
+                "level": {
+                    "name": "level",
                     "isArray": false,
                     "type": {
-                        "enum": "Difficulty"
+                        "enum": "Level"
                     },
                     "isRequired": true,
                     "attributes": []
@@ -563,20 +559,11 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "type": {
-                    "name": "type",
-                    "isArray": false,
-                    "type": {
-                        "enum": "QuestionType"
-                    },
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "tags": {
-                    "name": "tags",
+                "categories": {
+                    "name": "categories",
                     "isArray": true,
                     "type": {
-                        "enum": "Tag"
+                        "enum": "Category"
                     },
                     "isRequired": true,
                     "attributes": [],
@@ -595,20 +582,6 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "question"
                     }
-                },
-                "answer": {
-                    "name": "answer",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "metadata": {
-                    "name": "metadata",
-                    "isArray": false,
-                    "type": "AWSJSON",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -669,12 +642,12 @@ export const schema = {
         }
     },
     "enums": {
-        "Difficulty": {
-            "name": "Difficulty",
+        "Level": {
+            "name": "Level",
             "values": [
-                "BEGINNER",
+                "STARTER",
                 "INTERMEDIATE",
-                "ADVANCED"
+                "GURU"
             ]
         },
         "Cost": {
@@ -682,25 +655,15 @@ export const schema = {
             "values": [
                 "ONE",
                 "TWO",
-                "THREE",
-                "FOUR"
+                "THREE"
             ]
         },
-        "QuestionType": {
-            "name": "QuestionType",
-            "values": [
-                "HOME_IMPROVEMENT",
-                "GREEN_LIFESTYLE"
-            ]
-        },
-        "Tag": {
-            "name": "Tag",
+        "Category": {
+            "name": "Category",
             "values": [
                 "ENERGY",
                 "RESILIENCY",
                 "HEALTH",
-                "MATERIALS",
-                "EMBODIED_CARBON",
                 "WATER"
             ]
         },
@@ -759,5 +722,5 @@ export const schema = {
             }
         }
     },
-    "version": "9386bc5ee59d0a134cd93d4e8eecd9eb"
+    "version": "65c4cd401d518d71388345a16a442b07"
 };

@@ -1,5 +1,5 @@
-type User 
-    @model(mutations: { update: "updateUser" }) # only allow update mutation from client 
+type User
+    @model
     @auth(rules: [{ allow: owner }]) {
     id: ID!
     username: AWSEmail! # email address is used as an username
@@ -73,33 +73,26 @@ type Home
     annualWaterUsage: Float
 }
 
-enum Tag {
+enum Category {
     ENERGY
     RESILIENCY
     HEALTH
-    MATERIALS
-    EMBODIED_CARBON
     WATER
 }
 
-enum Difficulty {
-    BEGINNER
+enum Level {
+    STARTER
     INTERMEDIATE
-    ADVANCED
+    GURU
 }
 
 enum Cost {
     ONE
     TWO
     THREE
-    FOUR
 }
 
-enum QuestionType {
-    HOME_IMPROVEMENT
-    GREEN_LIFESTYLE
-}
-
+# All questions currently are of type yes/no
 type Question 
     @model 
     @auth(rules: [
@@ -112,13 +105,10 @@ type Question
     title: String! # short title of the question
     questionText: String! # the content of the question
     rewardText: String! # statement if the question is completed
-    difficulty: Difficulty!
+    level: Level!
     cost: Cost!
-    type: QuestionType!
-    tags: [Tag!]!
+    categories: [Category!]!
     responses: [Response] @connection(keyName: "byQuestion", fields: ["id"])
-    answer: String! # options here is mostly used for multiple choice questions
-    metadata: AWSJSON # used to store info specific to this question
 }
 
 # A home's response to a question

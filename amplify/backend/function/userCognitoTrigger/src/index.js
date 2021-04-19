@@ -22,6 +22,8 @@ exports.handler = async (event, context) => {
             Item: {
                 'id': {S: event.request.userAttributes.sub},
                 '__typename': {S: 'User'},
+                '_lastChangedAt': {N: `${date.getTime()}`},
+                '_version': {N: '1'},
                 'username': {S: event.request.userAttributes.email },
                 'displayName': {S: event.request.userAttributes['custom:displayName']},
                 'owner': {S: event.request.userAttributes.sub},

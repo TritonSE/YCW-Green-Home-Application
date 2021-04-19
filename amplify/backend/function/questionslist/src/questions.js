@@ -3,24 +3,19 @@ const uuid = require('uuid');
 const fs = require('fs');
 const parse = require('csv-parse');
 const { Config } = require('./config');
-const { Difficulty, Cost, QuestionType, textToTag } = require('./enums');
+const { Levels, Costs, textToCategory } = require('./enums');
 
 AWS.config.update({ region: Config.region });
 
 const questionsCSV = './data/questions.csv'
 const docClient = new AWS.DynamoDB.DocumentClient();
 const DATA_COLUMNS = {
-  difficulty: 0,
-  cost: 1,
-  type: 2,
-  tags: 3,
-  title: 4, // TODO: change this once title row in measure list
-  questionText: 4,
-  rewardText: 4, // TODO: change this once reward row in measure list
-  additionalQuestionInfo: 5,
-  isPopup: 6,
-  responseFormat: 7,
-  notes: 8,
+  title: 0,
+  questionText: 1,
+  rewardText: 2,
+  level: 3,
+  cost: 4,
+  categories: 5,
 }
 
 const parseQuestions = async () => {
@@ -36,17 +31,9 @@ const parseQuestions = async () => {
       title: row[DATA_COLUMNS.title], 
       questionText: row[DATA_COLUMNS.questionText],
       rewardText: row[DATA_COLUMNS.rewardText], 
-      difficulty: Difficulty[row[DATA_COLUMNS.difficulty]],
-      cost: Cost[row[DATA_COLUMNS.cost]],
-      type: QuestionType[row[DATA_COLUMNS.type]],
-      tags: textToTag(row[DATA_COLUMNS.tags]),
-      answer: 'Answer1, Answer2, Answer3, Answer4', // TODO: change this once answers in measure list
-      metadata: {
-        additionalQuestionInfo: row[DATA_COLUMNS.additionalQuestionInfo],
-        isPopup: row[DATA_COLUMNS.isPopup] === 'Yes',
-        responseFormat: row[DATA_COLUMNS.responseFormat],
-        notes: row[DATA_COLUMNS.notes], 
-      }
+      level: Levels[row[DATA_COLUMNS.level]],
+      cost: Costs[row[DATA_COLUMNS.cost]],
+      categories: textToCategory(row[DATA_COLUMNS.categories]),
     };
     questions.push(question);
   }
