@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { SafeAreaView, Text, Image, TextInput, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import * as Progress from "react-native-progress";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import DropDownPicker from "react-native-dropdown-picker";
-import styles from "../../styles/OnboardingStyles";
-import { homeInfo } from "./onboardingData";
+import React, { useState } from 'react';
+import { SafeAreaView, Text, Image, TextInput, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as Progress from 'react-native-progress';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import DropDownPicker from 'react-native-dropdown-picker';
+import styles from '../../styles/OnboardingStyles';
+import { homeInfo } from './onboardingData';
+import { HeatingFuelType, WaterHeaterFuelType, AgeType } from '../../API';
 
 interface Props {
   setPage(page: string): void;
@@ -14,32 +15,63 @@ interface Props {
 }
 
 const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
-  const [heatingFuelType, setHeatingFuelType] = useState("");
-  const [heaterAge, setHeaterAge] = useState("");
-  const [waterHeaterFuelType, setWaterFuelType] = useState("");
-  const [waterHeaterAge, setWaterHeaterAge] = useState("");
-  const [annualWaterUsage, setWaterUse] = useState("");
+  const [heatingFuelType, setHeatingFuelType] = useState<HeatingFuelType>();
+  const [heaterAge, setHeaterAge] = useState('');
+  const [
+    waterHeaterFuelType,
+    setWaterFuelType,
+  ] = useState<WaterHeaterFuelType>();
+  const [waterHeaterAge, setWaterHeaterAge] = useState('');
+  const [annualWaterUsage, setWaterUse] = useState('');
 
   const previousPage = () => {
-    setPage("page2");
+    setPage('page2');
     setHomeData({
       ...homeData,
       heatingFuelType,
       heaterAge,
       waterHeaterFuelType,
       waterHeaterAge,
-      annualWaterUsage: parseInt(annualWaterUsage),
+      annualWaterUsage: parseInt(annualWaterUsage, 10),
     });
   };
 
   const nextPage = () => {
-    setPage("page4");
+    setPage('page4');
+    let heaterAgeValue: AgeType;
+    if (parseInt(heaterAge, 10) < 5) {
+      heaterAgeValue = AgeType.LESS_THAN_5;
+    } else if (parseInt(heaterAge, 10) >= 5 && parseInt(heaterAge, 10) < 10) {
+      heaterAgeValue = AgeType.MORE_THAN_5;
+    } else if (parseInt(heaterAge, 10) >= 10 && parseInt(heaterAge, 10) < 20) {
+      heaterAgeValue = AgeType.MORE_THAN_10;
+    } else {
+      heaterAgeValue = AgeType.MORE_THAN_20;
+    }
+
+    let waterHeaterAgeValue: AgeType;
+    if (parseInt(waterHeaterAge, 10) < 5) {
+      waterHeaterAgeValue = AgeType.LESS_THAN_5;
+    } else if (
+      parseInt(waterHeaterAge, 10) >= 5 &&
+      parseInt(waterHeaterAge, 10) < 10
+    ) {
+      waterHeaterAgeValue = AgeType.MORE_THAN_5;
+    } else if (
+      parseInt(waterHeaterAge, 10) >= 10 &&
+      parseInt(waterHeaterAge, 10) < 20
+    ) {
+      waterHeaterAgeValue = AgeType.MORE_THAN_10;
+    } else {
+      waterHeaterAgeValue = AgeType.MORE_THAN_20;
+    }
+
     setHomeData({
       ...homeData,
       heatingFuelType,
-      heaterAge,
+      heaterAge: heaterAgeValue,
       waterHeaterFuelType,
-      waterHeaterAge,
+      waterHeaterAge: waterHeaterAgeValue,
       annualWaterUsage,
     });
   };
@@ -52,16 +84,16 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       scrollToOverflowEnabled
     >
       <SafeAreaView
-        style={{ alignItems: "center", justifyContent: "flex-start" }}
+        style={{ alignItems: 'center', justifyContent: 'flex-start' }}
       >
         <View style={styles.background} />
         <View style={styles.formContainer}>
           <TouchableOpacity onPress={previousPage} style={{ paddingTop: 70 }}>
-            <Image source={require("../../assets/backButton.png")} />
+            <Image source={require('../../assets/backButton.png')} />
           </TouchableOpacity>
 
           <Text
-            style={{ ...styles.title, alignSelf: "center", marginTop: -25 }}
+            style={{ ...styles.title, alignSelf: 'center', marginTop: -25 }}
           >
             Home Info
           </Text>
@@ -70,12 +102,12 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
           </Text>
 
           <View style={styles.form}>
-            <Text style={{ paddingVertical: "5%" }}>3 of 4</Text>
+            <Text style={{ paddingVertical: '5%' }}>3 of 4</Text>
             <Progress.Bar
               progress={0.75}
               width={null}
               color="rgba(233, 102, 97, 1)"
-              style={{ width: "90%" }}
+              style={{ width: '90%' }}
             />
             <Text style={styles.formTitle}>Heating Information</Text>
 
@@ -89,23 +121,23 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
             <Text style={styles.formComponent}>Water Heater Fuel Type</Text>
             <DropDownPicker
               style={{
-                alignSelf: "center",
-                borderColor: "gray",
+                alignSelf: 'center',
+                borderColor: 'gray',
                 borderWidth: 1,
-                width: "90%",
+                width: '90%',
                 borderRadius: 5,
-                paddingLeft: "2.5%",
+                paddingLeft: '2.5%',
               }}
               containerStyle={{ height: 40 }}
               items={[
-                { label: "Gas", value: "Gas" },
-                { label: "Electric", value: "Electric" },
-                { label: "Other", value: "Other" },
+                { label: 'Gas', value: WaterHeaterFuelType.GAS },
+                { label: 'Electric', value: WaterHeaterFuelType.ELECTRIC },
+                { label: 'Other', value: WaterHeaterFuelType.OTHER },
               ]}
-              dropDownStyle={{ width: "90%" }}
-              itemStyle={{ justifyContent: "flex-start", paddingLeft: "2%" }}
+              dropDownStyle={{ width: '90%' }}
+              itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
-              onChangeItem={(item) => setWaterFuelType(item.value)}
+              onChangeItem={item => setWaterFuelType(item.value)}
               // defaultValue={homeData.waterHeaterFuelType}
             />
             <Text style={styles.formComponent}>Age of Water Heater</Text>
@@ -125,29 +157,29 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
             <Text style={styles.formComponent}>Heating Fuel Type</Text>
             <DropDownPicker
               style={{
-                alignSelf: "center",
-                borderColor: "gray",
+                alignSelf: 'center',
+                borderColor: 'gray',
                 borderWidth: 1,
-                width: "90%",
+                width: '90%',
                 borderRadius: 5,
-                paddingLeft: "2.5%",
+                paddingLeft: '2.5%',
               }}
               containerStyle={{ height: 40 }}
               items={[
-                { label: "Gas", value: "Gas" },
-                { label: "Electric", value: "Electric" },
-                { label: "Propane", value: "Propane" },
-                { label: "Other", value: "Other" },
+                { label: 'Gas', value: HeatingFuelType.GAS },
+                { label: 'Electric', value: HeatingFuelType.ELECTRIC },
+                { label: 'Propane', value: HeatingFuelType.PROPANE },
+                { label: 'Other', value: HeatingFuelType.OTHER },
               ]}
-              dropDownStyle={{ width: "90%" }}
-              itemStyle={{ justifyContent: "flex-start", paddingLeft: "2%" }}
+              dropDownStyle={{ width: '90%' }}
+              itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
-              onChangeItem={(item) => setHeatingFuelType(item.value)}
+              onChangeItem={item => setHeatingFuelType(item.value)}
               // defaultValue={homeData.heatingFuelType}
             />
             <TouchableOpacity style={styles.button} onPress={nextPage}>
               <Text
-                style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
+                style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
               >
                 Next
               </Text>

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Text, TextInput, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import * as Progress from "react-native-progress";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import DropDownPicker from "react-native-dropdown-picker";
-import styles from "../../styles/OnboardingStyles";
-import { states, homeInfo } from "./onboardingData";
+import React, { useState } from 'react';
+import { Text, TextInput, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as Progress from 'react-native-progress';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import DropDownPicker from 'react-native-dropdown-picker';
+import styles from '../../styles/OnboardingStyles';
+import { states, homeInfo } from './onboardingData';
 
 interface Props {
   setPage(page: string): void;
@@ -21,14 +21,14 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
   const [addressState, setState] = useState(homeData.addressState);
 
   const nextPage = () => {
-    setPage("page2");
+    setPage('page2');
     setHomeData({
       ...homeData,
       zipcode,
       addressLine1,
       city,
       addressState,
-      yearBuilt: parseInt(yearBuilt),
+      yearBuilt: parseInt(yearBuilt, 10),
     });
   };
 
@@ -42,17 +42,17 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
     >
       <View
         style={{
-          alignItems: "center",
-          justifyContent: "flex-start",
+          alignItems: 'center',
+          justifyContent: 'flex-start',
         }}
       >
         <View style={styles.background} />
         <View
           style={{
-            position: "absolute",
-            backgroundColor: "#fff",
-            alignItems: "center",
-            width: "90%",
+            position: 'absolute',
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            width: '90%',
             borderBottomLeftRadius: 20,
             borderBottomRightRadius: 20,
           }}
@@ -68,7 +68,7 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
               progress={0.25}
               width={null}
               color="rgba(233, 102, 97, 1)"
-              style={{ width: "90%" }}
+              style={{ width: '90%' }}
             />
             <Text style={styles.formTitle}>Basic Information</Text>
             <Text style={styles.formComponent}>Zip Code *</Text>
@@ -93,19 +93,19 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
             <Text style={styles.formComponent}>State</Text>
             <DropDownPicker
               style={{
-                alignSelf: "center",
-                borderColor: "gray",
+                alignSelf: 'center',
+                borderColor: 'gray',
                 borderWidth: 1,
-                width: "90%",
+                width: '90%',
                 borderRadius: 5,
-                paddingLeft: "2.5%",
+                paddingLeft: '2.5%',
               }}
               containerStyle={{ height: 40 }}
               items={states}
-              dropDownStyle={{ width: "90%" }}
-              itemStyle={{ justifyContent: "flex-start", paddingLeft: "2%" }}
+              dropDownStyle={{ width: '90%' }}
+              itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
-              onChangeItem={(item) => setState(item.value)}
+              onChangeItem={item => setState(item.value)}
               defaultValue={homeData.addressState}
             />
             <Text style={styles.formComponent}>Year Home was Built</Text>
@@ -119,7 +119,7 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
 
             <TouchableOpacity style={styles.button} onPress={nextPage}>
               <Text
-                style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
+                style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
               >
                 Next
               </Text>
