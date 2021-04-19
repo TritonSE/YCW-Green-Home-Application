@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Image, ImageSourcePropType, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import SvgContainer from "../SvgContainer";
 
 type TaskCardProps = {
   level: string;
-  icon: ImageSourcePropType;
   title: string;
   question: string;
   environmentalBenefits: Array<string>;
@@ -14,58 +15,71 @@ type TaskCardProps = {
 const styles = StyleSheet.create({
   card: {
     display: "flex",
-    position: "absolute",
-    width: 155,
-    height: 149,
-    left: 21,
-    top: 229,
+    width: 160,
+    height: 160,
+    marginTop: 20,
+    marginLeft: 20,
     backgroundColor: "#FFFFFF",
     borderRadius: 5,
+    paddingLeft: 10,
   },
   cardHeader: {
-    justifyContent: "space-between",
+    paddingVertical: 10,
+    flexDirection: 'row'
   },
   title: {
+    alignItems: "flex-start",
+  },
+  titleText: {
     fontWeight: "normal",
     fontStyle: "italic",
     fontSize: 16,
-    lineHeight: 12,
+    maxWidth: 75,
     color: "#353935",
-    width: 69,
-    height: 49,
-    left: 30,
-    top: 244,
   },
   icon: {
     height: 40,
     width: 40,
+    marginLeft: 30,
+    alignItems: 'flex-end'
   },
   cost: {
     justifyContent: "flex-start",
   },
   question: {
-    justifyContent: "flex-start",
-    flexWrap: "wrap",
+    marginTop: 10,
   },
+  questionText: {
+    width: 125,
+    fontSize: 12,
+  }
 });
 
 const TaskCard: React.FC<TaskCardProps> = ({
-  icon,
   title,
   cost,
   question,
 }: TaskCardProps) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity>
+      <View style={styles.card}>
       <View style={styles.cardHeader}>
-        <View style={styles.title}>{title}</View>
+        <View style={styles.title}>
+          <Text style={styles.titleText}>{title}</Text>
+        </View>
         <View style={styles.icon}>
-          <Image source={icon} />
+          <SvgContainer badgeTitle={title} height="40" width="40"/>
         </View>
       </View>
-      <View style={styles.cost}>{cost}</View>
-      <View style={styles.question}>{question}</View>
+      <View style={styles.cost}>
+        <Text>{cost}</Text>
+      </View>
+      <View style={styles.question}>
+        <Text style={styles.questionText}>{question}</Text>
+      </View>
     </View>
+  </TouchableOpacity>
+    
   );
 };
 

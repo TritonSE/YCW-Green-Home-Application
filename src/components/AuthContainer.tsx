@@ -6,6 +6,7 @@ import { Translations } from '@aws-amplify/ui-components';
 import Onboarding from './Onboarding/Onboarding';
 import AuthenticatorTheme from '../styles/AuthenticatorTheme';
 import { AppContext } from '../contexts/AppContext';
+import TaskScreen from './Tasks/TaskScreen';
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -28,15 +29,7 @@ function App(): JSX.Element | null {
   };
 
   return (
-    <>
-      {appState === 'Onboarding' && <Onboarding />}
-      {appState === 'App' && (
-        <SafeAreaView>
-          <Text>Use React Navigation here</Text>
-          <Button title="Sign Out" onPress={signOut} />
-        </SafeAreaView>
-      )}
-    </>
+    <TaskScreen />
   );
 }
 

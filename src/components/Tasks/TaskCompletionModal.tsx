@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { toProperCase } from '../../utils';
+import toProperCase from '../../utils';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 interface Props {
