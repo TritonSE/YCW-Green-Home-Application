@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { Button, SafeAreaView, Text } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { withAuthenticator, AmplifyTheme } from 'aws-amplify-react-native';
 import { Auth, I18n } from 'aws-amplify';
 import { Translations } from '@aws-amplify/ui-components';
 import Onboarding from './Onboarding/Onboarding';
 import AuthenticatorTheme from '../styles/AuthenticatorTheme';
 import { AppContext } from '../contexts/AppContext';
+import NavFlow from './NavContainer';
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -18,22 +19,12 @@ function App(): JSX.Element | null {
     }
   }, [appState, setAppState]);
 
-  const signOut = async () => {
-    try {
-      await Auth.signOut();
-      setAppState('Auth');
-    } catch (error) {
-      console.error('Error sign out: ', error);
-    }
-  };
-
   return (
     <>
       {appState === 'Onboarding' && <Onboarding />}
       {appState === 'App' && (
-        <SafeAreaView>
-          <Text>Use React Navigation here</Text>
-          <Button title="Sign Out" onPress={signOut} />
+        <SafeAreaView style={{ flex: 1 }}>
+          <NavFlow />
         </SafeAreaView>
       )}
     </>
