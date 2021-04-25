@@ -1,20 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import toProperCase from '../../utils';
 import DropDownPicker from 'react-native-dropdown-picker';
-
-interface Props {
-  level: string;
-  category: string;
-  cost: string;
-  question: string;
-}
+import toProperCase from '../../utils';
+import { TaskContext } from '../../contexts/TaskContext';
 
 const CostTextToSymbol: { [key: string]: string } = {
-  'ONE': '$',
-  'TWO': '$$',
-  'THREE': '$$$',
-}
+  ONE: '$',
+  TWO: '$$',
+  THREE: '$$$',
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -55,7 +49,7 @@ const styles = StyleSheet.create({
   },
   dropdownList: {
     backgroundColor: 'white',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   buttonContainer: {
     zIndex: 1,
@@ -74,17 +68,26 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
-  }
-
+  },
 });
 
-const TaskCompletionModal: React.FC<Props> = ({ level, category, cost, question }) => {
+const TaskCompletionModal: React.FC = () => {
+  const { selectedTask, setIsTaskCompletionRendered } = useContext(TaskContext);
+  const { level, category, cost, question } = selectedTask;
+
+  const completeCurrentTask = () => {
+    // TODO: implement rest
+    setIsTaskCompletionRendered(false);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.modal}>
         <View style={styles.statsContainer}>
           <Text style={styles.statsText}>Level: {toProperCase(level)}</Text>
-          <Text style={styles.statsText}>Category: {toProperCase(category)}</Text>
+          <Text style={styles.statsText}>
+            Category: {toProperCase(category)}
+          </Text>
           <Text style={styles.statsText}>Cost: {CostTextToSymbol[cost]}</Text>
         </View>
         <View style={styles.questionContainer}>
@@ -98,20 +101,18 @@ const TaskCompletionModal: React.FC<Props> = ({ level, category, cost, question 
             ]}
             containerStyle={styles.dropdown}
             dropDownStyle={styles.dropdownList}
-            showArrow={true}
+            showArrow
             onChangeItem={item => console.log(item.label, item.value)}
           />
         </View>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => ''}>
+          <TouchableOpacity style={styles.button} onPress={completeCurrentTask}>
             <Text style={styles.buttonText}>Task Completed</Text>
           </TouchableOpacity>
         </View>
       </View>
     </View>
-  )
-}
-
-
+  );
+};
 
 export default TaskCompletionModal;

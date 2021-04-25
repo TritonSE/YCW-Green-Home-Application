@@ -1,28 +1,32 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import React, { useContext } from 'react';
+import { ScrollView, View, StyleSheet } from 'react-native';
 
 import TaskHeader from './TaskHeader';
 import TaskBoard from './TaskBoard';
 import TaskCompletionModal from './TaskCompletionModal';
+import { TaskContext } from '../../contexts/TaskContext';
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: "rgb(250,250,250)"
-  }
-})
+    backgroundColor: 'rgb(250,250,250)',
+  },
+  header: {
+    zIndex: 10,
+    elevation: 10,
+  },
+});
 
 const TaskScreen = () => {
+  const { isTaskCompletionRendered } = useContext(TaskContext);
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <TaskHeader />
+      <View style={styles.header}>
+        <TaskHeader />
+      </View>
       <TaskBoard />
-      {/* <TaskCompletionModal
-        level="STARTER"
-        category="ENERGY"
-        cost="ONE"
-        question="Does the home have ENERGY STAR ceiling fans in the living areas and bedrooms?"
-      /> */}
+      {isTaskCompletionRendered && <TaskCompletionModal />}
     </ScrollView>
   );
 };
