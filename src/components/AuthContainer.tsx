@@ -1,13 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { Button, SafeAreaView, Text } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { withAuthenticator, AmplifyTheme } from 'aws-amplify-react-native';
 import { Auth, I18n } from 'aws-amplify';
 import { Translations } from '@aws-amplify/ui-components';
 import Onboarding from './Onboarding/Onboarding';
 import AuthenticatorTheme from '../styles/AuthenticatorTheme';
 import { AppContext } from '../contexts/AppContext';
-import TaskScreen from './Tasks/TaskScreen';
-import { TaskProvider } from '../contexts/TaskContext';
+import NavFlow from './NavContainer';
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -20,19 +19,15 @@ function App(): JSX.Element | null {
     }
   }, [appState, setAppState]);
 
-  const signOut = async () => {
-    try {
-      await Auth.signOut();
-      setAppState('Auth');
-    } catch (error) {
-      console.error('Error sign out: ', error);
-    }
-  };
-
   return (
-    <TaskProvider>
-      <TaskScreen />
-    </TaskProvider>
+    <>
+      {appState === 'Onboarding' && <Onboarding />}
+      {appState === 'App' && (
+        <SafeAreaView style={{ flex: 1 }}>
+          <NavFlow />
+        </SafeAreaView>
+      )}
+    </>
   );
 }
 
