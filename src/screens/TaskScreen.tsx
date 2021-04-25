@@ -1,11 +1,34 @@
-/* eslint-disable import/prefer-default-export */
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useContext } from 'react';
+import { ScrollView, View, StyleSheet } from 'react-native';
 
-export function TaskScreen() {
+import TaskHeader from '../components/Tasks/TaskHeader';
+import TaskBoard from '../components/Tasks/TaskBoard';
+import TaskCompletionModal from '../components/Tasks/TaskCompletionModal';
+import { TaskContext } from '../contexts/TaskContext';
+
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    backgroundColor: 'rgb(250,250,250)',
+  },
+  header: {
+    zIndex: 10,
+    elevation: 10,
+  },
+});
+
+const TaskScreen = () => {
+  const { isTaskCompletionRendered } = useContext(TaskContext);
+
   return (
-    <View>
-      <Text>Welcome to the task screen!</Text>
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
+        <TaskHeader />
+      </View>
+      <TaskBoard />
+      {isTaskCompletionRendered && <TaskCompletionModal />}
+    </ScrollView>
   );
-}
+};
+
+export default TaskScreen;
