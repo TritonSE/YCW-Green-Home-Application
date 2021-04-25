@@ -3,13 +3,6 @@ import { StyleSheet, View } from 'react-native';
 
 import TaskCard from './TaskCard';
 
-const tasks = ['task1', 'task2', 'task3', 'task4', 'task5'];
-
-// type TaskBoardProps = {
-//   level: string;
-//   tasks: Array<TaskCard>;
-// };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
