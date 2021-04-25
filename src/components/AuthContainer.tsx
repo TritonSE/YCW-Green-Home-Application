@@ -7,6 +7,7 @@ import Onboarding from './Onboarding/Onboarding';
 import AuthenticatorTheme from '../styles/AuthenticatorTheme';
 import { AppContext } from '../contexts/AppContext';
 import TaskScreen from './Tasks/TaskScreen';
+import { TaskProvider } from '../contexts/TaskContext';
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -29,7 +30,9 @@ function App(): JSX.Element | null {
   };
 
   return (
-    <TaskScreen />
+    <TaskProvider>
+      <TaskScreen />
+    </TaskProvider>
   );
 }
 
