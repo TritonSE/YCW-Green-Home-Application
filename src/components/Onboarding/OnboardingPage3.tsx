@@ -16,13 +16,15 @@ interface Props {
 
 const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
   const [heatingFuelType, setHeatingFuelType] = useState<HeatingFuelType>();
-  const [heaterAge, setHeaterAge] = useState('');
+  const [heaterAge, setHeaterAge] = useState(String(0));
   const [
     waterHeaterFuelType,
     setWaterFuelType,
   ] = useState<WaterHeaterFuelType>();
-  const [waterHeaterAge, setWaterHeaterAge] = useState('');
-  const [annualWaterUsage, setWaterUse] = useState('');
+  const [waterHeaterAge, setWaterHeaterAge] = useState(String(0));
+  const [annualWaterUsage, setWaterUse] = useState(
+    String(homeData.annualWaterUsage),
+  );
 
   const previousPage = () => {
     setPage('page2');

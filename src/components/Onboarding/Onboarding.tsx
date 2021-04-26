@@ -6,7 +6,7 @@ import Page1 from './OnboardingPage1';
 import Page2 from './OnboardingPage2';
 import Page3 from './OnboardingPage3';
 import Page4 from './OnboardingPage4';
-import { createHome } from '../../graphql/mutations';
+import { createHome, createHomeOwner } from '../../graphql/mutations';
 
 const Onboarding: React.FC = () => {
   const [page, setPage] = useState('page1');
@@ -19,7 +19,17 @@ const Onboarding: React.FC = () => {
         query: createHome,
         variables: { input: homeData },
       });
-      console.log(result);
+      // console.log(result);
+      console.log(result.data.createHome);
+      const homeOwner = await API.graphql({
+        query: createHomeOwner,
+        variables: {
+          input: {
+            homeID: result.data.createHome.id,
+            homeOwnerID: result.data.createHome.owner,
+          },
+        },
+      });
     };
 
     if (page === 'submit') {
