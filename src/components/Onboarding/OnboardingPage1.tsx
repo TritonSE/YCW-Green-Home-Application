@@ -116,14 +116,33 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
               onChangeText={setYear}
               keyboardType="number-pad"
             />
-
-            <TouchableOpacity style={styles.button} onPress={nextPage}>
-              <Text
-                style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
+            {zipcode !== '' && addressLine1 !== '' ? (
+              <TouchableOpacity style={styles.button} onPress={nextPage}>
+                <Text
+                  style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
+                >
+                  Next
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#778899',
+                  marginTop: 20,
+                  width: 136,
+                  height: 35,
+                  borderRadius: 20,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
               >
-                Next
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
+                >
+                  Next
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </View>

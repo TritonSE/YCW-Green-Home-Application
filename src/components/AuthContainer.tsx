@@ -28,7 +28,7 @@ function App(): JSX.Element | null {
     };
 
     getUserData();
-    // console.log(userState);
+
     if (userState.homes.items.length === 0) {
       setAppState('Onboarding');
     } else {

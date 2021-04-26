@@ -108,24 +108,44 @@ const Page2: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
               onChangeText={setBathrooms}
               keyboardType="number-pad"
             />
-            <TouchableOpacity
-              style={{
-                backgroundColor: '#E96661',
-                marginTop: '25%',
-                width: 136,
-                height: 35,
-                borderRadius: 20,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              onPress={nextPage}
-            >
-              <Text
-                style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
+            {livableArea !== '0' && livableArea !== '' ? (
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#E96661',
+                  marginTop: '25%',
+                  width: 136,
+                  height: 35,
+                  borderRadius: 20,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                onPress={nextPage}
               >
-                Next
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
+                >
+                  Next
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={{
+                  backgroundColor: '#778899',
+                  marginTop: '25%',
+                  width: 136,
+                  height: 35,
+                  borderRadius: 20,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Text
+                  style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
+                >
+                  Next
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </View>

@@ -15,13 +15,11 @@ const Onboarding: React.FC = () => {
 
   useEffect(() => {
     const addHome = async () => {
-      const result = await API.graphql({
+      await API.graphql({
         query: createHome,
         variables: { input: homeData },
       });
-      // console.log(result);
-      console.log(result.data.createHome);
-      const homeOwner = await API.graphql({
+      await API.graphql({
         query: createHomeOwner,
         variables: {
           input: {
@@ -33,8 +31,6 @@ const Onboarding: React.FC = () => {
     };
 
     if (page === 'submit') {
-      // submit home info to backend here
-      console.log(homeData);
       addHome();
       setAppState('App');
     }
