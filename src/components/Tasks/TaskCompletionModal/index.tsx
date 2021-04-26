@@ -1,15 +1,9 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import toProperCase from '../../../utils';
+import { toProperCase, CostTextToSymbol } from '../../../utils';
 import { TaskContext } from '../../../contexts/TaskContext';
 import styles from './styles';
-
-const CostTextToSymbol: { [key: string]: string } = {
-  ONE: '$',
-  TWO: '$$',
-  THREE: '$$$',
-};
 
 const TaskCompletionModal: React.FC = () => {
   const { selectedTask, setIsTaskCompletionRendered } = useContext(TaskContext);

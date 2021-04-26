@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { TaskContext } from '../../../contexts/TaskContext';
 import styles from './styles';
 /*
 enum LEVEL {
@@ -23,6 +24,16 @@ const HEADER_TITLE = 'TASKS';
 const HEADER_SUBTITLE = 'Receive more badges by completing new tasks';
 
 const TaskHeader = () => {
+  const { filters, setFilters } = useContext(TaskContext);
+
+  const updateFilters = (filter: string, value: string) => {
+    console.log(`${filter}: ${value}`);
+    setFilters({
+      ...filters,
+      [filter]: value,
+    });
+  };
+
   return (
     <View style={styles.wrapper}>
       <View>
@@ -41,7 +52,7 @@ const TaskHeader = () => {
             labelStyle={styles.dropdownLabel}
             style={styles.dropdownBox}
             showArrow
-            onChangeItem={item => console.log(item.label, item.value)}
+            onChangeItem={item => updateFilters('level', item.value)}
           />
           <DropDownPicker
             items={[
@@ -55,7 +66,7 @@ const TaskHeader = () => {
             labelStyle={styles.dropdownLabel}
             style={styles.dropdownBox}
             showArrow
-            onChangeItem={item => console.log(item.label, item.value)}
+            onChangeItem={item => updateFilters('category', item.value)}
           />
           <DropDownPicker
             items={[
@@ -68,7 +79,7 @@ const TaskHeader = () => {
             labelStyle={styles.dropdownLabel}
             style={styles.dropdownBox}
             showArrow
-            onChangeItem={item => console.log(item.label, item.value)}
+            onChangeItem={item => updateFilters('cost', item.value)}
           />
         </View>
       </View>

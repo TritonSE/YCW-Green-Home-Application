@@ -1,45 +1,39 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 import TaskCard from '../TaskCard';
+import { Task } from '../../../types/Tasks';
+import { TaskContext } from '../../../contexts/TaskContext';
 
-const TaskBoard: React.FC = () => {
-  return (
-    <View style={styles.container}>
+interface Props {
+  tasks: Task[];
+}
+
+const TaskBoard: React.FC<Props> = ({ tasks }) => {
+  const { filters } = useContext(TaskContext);
+
+  const taskComponents = tasks
+    .filter(task => {
+      const hasNoFilters = !(filters.level || filters.category || filters.cost);
+      if (hasNoFilters) return true;
+      if (filters.level && filters.level !== task.level) return false;
+      if (filters.category && filters.category !== task.category) return false;
+      if (filters.cost && filters.cost !== task.cost) return false;
+      return true;
+    })
+    .map(task => (
       <TaskCard
-        level="Starter"
-        title="Ceiling Fans"
-        rewardText="Completed ENERGY STAR® ceiling fans in the living areas and bedrooms"
-        cost="$"
-        category="Energy"
-        question="Does the home have ENERGY STAR® ceiling fans in the living areas and bedrooms?"
+        key={task.title} // TODO: use id when connected to backend
+        level={task.level}
+        title={task.title}
+        rewardText={task.rewardText}
+        cost={task.cost}
+        category={task.category}
+        question={task.question}
       />
-      <TaskCard
-        level="Starter"
-        title="Refrigerator"
-        rewardText="Completed ENERGY STAR® certified refrigerator, less than 25 cubic feet in size, and less than 2 years old. Multiple appliances must still total less than 25 cubic feet to qualify."
-        cost="$$$"
-        category="Energy"
-        question="Is the refrigerator ENERGY STAR® certified, less than 25 cubic feet in size, and less than 2 years old?"
-      />
-      <TaskCard
-        level="Starter"
-        title="LED Lights"
-        rewardText="Completed LED lights"
-        cost="$$"
-        category="Energy"
-        question="Are all of the lights LED?"
-      />
-      <TaskCard
-        level="Starter"
-        title="Shortened Shower"
-        rewardText="Successfully shortened showers"
-        cost="$"
-        category="Water"
-        question="Have you shortened the amount of time you take for a shower?"
-      />
-    </View>
-  );
+    ));
+
+  return <View style={styles.container}>{taskComponents}</View>;
 };
 
 export default TaskBoard;

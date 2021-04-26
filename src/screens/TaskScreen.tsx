@@ -1,31 +1,59 @@
 import React, { useContext } from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
-
+import { ScrollView, View } from 'react-native';
 import TaskHeader from '../components/Tasks/TaskHeader';
 import TaskBoard from '../components/Tasks/TaskBoard';
 import TaskCompletionModal from '../components/Tasks/TaskCompletionModal';
 import { TaskContext } from '../contexts/TaskContext';
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: 'rgb(250,250,250)',
-  },
-  header: {
-    zIndex: 10,
-    elevation: 10,
-  },
-});
+import styles from '../styles/TaskScreenStyles';
 
 const TaskScreen = () => {
   const { isTaskCompletionRendered } = useContext(TaskContext);
+
+  const tasks = [
+    {
+      level: 'STARTER',
+      title: 'Ceiling Fans',
+      rewardText:
+        'Completed ENERGY STAR® ceiling fans in the living areas and bedrooms',
+      cost: 'ONE',
+      category: 'ENERGY',
+      question:
+        'Does the home have ENERGY STAR® ceiling fans in the living areas and bedrooms?',
+    },
+    {
+      level: 'STARTER',
+      title: 'Refrigerator',
+      rewardText:
+        'Completed ENERGY STAR® certified refrigerator, less than 25 cubic feet in size, and less than 2 years old. Multiple appliances must still total less than 25 cubic feet to qualify.',
+      cost: 'THREE',
+      category: 'ENERGY',
+      question:
+        'Is the refrigerator ENERGY STAR® certified, less than 25 cubic feet in size, and less than 2 years old?',
+    },
+    {
+      level: 'STARTER',
+      title: 'LED Lights',
+      rewardText: 'Completed LED lights',
+      cost: 'TWO',
+      category: 'ENERGY',
+      question: 'Are all of the lights LED?',
+    },
+    {
+      level: 'STARTER',
+      title: 'Shortened Shower',
+      rewardText: 'Successfully shortened showers',
+      cost: 'ONE',
+      category: 'WATER',
+      question: 'Have you shortened the amount of time you take for a shower?',
+    },
+  ];
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
         <TaskHeader />
       </View>
-      <TaskBoard />
+      <TaskBoard tasks={tasks} />
       {isTaskCompletionRendered && <TaskCompletionModal />}
     </ScrollView>
   );

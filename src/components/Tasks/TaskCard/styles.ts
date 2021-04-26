@@ -17,12 +17,12 @@ const styles = StyleSheet.create({
   },
   title: {
     alignItems: 'flex-start',
+    flexShrink: 1,
   },
   titleText: {
     fontWeight: 'normal',
     fontStyle: 'italic',
     fontSize: 16,
-    maxWidth: 75,
     color: '#353935',
   },
   icon: {

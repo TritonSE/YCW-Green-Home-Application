@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
   dropdownLabel: {
     fontSize: 12,
   },
+  dropdownList: {
+    alignItems: 'flex-start',
+  },
 });
 
 export default styles;
