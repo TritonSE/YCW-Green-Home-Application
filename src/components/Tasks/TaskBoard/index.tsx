@@ -1,17 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-
-import TaskCard from './TaskCard';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginHorizontal: 20,
-    justifyContent: 'space-between',
-  },
-});
+import { View } from 'react-native';
+import styles from './styles';
+import TaskCard from '../TaskCard';
 
 const TaskBoard: React.FC = () => {
   return (
@@ -31,6 +21,22 @@ const TaskBoard: React.FC = () => {
         cost="$$$"
         category="Energy"
         question="Is the refrigerator ENERGY STAR® certified, less than 25 cubic feet in size, and less than 2 years old?"
+      />
+      <TaskCard
+        level="Starter"
+        title="LED Lights"
+        rewardText="Completed LED lights"
+        cost="$$"
+        category="Energy"
+        question="Are all of the lights LED?"
+      />
+      <TaskCard
+        level="Starter"
+        title="Shortened Shower"
+        rewardText="Successfully shortened showers"
+        cost="$"
+        category="Water"
+        question="Have you shortened the amount of time you take for a shower?"
       />
     </View>
   );

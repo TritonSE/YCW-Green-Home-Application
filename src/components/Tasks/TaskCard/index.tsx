@@ -1,51 +1,9 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { TaskContext } from '../../contexts/TaskContext';
-import SvgContainer from '../SvgContainer';
-
-const styles = StyleSheet.create({
-  card: {
-    width: 160,
-    height: 180,
-    marginTop: 20,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 5,
-    paddingLeft: 10,
-  },
-  cardHeader: {
-    paddingVertical: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginRight: 15,
-  },
-  title: {
-    alignItems: 'flex-start',
-  },
-  titleText: {
-    fontWeight: 'normal',
-    fontStyle: 'italic',
-    fontSize: 16,
-    maxWidth: 75,
-    color: '#353935',
-  },
-  icon: {
-    height: 40,
-    width: 40,
-    marginLeft: 30,
-    alignItems: 'flex-end',
-  },
-  cost: {
-    justifyContent: 'flex-start',
-  },
-  question: {
-    marginTop: 10,
-  },
-  questionText: {
-    width: 125,
-    fontSize: 12,
-  },
-});
+import { TaskContext } from '../../../contexts/TaskContext';
+import SvgContainer from '../../SvgContainer';
+import styles from './styles';
 
 interface Props {
   level: string;
