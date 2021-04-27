@@ -15,11 +15,19 @@ interface TaskData {
   rewardText: string;
 }
 
+interface TaskFilters {
+  level: string;
+  cost: string;
+  category: string;
+}
+
 interface TaskState {
   isTaskCompletionRendered: boolean;
   selectedTask: TaskData;
+  filters: TaskFilters;
   setIsTaskCompletionRendered: Dispatch<SetStateAction<boolean>> | (() => void);
   setSelectedTask: Dispatch<SetStateAction<TaskData>> | (() => void);
+  setFilters: Dispatch<SetStateAction<TaskFilters>> | (() => void);
 }
 
 // default state
@@ -32,11 +40,19 @@ const initialSelectedTask: TaskData = {
   rewardText: '',
 };
 
+const initialFilters: TaskFilters = {
+  level: '',
+  cost: '',
+  category: '',
+};
+
 const initialState: TaskState = {
   isTaskCompletionRendered: false,
   selectedTask: initialSelectedTask,
+  filters: initialFilters,
   setIsTaskCompletionRendered: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
   setSelectedTask: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  setFilters: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
 };
 
 // context and provider
@@ -46,14 +62,17 @@ export const TaskProvider: React.FC = ({ children }) => {
     initialState.isTaskCompletionRendered,
   );
   const [selectedTask, setSelectedTask] = useState(initialState.selectedTask);
+  const [filters, setFilters] = useState(initialState.filters);
 
   return (
     <TaskContext.Provider
       value={{
         isTaskCompletionRendered,
         selectedTask,
+        filters,
         setIsTaskCompletionRendered,
         setSelectedTask,
+        setFilters,
       }}
     >
       {children}
