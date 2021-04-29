@@ -11,27 +11,32 @@ interface Props {
 
 const TaskBoard: React.FC<Props> = ({ tasks }) => {
   const { filters } = useContext(TaskContext);
+  const hasNoFilters = !(filters.level || filters.category || filters.cost);
 
-  const taskComponents = tasks
-    .filter(task => {
-      const hasNoFilters = !(filters.level || filters.category || filters.cost);
-      if (hasNoFilters) return true;
-      if (filters.level && filters.level !== task.level) return false;
-      if (filters.category && filters.category !== task.category) return false;
-      if (filters.cost && filters.cost !== task.cost) return false;
-      return true;
-    })
-    .map(task => (
-      <TaskCard
-        key={task.title} // TODO: use id when connected to backend
-        level={task.level}
-        title={task.title}
-        rewardText={task.rewardText}
-        cost={task.cost}
-        category={task.category}
-        question={task.question}
-      />
-    ));
+  const filteredTasks = hasNoFilters
+    ? tasks
+    : tasks.filter(task => {
+        if (filters.level && filters.level !== task.level) return false;
+        if (filters.category && filters.category !== task.category)
+          return false;
+        if (filters.cost && filters.cost !== task.cost) return false;
+        return true;
+      });
+
+  const t = filteredTasks.map(ta => ta.title);
+  console.log(t);
+
+  const taskComponents = filteredTasks.map(task => (
+    <TaskCard
+      key={task.title} // TODO: use id when connected to backend
+      level={task.level}
+      title={task.title}
+      rewardText={task.rewardText}
+      cost={task.cost}
+      category={task.category}
+      question={task.question}
+    />
+  ));
 
   return <View style={styles.container}>{taskComponents}</View>;
 };

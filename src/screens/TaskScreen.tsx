@@ -39,12 +39,28 @@ const TaskScreen = () => {
       question: 'Are all of the lights LED?',
     },
     {
-      level: 'STARTER',
+      level: 'INTERMEDIATE',
       title: 'Shortened Shower',
       rewardText: 'Successfully shortened showers',
       cost: 'ONE',
       category: 'WATER',
       question: 'Have you shortened the amount of time you take for a shower?',
+    },
+    {
+      level: 'INTERMEDIATE',
+      title: 'Air Sealed Home',
+      rewardText: 'Completed Air Sealed Home',
+      cost: 'TWO',
+      category: 'RESILIENCY',
+      question: 'Has the home been air sealed?',
+    },
+    {
+      level: 'ADVANCED',
+      title: 'Energy Audit',
+      rewardText: 'Completed an energy audit',
+      cost: 'THREE',
+      category: 'ENERGY',
+      question: 'Has the home completed an energy audit?',
     },
   ];
 
