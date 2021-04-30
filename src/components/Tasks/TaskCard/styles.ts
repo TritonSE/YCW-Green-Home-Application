@@ -16,8 +16,11 @@ const styles = StyleSheet.create({
     marginRight: 15,
   },
   title: {
-    alignItems: 'flex-start',
+    flex: 1,
     flexShrink: 1,
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   titleText: {
     fontWeight: 'normal',
@@ -28,7 +31,7 @@ const styles = StyleSheet.create({
   icon: {
     height: 40,
     width: 40,
-    marginLeft: 30,
+    marginLeft: 10,
     alignItems: 'flex-end',
   },
   cost: {
