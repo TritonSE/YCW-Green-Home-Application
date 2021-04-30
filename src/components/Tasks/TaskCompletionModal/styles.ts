@@ -6,11 +6,31 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   modal: {
+    zIndex: 0,
+    backgroundColor: '#FAFAFA',
     height: 375,
     borderColor: '#ddd',
     borderWidth: 1,
     borderTopLeftRadius: 45,
     borderTopRightRadius: 45,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+  },
+  badgeIcon: {
+    marginLeft: 20,
+    marginTop: -50,
+    zIndex: 2,
+    flex: 1,
+    justifyContent: 'flex-start',
+  },
+  closeIcon: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginTop: 24,
+    marginRight: 30,
+  },
+  bodyContainer: {
     paddingLeft: 36,
   },
   statsContainer: {
@@ -42,6 +62,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   buttonContainer: {
+    alignItems: 'center',
     zIndex: 1,
     elevation: 1,
   },
