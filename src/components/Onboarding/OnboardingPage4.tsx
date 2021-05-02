@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import DropDownPicker from "react-native-dropdown-picker";
 import styles from "../../styles/OnboardingStyles";
 import { homeInfo } from "./onboardingData";
+import { useNavigation } from "@react-navigation/core";
 
 interface Props {
   setPage(page: string): void;
@@ -23,21 +24,22 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
   const [hasAirConditioner, setAC] = useState(homeData.hasAirConditioner);
   const [hasPool, setPool] = useState(homeData.hasPool);
   const [hasHotTub, setHotTub] = useState(homeData.hasHotTub);
-  // const [EV, setEV] = useState(homeData.EV);
+
   const [picker1, setPicker1] = useState(false);
   const [picker2, setPicker2] = useState(false);
   const [picker3, setPicker3] = useState(false);
 
+  const navigation = useNavigation();
+
   const previousPage = () => {
-    setPage("page3");
+    navigation.goBack();
     setHomeData({
       ...homeData,
-      annualElectricalEnergyUsage: parseInt(annualElectricalEnergyUsage),
-      annualGasPropaneEnergyUsage: parseInt(annualGasPropaneEnergyUsage),
+      annualElectricalEnergyUsage: parseInt(annualElectricalEnergyUsage, 10),
+      annualGasPropaneEnergyUsage: parseInt(annualGasPropaneEnergyUsage, 10),
       hasAirConditioner,
       hasPool,
       hasHotTub,
-      // EV,
     });
   };
 
@@ -50,7 +52,6 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       hasAirConditioner,
       hasPool,
       hasHotTub,
-      // EV,
     });
   };
 
