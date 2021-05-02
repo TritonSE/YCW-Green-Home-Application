@@ -8,7 +8,6 @@ import { homeInfo } from "./onboardingData";
 import { useNavigation } from "@react-navigation/core";
 
 interface Props {
-  setPage(page: string): void;
   setHomeData({}): void;
   homeData: typeof homeInfo;
 }

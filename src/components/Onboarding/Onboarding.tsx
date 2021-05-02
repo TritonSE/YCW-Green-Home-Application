@@ -68,30 +68,6 @@ const Onboarding: React.FC = () => {
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
-    // {page === 'page1' && (
-
-    // )}
-    // {page === 'page2' && (
-    //   <Page2
-    //     setPage={setPage}
-    //     setHomeData={setHomeData}
-    //     homeData={homeData}
-    //   />
-    // )}
-    // {page === 'page3' && (
-    //   <Page3
-    //     setPage={setPage}
-    //     setHomeData={setHomeData}
-    //     homeData={homeData}
-    //   />
-    // )}
-    // {page === 'page4' && (
-    //   <Page4
-    //     setPage={setPage}
-    //     setHomeData={setHomeData}
-    //     homeData={homeData}
-    //   />
-    // )}
   );
 };
 

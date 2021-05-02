@@ -7,10 +7,10 @@ import Onboarding from "./Onboarding/Onboarding";
 import AuthenticatorTheme from "../styles/AuthenticatorTheme";
 import { AppContext } from "../contexts/AppContext";
 import NavFlow from "./NavContainer";
-
 import { getUser } from "../graphql/queries";
 import { UserContext } from "../contexts/UserContext";
 import { NavigationContainer } from "@react-navigation/native";
+import LoadingView from "react-native-loading-view";
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -30,12 +30,14 @@ function App(): JSX.Element | null {
 
     getUserData();
 
-    if (userState.homes.items.length === 0) {
+    if (userState.id === "") {
+      setAppState("Loading");
+    } else if (userState.homes.items.length === 0 && appState !== "App") {
       setAppState("Onboarding");
     } else {
       setAppState("App");
     }
-  }, [appState, setAppState, userState, setUserState]);
+  }, [appState, userState]);
 
   return (
     <NavigationContainer>
@@ -43,6 +45,11 @@ function App(): JSX.Element | null {
       {appState === "App" && (
         <SafeAreaView style={{ flex: 1 }}>
           <NavFlow />
+        </SafeAreaView>
+      )}
+      {appState === "Loading" && (
+        <SafeAreaView style={{ flex: 1 }}>
+          <LoadingView loading={true}></LoadingView>
         </SafeAreaView>
       )}
     </NavigationContainer>

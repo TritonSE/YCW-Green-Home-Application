@@ -27,6 +27,7 @@
     "react-native-dropdown-picker": "^4.0.2",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
+    "react-native-loading-view": "^1.0.1",
     "react-native-progress": "^4.1.2",
     "react-native-reanimated": "~1.13.0",
     "react-native-screens": "~2.15.0",

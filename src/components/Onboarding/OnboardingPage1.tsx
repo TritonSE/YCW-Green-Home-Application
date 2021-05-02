@@ -9,7 +9,6 @@ import { states, homeInfo } from "./onboardingData";
 import { useNavigation } from "@react-navigation/native";
 
 interface Props {
-  setPage(page: string): void;
   setHomeData({}): void;
   homeData: typeof homeInfo;
 }
