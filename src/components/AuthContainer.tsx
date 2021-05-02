@@ -1,16 +1,16 @@
-import React, { useContext, useEffect } from "react";
-import { SafeAreaView } from "react-native";
-import { withAuthenticator, AmplifyTheme } from "aws-amplify-react-native";
-import { Auth, I18n, API } from "aws-amplify";
-import { Translations } from "@aws-amplify/ui-components";
-import Onboarding from "./Onboarding/Onboarding";
-import AuthenticatorTheme from "../styles/AuthenticatorTheme";
-import { AppContext } from "../contexts/AppContext";
-import NavFlow from "./NavContainer";
-import { getUser } from "../graphql/queries";
-import { UserContext } from "../contexts/UserContext";
-import { NavigationContainer } from "@react-navigation/native";
-import LoadingView from "react-native-loading-view";
+import React, { useContext, useEffect } from 'react';
+import { SafeAreaView } from 'react-native';
+import { withAuthenticator, AmplifyTheme } from 'aws-amplify-react-native';
+import { Auth, I18n, API } from 'aws-amplify';
+import { Translations } from '@aws-amplify/ui-components';
+import { NavigationContainer } from '@react-navigation/native';
+import LoadingView from 'react-native-loading-view';
+import Onboarding from './Onboarding/Onboarding';
+import AuthenticatorTheme from '../styles/AuthenticatorTheme';
+import { AppContext } from '../contexts/AppContext';
+import NavFlow from './NavContainer';
+import { getUser } from '../graphql/queries';
+import { UserContext } from '../contexts/UserContext';
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -30,26 +30,26 @@ function App(): JSX.Element | null {
 
     getUserData();
 
-    if (userState.id === "") {
-      setAppState("Loading");
-    } else if (userState.homes.items.length === 0 && appState !== "App") {
-      setAppState("Onboarding");
+    if (userState.id === '') {
+      setAppState('Loading');
+    } else if (userState.homes.items.length === 0 && appState !== 'App') {
+      setAppState('Onboarding');
     } else {
-      setAppState("App");
+      setAppState('App');
     }
-  }, [appState, userState]);
+  }, [appState, setAppState, userState, setUserState]);
 
   return (
     <NavigationContainer>
-      {appState === "Onboarding" && <Onboarding />}
-      {appState === "App" && (
+      {appState === 'Onboarding' && <Onboarding />}
+      {appState === 'App' && (
         <SafeAreaView style={{ flex: 1 }}>
           <NavFlow />
         </SafeAreaView>
       )}
-      {appState === "Loading" && (
+      {appState === 'Loading' && (
         <SafeAreaView style={{ flex: 1 }}>
-          <LoadingView loading={true}></LoadingView>
+          <LoadingView loading />
         </SafeAreaView>
       )}
     </NavigationContainer>
@@ -58,40 +58,40 @@ function App(): JSX.Element | null {
 
 const MyTheme = { ...AmplifyTheme, ...AuthenticatorTheme };
 // Unstable changing section header text: https://github.com/aws-amplify/amplify-js/issues/6115
-I18n.putVocabulariesForLanguage("en-US", {
-  [Translations.SIGN_IN_HEADER_TEXT]: "Welcome to Your Clear Way",
-  [Translations.SIGN_UP_HEADER_TEXT]: "Welcome to Your Clear Way",
+I18n.putVocabulariesForLanguage('en-US', {
+  [Translations.SIGN_IN_HEADER_TEXT]: 'Welcome to Your Clear Way',
+  [Translations.SIGN_UP_HEADER_TEXT]: 'Welcome to Your Clear Way',
 });
 
 export default withAuthenticator(App, {
   theme: MyTheme,
-  usernameAttributes: "email",
+  usernameAttributes: 'email',
   signUpConfig: {
-    hiddenDefaults: ["username", "phone_number"],
+    hiddenDefaults: ['username', 'phone_number'],
     signUpFields: [
       {
-        label: "Display Name",
-        placeholder: "Enter your display name",
-        key: "custom:displayName",
+        label: 'Display Name',
+        placeholder: 'Enter your display name',
+        key: 'custom:displayName',
         required: true,
         displayOrder: 2,
-        type: "string",
+        type: 'string',
       },
       {
-        label: "Email",
-        placeholder: "Enter your email",
-        key: "email",
+        label: 'Email',
+        placeholder: 'Enter your email',
+        key: 'email',
         required: true,
         displayOrder: 3,
-        type: "string",
+        type: 'string',
       },
       {
-        label: "Password",
-        placeholder: "Enter your password",
-        key: "password",
+        label: 'Password',
+        placeholder: 'Enter your password',
+        key: 'password',
         required: true,
         displayOrder: 4,
-        type: "password",
+        type: 'password',
       },
     ],
   },
