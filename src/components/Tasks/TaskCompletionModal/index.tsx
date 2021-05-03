@@ -25,6 +25,7 @@ const TaskCompletionModal: React.FC = () => {
     <BottomSheet
       modalProps={{ animationType: 'fade' }}
       isVisible={isTaskCompletionRendered}
+      containerStyle={styles.bottomSheetContainer}
     >
       <View style={styles.container}>
         <View style={styles.modal}>
@@ -46,7 +47,6 @@ const TaskCompletionModal: React.FC = () => {
             </View>
           </View>
 
-          {/** BODY: CONTAINS STATS,QUESTIONS,DROPDOWNS* */}
           <View style={styles.bodyContainer}>
             <View style={styles.statsContainer}>
               <Text style={styles.statsText}>Level: {toProperCase(level)}</Text>

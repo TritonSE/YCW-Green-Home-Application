@@ -1,14 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  bottomSheetContainer: {
+    zIndex: 0,
+  },
   container: {
     flex: 1,
     justifyContent: 'space-between',
   },
   modal: {
-    zIndex: 0,
     backgroundColor: '#FAFAFA',
-    height: 375,
+    minHeight: 450,
     borderColor: '#ddd',
     borderWidth: 1,
     borderTopLeftRadius: 45,
@@ -16,36 +18,37 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    zIndex: 2,
   },
   badgeIcon: {
-    marginLeft: 20,
-    marginTop: -50,
-    zIndex: 2,
-    flex: 1,
-    justifyContent: 'flex-start',
+    marginLeft: 60,
+    marginTop: -30,
+    borderWidth: 8,
+    borderRadius: 70,
+    borderColor: '#FAFAFA',
   },
   closeIcon: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    marginTop: 24,
-    marginRight: 30,
+    flexDirection: 'row-reverse',
+    marginLeft: 30,
+    marginTop: 20,
   },
   bodyContainer: {
     paddingLeft: 36,
   },
   statsContainer: {
-    marginTop: 50,
+    marginTop: 30,
   },
   statsText: {
-    fontSize: 16,
+    fontSize: 18,
     fontStyle: 'italic',
   },
   questionContainer: {
-    marginTop: 20,
+    marginTop: 30,
     marginRight: 31,
   },
   questionText: {
-    fontSize: 16,
+    fontSize: 18,
   },
   dropdownContainer: {
     marginTop: 30,
