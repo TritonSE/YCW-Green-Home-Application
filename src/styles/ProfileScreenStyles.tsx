@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   backgroundBlue: {
     position: 'absolute',
     width: '100%',
-    height: '35%',
+    height: 270,
     backgroundColor: '#86C5BE',
   },
   backgroundGray: {
@@ -66,9 +66,9 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     position: 'absolute',
-    top: '30%',
+    top: 230,
     alignSelf: 'center',
-    height: 460,
+    height: 300,
     width: '90%',
     borderRadius: 5,
     paddingLeft: '2.5%',
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     paddingTop: '10%',
     paddingLeft: '5%',
     paddingRight: '5%',
+    zIndex: 1,
   },
 });
 
