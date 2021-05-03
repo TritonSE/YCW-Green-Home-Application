@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { Image, Text, TextInput, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import * as Progress from "react-native-progress";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import styles from "../../styles/OnboardingStyles";
-import { homeInfo } from "./onboardingData";
-import { useNavigation } from "@react-navigation/core";
+import React, { useState } from 'react';
+import { Image, Text, TextInput, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as Progress from 'react-native-progress';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useNavigation } from '@react-navigation/core';
+import styles from '../../styles/OnboardingStyles';
+import { Home } from '../../API';
 
 interface Props {
   setHomeData({}): void;
-  homeData: typeof homeInfo;
+  homeData: Home;
 }
 
 const Page2: React.FC<Props> = ({ setHomeData, homeData }) => {
@@ -17,7 +17,7 @@ const Page2: React.FC<Props> = ({ setHomeData, homeData }) => {
   const [outDoorArea, setOutdoor] = useState(String(homeData.outDoorArea));
   const [bedroomCount, setBedrooms] = useState(String(homeData.bedroomCount));
   const [bathroomCount, setBathrooms] = useState(
-    String(homeData.bathroomCount)
+    String(homeData.bathroomCount),
   );
 
   const navigation = useNavigation();
@@ -34,7 +34,7 @@ const Page2: React.FC<Props> = ({ setHomeData, homeData }) => {
   };
 
   const nextPage = () => {
-    navigation.navigate("Page 3");
+    navigation.navigate('Page 3');
 
     setHomeData({
       ...homeData,
@@ -52,15 +52,15 @@ const Page2: React.FC<Props> = ({ setHomeData, homeData }) => {
       contentContainerStyle={{ flexGrow: 1, height: 800 }}
       scrollToOverflowEnabled
     >
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: 'center' }}>
         <View style={styles.background} />
         <View style={styles.formContainer}>
           <TouchableOpacity onPress={previousPage} style={{ paddingTop: 70 }}>
-            <Image source={require("../../assets/backButton.png")} />
+            <Image source={require('../../assets/backButton.png')} />
           </TouchableOpacity>
 
           <Text
-            style={{ ...styles.title, alignSelf: "center", marginTop: -25 }}
+            style={{ ...styles.title, alignSelf: 'center', marginTop: -25 }}
           >
             Home Info
           </Text>
@@ -70,12 +70,12 @@ const Page2: React.FC<Props> = ({ setHomeData, homeData }) => {
           </Text>
 
           <View style={styles.form}>
-            <Text style={{ paddingVertical: "5%" }}>2 of 4</Text>
+            <Text style={{ paddingVertical: '5%' }}>2 of 4</Text>
             <Progress.Bar
               progress={0.5}
               width={null}
               color="rgba(233, 102, 97, 1)"
-              style={{ width: "90%" }}
+              style={{ width: '90%' }}
             />
             <Text style={styles.formTitle}>Home Size</Text>
             <Text style={styles.formComponent}>
@@ -110,21 +110,21 @@ const Page2: React.FC<Props> = ({ setHomeData, homeData }) => {
               onChangeText={setBathrooms}
               keyboardType="number-pad"
             />
-            {livableArea !== "0" && livableArea !== "" ? (
+            {livableArea !== '0' && livableArea !== '' ? (
               <TouchableOpacity
                 style={{
-                  backgroundColor: "#E96661",
-                  marginTop: "25%",
+                  backgroundColor: '#E96661',
+                  marginTop: '25%',
                   width: 136,
                   height: 35,
                   borderRadius: 20,
-                  alignItems: "center",
-                  justifyContent: "center",
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
                 onPress={nextPage}
               >
                 <Text
-                  style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
+                  style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
                 >
                   Next
                 </Text>
@@ -132,17 +132,17 @@ const Page2: React.FC<Props> = ({ setHomeData, homeData }) => {
             ) : (
               <TouchableOpacity
                 style={{
-                  backgroundColor: "#778899",
-                  marginTop: "25%",
+                  backgroundColor: '#778899',
+                  marginTop: '25%',
                   width: 136,
                   height: 35,
                   borderRadius: 20,
-                  alignItems: "center",
-                  justifyContent: "center",
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 <Text
-                  style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
+                  style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
                 >
                   Next
                 </Text>
