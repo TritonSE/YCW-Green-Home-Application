@@ -6,22 +6,41 @@ import Page1 from "./OnboardingPage1";
 import Page2 from "./OnboardingPage2";
 import Page3 from "./OnboardingPage3";
 import Page4 from "./OnboardingPage4";
-import { createHome, createHomeOwner } from "../../graphql/mutations";
+import {
+  createHome,
+  createHomeOwner,
+  updateHome,
+} from "../../graphql/mutations";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
-const Onboarding: React.FC = () => {
+interface Props {
+  homeInformation?: typeof homeInfo;
+}
+
+const Onboarding: React.FC<Props> = ({ homeInformation }) => {
   const [page, setPage] = useState("");
-  const [homeData, setHomeData] = useState(homeInfo);
+  const [homeData, setHomeData] = useState(
+    homeInformation !== undefined ? homeInformation : homeInfo
+  );
   const { setAppState } = useContext(AppContext);
 
   useEffect(() => {
     const addHome = async () => {
-      const result = await API.graphql({
-        query: createHome,
-        variables: { input: homeData },
-      });
+      var result;
+      if (homeInformation !== undefined) {
+        result = await API.graphql({
+          query: updateHome,
+          variables: { input: homeData },
+        });
+      } else {
+        result = await API.graphql({
+          query: createHome,
+          variables: { input: homeData },
+        });
+      }
+
       await API.graphql({
         query: createHomeOwner,
         variables: {
@@ -37,7 +56,7 @@ const Onboarding: React.FC = () => {
       addHome();
       setAppState("App");
     }
-  }, [page, homeData, setAppState]);
+  }, [page, homeData, setAppState, homeInformation]);
 
   return (
     <Stack.Navigator>
