@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
@@ -7,12 +7,12 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { useNavigation } from '@react-navigation/core';
 import LoadingView from 'react-native-loading-view';
 import styles from '../../styles/OnboardingStyles';
-import { homeInfo } from './onboardingData';
+import { CreateHomeInput } from '../../API';
 
 interface Props {
   setPage(page: string): void;
   setHomeData({}): void;
-  homeData: typeof homeInfo;
+  homeData: CreateHomeInput;
 }
 
 const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {

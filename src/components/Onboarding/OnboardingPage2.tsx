@@ -5,11 +5,11 @@ import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useNavigation } from '@react-navigation/core';
 import styles from '../../styles/OnboardingStyles';
-import { homeInfo } from './onboardingData';
+import { CreateHomeInput } from '../../API';
 
 interface Props {
   setHomeData({}): void;
-  homeData: typeof homeInfo;
+  homeData: CreateHomeInput;
 }
 
 const Page2: React.FC<Props> = ({ setHomeData, homeData }) => {

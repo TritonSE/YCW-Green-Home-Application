@@ -6,11 +6,12 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../../styles/OnboardingStyles';
-import { homeInfo, states } from './onboardingData';
+import { states } from './onboardingData';
+import { CreateHomeInput } from '../../API';
 
 interface Props {
   setHomeData({}): void;
-  homeData: typeof homeInfo;
+  homeData: CreateHomeInput;
 }
 
 const Page1: React.FC<Props> = ({ setHomeData, homeData }) => {

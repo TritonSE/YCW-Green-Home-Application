@@ -6,12 +6,16 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useNavigation } from '@react-navigation/core';
 import styles from '../../styles/OnboardingStyles';
-import { HeatingFuelType, WaterHeaterFuelType, AgeType, Home } from '../../API';
-import { homeInfo } from './onboardingData';
+import {
+  HeatingFuelType,
+  WaterHeaterFuelType,
+  AgeType,
+  CreateHomeInput,
+} from '../../API';
 
 interface Props {
   setHomeData({}): void;
-  homeData: typeof homeInfo;
+  homeData: CreateHomeInput;
 }
 
 const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
