@@ -16,9 +16,9 @@ interface Props {
 
 const Page1: React.FC<Props> = ({ setHomeData, homeData }) => {
   const [zipcode, setZipcode] = useState(homeData.zipcode);
-  const [addressLine1, setAddress] = useState(homeData.addressLine1);
-  const [city, setCity] = useState(homeData.city);
-  const [yearBuilt, setYear] = useState('');
+  const [addressLine1, setAddress] = useState(String(homeData.addressLine1));
+  const [city, setCity] = useState(String(homeData.city));
+  const [yearBuilt, setYear] = useState(String(homeData.yearBuilt));
   const [addressState, setState] = useState(homeData.addressState);
 
   const navigation = useNavigation();

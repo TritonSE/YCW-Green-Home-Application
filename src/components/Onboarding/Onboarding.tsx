@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { API } from 'aws-amplify';
+import { API, Auth } from 'aws-amplify';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppContext } from '../../contexts/AppContext';
 import { homeInfo } from './onboardingData';
@@ -13,6 +13,8 @@ import {
   updateHome,
 } from '../../graphql/mutations';
 import { CreateHomeInput } from '../../API';
+import { getUser } from '../../graphql/queries';
+import { UserContext } from '../../contexts/UserContext';
 
 const Stack = createStackNavigator();
 
@@ -26,10 +28,11 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
     homeInformation !== undefined ? homeInformation : homeInfo,
   );
   const { setAppState } = useContext(AppContext);
+  const { setUserState } = useContext(UserContext);
 
   useEffect(() => {
     const addHome = async () => {
-      let result;
+      let result: any;
       if (homeInformation !== undefined) {
         result = await API.graphql({
           query: updateHome,
@@ -51,13 +54,20 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
           },
         },
       });
+
+      const user = await Auth.currentAuthenticatedUser();
+      const userData: any = await API.graphql({
+        query: getUser,
+        variables: { id: user.attributes.sub },
+      });
+      setUserState(userData.data.getUser);
     };
 
     if (page === 'submit') {
       addHome();
       setAppState('App');
     }
-  }, [page, homeData, setAppState, homeInformation]);
+  }, [page, homeData, setAppState, homeInformation, setUserState]);
 
   return (
     <Stack.Navigator>

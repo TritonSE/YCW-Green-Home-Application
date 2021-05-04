@@ -21,7 +21,7 @@ function App(): JSX.Element | null {
   useEffect(() => {
     const getUserData = async () => {
       const user = await Auth.currentAuthenticatedUser();
-      const result = await API.graphql({
+      const result: any = await API.graphql({
         query: getUser,
         variables: { id: user.attributes.sub },
       });
