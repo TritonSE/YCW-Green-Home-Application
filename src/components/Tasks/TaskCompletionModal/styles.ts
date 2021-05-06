@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     backgroundColor: '#FAFAFA',
-    minHeight: 450,
+    minHeight: '73%',
     borderColor: '#ddd',
     borderWidth: 1,
     borderTopLeftRadius: 45,
@@ -17,29 +17,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     zIndex: 10,
-    elevation: 10,
     height: 200,
   },
   badgeIcon: {
     position: 'absolute',
     left: 70,
-    top: 170,
-    marginBottom: 20,
+    zIndex: 20,
+    marginTop: 170,
     borderWidth: 15,
     borderRadius: 70,
     borderColor: '#FAFAFA',
   },
   closeIcon: {
-    position: 'absolute',
-    right: 30,
-    top: 220,
+    flex: 1,
     flexGrow: 1,
+    paddingLeft: '83%',
+    marginTop: 30,
   },
   bodyContainer: {
     paddingLeft: 36,
   },
   statsContainer: {
-    marginTop: 80,
+    paddingTop: -210,
   },
   statsText: {
     fontSize: 18,
@@ -55,28 +54,35 @@ const styles = StyleSheet.create({
   dropdownContainer: {
     marginTop: 30,
     zIndex: 20,
-    elevation: 20,
+    width: 300,
   },
   dropdown: {
     width: 100,
     height: 43,
     backgroundColor: 'white',
+    zIndex: 20,
   },
   itemList: {
     justifyContent: 'flex-start',
     paddingLeft: 5,
   },
+
+  /*
   buttonContainer: {
-    alignItems: 'center',
-    zIndex: 1,
-    elevation: 1,
+    alignItems: "center",
+    paddingTop: 50,
+    //backgroundColor: "red",
+    paddingBottom: 50,
   },
+  */
+
   button: {
-    marginTop: 30,
+    marginTop: '23%',
+    alignSelf: 'center',
     width: 300,
     height: 50,
+    marginBottom: 45,
     borderRadius: 30,
-    alignItems: 'center',
     justifyContent: 'center',
   },
   buttonDisabled: {
@@ -89,6 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
+    alignSelf: 'center',
   },
 });
 

@@ -26,6 +26,7 @@ const TaskCompletionModal: React.FC = () => {
     <BottomSheet
       modalProps={{ animationType: 'fade' }}
       isVisible={isTaskCompletionRendered}
+      containerStyle={{ zIndex: 10 }}
     >
       <View style={styles.iconContainer}>
         <View style={styles.badgeIcon}>
@@ -35,15 +36,17 @@ const TaskCompletionModal: React.FC = () => {
             width="70"
           />
         </View>
-
-        <View style={styles.closeIcon}>
-          <TouchableOpacity onPress={() => setIsTaskCompletionRendered(false)}>
-            <Ionicons name="close-outline" size={32} />
-          </TouchableOpacity>
-        </View>
       </View>
       <View style={styles.container}>
         <View style={styles.modal}>
+          <View style={styles.closeIcon}>
+            <TouchableOpacity
+              onPress={() => setIsTaskCompletionRendered(false)}
+            >
+              <Ionicons name="close-outline" size={32} />
+            </TouchableOpacity>
+          </View>
+
           <View style={styles.bodyContainer}>
             <View style={styles.statsContainer}>
               <Text style={styles.statsText}>Level: {toProperCase(level)}</Text>
@@ -71,18 +74,16 @@ const TaskCompletionModal: React.FC = () => {
             </View>
           </View>
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={{
-                ...styles.button,
-                ...(isCompleted ? styles.buttonEnabled : styles.buttonDisabled),
-              }}
-              disabled={!isCompleted}
-              onPress={completeCurrentTask}
-            >
-              <Text style={styles.buttonText}>Task Completed</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={{
+              ...styles.button,
+              ...(isCompleted ? styles.buttonEnabled : styles.buttonDisabled),
+            }}
+            disabled={!isCompleted}
+            onPress={completeCurrentTask}
+          >
+            <Text style={styles.buttonText}>Task Completed</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </BottomSheet>
