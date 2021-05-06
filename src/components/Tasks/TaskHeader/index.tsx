@@ -3,22 +3,6 @@ import { Text, View } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { TaskContext } from '../../../contexts/TaskContext';
 import styles from './styles';
-/*
-enum LEVEL {
-  beginner = "Beginner",
-  intermediate = "Intermediate",
-  guru = "Guru",
-}
-enum CATEGORY {
-  tbd = "abc",
-  tbd1 = "abc",
-  tbd2 = "abc",
-}
-enum COST {
-  low = "$",
-  medium = "$$",
-  high = "$$$",
-} */
 
 const HEADER_TITLE = 'TASKS';
 const HEADER_SUBTITLE = 'Receive more badges by completing new tasks';
