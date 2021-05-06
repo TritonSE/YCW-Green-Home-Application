@@ -11,6 +11,7 @@ import { AppContext } from '../contexts/AppContext';
 import NavFlow from './NavContainer';
 import { getUser } from '../graphql/queries';
 import { UserContext } from '../contexts/UserContext';
+import { QuestionProvider } from '../contexts/QuestionsContext';
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -27,7 +28,6 @@ function App(): JSX.Element | null {
       });
       setUserState(result.data.getUser);
     };
-
     getUserData();
 
     if (userState.id === '') {
@@ -44,7 +44,9 @@ function App(): JSX.Element | null {
       {appState === 'Onboarding' && <Onboarding />}
       {appState === 'App' && (
         <SafeAreaView style={{ flex: 1 }}>
-          <NavFlow />
+          <QuestionProvider>
+            <NavFlow />
+          </QuestionProvider>
         </SafeAreaView>
       )}
       {appState === 'Loading' && (
