@@ -23,9 +23,6 @@ const TaskBoard: React.FC<Props> = ({ tasks }) => {
         return true;
       });
 
-  const t = filteredTasks.map(ta => ta.title);
-  console.log(t);
-
   const taskComponents = filteredTasks.map(task => (
     <TaskCard
       key={task.title} // TODO: use id when connected to backend

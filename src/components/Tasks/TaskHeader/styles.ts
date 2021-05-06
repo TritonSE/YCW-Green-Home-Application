@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
   dropdownLabel: {
     fontSize: 12,
   },
-  dropdownList: {
-    alignItems: 'flex-start',
+  dropdownItem: {
+    justifyContent: 'flex-start',
   },
 });
 

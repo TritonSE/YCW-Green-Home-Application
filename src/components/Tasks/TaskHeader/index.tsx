@@ -50,6 +50,7 @@ const TaskHeader = () => {
             ]}
             containerStyle={styles.dropdownContainer}
             labelStyle={styles.dropdownLabel}
+            itemStyle={styles.dropdownItem}
             style={styles.dropdownBox}
             showArrow
             onChangeItem={item => updateFilters('level', item.value)}
@@ -64,6 +65,7 @@ const TaskHeader = () => {
             ]}
             containerStyle={styles.dropdownContainer}
             labelStyle={styles.dropdownLabel}
+            itemStyle={styles.dropdownItem}
             style={styles.dropdownBox}
             showArrow
             onChangeItem={item => updateFilters('category', item.value)}
@@ -77,6 +79,7 @@ const TaskHeader = () => {
             ]}
             containerStyle={styles.dropdownContainer}
             labelStyle={styles.dropdownLabel}
+            itemStyle={styles.dropdownItem}
             style={styles.dropdownBox}
             showArrow
             onChangeItem={item => updateFilters('cost', item.value)}

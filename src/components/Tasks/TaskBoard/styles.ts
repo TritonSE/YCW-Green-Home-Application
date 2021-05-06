@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     marginHorizontal: 20,
     justifyContent: 'space-between',
+    marginBottom: 20,
   },
 });
 
