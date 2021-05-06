@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   closeIcon: {
     position: 'absolute',
     right: 30,
-    top: 200,
+    top: 220,
     flexGrow: 1,
   },
   bodyContainer: {
