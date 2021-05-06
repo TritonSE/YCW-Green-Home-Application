@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -14,6 +14,7 @@ const TaskCompletionModal: React.FC = () => {
     setIsTaskCompletionRendered,
     isTaskCompletionRendered,
   } = useContext(TaskContext);
+  const [isCompleted, setIsCompleted] = useState(false);
   const { level, category, cost, question } = selectedTask;
 
   const completeCurrentTask = () => {
@@ -25,28 +26,24 @@ const TaskCompletionModal: React.FC = () => {
     <BottomSheet
       modalProps={{ animationType: 'fade' }}
       isVisible={isTaskCompletionRendered}
-      containerStyle={styles.bottomSheetContainer}
     >
+      <View style={styles.iconContainer}>
+        <View style={styles.badgeIcon}>
+          <SvgContainer
+            badgeTitle={selectedTask.title}
+            height="70"
+            width="70"
+          />
+        </View>
+
+        <View style={styles.closeIcon}>
+          <TouchableOpacity onPress={() => setIsTaskCompletionRendered(false)}>
+            <Ionicons name="close-outline" size={32} />
+          </TouchableOpacity>
+        </View>
+      </View>
       <View style={styles.container}>
         <View style={styles.modal}>
-          <View style={styles.iconContainer}>
-            <View style={styles.badgeIcon}>
-              <SvgContainer
-                badgeTitle={selectedTask.title}
-                height="70"
-                width="70"
-              />
-            </View>
-
-            <View style={styles.closeIcon}>
-              <TouchableOpacity
-                onPress={() => setIsTaskCompletionRendered(false)}
-              >
-                <Ionicons name="close-outline" size={32} />
-              </TouchableOpacity>
-            </View>
-          </View>
-
           <View style={styles.bodyContainer}>
             <View style={styles.statsContainer}>
               <Text style={styles.statsText}>Level: {toProperCase(level)}</Text>
@@ -67,17 +64,17 @@ const TaskCompletionModal: React.FC = () => {
                   { label: 'Yes', value: 'yes' },
                 ]}
                 containerStyle={styles.dropdown}
-                dropDownStyle={styles.dropdownList}
+                itemStyle={styles.itemList}
                 showArrow
-                onChangeItem={item => console.log(item.label, item.value)}
+                onChangeItem={item => setIsCompleted(item.value === 'yes')}
               />
             </View>
           </View>
 
-          {/** BUTTONS: CONTAINS STATS,QUESTIONS,DROPDOWNS* */}
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
+              disabled={!isCompleted}
               onPress={completeCurrentTask}
             >
               <Text style={styles.buttonText}>Task Completed</Text>

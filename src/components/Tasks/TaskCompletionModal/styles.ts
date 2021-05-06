@@ -1,9 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  bottomSheetContainer: {
-    zIndex: 0,
-  },
   container: {
     flex: 1,
     justifyContent: 'space-between',
@@ -19,25 +16,29 @@ const styles = StyleSheet.create({
   iconContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    zIndex: 2,
+    zIndex: 10,
+    elevation: 10,
+    height: 200,
   },
   badgeIcon: {
-    marginLeft: 60,
-    marginTop: -30,
-    borderWidth: 8,
+    position: 'absolute',
+    left: 70,
+    top: 170,
+    marginBottom: 20,
+    borderWidth: 15,
     borderRadius: 70,
     borderColor: '#FAFAFA',
   },
   closeIcon: {
-    flexDirection: 'row-reverse',
-    marginLeft: 30,
-    marginTop: 20,
+    position: 'absolute',
+    right: 30,
+    top: 220,
   },
   bodyContainer: {
     paddingLeft: 36,
   },
   statsContainer: {
-    marginTop: 30,
+    marginTop: 80,
   },
   statsText: {
     fontSize: 18,
@@ -52,17 +53,17 @@ const styles = StyleSheet.create({
   },
   dropdownContainer: {
     marginTop: 30,
-    zIndex: 10,
-    elevation: 10,
+    zIndex: 20,
+    elevation: 20,
   },
   dropdown: {
     width: 100,
     height: 43,
     backgroundColor: 'white',
   },
-  dropdownList: {
-    backgroundColor: 'white',
-    alignItems: 'flex-start',
+  itemList: {
+    justifyContent: 'flex-start',
+    paddingLeft: 5,
   },
   buttonContainer: {
     alignItems: 'center',
@@ -77,6 +78,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  buttonDisabled: {
+    backgroundColor: 'rgba(233, 102, 97, 0.75)',
   },
   buttonText: {
     fontSize: 18,
