@@ -73,7 +73,10 @@ const TaskCompletionModal: React.FC = () => {
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              style={styles.button}
+              style={{
+                ...styles.button,
+                ...(isCompleted ? styles.buttonEnabled : styles.buttonDisabled),
+              }}
               disabled={!isCompleted}
               onPress={completeCurrentTask}
             >

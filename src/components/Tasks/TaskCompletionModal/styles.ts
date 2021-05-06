@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   button: {
-    backgroundColor: 'rgba(233, 102, 97, 1)',
     marginTop: 30,
     width: 300,
     height: 50,
@@ -80,7 +79,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonDisabled: {
-    backgroundColor: 'rgba(233, 102, 97, 0.75)',
+    backgroundColor: 'rgba(233, 102, 97, 0.6)',
+  },
+  buttonEnabled: {
+    backgroundColor: 'rgba(233, 102, 97, 1)',
   },
   buttonText: {
     fontSize: 18,
