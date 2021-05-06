@@ -36,8 +36,11 @@ const TaskCompletionModal: React.FC = () => {
           />
         </View>
 
-        <View style={styles.closeIcon}>
-          <TouchableOpacity onPress={() => setIsTaskCompletionRendered(false)}>
+        <View style={styles.closeIconWrapper}>
+          <TouchableOpacity
+            style={styles.closeIcon}
+            onPress={() => setIsTaskCompletionRendered(false)}
+          >
             <Ionicons name="close-outline" size={32} />
           </TouchableOpacity>
         </View>
