@@ -29,13 +29,11 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     borderColor: '#FAFAFA',
   },
-  closeIconWrapper: {
-    flexGrow: 1,
-  },
   closeIcon: {
     position: 'absolute',
     right: 30,
     top: 200,
+    flexGrow: 1,
   },
   bodyContainer: {
     paddingLeft: 36,
