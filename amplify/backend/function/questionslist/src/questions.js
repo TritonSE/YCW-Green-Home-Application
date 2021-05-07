@@ -47,10 +47,10 @@ const batchWriteQuestions = async (questions) => {
       Item: {
         id: uuid.v4(),
         __typename: 'Question',
-        _lastChangedAt: Date.now(),
+        _lastChangedAt: new Date().getTime(),
         _version: 1,
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
         ...question,
       }
     }

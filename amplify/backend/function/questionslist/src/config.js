@@ -7,6 +7,4 @@ const Config = {
   tableName: `Question-${process.env.API_YOURCLEARWAYAPI_GRAPHQLAPIIDOUTPUT}-${process.env.ENV}`,
 }
 
-console.log(Config.tableName);
-
 module.exports = { Config };
