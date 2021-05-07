@@ -18,7 +18,7 @@ const TaskCompletionModal: React.FC = () => {
   const { level, category, cost, question } = selectedTask;
 
   const completeCurrentTask = () => {
-    // TODO: implement rest
+    // TODO: implement API calls
     setIsTaskCompletionRendered(false);
   };
 
