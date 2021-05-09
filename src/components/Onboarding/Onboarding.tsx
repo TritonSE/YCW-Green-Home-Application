@@ -43,17 +43,16 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
           query: createHome,
           variables: { input: homeData },
         });
-      }
-
-      await API.graphql({
-        query: createHomeOwner,
-        variables: {
-          input: {
-            homeID: result.data.createHome.id,
-            homeOwnerID: result.data.createHome.owner,
+        await API.graphql({
+          query: createHomeOwner,
+          variables: {
+            input: {
+              homeID: result.data.createHome.id,
+              homeOwnerID: result.data.createHome.owner,
+            },
           },
-        },
-      });
+        });
+      }
 
       const user = await Auth.currentAuthenticatedUser();
       const userData: any = await API.graphql({
