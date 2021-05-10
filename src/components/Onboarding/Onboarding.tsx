@@ -24,9 +24,7 @@ interface Props {
 
 const Onboarding: React.FC<Props> = ({ homeInformation }) => {
   const [page, setPage] = useState('');
-  const [homeData, setHomeData] = useState(
-    homeInformation !== undefined ? homeInformation : homeInfo,
-  );
+  const [homeData, setHomeData] = useState(homeInformation ?? homeInfo);
   const { setAppState } = useContext(AppContext);
   const { setUserState } = useContext(UserContext);
 

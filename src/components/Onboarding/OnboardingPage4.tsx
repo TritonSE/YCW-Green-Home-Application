@@ -68,13 +68,7 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
           contentContainerStyle={{ flexGrow: 1, height: 900 }}
           scrollToOverflowEnabled
         >
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-              backgroundColor: '#fff',
-            }}
-          >
+          <View style={styles.pageContainer}>
             <View style={styles.background} />
             <View style={styles.formContainer}>
               <TouchableOpacity
@@ -134,14 +128,7 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                   Air Conditioning
                 </Text>
                 <DropDownPicker
-                  style={{
-                    alignSelf: 'center',
-                    borderColor: 'gray',
-                    borderWidth: 1,
-                    width: '90%',
-                    borderRadius: 5,
-                    paddingLeft: '2.5%',
-                  }}
+                  style={styles.dropdownPicker}
                   containerStyle={{ height: 40 }}
                   items={[
                     { label: 'Yes', value: 'Yes' },
@@ -163,14 +150,7 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                 <Text style={styles.compactFormComponent}>Pool</Text>
                 {!picker1 ? (
                   <DropDownPicker
-                    style={{
-                      alignSelf: 'center',
-                      borderColor: 'gray',
-                      borderWidth: 1,
-                      width: '90%',
-                      borderRadius: 5,
-                      paddingLeft: '2.5%',
-                    }}
+                    style={styles.dropdownPicker}
                     containerStyle={{ height: 40 }}
                     items={[
                       { label: 'Yes', value: 'Yes' },
@@ -194,14 +174,7 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                 <Text style={styles.compactFormComponent}>Hottub</Text>
                 {!picker2 ? (
                   <DropDownPicker
-                    style={{
-                      alignSelf: 'center',
-                      borderColor: 'gray',
-                      borderWidth: 1,
-                      width: '90%',
-                      borderRadius: 5,
-                      paddingLeft: '2.5%',
-                    }}
+                    style={styles.dropdownPicker}
                     containerStyle={{ height: 40 }}
                     items={[
                       { label: 'Yes', value: 'Yes' },
@@ -221,15 +194,7 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                   <Text style={{ height: 40 }} />
                 )}
                 <TouchableOpacity
-                  style={{
-                    backgroundColor: '#E96661',
-                    marginTop: '4%',
-                    width: 136,
-                    height: 35,
-                    borderRadius: 20,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
+                  style={{ ...styles.button, marginTop: '4%' }}
                   onPress={nextPage}
                 >
                   <Text

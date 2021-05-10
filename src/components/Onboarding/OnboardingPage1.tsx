@@ -51,16 +51,7 @@ const Page1: React.FC<Props> = ({ setHomeData, homeData }) => {
         }}
       >
         <View style={styles.background} />
-        <View
-          style={{
-            position: 'absolute',
-            backgroundColor: '#fff',
-            alignItems: 'center',
-            width: '90%',
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-          }}
-        >
+        <View style={{ ...styles.formContainer, alignItems: 'center' }}>
           <Text style={{ fontSize: 26, paddingTop: 61 }}>Home Info</Text>
           <Text style={styles.description}>
             Complete the following questions about your current home.
@@ -98,14 +89,7 @@ const Page1: React.FC<Props> = ({ setHomeData, homeData }) => {
             />
             <Text style={styles.formComponent}>State</Text>
             <DropDownPicker
-              style={{
-                alignSelf: 'center',
-                borderColor: 'gray',
-                borderWidth: 1,
-                width: '90%',
-                borderRadius: 5,
-                paddingLeft: '2.5%',
-              }}
+              style={styles.dropdownPicker}
               containerStyle={{ height: 40 }}
               items={states}
               dropDownStyle={{ width: '90%' }}

@@ -65,13 +65,7 @@ const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
       contentContainerStyle={{ flexGrow: 1, height: 800 }}
       scrollToOverflowEnabled
     >
-      <SafeAreaView
-        style={{
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          backgroundColor: '#fff',
-        }}
-      >
+      <SafeAreaView style={styles.pageContainer}>
         <View style={styles.background} />
         <View style={styles.formContainer}>
           <TouchableOpacity onPress={previousPage} style={{ paddingTop: 70 }}>
@@ -99,14 +93,7 @@ const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
 
             <Text style={styles.formComponent}>Age of Heater</Text>
             <DropDownPicker
-              style={{
-                alignSelf: 'center',
-                borderColor: 'gray',
-                borderWidth: 1,
-                width: '90%',
-                borderRadius: 5,
-                paddingLeft: '2.5%',
-              }}
+              style={styles.dropdownPicker}
               containerStyle={{ height: 40 }}
               items={[
                 { label: 'Less than 5', value: AgeType.LESS_THAN_5 },
@@ -124,14 +111,7 @@ const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
             <Text style={styles.formComponent}>Water Heater Fuel Type</Text>
             {!picker1 ? (
               <DropDownPicker
-                style={{
-                  alignSelf: 'center',
-                  borderColor: 'gray',
-                  borderWidth: 1,
-                  width: '90%',
-                  borderRadius: 5,
-                  paddingLeft: '2.5%',
-                }}
+                style={styles.dropdownPicker}
                 containerStyle={{ height: 40 }}
                 items={[
                   { label: 'Gas', value: WaterHeaterFuelType.GAS },
@@ -151,14 +131,7 @@ const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
             <Text style={styles.formComponent}>Age of Water Heater</Text>
             {!picker2 ? (
               <DropDownPicker
-                style={{
-                  alignSelf: 'center',
-                  borderColor: 'gray',
-                  borderWidth: 1,
-                  width: '90%',
-                  borderRadius: 5,
-                  paddingLeft: '2.5%',
-                }}
+                style={styles.dropdownPicker}
                 containerStyle={{ height: 40 }}
                 items={[
                   { label: 'Less than 5', value: AgeType.LESS_THAN_5 },
@@ -183,14 +156,7 @@ const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
             />
             <Text style={styles.formComponent}>Heating Fuel Type</Text>
             <DropDownPicker
-              style={{
-                alignSelf: 'center',
-                borderColor: 'gray',
-                borderWidth: 1,
-                width: '90%',
-                borderRadius: 5,
-                paddingLeft: '2.5%',
-              }}
+              style={styles.dropdownPicker}
               containerStyle={{ height: 40 }}
               items={[
                 { label: 'Gas', value: HeatingFuelType.GAS },
