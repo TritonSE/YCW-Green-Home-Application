@@ -43,13 +43,7 @@ const Page1: React.FC<Props> = ({ setHomeData, homeData }) => {
       contentContainerStyle={{ flexGrow: 1, height: 800 }}
       scrollToOverflowEnabled
     >
-      <View
-        style={{
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          backgroundColor: '#fff',
-        }}
-      >
+      <View style={styles.pageContainer}>
         <View style={styles.background} />
         <View style={{ ...styles.formContainer, alignItems: 'center' }}>
           <Text style={{ fontSize: 26, paddingTop: 61 }}>Home Info</Text>
