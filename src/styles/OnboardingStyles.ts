@@ -57,6 +57,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingLeft: '2.5%',
   },
+  redFormInput: {
+    alignSelf: 'center',
+    height: 40,
+    borderColor: 'red',
+    borderWidth: 1,
+    width: '90%',
+    borderRadius: 5,
+    paddingLeft: '2.5%',
+  },
   button: {
     backgroundColor: '#E96661',
     marginTop: 20,
@@ -73,6 +82,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#6C6B6B',
     paddingBottom: '2.5%',
+  },
+  dropdownPicker: {
+    alignSelf: 'center',
+    borderColor: 'gray',
+    borderWidth: 1,
+    width: '90%',
+    borderRadius: 5,
+    paddingLeft: '2.5%',
+  },
+  pageContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    backgroundColor: '#fff',
   },
 });
 
