@@ -1,4 +1,11 @@
-const states = [
+import {
+  AgeType,
+  CreateHomeInput,
+  HeatingFuelType,
+  WaterHeaterFuelType,
+} from '../../API';
+
+export const states = [
   { label: 'AK', value: 'AK' },
   { label: 'AL', value: 'AL' },
   { label: 'AR', value: 'AR' },
@@ -52,4 +59,25 @@ const states = [
   { label: 'WY', value: 'WY' },
 ];
 
-export default states;
+export const homeInfo: CreateHomeInput = {
+  bedroomCount: 0,
+  livableArea: 0,
+  zipcode: '',
+  addressLine1: '',
+  addressState: '',
+  annualElectricalEnergyUsage: 0,
+  annualGasPropaneEnergyUsage: 0,
+  annualWaterUsage: 0,
+  bathroomCount: 0,
+  city: '',
+  country: '',
+  hasAirConditioner: false,
+  hasHotTub: false,
+  hasPool: false,
+  heaterAge: AgeType.LESS_THAN_5,
+  heatingFuelType: HeatingFuelType.ELECTRIC,
+  outDoorArea: 0,
+  waterHeaterAge: AgeType.LESS_THAN_5,
+  waterHeaterFuelType: WaterHeaterFuelType.ELECTRIC,
+  yearBuilt: 0,
+};

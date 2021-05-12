@@ -4,31 +4,34 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { useNavigation } from '@react-navigation/native';
 import styles from '../../styles/OnboardingStyles';
-import states from './states';
+import { states } from './onboardingData';
+import { CreateHomeInput } from '../../API';
 
 interface Props {
-  setPage(page: string): void;
   setHomeData({}): void;
-  homeData: Record<string, string>;
+  homeData: CreateHomeInput;
 }
 
-const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
-  const [zipcode, setZipcode] = useState(homeData.zipCode);
-  const [address, setAddress] = useState(homeData.address);
-  const [city, setCity] = useState(homeData.city);
-  const [year, setYear] = useState(homeData.year);
-  const [state, setState] = useState(homeData.state);
+const Page1: React.FC<Props> = ({ setHomeData, homeData }) => {
+  const [zipcode, setZipcode] = useState(homeData.zipcode);
+  const [addressLine1, setAddress] = useState(String(homeData.addressLine1));
+  const [city, setCity] = useState(String(homeData.city));
+  const [yearBuilt, setYear] = useState(String(homeData.yearBuilt));
+  const [addressState, setState] = useState(homeData.addressState);
+
+  const navigation = useNavigation();
 
   const nextPage = () => {
-    setPage('page2');
+    navigation.navigate('Page 2');
     setHomeData({
       ...homeData,
-      zipCode: zipcode,
-      address,
+      zipcode,
+      addressLine1,
       city,
-      state,
-      year,
+      addressState,
+      yearBuilt: parseInt(yearBuilt, 10),
     });
   };
 
@@ -40,23 +43,9 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       contentContainerStyle={{ flexGrow: 1, height: 800 }}
       scrollToOverflowEnabled
     >
-      <View
-        style={{
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-        }}
-      >
+      <View style={styles.pageContainer}>
         <View style={styles.background} />
-        <View
-          style={{
-            position: 'absolute',
-            backgroundColor: '#fff',
-            alignItems: 'center',
-            width: '90%',
-            borderBottomLeftRadius: 20,
-            borderBottomRightRadius: 20,
-          }}
-        >
+        <View style={{ ...styles.formContainer, alignItems: 'center' }}>
           <Text style={{ fontSize: 26, paddingTop: 61 }}>Home Info</Text>
           <Text style={styles.description}>
             Complete the following questions about your current home.
@@ -73,15 +62,17 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
             <Text style={styles.formTitle}>Basic Information</Text>
             <Text style={styles.formComponent}>Zip Code *</Text>
             <TextInput
-              style={styles.formInput}
+              style={zipcode === '' ? styles.redFormInput : styles.formInput}
               value={zipcode}
               onChangeText={setZipcode}
               keyboardType="number-pad"
             />
             <Text style={styles.formComponent}>Address *</Text>
             <TextInput
-              style={styles.formInput}
-              value={address}
+              style={
+                addressLine1 === '' ? styles.redFormInput : styles.formInput
+              }
+              value={addressLine1}
               onChangeText={setAddress}
             />
             <Text style={styles.formComponent}>City</Text>
@@ -92,38 +83,45 @@ const Page1: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
             />
             <Text style={styles.formComponent}>State</Text>
             <DropDownPicker
-              style={{
-                alignSelf: 'center',
-                borderColor: 'gray',
-                borderWidth: 1,
-                width: '90%',
-                borderRadius: 5,
-                paddingLeft: '2.5%',
-              }}
+              style={styles.dropdownPicker}
               containerStyle={{ height: 40 }}
               items={states}
               dropDownStyle={{ width: '90%' }}
               itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
               onChangeItem={item => setState(item.value)}
-              defaultValue={homeData.state}
+              defaultValue={homeData.addressState}
             />
             <Text style={styles.formComponent}>Year Home was Built</Text>
 
             <TextInput
               style={styles.formInput}
-              value={year}
+              value={yearBuilt}
               onChangeText={setYear}
               keyboardType="number-pad"
             />
-
-            <TouchableOpacity style={styles.button} onPress={nextPage}>
-              <Text
-                style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
+            {zipcode !== '' && addressLine1 !== '' ? (
+              <TouchableOpacity style={styles.button} onPress={nextPage}>
+                <Text
+                  style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
+                >
+                  Next
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={{
+                  ...styles.button,
+                  backgroundColor: '#778899',
+                }}
               >
-                Next
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}
+                >
+                  Next
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </View>
