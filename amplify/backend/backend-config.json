@@ -45,7 +45,7 @@
     }
   },
   "function": {
-    "questionslistscript": {
+    "questionslist": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda",
@@ -54,17 +54,10 @@
           "category": "api",
           "resourceName": "YourClearWayAPI",
           "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput"
+            "GraphQLAPIIdOutput"
           ]
         }
       ]
-    },
-    "questionslist": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
     },
     "userCognitoTrigger": {
       "build": true,

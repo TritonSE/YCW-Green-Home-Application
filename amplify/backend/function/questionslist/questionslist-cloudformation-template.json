@@ -15,6 +15,10 @@
     },
     "s3Key": {
       "Type": "String"
+    },
+    "apiYourClearWayAPIGraphQLAPIIdOutput": {
+      "Type": "String",
+      "Default": "apiYourClearWayAPIGraphQLAPIIdOutput"
     }
   },
   "Conditions": {
@@ -61,6 +65,35 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
+            },
+            "API_YOURCLEARWAYAPI_QUESTIONTABLE_NAME": {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apiYourClearWayAPIGraphQLAPIIdOutput}:GetAtt:QuestionTable:Name"
+              }
+            },
+            "API_YOURCLEARWAYAPI_QUESTIONTABLE_ARN": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:dynamodb:",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ":",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":table/",
+                  {
+                    "Fn::ImportValue": {
+                      "Fn::Sub": "${apiYourClearWayAPIGraphQLAPIIdOutput}:GetAtt:QuestionTable:Name"
+                    }
+                  }
+                ]
+              ]
+            },
+            "API_YOURCLEARWAYAPI_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apiYourClearWayAPIGraphQLAPIIdOutput"
             }
           }
         },
@@ -160,6 +193,87 @@
                   }
                 ]
               }
+            }
+          ]
+        }
+      }
+    },
+    "AmplifyResourcesPolicy": {
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyName": "amplify-lambda-execution-policy",
+        "Roles": [
+          {
+            "Ref": "LambdaExecutionRole"
+          }
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:Put*",
+                "dynamodb:Create*",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:Get*",
+                "dynamodb:BatchGetItem",
+                "dynamodb:List*",
+                "dynamodb:Describe*",
+                "dynamodb:Scan",
+                "dynamodb:Query",
+                "dynamodb:Update*",
+                "dynamodb:RestoreTable*",
+                "dynamodb:Delete*"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apiYourClearWayAPIGraphQLAPIIdOutput}:GetAtt:QuestionTable:Name"
+                        }
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:dynamodb:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":",
+                      {
+                        "Ref": "AWS::AccountId"
+                      },
+                      ":table/",
+                      {
+                        "Fn::ImportValue": {
+                          "Fn::Sub": "${apiYourClearWayAPIGraphQLAPIIdOutput}:GetAtt:QuestionTable:Name"
+                        }
+                      },
+                      "/index/*"
+                    ]
+                  ]
+                }
+              ]
             }
           ]
         }
