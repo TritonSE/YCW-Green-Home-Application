@@ -25,8 +25,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    zIndex: 10,
-    elevation: 10,
+    minHeight: '90%',
   },
   dropdownContainer: {
     width: 98,

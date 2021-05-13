@@ -10,3 +10,4 @@ const lowerThermostatXML = `<svg width="70" height="70" viewBox="0 0 70 70" fill
 `;
 
 export default lowerThermostatXML;
+
