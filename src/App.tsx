@@ -7,6 +7,7 @@ import awsconfig from './aws-exports';
 
 import AuthScreen from './screens/AuthScreen';
 import { AppProvider } from './contexts/AppContext';
+import { UserProvider } from './contexts/UserContext';
 
 /*
    Analytics manually disabled so no event is fired
@@ -23,7 +24,9 @@ Amplify.configure({
 export default function App(): JSX.Element | null {
   return (
     <AppProvider>
-      <AuthScreen />
+      <UserProvider>
+        <AuthScreen />
+      </UserProvider>
     </AppProvider>
   );
 }

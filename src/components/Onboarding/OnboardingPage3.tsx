@@ -4,43 +4,58 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { useNavigation } from '@react-navigation/core';
 import styles from '../../styles/OnboardingStyles';
+import {
+  HeatingFuelType,
+  WaterHeaterFuelType,
+  AgeType,
+  CreateHomeInput,
+} from '../../API';
 
 interface Props {
-  setPage(page: string): void;
   setHomeData({}): void;
-  homeData: Record<string, string>;
+  homeData: CreateHomeInput;
 }
 
-const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
-  const [heatingFuelType, setHeatingFuelType] = useState(homeData.fuelType);
-  const [heaterAge, setHeaterAge] = useState(homeData.heaterAge);
-  const [waterFuelType, setWaterFuelType] = useState(homeData.waterFuelType);
-  const [waterHeaterAge, setWaterHeaterAge] = useState(homeData.waterHeaterAge);
-  const [waterUse, setWaterUse] = useState(homeData.waterUse);
+const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
+  const [heatingFuelType, setHeatingFuelType] = useState<HeatingFuelType>();
+  const [heaterAge, setHeaterAge] = useState<AgeType>();
+  const [
+    waterHeaterFuelType,
+    setWaterFuelType,
+  ] = useState<WaterHeaterFuelType>();
+  const [waterHeaterAge, setWaterHeaterAge] = useState<AgeType>();
+  const [annualWaterUsage, setWaterUse] = useState(
+    String(homeData.annualWaterUsage),
+  );
+  const [picker1, setPicker1] = useState(false);
+  const [picker2, setPicker2] = useState(false);
+
+  const navigation = useNavigation();
 
   const previousPage = () => {
-    setPage('page2');
+    navigation.goBack();
     setHomeData({
       ...homeData,
-      fuelType: heatingFuelType,
+      heatingFuelType,
       heaterAge,
-      waterFuelType,
+      waterHeaterFuelType,
       waterHeaterAge,
-      waterUse,
+      annualWaterUsage: parseInt(annualWaterUsage, 10),
     });
   };
 
   const nextPage = () => {
-    setPage('page4');
     setHomeData({
       ...homeData,
-      fuelType: heatingFuelType,
+      heatingFuelType,
       heaterAge,
-      waterFuelType,
+      waterHeaterFuelType,
       waterHeaterAge,
-      waterUse,
+      annualWaterUsage,
     });
+    navigation.navigate('Page 4');
   };
 
   return (
@@ -50,9 +65,7 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       contentContainerStyle={{ flexGrow: 1, height: 800 }}
       scrollToOverflowEnabled
     >
-      <SafeAreaView
-        style={{ alignItems: 'center', justifyContent: 'flex-start' }}
-      >
+      <SafeAreaView style={styles.pageContainer}>
         <View style={styles.background} />
         <View style={styles.formContainer}>
           <TouchableOpacity onPress={previousPage} style={{ paddingTop: 70 }}>
@@ -77,71 +90,84 @@ const Page3: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
               style={{ width: '90%' }}
             />
             <Text style={styles.formTitle}>Heating Information</Text>
-            <Text style={styles.formComponent}>Heating Fuel Type</Text>
+
+            <Text style={styles.formComponent}>Age of Heater</Text>
             <DropDownPicker
-              style={{
-                alignSelf: 'center',
-                borderColor: 'gray',
-                borderWidth: 1,
-                width: '90%',
-                borderRadius: 5,
-                paddingLeft: '2.5%',
-              }}
+              style={styles.dropdownPicker}
               containerStyle={{ height: 40 }}
               items={[
-                { label: 'Gas', value: 'Gas' },
-                { label: 'Electric', value: 'Electric' },
-                { label: 'Propane', value: 'Propane' },
-                { label: 'Other', value: 'Other' },
+                { label: 'Less than 5', value: AgeType.LESS_THAN_5 },
+                { label: 'More than 5', value: AgeType.MORE_THAN_5 },
+                { label: 'More than 10', value: AgeType.MORE_THAN_10 },
+                { label: 'More than 20', value: AgeType.MORE_THAN_20 },
+              ]}
+              dropDownStyle={{ width: '90%' }}
+              itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
+              placeholder=""
+              onChangeItem={item => setHeaterAge(item.value)}
+              onOpen={() => setPicker1(true)}
+              onClose={() => setPicker1(false)}
+            />
+            <Text style={styles.formComponent}>Water Heater Fuel Type</Text>
+            {!picker1 ? (
+              <DropDownPicker
+                style={styles.dropdownPicker}
+                containerStyle={{ height: 40 }}
+                items={[
+                  { label: 'Gas', value: WaterHeaterFuelType.GAS },
+                  { label: 'Electric', value: WaterHeaterFuelType.ELECTRIC },
+                  { label: 'Other', value: WaterHeaterFuelType.OTHER },
+                ]}
+                dropDownStyle={{ width: '90%' }}
+                itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
+                placeholder=""
+                onChangeItem={item => setWaterFuelType(item.value)}
+                onOpen={() => setPicker2(true)}
+                onClose={() => setPicker2(false)}
+              />
+            ) : (
+              <Text style={{ height: 40 }} />
+            )}
+            <Text style={styles.formComponent}>Age of Water Heater</Text>
+            {!picker2 ? (
+              <DropDownPicker
+                style={styles.dropdownPicker}
+                containerStyle={{ height: 40 }}
+                items={[
+                  { label: 'Less than 5', value: AgeType.LESS_THAN_5 },
+                  { label: 'More than 5', value: AgeType.MORE_THAN_5 },
+                  { label: 'More than 10', value: AgeType.MORE_THAN_10 },
+                  { label: 'More than 20', value: AgeType.MORE_THAN_20 },
+                ]}
+                dropDownStyle={{ width: '90%' }}
+                itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
+                placeholder=""
+                onChangeItem={item => setWaterHeaterAge(item.value)}
+              />
+            ) : (
+              <Text style={{ height: 40 }} />
+            )}
+            <Text style={styles.formComponent}>Annual Water Use</Text>
+            <TextInput
+              style={styles.formInput}
+              value={annualWaterUsage}
+              onChangeText={setWaterUse}
+              keyboardType="number-pad"
+            />
+            <Text style={styles.formComponent}>Heating Fuel Type</Text>
+            <DropDownPicker
+              style={styles.dropdownPicker}
+              containerStyle={{ height: 40 }}
+              items={[
+                { label: 'Gas', value: HeatingFuelType.GAS },
+                { label: 'Electric', value: HeatingFuelType.ELECTRIC },
+                { label: 'Propane', value: HeatingFuelType.PROPANE },
+                { label: 'Other', value: HeatingFuelType.OTHER },
               ]}
               dropDownStyle={{ width: '90%' }}
               itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
               onChangeItem={item => setHeatingFuelType(item.value)}
-              defaultValue={homeData.fuelType}
-            />
-            <Text style={styles.formComponent}>Age of Heater</Text>
-            <TextInput
-              style={styles.formInput}
-              value={heaterAge}
-              onChangeText={setHeaterAge}
-              keyboardType="number-pad"
-            />
-            <Text style={styles.formComponent}>Water Heater Fuel Type</Text>
-            <DropDownPicker
-              style={{
-                alignSelf: 'center',
-                borderColor: 'gray',
-                borderWidth: 1,
-                width: '90%',
-                borderRadius: 5,
-                paddingLeft: '2.5%',
-              }}
-              containerStyle={{ height: 40 }}
-              items={[
-                { label: 'Gas', value: 'Gas' },
-                { label: 'Electric', value: 'Electric' },
-                { label: 'Other', value: 'Other' },
-              ]}
-              dropDownStyle={{ width: '90%' }}
-              itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
-              placeholder=""
-              onChangeItem={item => setWaterFuelType(item.value)}
-              defaultValue={homeData.waterFuelType}
-            />
-            <Text style={styles.formComponent}>Age of Water Heater</Text>
-            <TextInput
-              style={styles.formInput}
-              value={waterHeaterAge}
-              onChangeText={setWaterHeaterAge}
-              keyboardType="number-pad"
-            />
-            <Text style={styles.formComponent}>Annual Water Use</Text>
-            <TextInput
-              style={styles.formInput}
-              value={waterUse}
-              onChangeText={setWaterUse}
-              keyboardType="number-pad"
             />
             <TouchableOpacity style={styles.button} onPress={nextPage}>
               <Text
