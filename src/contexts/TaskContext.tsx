@@ -4,16 +4,7 @@ import React, {
   SetStateAction,
   useState,
 } from 'react';
-
-// types for local state
-interface TaskData {
-  level: string;
-  cost: string;
-  category: string;
-  title: string;
-  question: string;
-  rewardText: string;
-}
+import { Task } from '../types';
 
 interface TaskFilters {
   level: string;
@@ -23,15 +14,15 @@ interface TaskFilters {
 
 interface TaskState {
   isTaskCompletionRendered: boolean;
-  selectedTask: TaskData;
+  selectedTask: Task;
   filters: TaskFilters;
   setIsTaskCompletionRendered: Dispatch<SetStateAction<boolean>> | (() => void);
-  setSelectedTask: Dispatch<SetStateAction<TaskData>> | (() => void);
+  setSelectedTask: Dispatch<SetStateAction<Task>> | (() => void);
   setFilters: Dispatch<SetStateAction<TaskFilters>> | (() => void);
 }
 
 // default state
-const initialSelectedTask: TaskData = {
+const initialSelectedTask: Task = {
   level: '',
   cost: '',
   category: '',

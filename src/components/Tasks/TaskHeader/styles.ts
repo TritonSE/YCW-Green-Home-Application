@@ -1,9 +1,13 @@
 import { StyleSheet, Platform } from 'react-native';
+import SizeConstants from '../../../common/Sizes';
 
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#86C5BE',
-    paddingTop: Platform.OS === 'ios' ? 68 : 40,
+    paddingTop:
+      Platform.OS === 'ios'
+        ? SizeConstants.topPadding.ios
+        : SizeConstants.topPadding.android,
     height: 184,
     left: 0,
     display: 'flex',
