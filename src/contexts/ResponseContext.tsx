@@ -5,8 +5,6 @@ import React, {
   useState,
 } from 'react';
 
-// responseState will have an array of response objects
-// response objects have id, homeId, QuestionID, home, no Question!!!, answer, createdAt
 interface ResponseState {
   responseState: {
     items: [
@@ -14,8 +12,6 @@ interface ResponseState {
         id: string;
         homeID: string;
         questionID: string;
-        // home: Home type (??)
-        // question: Question type (??)
         answer: string;
         createdAt: string;
       },
@@ -29,8 +25,6 @@ interface ResponseState {
               id: string;
               homeID: string;
               questionID: string;
-              // home: Home type (??)
-              // question: Question type (??)
               answer: string;
               createdAt: string;
             },
