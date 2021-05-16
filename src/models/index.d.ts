@@ -94,6 +94,7 @@ export declare class Home {
 
 export declare class Response {
   readonly id: string;
+  readonly questionID: string;
   readonly home?: Home;
   readonly question?: Question;
   readonly answer: string;
@@ -110,7 +111,6 @@ export declare class Question {
   readonly level: Level | keyof typeof Level;
   readonly cost: Cost | keyof typeof Cost;
   readonly categories: Category[] | keyof typeof Category;
-  readonly responses?: (Response | null)[];
   constructor(init: ModelInit<Question>);
   static copyOf(source: Question, mutator: (draft: MutableModel<Question>) => MutableModel<Question> | void): Question;
 }
