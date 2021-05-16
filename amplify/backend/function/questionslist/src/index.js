@@ -1,4 +1,10 @@
-const { parseQuestions, batchWriteQuestions } = require('./questions');
+/* Amplify Params - DO NOT EDIT
+	API_YOURCLEARWAYAPI_GRAPHQLAPIIDOUTPUT
+	API_YOURCLEARWAYAPI_QUESTIONTABLE_ARN
+	API_YOURCLEARWAYAPI_QUESTIONTABLE_NAME
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT */const { parseQuestions, batchWriteQuestions } = require('./questions');
 
 const MAX_ITEMS_PER_DB_WRITE = 25; // Maximum number of items DynamoDB allows per batch write
 

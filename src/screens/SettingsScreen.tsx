@@ -7,15 +7,33 @@ import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AppContext } from '../contexts/AppContext';
+import { UserContext } from '../contexts/UserContext';
 
 export function SettingsScreen() {
   const navigation = useNavigation();
   const { setAppState } = useContext(AppContext);
+  const { setUserState } = useContext(UserContext);
   const [name, setName] = useState('');
 
   const signOut = async () => {
     try {
       await Auth.signOut();
+      setUserState({
+        _deleted: null,
+        _lastChangedAt: 0,
+        _version: 1,
+        createdAt: '',
+        displayName: '',
+        homes: {
+          items: [],
+          nextToken: null,
+          startedAt: null,
+        },
+        id: '',
+        owner: '',
+        updatedAt: '',
+        username: '',
+      });
       setAppState('Auth');
     } catch (error) {
       console.error('Error signing out: ', error);

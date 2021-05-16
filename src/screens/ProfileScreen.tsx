@@ -5,7 +5,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ProfilePage1 } from './ProfilePage1';
 import { SettingsScreen } from './SettingsScreen';
 import Onboarding from '../components/Onboarding/Onboarding';
-import { ExportScreen } from './ExportScreen';
 
 const Stack = createStackNavigator();
 
