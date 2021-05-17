@@ -9,4 +9,149 @@ const laundryLineXML = `<svg width="70" height="70" viewBox="0 0 70 70" fill="no
 </svg>
 `;
 
-export default laundryLineXML;
+const grayLaundryLineXML = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="70"
+   height="70"
+   viewBox="0 0 70 70"
+   fill="none"
+   version="1.1"
+   id="svg638"
+   sodipodi:docname="gray_laundryLine.svg"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)">
+  <metadata
+     id="metadata644">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs642">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Greyscale"
+       id="filter648">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix646" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Greyscale"
+       id="filter652">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix650" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Greyscale"
+       id="filter656">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix654" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Greyscale"
+       id="filter660">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix658" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Greyscale"
+       id="filter664">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix662" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Greyscale"
+       id="filter668">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix666" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Greyscale"
+       id="filter672">
+      <feColorMatrix
+         values="0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0.21 0.72 0.072 0 0 0 0 0 1 0 "
+         id="feColorMatrix670" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     id="namedview640"
+     showgrid="false"
+     inkscape:zoom="11.857143"
+     inkscape:cx="35"
+     inkscape:cy="35"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg638" />
+  <path
+     d="M35 70C54.33 70 70 54.33 70 35C70 15.67 54.33 0 35 0C15.67 0 0 15.67 0 35C0 54.33 15.67 70 35 70Z"
+     fill="#FD8469"
+     id="path624"
+     style="filter:url(#filter672)" />
+  <path
+     d="M50.819 14.6616L50.6536 14.9923C49.882 16.5356 49.441 18.2994 49.3308 20.1183C48.7796 27.9451 39.2993 28.4412 39.2993 28.4412C36.9843 15.0474 50.819 14.6616 50.819 14.6616Z"
+     fill="#4CDBC4"
+     id="path626"
+     style="filter:url(#filter668)" />
+  <path
+     d="M49.6061 15.4885C48.8345 16.0396 47.7872 16.8113 46.5746 17.8034C45.9683 18.2995 45.3069 18.9058 44.7006 19.5121C44.0392 20.1735 43.3778 20.8349 42.7715 21.6066C42.4408 21.9924 42.1652 22.3782 41.8345 22.8192C41.5589 23.2601 41.2282 23.6459 40.9526 24.0869C40.4014 24.9688 39.8502 25.9058 39.4644 26.8979C39.0786 27.89 38.7479 28.9373 38.5825 29.9845C38.4172 31.0318 38.362 32.079 38.4172 33.1262C38.4172 33.4018 38.4723 33.6223 38.5274 33.8979C38.5825 34.1184 38.5825 34.3388 38.6376 34.5593H39.5195C39.5195 34.5042 39.5195 34.5042 39.4644 34.4491C39.4093 34.2286 39.3542 34.0081 39.299 33.7877C39.2439 33.5672 39.1888 33.3467 39.1888 33.0711C39.0786 32.1341 39.0786 31.142 39.2439 30.0947C39.3542 29.1026 39.6298 28.1105 40.0156 27.1184C40.3463 26.1262 40.8424 25.1892 41.3384 24.3073C41.614 23.8664 41.8896 23.4255 42.1652 23.0396C42.4408 22.6538 42.7164 22.2129 43.0471 21.827C43.6534 21.0554 44.2597 20.3388 44.9211 19.6774C45.5274 19.016 46.1337 18.4097 46.74 17.9136C47.8424 16.8664 48.8896 16.0396 49.6061 15.4885C50.3778 14.9924 50.8187 14.7168 50.8187 14.7168C50.8187 14.7168 50.3778 14.9373 49.6061 15.4885Z"
+     fill="#2C9984"
+     id="path628"
+     style="filter:url(#filter664)" />
+  <path
+     d="M26.5669 14.6616L26.7322 14.9923C27.5039 16.5356 27.9449 18.2994 28.0551 20.1183C28.6063 27.9451 38.0866 28.4412 38.0866 28.4412C40.4016 15.0474 26.5669 14.6616 26.5669 14.6616Z"
+     fill="#4CDBC4"
+     id="path630"
+     style="filter:url(#filter660)" />
+  <path
+     d="M36.0472 24.362C36.5433 25.2439 37.0393 26.1809 37.37 27.1731C37.7007 28.1652 37.9763 29.1573 38.1417 30.1494C38.2519 31.1416 38.307 32.1337 38.1968 33.1258C38.1968 33.3463 38.1417 33.6219 38.0866 33.8424C38.0315 34.0628 38.0315 34.2833 37.9212 34.5038C37.9212 34.5589 37.9212 34.5589 37.8661 34.614H38.748C38.8031 34.3935 38.8031 34.1731 38.8582 33.9526C38.9133 33.677 38.9133 33.4565 38.9685 33.1809C39.0787 32.1337 38.9685 31.0864 38.8031 30.0392C38.6378 28.992 38.307 27.9447 37.9212 26.9526C37.5354 25.9605 36.9842 25.0235 36.433 24.1416C36.1574 23.7006 35.8267 23.2597 35.5511 22.8738C35.2204 22.488 34.9448 22.0471 34.6141 21.6612C33.9527 20.8896 33.3464 20.1731 32.685 19.5668C32.0236 18.9053 31.4173 18.3542 30.811 17.8581C29.5984 16.8109 28.5511 16.0392 27.7795 15.5431C27.0078 14.992 26.5669 14.7715 26.5669 14.7715C26.5669 14.7715 27.0078 15.0471 27.7795 15.5983C28.496 16.1494 29.5433 16.9762 30.7007 18.0235C31.307 18.5746 31.9133 19.1809 32.5196 19.7872C33.1259 20.4487 33.7874 21.1652 34.3937 21.9368C34.7244 22.3227 35 22.7085 35.2755 23.1494C35.5511 23.4801 35.8267 23.9211 36.0472 24.362Z"
+     fill="#2C9984"
+     id="path632"
+     style="filter:url(#filter656)" />
+  <path
+     d="M47.3466 43.4882C47.1262 38.0315 43.3781 33.6221 38.6931 33.6221C34.0081 33.6221 30.26 38.0315 30.0396 43.4882H47.3466Z"
+     fill="#FFD05B"
+     id="path634"
+     style="filter:url(#filter652)" />
+  <path
+     d="M56.4411 36.9293C56.4411 37.4254 56.2757 37.9215 55.8899 38.3073L52.7481 41.449L47.7324 46.4648C47.6222 46.575 47.5119 46.6301 47.4017 46.6852C47.071 46.9057 46.6852 47.016 46.3544 47.016H29.3781L22.1576 54.2915L15.0474 47.1813L23.5907 38.638C25.1891 37.0396 27.3938 36.1026 29.6537 36.1026H42.882C43.9293 36.1026 44.8111 36.9845 44.8111 38.0317C44.8111 38.5829 44.5907 39.079 44.26 39.4097C43.9293 39.7404 43.4332 39.9608 42.882 39.9608H39.4647H33.071C32.5198 39.9608 32.0789 40.4018 32.0789 40.953C32.0789 41.2286 32.1891 41.449 32.3545 41.6144C32.5198 41.7797 32.7954 41.89 33.0159 41.89H46.7403L47.2363 41.3939L53.134 35.5514C53.9056 34.7797 55.1182 34.7797 55.8899 35.5514C56.2757 35.9372 56.4411 36.4333 56.4411 36.9293Z"
+     fill="white"
+     id="path636"
+     style="filter:url(#filter648)" />
+</svg>`;
+
+export { laundryLineXML, grayLaundryLineXML };
