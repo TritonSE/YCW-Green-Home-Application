@@ -7,12 +7,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../styles/ProfileScreenStyles';
 import { UserContext } from '../contexts/UserContext';
+import ProfileHeader from '../components/Profile/ProfileHeader';
 
 export function ProfilePage1() {
   const navigation = useNavigation();
   const { userState } = useContext(UserContext);
 
-  const name = userState.owner;
+  const name = userState.displayName;
   const bio = 'Member since 2021';
   const badgeNumber = 10;
 
@@ -30,7 +31,8 @@ export function ProfilePage1() {
     >
       <View style={styles.backgroundGray}>
         <View style={styles.backgroundBlue} />
-        <View style={styles.settings}>
+        <ProfileHeader />
+        {/* <View style={styles.settings}>
           <TouchableOpacity onPress={() => console.log('info')}>
             <Ionicons
               name="information-circle-outline"
@@ -44,7 +46,7 @@ export function ProfilePage1() {
           <TouchableOpacity onPress={settingsPage}>
             <Ionicons name="settings" size={20} color="white" />
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View style={styles.profileContainer}>
           <Image
             style={styles.image}

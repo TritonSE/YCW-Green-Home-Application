@@ -49,6 +49,15 @@ export function SettingsScreen() {
   };
 
   const styles = StyleSheet.create({
+    button: {
+      backgroundColor: 'rgba(233, 102, 97, 1)',
+      marginTop: 30,
+      width: 135,
+      height: 50,
+      borderRadius: 30,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     buttonRow: {
       height: 45,
       width: '100%',
@@ -57,6 +66,26 @@ export function SettingsScreen() {
       padding: 10,
       margin: -0.5,
       backgroundColor: 'white',
+    },
+    editHome: {
+      backgroundColor: 'rgba(233, 102, 97, 1)',
+      marginTop: 30,
+      width: 220,
+      height: 50,
+      borderRadius: 30,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      position: 'absolute',
+      alignItems: 'center',
+      width: '100%',
+      paddingTop: '10%',
+      paddingLeft: '5%',
+      paddingRight: '5%',
+      zIndex: 1,
     },
     inputBox: {
       height: 40,
@@ -100,19 +129,7 @@ export function SettingsScreen() {
       scrollToOverflowEnabled
     >
       <View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            position: 'absolute',
-            alignItems: 'center',
-            width: '100%',
-            paddingTop: '10%',
-            paddingLeft: '5%',
-            paddingRight: '5%',
-            zIndex: 1,
-          }}
-        >
+        <View style={styles.header}>
           <Text> </Text>
           <Text
             style={{
@@ -232,18 +249,7 @@ export function SettingsScreen() {
             <Text style={styles.text}>Export Data</Text>
           </TouchableOpacity>
           <View style={{ zIndex: 1, elevation: 1, alignItems: 'center' }}>
-            <TouchableOpacity
-              style={{
-                backgroundColor: 'rgba(233, 102, 97, 1)',
-                marginTop: 30,
-                width: 220,
-                height: 50,
-                borderRadius: 30,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              onPress={onboardingPage}
-            >
+            <TouchableOpacity style={styles.editHome} onPress={onboardingPage}>
               <Text
                 style={{
                   fontSize: 18,
@@ -299,18 +305,7 @@ export function SettingsScreen() {
           </TouchableOpacity>
           {/* log out */}
           <View style={{ zIndex: 1, elevation: 1, alignItems: 'center' }}>
-            <TouchableOpacity
-              style={{
-                backgroundColor: 'rgba(233, 102, 97, 1)',
-                marginTop: 30,
-                width: 135,
-                height: 50,
-                borderRadius: 30,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              onPress={signOut}
-            >
+            <TouchableOpacity style={styles.button} onPress={signOut}>
               <Text
                 style={{
                   fontSize: 18,

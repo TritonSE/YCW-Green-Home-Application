@@ -27,11 +27,11 @@ export function ProfileScreen() {
           component={SettingsScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Export"
           component={ExportScreen}
           options={{ headerShown: false }}
-        />
+        /> */}
         <Stack.Screen
           name="Onboarding"
           component={Onboarding}
