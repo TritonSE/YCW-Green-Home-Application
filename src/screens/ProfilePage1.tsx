@@ -1,16 +1,18 @@
 /* eslint-disable import/prefer-default-export */
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../styles/ProfileScreenStyles';
+import { UserContext } from '../contexts/UserContext';
 
 export function ProfilePage1() {
   const navigation = useNavigation();
+  const { userState } = useContext(UserContext);
 
-  const name = 'John Smith';
+  const name = userState.owner;
   const bio = 'Member since 2021';
   const badgeNumber = 10;
 
