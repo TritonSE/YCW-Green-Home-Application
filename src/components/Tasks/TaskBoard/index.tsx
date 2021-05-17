@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from './styles';
 import TaskCard from '../TaskCard';
 import { Task } from '../../../types/Tasks';

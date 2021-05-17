@@ -53,7 +53,7 @@ export default function NavFlow() {
       }}
     >
       <Tab.Screen name={NavRoutes.HOME} component={HomeScreen} />
-      <Tab.Screen name={NavRoutes.TASKS} component={TaskScreen} />
+      <Tab.Screen name={NavRoutes.TASKS} component={TaskContainer} />
       <Tab.Screen name={NavRoutes.PROGRESS} component={BadgeScreen} />
       <Tab.Screen name={NavRoutes.ME} component={ProfileScreen} />
     </Tab.Navigator>

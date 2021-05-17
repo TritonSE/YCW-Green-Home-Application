@@ -28,12 +28,11 @@ const styles = StyleSheet.create({
   dropdownWrapper: {
     paddingTop: 10,
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    minHeight: '90%',
+    minHeight: '30%',
   },
   dropdownContainer: {
-    width: 98,
-    height: 35,
+    width: '200%',
+    height: '20%',
   },
   dropdownBox: {
     paddingHorizontal: 2,
