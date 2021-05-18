@@ -1,19 +1,24 @@
 /* eslint-disable import/prefer-default-export */
 import React, { useContext, useState } from 'react';
 import { Auth } from 'aws-amplify';
-import { View, Text, TextInput, StyleSheet, Touchable } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AppContext } from '../../contexts/AppContext';
 import { UserContext } from '../../contexts/UserContext';
+import SettingsBox from './SettingsBox';
 
 export function SettingsScreen() {
   const navigation = useNavigation();
   const { setAppState } = useContext(AppContext);
   const { setUserState } = useContext(UserContext);
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [address, setAddress] = useState('');
+  const [address2, setAddress2] = useState('');
+  const [homeName, setHomeName] = useState('');
 
   const signOut = async () => {
     try {
@@ -87,37 +92,6 @@ export function SettingsScreen() {
       paddingRight: '5%',
       zIndex: 1,
     },
-    inputBox: {
-      height: 40,
-      width: '100%',
-      borderWidth: 1,
-      borderColor: '#939393',
-      paddingTop: 20,
-      paddingBottom: 20,
-      margin: -0.5,
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: 'white',
-    },
-    input: {
-      flex: 1,
-      color: '#939393',
-      fontSize: 18,
-      height: 40,
-    },
-    icon: {
-      paddingBottom: 24,
-      paddingLeft: 10,
-      paddingRight: 10,
-    },
-    text: {
-      flex: 1,
-      paddingBottom: 20,
-      color: '#939393',
-      fontSize: 18,
-    },
   });
 
   return (
@@ -161,94 +135,49 @@ export function SettingsScreen() {
             ACCOUNT
           </Text>
           {/* table */}
-          <View style={styles.inputBox}>
-            <Ionicons
-              style={styles.icon}
-              name="person-circle-outline"
-              size={24}
-              color="#939393"
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Name"
-              value={name}
-              onChangeText={setName}
-            />
-          </View>
-          <View style={styles.inputBox}>
-            <Ionicons
-              style={styles.icon}
-              name="mail-outline"
-              size={24}
-              color="#939393"
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              onChangeText={() => console.log('email')}
-            />
-          </View>
-          <View style={styles.inputBox}>
-            <Ionicons
-              style={styles.icon}
-              name="lock-closed-outline"
-              size={24}
-              color="#939393"
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Password"
-              onChangeText={() => console.log('password')}
-            />
-          </View>
-          <View style={styles.inputBox}>
-            <Ionicons
-              style={styles.icon}
-              name="home-outline"
-              size={24}
-              color="#939393"
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Current Address"
-              onChangeText={() => console.log('address')}
-            />
-          </View>
-          <View style={styles.inputBox}>
-            <Ionicons
-              style={styles.icon}
-              name="home-outline"
-              size={24}
-              color="#939393"
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Current Address Line 2"
-              onChangeText={() => console.log('address2')}
-            />
-          </View>
-          <View style={styles.inputBox}>
-            <Ionicons
-              style={styles.icon}
-              name="home-outline"
-              size={24}
-              color="#939393"
-            />
-            <TextInput
-              style={styles.input}
-              placeholder="Current Home Name"
-              onChangeText={() => console.log('home name')}
-            />
-          </View>
-          <TouchableOpacity style={styles.inputBox}>
-            <Ionicons
-              style={styles.icon}
-              name="share-outline"
-              size={24}
-              color="#939393"
-            />
-            <Text style={styles.text}>Export Data</Text>
-          </TouchableOpacity>
+          <SettingsBox
+            type="Input"
+            icon="person-circle-outline"
+            place="Name"
+            valueInput={name}
+            setInput={setName}
+          />
+          <SettingsBox
+            type="Input"
+            icon="mail-outline"
+            place="Email"
+            valueInput={email}
+            setInput={setEmail}
+          />
+          <SettingsBox
+            type="Input"
+            icon="lock-closed-outline"
+            place="Password"
+            valueInput={password}
+            setInput={setPassword}
+          />
+          <SettingsBox
+            type="Input"
+            icon="home-outline"
+            place="Current Address"
+            valueInput={address}
+            setInput={setAddress}
+          />
+          <SettingsBox
+            type="Input"
+            icon="home-outline"
+            place="Current Address Line 2"
+            valueInput={address2}
+            setInput={setAddress2}
+          />
+          <SettingsBox
+            type="Input"
+            icon="home-outline"
+            place="Current Home Name"
+            valueInput={homeName}
+            setInput={setHomeName}
+          />
+          <SettingsBox type="Text" icon="share-outline" text="Export Data" />
           <View style={{ zIndex: 1, elevation: 1, alignItems: 'center' }}>
             <TouchableOpacity style={styles.editHome} onPress={onboardingPage}>
               <Text
@@ -286,24 +215,16 @@ export function SettingsScreen() {
           >
             SUPPORT
           </Text>
-          <TouchableOpacity style={styles.inputBox}>
-            <Ionicons
-              style={styles.icon}
-              name="information-circle-outline"
-              size={24}
-              color="#939393"
-            />
-            <Text style={styles.text}>Help &amp; Support</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.inputBox}>
-            <Ionicons
-              style={styles.icon}
-              name="shield-outline"
-              size={24}
-              color="#939393"
-            />
-            <Text style={styles.text}>Privacy Policy</Text>
-          </TouchableOpacity>
+          <SettingsBox
+            type="Text"
+            icon="information-circle-outline"
+            text="Help &amp; Support"
+          />
+          <SettingsBox
+            type="Text"
+            icon="shield-outline"
+            text="Privacy Policy"
+          />
           {/* log out */}
           <View style={{ zIndex: 1, elevation: 1, alignItems: 'center' }}>
             <TouchableOpacity style={styles.button} onPress={signOut}>
