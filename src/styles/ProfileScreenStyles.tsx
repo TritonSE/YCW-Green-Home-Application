@@ -1,9 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  address: {
-    fontSize: 12,
-  },
   backgroundBlue: {
     position: 'absolute',
     width: '100%',
@@ -27,24 +24,6 @@ const styles = StyleSheet.create({
   homesLayout: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-  },
-  homeCard: {
-    margin: 8,
-    padding: 10,
-    height: 100,
-    width: 140,
-    borderRadius: 5,
-    backgroundColor: '#fafafa',
-  },
-  homeColor: {
-    width: 30,
-    height: 30,
-    borderRadius: 50,
-    backgroundColor: '#6ba177',
-  },
-  homeSpacing: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   line: {
     marginLeft: 3,

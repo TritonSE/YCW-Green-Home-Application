@@ -6,8 +6,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { AppContext } from '../contexts/AppContext';
-import { UserContext } from '../contexts/UserContext';
+import { AppContext } from '../../contexts/AppContext';
+import { UserContext } from '../../contexts/UserContext';
 
 export function SettingsScreen() {
   const navigation = useNavigation();

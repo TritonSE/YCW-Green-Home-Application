@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ProfilePage1 } from './ProfilePage1';
-import { SettingsScreen } from './SettingsScreen';
+import { ProfilePage1 } from '../components/Profile/ProfilePage1';
+import { SettingsScreen } from '../components/Profile/SettingsScreen';
 import Onboarding from '../components/Onboarding/Onboarding';
 
 const Stack = createStackNavigator();
