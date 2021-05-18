@@ -8,6 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../styles/ProfileScreenStyles';
 import { UserContext } from '../contexts/UserContext';
 import ProfileHeader from '../components/Profile/ProfileHeader';
+import ProfileContainer from '../components/Profile/ProfileContainer';
 
 export function ProfilePage1() {
   const navigation = useNavigation();
@@ -32,33 +33,7 @@ export function ProfilePage1() {
       <View style={styles.backgroundGray}>
         <View style={styles.backgroundBlue} />
         <ProfileHeader />
-        {/* <View style={styles.settings}>
-          <TouchableOpacity onPress={() => console.log('info')}>
-            <Ionicons
-              name="information-circle-outline"
-              size={20}
-              color="white"
-            />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 20, color: 'white', fontWeight: 'bold' }}>
-            PROFILE
-          </Text>
-          <TouchableOpacity onPress={settingsPage}>
-            <Ionicons name="settings" size={20} color="white" />
-          </TouchableOpacity>
-        </View> */}
-        <View style={styles.profileContainer}>
-          <Image
-            style={styles.image}
-            source={require('../images/profile-pic.png')}
-          />
-          <View>
-            <Text style={styles.name}>{name}</Text>
-          </View>
-          <View>
-            <Text style={styles.bio}>{bio}</Text>
-          </View>
-        </View>
+        <ProfileContainer />
         <View style={styles.mainContainer}>
           <View style={styles.mainLayout}>
             <View style={styles.numberCircle}>

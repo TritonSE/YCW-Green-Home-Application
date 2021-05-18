@@ -19,11 +19,6 @@ const styles = StyleSheet.create({
     color: '#353935',
     fontSize: 20,
   },
-  bio: {
-    color: 'white',
-    fontSize: 13.5,
-    textAlign: 'center',
-  },
   homeTitle: {
     paddingTop: 15,
     paddingLeft: 5,
@@ -51,13 +46,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  image: {
-    borderRadius: 60,
-    height: 70,
-    marginTop: 80,
-    marginBottom: 20,
-    width: 70,
-  },
   line: {
     marginLeft: 3,
     marginRight: 3,
@@ -79,12 +67,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  name: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
   number: {
     padding: 15,
     color: 'white',
@@ -104,17 +86,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     marginBottom: 12,
-  },
-  settings: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    position: 'absolute',
-    alignItems: 'center',
-    width: '100%',
-    paddingTop: '10%',
-    paddingLeft: '5%',
-    paddingRight: '5%',
-    zIndex: 1,
   },
 });
 
