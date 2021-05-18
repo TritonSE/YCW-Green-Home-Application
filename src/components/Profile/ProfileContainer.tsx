@@ -13,13 +13,13 @@ const styles = StyleSheet.create({
     borderRadius: 60,
     height: 70,
     marginTop: 80,
-    marginBottom: 20,
+    marginBottom: 15,
     width: 70,
   },
   name: {
     color: 'white',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '500',
     textAlign: 'center',
   },
   bio: {
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 const ProfileContainer = () => {
   const { userState } = useContext(UserContext);
   const name = userState.displayName;
-  const bio = `Member from ${userState.createdAt.split('-')[0]}`;
+  const bio = `Member since ${userState.createdAt.split('-')[0]}`;
 
   return (
     <View style={styles.profileContainer}>

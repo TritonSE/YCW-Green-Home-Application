@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
-import { Text, View, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, StatusBar } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from '../../styles/ProfileScreenStyles';
 import ProfileHeader from './ProfileHeader';
@@ -17,6 +16,7 @@ export function ProfilePage1() {
       contentContainerStyle={{ height: 600 }}
       scrollToOverflowEnabled
     >
+      <StatusBar backgroundColor="#86C5BE" barStyle="dark-content" />
       <View style={styles.backgroundGray}>
         <View style={styles.backgroundBlue} />
         <ProfileHeader />

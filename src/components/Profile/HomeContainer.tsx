@@ -6,7 +6,7 @@ import HomeCard from './HomeCard';
 const styles = StyleSheet.create({
   mainContainer: {
     position: 'absolute',
-    top: 230,
+    top: 220,
     alignSelf: 'center',
     height: 300,
     width: '90%',
@@ -41,16 +41,16 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingLeft: 5,
     paddingBottom: 15,
+    fontWeight: '500',
   },
   homesLayout: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
   line: {
-    marginLeft: 3,
-    marginRight: 3,
+    marginRight: '2.5%',
     borderBottomColor: '#BFE3D5',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 1,
   },
 });
 
