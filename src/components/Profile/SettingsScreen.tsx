@@ -7,7 +7,9 @@ import { useNavigation } from '@react-navigation/native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { AppContext } from '../../contexts/AppContext';
 import { UserContext } from '../../contexts/UserContext';
+
 import SettingsBox from './SettingsBox';
+import SettingsHeader from './SettingsHeader';
 
 export function SettingsScreen() {
   const navigation = useNavigation();
@@ -49,10 +51,6 @@ export function SettingsScreen() {
     navigation.navigate('Onboarding');
   };
 
-  const done = () => {
-    navigation.goBack();
-  };
-
   const styles = StyleSheet.create({
     button: {
       backgroundColor: 'rgba(233, 102, 97, 1)',
@@ -81,17 +79,6 @@ export function SettingsScreen() {
       alignItems: 'center',
       justifyContent: 'center',
     },
-    header: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      position: 'absolute',
-      alignItems: 'center',
-      width: '100%',
-      paddingTop: '10%',
-      paddingLeft: '5%',
-      paddingRight: '5%',
-      zIndex: 1,
-    },
   });
 
   return (
@@ -103,21 +90,7 @@ export function SettingsScreen() {
       scrollToOverflowEnabled
     >
       <View>
-        <View style={styles.header}>
-          <Text> </Text>
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: 'bold',
-              paddingLeft: 40,
-            }}
-          >
-            PROFILE
-          </Text>
-          <TouchableOpacity onPress={done}>
-            <Text style={{ fontSize: 15, fontWeight: 'bold' }}>DONE</Text>
-          </TouchableOpacity>
-        </View>
+        <SettingsHeader />
         {/* account section */}
         <View
           style={{
