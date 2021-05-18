@@ -135,6 +135,7 @@ export function SettingsScreen() {
             style={{
               fontSize: 20,
               fontWeight: 'bold',
+              paddingLeft: 40,
             }}
           >
             PROFILE

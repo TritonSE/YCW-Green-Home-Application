@@ -31,9 +31,8 @@ const styles = StyleSheet.create({
 
 const ProfileContainer = () => {
   const { userState } = useContext(UserContext);
-
   const name = userState.displayName;
-  const bio = 'Member since 2021';
+  const bio = `Member from ${userState.createdAt.split('-')[0]}`;
 
   return (
     <View style={styles.profileContainer}>
