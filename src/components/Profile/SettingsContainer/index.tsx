@@ -76,6 +76,7 @@ const SettingsContainer = () => {
           place="Password"
           valueInput={password}
           setInput={setPassword}
+          password
         />
         <SettingsBox
           type="Input"

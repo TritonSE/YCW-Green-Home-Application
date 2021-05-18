@@ -10,6 +10,7 @@ interface Props {
   valueInput?: string;
   setInput?: React.Dispatch<React.SetStateAction<string>>;
   text?: string;
+  password?: boolean;
 }
 
 const SettingsBox: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const SettingsBox: React.FC<Props> = ({
   valueInput,
   setInput,
   text,
+  password,
 }) => {
   return (
     <View style={styles.inputBox}>
@@ -29,6 +31,7 @@ const SettingsBox: React.FC<Props> = ({
           placeholder={place}
           value={valueInput}
           onChangeText={setInput}
+          secureTextEntry={password}
         />
       )}
       {type === 'Text' && <Text style={styles.text}>{text}</Text>}
