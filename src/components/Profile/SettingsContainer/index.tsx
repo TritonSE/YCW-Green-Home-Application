@@ -1,25 +1,43 @@
-import React, { useContext, useState } from 'react';
-import { Auth } from 'aws-amplify';
+import React, { useContext, useState, useEffect } from 'react';
+import { Auth, API } from 'aws-amplify';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { AppContext } from '../../../contexts/AppContext';
 import { UserContext } from '../../../contexts/UserContext';
+import { homeInfo } from '../../Onboarding/onboardingData';
+import { updateHome } from '../../../graphql/mutations';
 
 import SettingsBox from '../SettingsBox';
 
 const SettingsContainer = () => {
   const navigation = useNavigation();
   const { setAppState } = useContext(AppContext);
-  const { setUserState } = useContext(UserContext);
+  const { userState, setUserState } = useContext(UserContext);
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [address, setAddress] = useState('');
-  const [address2, setAddress2] = useState('');
-  const [homeName, setHomeName] = useState('');
+  // workaround to parse data that may be undefined - to change?
+  const homes = userState.homes.items;
+  const homesString = JSON.stringify(homes);
+  const homesJSON = JSON.parse(homesString);
+  const { home } = homesJSON[0];
+  const curHomeName = homesJSON[0].home.addressLine1.split(' ')[1];
+
+  const [homeData] = useState(home);
+  const [name, setName] = useState(String(userState.displayName));
+  const [email, setEmail] = useState(String(userState.username));
+  const [password, setPassword] = useState(''); // unsure how to get password
+  const [address, setAddress] = useState(
+    String(homeData.addressLine1) === 'null'
+      ? ''
+      : String(homeData.addressLine1),
+  );
+  const [address2, setAddress2] = useState(
+    String(homeData.addressLine2) === 'null'
+      ? ''
+      : String(homeData.addressLine2),
+  );
+  const [homeName, setHomeName] = useState(curHomeName);
 
   const signOut = async () => {
     try {

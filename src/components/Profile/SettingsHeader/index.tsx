@@ -14,7 +14,7 @@ const SettingsHeader = () => {
   return (
     <View style={styles.header}>
       <Text> </Text>
-      <Text style={styles.profile}>PROFILE</Text>
+      <Text style={styles.profile}>SETTINGS</Text>
       <TouchableOpacity onPress={done}>
         <Text style={styles.done}>DONE</Text>
       </TouchableOpacity>

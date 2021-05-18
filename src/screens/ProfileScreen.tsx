@@ -13,6 +13,7 @@ const Stack = createStackNavigator();
 export function ProfileScreen() {
   const { userState } = useContext(UserContext);
 
+  // workaround to parse data that may be undefined - to change?
   const homes = userState.homes.items;
   const homesString = JSON.stringify(homes);
   const homesJSON = JSON.parse(homesString);
