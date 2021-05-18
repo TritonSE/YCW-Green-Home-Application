@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     width: '100%',
-    paddingTop: '10%',
+    paddingTop: '8%',
     paddingLeft: '5%',
     paddingRight: '5%',
     zIndex: 1,
