@@ -2,10 +2,10 @@
 import React from 'react';
 import { View, StatusBar } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import styles from '../../styles/ProfileScreenStyles';
-import ProfileHeader from './ProfileHeader';
-import ProfileContainer from './ProfileContainer';
-import HomeContainer from './HomeContainer';
+import styles from './styles';
+import ProfileHeader from '../ProfileHeader';
+import ProfileContainer from '../ProfileContainer';
+import HomeContainer from '../HomeContainer';
 
 export function ProfilePage1() {
   return (

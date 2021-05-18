@@ -1,27 +1,9 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
-const styles = StyleSheet.create({
-  settings: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    position: 'absolute',
-    alignItems: 'center',
-    width: '100%',
-    paddingTop: '8%',
-    paddingLeft: '5%',
-    paddingRight: '5%',
-    zIndex: 1,
-  },
-  pageHeader: {
-    fontSize: 20,
-    color: 'white',
-    fontWeight: '700',
-  },
-});
+import styles from './styles';
 
 const ProfileHeader = () => {
   const navigation = useNavigation();

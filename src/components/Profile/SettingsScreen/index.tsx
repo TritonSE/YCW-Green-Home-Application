@@ -3,8 +3,8 @@ import React from 'react';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import SettingsHeader from './SettingsHeader';
-import SettingsContainer from './SettingsContainer';
+import SettingsHeader from '../SettingsHeader';
+import SettingsContainer from '../SettingsContainer';
 
 export function SettingsScreen() {
   return (
