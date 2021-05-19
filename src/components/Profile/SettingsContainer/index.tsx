@@ -1,13 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Auth, API } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { AppContext } from '../../../contexts/AppContext';
 import { UserContext } from '../../../contexts/UserContext';
-import { homeInfo } from '../../Onboarding/onboardingData';
-import { updateHome } from '../../../graphql/mutations';
 
 import SettingsBox from '../SettingsBox';
 
@@ -26,7 +24,7 @@ const SettingsContainer = () => {
   const [homeData] = useState(home);
   const [name, setName] = useState(String(userState.displayName));
   const [email, setEmail] = useState(String(userState.username));
-  const [password, setPassword] = useState(''); // unsure how to get password
+  const [password, setPassword] = useState('');
   const [address, setAddress] = useState(
     String(homeData.addressLine1) === 'null'
       ? ''
