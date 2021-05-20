@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import API from '@aws-amplify/api';
@@ -40,6 +39,7 @@ export default function NavFlow() {
         query: customListQuestions,
       });
       setQuestionState({ items: result.data.listQuestions.items });
+
       const responses: any = await API.graphql({
         query: customResponses,
         variables: { filter: { homeID: userState.homes.items[0].home.id } },

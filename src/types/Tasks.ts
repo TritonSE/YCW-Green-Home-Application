@@ -1,8 +1,9 @@
 export interface Task {
+  id: string;
   level: string;
   title: string;
-  question: string;
-  category: string;
+  questionText: string;
+  categories: string[];
   cost: string;
   rewardText: string;
 }

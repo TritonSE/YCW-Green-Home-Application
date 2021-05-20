@@ -23,13 +23,14 @@ interface TaskState {
   setTasksCompleted: Dispatch<SetStateAction<CompletedTask[]>> | (() => void);
 }
 
-// default state
-const initialSelectedTask: Task = {
+// default state, exported for fallback initial task in TaskContainer
+export const initialSelectedTask: Task = {
+  id: '',
   level: '',
   cost: '',
-  category: '',
+  categories: [],
   title: '',
-  question: '',
+  questionText: '',
   rewardText: '',
 };
 

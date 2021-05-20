@@ -1,25 +1,26 @@
-import API from '@aws-amplify/api';
 import React, { useContext, useEffect } from 'react';
-import { TaskProvider } from '../contexts/TaskContext';
-import { UserContext } from '../contexts/UserContext';
-import { listResponses } from '../graphql/queries';
+import { QuestionContext } from '../contexts/QuestionsContext';
+import { ResponseContext } from '../contexts/ResponseContext';
+import { TaskProvider, initialSelectedTask } from '../contexts/TaskContext';
 import { TaskScreen } from '../screens';
+import { Task } from '../types';
 
 const TaskContainer = () => {
-  const { userState } = useContext(UserContext);
+  const { questionState } = useContext(QuestionContext);
+  const { responseState } = useContext(ResponseContext);
 
-  useEffect(() => {
-    const getResponses = async () => {
-      const result: any = await API.graphql({
-        query: listResponses,
-        variables: { homeID: 'bet' },
-      });
-    };
-  }, []);
+  const questionMap = new Map(
+    questionState.items.map(question => [question.id, question]),
+  );
+  const questionsNotAnswered: Task[] = responseState.items
+    .filter(response => !questionMap.has(response.questionID))
+    .map(
+      response => questionMap.get(response.questionID) || initialSelectedTask,
+    );
 
   return (
     <TaskProvider>
-      <TaskScreen />
+      <TaskScreen tasks={questionsNotAnswered} />
     </TaskProvider>
   );
 };

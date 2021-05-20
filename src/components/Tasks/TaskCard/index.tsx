@@ -8,23 +8,24 @@ import styles from './styles';
 import { CostTextToSymbol } from '../../../utils';
 
 const TaskCard: React.FC<Task> = ({
+  id,
   level,
   title,
-  question,
-  category,
+  questionText,
+  categories,
   cost,
   rewardText,
 }) => {
-  const { setIsTaskCompletionRendered, setSelectedTask } = useContext(
-    TaskContext,
-  );
+  const { setIsTaskCompletionRendered, setSelectedTask } =
+    useContext(TaskContext);
 
   const selectCurrentTask = () => {
     setSelectedTask({
+      id,
       level,
       title,
-      question,
-      category,
+      questionText,
+      categories,
       cost,
       rewardText,
     });
@@ -48,7 +49,7 @@ const TaskCard: React.FC<Task> = ({
           <Text>{CostTextToSymbol[cost]}</Text>
         </View>
         <View style={styles.question}>
-          <Text style={styles.questionText}>{question}</Text>
+          <Text style={styles.questionText}>{questionText}</Text>
         </View>
       </View>
     </TouchableOpacity>

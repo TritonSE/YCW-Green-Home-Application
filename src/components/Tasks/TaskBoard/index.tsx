@@ -17,7 +17,7 @@ const TaskBoard: React.FC<Props> = ({ tasks }) => {
     ? tasks
     : tasks.filter(task => {
         if (filters.level && filters.level !== task.level) return false;
-        if (filters.category && filters.category !== task.category)
+        if (filters.category && filters.category in task.categories)
           return false;
         if (filters.cost && filters.cost !== task.cost) return false;
         return true;
@@ -25,13 +25,14 @@ const TaskBoard: React.FC<Props> = ({ tasks }) => {
 
   const taskComponents = filteredTasks.map(task => (
     <TaskCard
-      key={task.title} // TODO: use id when connected to backend
+      key={task.id}
+      id={task.id}
       level={task.level}
       title={task.title}
       rewardText={task.rewardText}
       cost={task.cost}
-      category={task.category}
-      question={task.question}
+      categories={task.categories}
+      questionText={task.questionText}
     />
   ));
 
