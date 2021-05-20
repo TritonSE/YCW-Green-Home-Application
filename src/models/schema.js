@@ -44,7 +44,11 @@ export const schema = {
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {}
+                    "properties": {
+                        "mutations": {
+                            "create": null
+                        }
+                    }
                 },
                 {
                     "type": "auth",
@@ -396,6 +400,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "questionID": {
+                    "name": "questionID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "home": {
                     "name": "home",
                     "isArray": false,
@@ -418,7 +429,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "association": {
-                        "connectionType": "BELONGS_TO",
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
                         "targetName": "questionID"
                     }
                 },
@@ -451,16 +463,6 @@ export const schema = {
                         "fields": [
                             "homeID",
                             "questionID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byQuestion",
-                        "fields": [
-                            "questionID",
-                            "homeID"
                         ]
                     }
                 },
@@ -568,20 +570,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": [],
                     "isArrayNullable": false
-                },
-                "responses": {
-                    "name": "responses",
-                    "isArray": true,
-                    "type": {
-                        "model": "Response"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "question"
-                    }
                 }
             },
             "syncable": true,
@@ -722,5 +710,5 @@ export const schema = {
             }
         }
     },
-    "version": "65c4cd401d518d71388345a16a442b07"
+    "version": "6fe8968c42e769e57a29ed63c0ed8b1f"
 };
