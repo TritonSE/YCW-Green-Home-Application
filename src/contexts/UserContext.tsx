@@ -4,6 +4,7 @@ import React, {
   SetStateAction,
   useState,
 } from 'react';
+import { GetUserQuery, ModelHomeOwnerConnection } from '../API';
 
 interface UserState {
   userState: {
@@ -12,11 +13,7 @@ interface UserState {
     _version: 1;
     createdAt: '';
     displayName: '';
-    homes: {
-      items: [];
-      nextToken: null;
-      startedAt: null;
-    };
+    homes: ModelHomeOwnerConnection;
     id: '';
     owner: '';
     updatedAt: '';
@@ -52,6 +49,7 @@ const initialState: UserState = {
     createdAt: '',
     displayName: '',
     homes: {
+      __typename: 'ModelHomeOwnerConnection',
       items: [],
       nextToken: null,
       startedAt: null,

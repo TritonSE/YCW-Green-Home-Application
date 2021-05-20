@@ -4,7 +4,7 @@ import React, {
   SetStateAction,
   useState,
 } from 'react';
-import { Task } from '../types';
+import { CompletedTask, Task } from '../types';
 
 interface TaskFilters {
   level: string;
@@ -16,9 +16,11 @@ interface TaskState {
   isTaskCompletionRendered: boolean;
   selectedTask: Task;
   filters: TaskFilters;
+  tasksCompleted: CompletedTask[];
   setIsTaskCompletionRendered: Dispatch<SetStateAction<boolean>> | (() => void);
   setSelectedTask: Dispatch<SetStateAction<Task>> | (() => void);
   setFilters: Dispatch<SetStateAction<TaskFilters>> | (() => void);
+  setTasksCompleted: Dispatch<SetStateAction<CompletedTask[]>> | (() => void);
 }
 
 // default state
@@ -37,13 +39,24 @@ const initialFilters: TaskFilters = {
   category: '',
 };
 
+const initialTasksCompleted: CompletedTask[] = [
+  {
+    id: '',
+    homeID: '',
+    questionID: '',
+    answer: '',
+  },
+];
+
 const initialState: TaskState = {
   isTaskCompletionRendered: false,
   selectedTask: initialSelectedTask,
   filters: initialFilters,
+  tasksCompleted: initialTasksCompleted,
   setIsTaskCompletionRendered: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
   setSelectedTask: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
   setFilters: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  setTasksCompleted: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
 };
 
 // context and provider
@@ -54,6 +67,9 @@ export const TaskProvider: React.FC = ({ children }) => {
   );
   const [selectedTask, setSelectedTask] = useState(initialState.selectedTask);
   const [filters, setFilters] = useState(initialState.filters);
+  const [tasksCompleted, setTasksCompleted] = useState(
+    initialState.tasksCompleted,
+  );
 
   return (
     <TaskContext.Provider
@@ -61,9 +77,11 @@ export const TaskProvider: React.FC = ({ children }) => {
         isTaskCompletionRendered,
         selectedTask,
         filters,
+        tasksCompleted,
         setIsTaskCompletionRendered,
         setSelectedTask,
         setFilters,
+        setTasksCompleted,
       }}
     >
       {children}

@@ -6,3 +6,10 @@ export interface Task {
   cost: string;
   rewardText: string;
 }
+
+export interface CompletedTask {
+  id: string;
+  homeID: string;
+  questionID: string;
+  answer: string;
+}

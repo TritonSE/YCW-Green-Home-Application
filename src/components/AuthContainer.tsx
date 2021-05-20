@@ -14,6 +14,7 @@ import { UserContext } from '../contexts/UserContext';
 import { QuestionProvider } from '../contexts/QuestionsContext';
 import { customResponses } from '../customQueries';
 import { ResponseProvider } from '../contexts/ResponseContext';
+import { GetUserQuery } from '../API';
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -24,11 +25,11 @@ function App(): JSX.Element | null {
   useEffect(() => {
     const getUserData = async () => {
       const user = await Auth.currentAuthenticatedUser();
-      const result: any = await API.graphql({
+      const result = (await API.graphql({
         query: getUser,
         variables: { id: user.attributes.sub },
-      });
-      setUserState(result.data.getUser);
+      })) as { data: GetUserQuery };
+      // setUserState(result.data.getUser);
     };
     getUserData();
 
