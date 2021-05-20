@@ -10,8 +10,10 @@ import {
   BadgeScreen,
   ProfileScreen,
 } from '../screens/index';
-import { customListQuestions } from '../customQueries';
+import { customListQuestions, customResponses } from '../customQueries';
 import { QuestionContext } from '../contexts/QuestionsContext';
+import { ResponseContext } from '../contexts/ResponseContext';
+import { UserContext } from '../contexts/UserContext';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,15 +32,26 @@ const NavRoutesToIcon = {
 
 export default function NavFlow() {
   const { setQuestionState } = useContext(QuestionContext);
+  const { setResponseState } = useContext(ResponseContext);
+  const { userState } = useContext(UserContext);
   useEffect(() => {
     const getQuestions = async () => {
       const result: any = await API.graphql({
         query: customListQuestions,
       });
       setQuestionState({ items: result.data.listQuestions.items });
+      const responses: any = await API.graphql({
+        query: customResponses,
+        variables: { filter: { homeID: userState.homes.items[0].home.id } },
+      });
+
+      if (responses.data.listResponses.items.length !== 0) {
+        setResponseState({ items: responses.data.listResponses.items });
+      }
     };
+
     getQuestions();
-  }, [setQuestionState]);
+  }, [setQuestionState, setResponseState, userState]);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

@@ -12,6 +12,8 @@ import NavFlow from './NavContainer';
 import { getUser } from '../graphql/queries';
 import { UserContext } from '../contexts/UserContext';
 import { QuestionProvider } from '../contexts/QuestionsContext';
+import { customResponses } from '../customQueries';
+import { ResponseProvider } from '../contexts/ResponseContext';
 
 Auth.configure({ mandatorySignIn: true });
 
@@ -45,7 +47,9 @@ function App(): JSX.Element | null {
       {appState === 'App' && (
         <SafeAreaView style={{ flex: 1 }}>
           <QuestionProvider>
-            <NavFlow />
+            <ResponseProvider>
+              <NavFlow />
+            </ResponseProvider>
           </QuestionProvider>
         </SafeAreaView>
       )}
