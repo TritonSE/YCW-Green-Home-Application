@@ -28,3 +28,64 @@ export const customResponses = /* GraphQL */ `
     }
   }
 `;
+
+export const customGetUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      username
+      displayName
+      createdAt
+      updatedAt
+      owner
+      homes {
+        items {
+          id
+          homeID
+          homeOwnerID
+          createdAt
+          updatedAt
+          homeOwner {
+            id
+            username
+            displayName
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+          home {
+            id
+            addressLine1
+            addressLine2
+            city
+            addressState
+            country
+            zipcode
+            yearBuilt
+            outDoorArea
+            livableArea
+            bedroomCount
+            bathroomCount
+            heatingFuelType
+            heaterAge
+            waterHeaterFuelType
+            waterHeaterAge
+            hasAirConditioner
+            hasPool
+            hasHotTub
+            annualElectricalEnergyUsage
+            annualGasPropaneEnergyUsage
+            annualWaterUsage
+            createdAt
+            updatedAt
+            owner
+            homeowners
+          }
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
