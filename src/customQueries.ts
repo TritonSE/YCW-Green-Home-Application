@@ -14,3 +14,17 @@ export const customListQuestions = /* GraphQL */ `
     }
   }
 `;
+
+export const customResponses = /* GraphQL */ `
+  query responsesQuery {
+    listResponses {
+      items {
+        id
+        homeID
+        questionID
+        answer
+        createdAt
+      }
+    }
+  }
+`;

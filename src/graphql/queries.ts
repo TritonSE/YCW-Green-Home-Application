@@ -568,22 +568,6 @@ export const listQuestions = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-        responses {
-          items {
-            id
-            homeID
-            questionID
-            answer
-            createdAt
-            _version
-            _deleted
-            _lastChangedAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
       }
       nextToken
       startedAt
@@ -606,68 +590,6 @@ export const getQuestion = /* GraphQL */ `
       createdAt
       updatedAt
       owner
-      responses {
-        items {
-          id
-          homeID
-          questionID
-          answer
-          createdAt
-          _version
-          _deleted
-          _lastChangedAt
-          updatedAt
-          home {
-            id
-            addressLine1
-            addressLine2
-            city
-            addressState
-            country
-            zipcode
-            yearBuilt
-            outDoorArea
-            livableArea
-            bedroomCount
-            bathroomCount
-            heatingFuelType
-            heaterAge
-            waterHeaterFuelType
-            waterHeaterAge
-            hasAirConditioner
-            hasPool
-            hasHotTub
-            annualElectricalEnergyUsage
-            annualGasPropaneEnergyUsage
-            annualWaterUsage
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-            homeowners
-          }
-          question {
-            id
-            title
-            questionText
-            rewardText
-            level
-            cost
-            categories
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          owner
-        }
-        nextToken
-        startedAt
-      }
     }
   }
 `;
@@ -698,22 +620,6 @@ export const syncQuestions = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-        responses {
-          items {
-            id
-            homeID
-            questionID
-            answer
-            createdAt
-            _version
-            _deleted
-            _lastChangedAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
       }
       nextToken
       startedAt
@@ -808,22 +714,6 @@ export const getResponse = /* GraphQL */ `
         createdAt
         updatedAt
         owner
-        responses {
-          items {
-            id
-            homeID
-            questionID
-            answer
-            createdAt
-            _version
-            _deleted
-            _lastChangedAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
       }
       owner
     }
@@ -899,10 +789,6 @@ export const listResponses = /* GraphQL */ `
           createdAt
           updatedAt
           owner
-          responses {
-            nextToken
-            startedAt
-          }
         }
         owner
       }
@@ -991,10 +877,6 @@ export const getResponsesByCreatedAt = /* GraphQL */ `
           createdAt
           updatedAt
           owner
-          responses {
-            nextToken
-            startedAt
-          }
         }
         owner
       }
@@ -1079,10 +961,6 @@ export const syncResponses = /* GraphQL */ `
           createdAt
           updatedAt
           owner
-          responses {
-            nextToken
-            startedAt
-          }
         }
         owner
       }
