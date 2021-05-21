@@ -83,8 +83,6 @@ export const customGetUser = /* GraphQL */ `
             homeowners
           }
         }
-        nextToken
-        startedAt
       }
     }
   }
