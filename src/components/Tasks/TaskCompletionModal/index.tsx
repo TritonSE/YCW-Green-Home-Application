@@ -15,7 +15,7 @@ const TaskCompletionModal: React.FC = () => {
     isTaskCompletionRendered,
   } = useContext(TaskContext);
   const [isCompleted, setIsCompleted] = useState(false);
-  const { level, category, cost, question } = selectedTask;
+  const { level, categories, cost, questionText } = selectedTask;
 
   const completeCurrentTask = () => {
     // TODO: implement API calls
@@ -51,14 +51,15 @@ const TaskCompletionModal: React.FC = () => {
             <View style={styles.statsContainer}>
               <Text style={styles.statsText}>Level: {toProperCase(level)}</Text>
               <Text style={styles.statsText}>
-                Category: {toProperCase(category)}
+                Categories:{' '}
+                {categories.map(category => toProperCase(category)).join(', ')}
               </Text>
               <Text style={styles.statsText}>
                 Cost: {CostTextToSymbol[cost]}
               </Text>
             </View>
             <View style={styles.questionContainer}>
-              <Text style={styles.questionText}>{question}</Text>
+              <Text style={styles.questionText}>{questionText}</Text>
             </View>
             <View style={styles.dropdownContainer}>
               <DropDownPicker

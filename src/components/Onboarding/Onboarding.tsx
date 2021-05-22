@@ -21,7 +21,7 @@ const Stack = createStackNavigator();
 interface Props {
   homeInformation?: CreateHomeInput;
 }
-
+const i = 0;
 const Onboarding: React.FC<Props> = ({ homeInformation }) => {
   const [page, setPage] = useState('');
   const [homeData, setHomeData] = useState(homeInformation ?? homeInfo);
@@ -30,6 +30,7 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
 
   useEffect(() => {
     const addHome = async () => {
+      console.log('sdfsdfsfd', i);
       let result: any;
       if (homeInformation !== undefined) {
         result = await API.graphql({

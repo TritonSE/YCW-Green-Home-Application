@@ -9,14 +9,12 @@ const TaskContainer = () => {
   const { questionState } = useContext(QuestionContext);
   const { responseState } = useContext(ResponseContext);
 
-  const questionMap = new Map(
-    questionState.items.map(question => [question.id, question]),
+  const responseMap = new Map(
+    responseState.items.map(response => [response.questionID, response]),
   );
-  const questionsNotAnswered: Task[] = responseState.items
-    .filter(response => !questionMap.has(response.questionID))
-    .map(
-      response => questionMap.get(response.questionID) || initialSelectedTask,
-    );
+  const questionsNotAnswered: Task[] = questionState.items.filter(
+    question => !responseMap.has(question.id),
+  );
 
   return (
     <TaskProvider>
