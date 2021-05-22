@@ -3,10 +3,15 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { BottomSheet } from 'react-native-elements';
+import { API } from '@aws-amplify/api';
 import SvgContainer from '../../SvgContainer';
 import { toProperCase, CostTextToSymbol } from '../../../utils';
 import { TaskContext } from '../../../contexts/TaskContext';
 import styles from './styles';
+import { createResponse } from '../../../graphql/mutations';
+import { UserContext } from '../../../contexts/UserContext';
+import { CreateResponseMutation } from '../../../API';
+import { ResponseContext } from '../../../contexts/ResponseContext';
 
 const TaskCompletionModal: React.FC = () => {
   const {
@@ -14,11 +19,34 @@ const TaskCompletionModal: React.FC = () => {
     setIsTaskCompletionRendered,
     isTaskCompletionRendered,
   } = useContext(TaskContext);
+  const { userState } = useContext(UserContext);
+  const { responseState, setResponseState } = useContext(ResponseContext);
   const [isCompleted, setIsCompleted] = useState(false);
   const { level, categories, cost, questionText } = selectedTask;
 
-  const completeCurrentTask = () => {
-    // TODO: implement API calls
+  const completeCurrentTask = async () => {
+    const response = {
+      homeID: userState.homes.items[0].id,
+      questionID: selectedTask.id,
+      answer: 'Y',
+    };
+    const result: any = await API.graphql({
+      query: createResponse,
+      variables: { input: response },
+    });
+    const { id, createdAt } = result.data.createResponse;
+    if (!result.error) {
+      setResponseState({
+        items: [
+          ...responseState.items,
+          {
+            id,
+            createdAt,
+            ...response,
+          },
+        ],
+      });
+    }
     setIsTaskCompletionRendered(false);
   };
 
