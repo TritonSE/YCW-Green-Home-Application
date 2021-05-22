@@ -28,11 +28,11 @@ function App(): JSX.Element | null {
         variables: { id: user.attributes.sub },
       });
       setUserState(result.data.getUser);
+      setAppState('Loading');
     };
     if (userState.id === '') {
       getUserData();
-      setAppState('Loading');
-    } else if (userState.homes?.items?.length === 0 && appState !== 'App') {
+    } else if (userState.homes.items.length === 0 && appState !== 'App') {
       setAppState('Onboarding');
     } else {
       setAppState('App');

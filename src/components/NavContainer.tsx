@@ -34,7 +34,7 @@ export default function NavFlow() {
   const { setResponseState } = useContext(ResponseContext);
   const { userState } = useContext(UserContext);
   useEffect(() => {
-    const getQuestions = async () => {
+    const getQuestionsAndResponses = async () => {
       const result: any = await API.graphql({
         query: customListQuestions,
       });
@@ -49,8 +49,7 @@ export default function NavFlow() {
         setResponseState({ items: responses.data.listResponses.items });
       }
     };
-
-    getQuestions();
+    getQuestionsAndResponses();
   }, [setQuestionState, setResponseState, userState]);
   return (
     <Tab.Navigator
