@@ -51,8 +51,8 @@ const TaskHeader = () => {
           label="Level"
           data={options.levels}
           onChangeText={value => updateFilters('level', value)}
-          containerStyle={styles.dropdownContainer}
           itemCount={options.levels.length}
+          containerStyle={styles.dropdownContainer}
         />
         <Dropdown
           itemColor="rgba(0, 0, 0, .54)"
