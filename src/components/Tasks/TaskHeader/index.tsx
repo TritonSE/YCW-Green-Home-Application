@@ -47,6 +47,7 @@ const TaskHeader = () => {
 
       <View style={styles.dropdownWrapper}>
         <Dropdown
+          value="All"
           itemColor="rgba(0, 0, 0, .54)"
           label="Level"
           data={options.levels}
@@ -57,6 +58,7 @@ const TaskHeader = () => {
           underlineColor="transparent"
         />
         <Dropdown
+          value="All"
           itemColor="rgba(0, 0, 0, .54)"
           label="Category"
           data={options.categories}
@@ -67,6 +69,7 @@ const TaskHeader = () => {
           underlineColor="transparent"
         />
         <Dropdown
+          value="All"
           itemColor="rgba(0, 0, 0, .54)"
           label="Cost"
           data={options.costs}
