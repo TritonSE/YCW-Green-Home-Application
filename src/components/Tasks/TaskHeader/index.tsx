@@ -53,6 +53,8 @@ const TaskHeader = () => {
           onChangeText={value => updateFilters('level', value)}
           itemCount={options.levels.length}
           containerStyle={styles.dropdownContainer}
+          useNativeDriver
+          underlineColor="transparent"
         />
         <Dropdown
           itemColor="rgba(0, 0, 0, .54)"
@@ -61,6 +63,8 @@ const TaskHeader = () => {
           onChangeText={value => updateFilters('category', value)}
           containerStyle={styles.dropdownContainer}
           itemCount={options.categories.length}
+          useNativeDriver
+          underlineColor="transparent"
         />
         <Dropdown
           itemColor="rgba(0, 0, 0, .54)"
@@ -69,6 +73,8 @@ const TaskHeader = () => {
           onChangeText={value => updateFilters('cost', value)}
           containerStyle={styles.dropdownContainer}
           itemCount={options.costs.length}
+          useNativeDriver
+          underlineColor="transparent"
         />
       </View>
     </View>

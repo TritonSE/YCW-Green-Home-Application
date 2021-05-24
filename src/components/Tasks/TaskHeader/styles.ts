@@ -31,13 +31,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     minWidth: '100%',
   },
-  dropdownOverlay: {
-    fontSize: 12,
-  },
   dropdownContainer: {
     width: '25%',
     height: '80%',
     backgroundColor: 'white',
+    borderRadius: 20,
   },
 });
 

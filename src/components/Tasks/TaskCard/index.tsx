@@ -16,8 +16,9 @@ const TaskCard: React.FC<Task> = ({
   cost,
   rewardText,
 }) => {
-  const { setIsTaskCompletionRendered, setSelectedTask } =
-    useContext(TaskContext);
+  const { setIsTaskCompletionRendered, setSelectedTask } = useContext(
+    TaskContext,
+  );
 
   const selectCurrentTask = () => {
     setSelectedTask({

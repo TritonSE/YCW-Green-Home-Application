@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   card: {
-    width: 160,
+    width: 170,
     height: 180,
     marginTop: 20,
     backgroundColor: '#FFFFFF',
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   },
   cost: {
     justifyContent: 'flex-start',
+    fontStyle: 'italic',
   },
   question: {
     marginTop: 10,
