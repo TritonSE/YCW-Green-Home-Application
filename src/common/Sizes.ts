@@ -1,7 +1,7 @@
 export default {
   topPadding: {
-    ios: 44,
-    android: 40,
+    ios: 15,
+    android: 30,
   },
   text: {
     title: 20,

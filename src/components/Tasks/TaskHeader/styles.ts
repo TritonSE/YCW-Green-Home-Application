@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   dropdownContainer: {
     width: '25%',
-    height: '80%',
+    height: '75%',
     backgroundColor: 'white',
     borderRadius: 20,
   },

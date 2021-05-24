@@ -56,6 +56,7 @@ const TaskHeader = () => {
           containerStyle={styles.dropdownContainer}
           useNativeDriver
           underlineColor="transparent"
+          dropdownOffset={{ top: 12, left: 0 }}
         />
         <Dropdown
           value="All"

@@ -15,13 +15,15 @@ const TaskScreen: React.FC<Props> = ({ tasks }) => {
   const { isTaskCompletionRendered } = useContext(TaskContext);
 
   return (
-    <View style={styles.header}>
-      <TaskHeader />
-      <ScrollView contentContainerStyle={styles.container}>
-        <TaskBoard tasks={tasks} />
-        {isTaskCompletionRendered && <TaskCompletionModal />}
-      </ScrollView>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'red' }}>
+      <View style={styles.header}>
+        <TaskHeader />
+        <ScrollView contentContainerStyle={styles.container}>
+          <TaskBoard tasks={tasks} />
+          {isTaskCompletionRendered && <TaskCompletionModal />}
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 };
 

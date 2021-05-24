@@ -28,7 +28,7 @@ const badgeXMLs: badgeXMLObj = {
   'Home Insulation Recycled Material': XMLs.homeInsulRecycledMaterialXML,
   'Home Insulation Batt or Loose-fill': XMLs.homeInsulBattOrLooseFillXML,
   'Energy Audit': XMLs.energyAuditXML,
-  "Home's certified": XMLs.homeCertifiedXML,
+  "Home's Certified": XMLs.homeCertifiedXML,
   'Ductwork Pressure Balance': XMLs.ductworkPressureBalanceXML,
   'HVAC Air Flow': XMLs.hvacAirFlowXML,
   'Energy Offset': XMLs.energyOffsetXML,
