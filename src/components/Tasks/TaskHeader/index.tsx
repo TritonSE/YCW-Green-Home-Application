@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
 import { Dropdown } from 'react-native-material-dropdown-no-proptypes';
 import { TaskContext } from '../../../contexts/TaskContext';
 import styles from './styles';
@@ -19,17 +18,28 @@ const TaskHeader = () => {
     });
   };
 
-  const data = [
-    {
-      value: 'Banana',
-    },
-    {
-      value: 'Mango',
-    },
-    {
-      value: 'Pear',
-    },
-  ];
+  const options = {
+    levels: [
+      { label: 'All', value: '' },
+      { label: 'Starter', value: 'STARTER' },
+      { label: 'Intermediate', value: 'INTERMEDIATE' },
+      { label: 'Guru', value: 'GURU' },
+    ],
+    categories: [
+      { label: 'All', value: '' },
+      { label: 'Energy', value: 'ENERGY' },
+      { label: 'Resiliency', value: 'RESILIENCY' },
+      { label: 'Water', value: 'WATER' },
+      { label: 'Health', value: 'Health' },
+    ],
+    costs: [
+      { label: 'All', value: '' },
+      { label: '$', value: 'ONE' },
+      { label: '$$', value: 'TWO' },
+      { label: '$$$', value: 'THREE' },
+    ],
+  };
+
   return (
     <View style={styles.wrapper}>
       <Text style={styles.title}>{HEADER_TITLE}</Text>
@@ -38,56 +48,22 @@ const TaskHeader = () => {
       <View style={styles.dropdownWrapper}>
         <Dropdown
           itemColor="rgba(0, 0, 0, .54)"
-          label="Favorite Fruit"
-          data={data}
+          label="Level"
+          data={options.levels}
+          onChangeText={value => updateFilters('level', value)}
         />
-        <Dropdown label="Favorite Fruit" data={data} />
-        <Dropdown label="Favorite Fruit" data={data} />
-        {/**
-        <DropDownPicker
-          items={[
-            { label: "LEVEL", value: "", selected: true },
-            { label: "Starter", value: "STARTER" },
-            { label: "Intermediate", value: "INTERMEDIATE" },
-            { label: "Guru", value: "GURU" },
-          ]}
-          containerStyle={styles.dropdownContainer}
-          labelStyle={styles.dropdownLabel}
-          itemStyle={styles.dropdownItem}
-          style={styles.dropdownBox}
-          showArrow
-          onChangeItem={(item) => updateFilters("level", item.value)}
+        <Dropdown
+          itemColor="rgba(0, 0, 0, .54)"
+          label="Category"
+          data={options.categories}
+          onChangeText={value => updateFilters('category', value)}
         />
-        <DropDownPicker
-          items={[
-            { label: "CATEGORY", value: "", selected: true },
-            { label: "Energy", value: "ENERGY" },
-            { label: "Resiliency", value: "RESILIENCY" },
-            { label: "Water", value: "WATER" },
-            { label: "Health", value: "Health" },
-          ]}
-          containerStyle={styles.dropdownContainer}
-          labelStyle={styles.dropdownLabel}
-          itemStyle={styles.dropdownItem}
-          style={styles.dropdownBox}
-          showArrow
-          onChangeItem={(item) => updateFilters("category", item.value)}
+        <Dropdown
+          itemColor="rgba(0, 0, 0, .54)"
+          label="Cost"
+          data={options.categories}
+          onChangeText={value => updateFilters('cost', value)}
         />
-        <DropDownPicker
-          items={[
-            { label: "COST", value: "", selected: true },
-            { label: "$", value: "ONE" },
-            { label: "$$", value: "TWO" },
-            { label: "$$", value: "THREE" },
-          ]}
-          containerStyle={styles.dropdownContainer}
-          labelStyle={styles.dropdownLabel}
-          itemStyle={styles.dropdownItem}
-          style={styles.dropdownBox}
-          showArrow
-          onChangeItem={(item) => updateFilters("cost", item.value)}
-        />
-          * */}
       </View>
     </View>
   );

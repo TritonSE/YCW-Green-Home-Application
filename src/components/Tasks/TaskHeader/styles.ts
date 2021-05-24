@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     minHeight: '30%',
   },
   dropdownContainer: {
-    width: '200%',
-    height: '20%',
+    width: '125%',
+    height: '80%',
   },
   dropdownBox: {
     paddingHorizontal: 2,
