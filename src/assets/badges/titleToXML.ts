@@ -1,8 +1,20 @@
 import * as XMLs from './svgXMLs';
 
-interface badgeXMLObj {
-  [key: string]: string;
+interface xmlObj {
+  normal: string;
+  grayscale: string;
 }
+
+interface badgeXMLObj {
+  [key: string]: xmlObj;
+}
+
+const xmlsToObj = (normalXML: string, grayscaleXML: string): xmlObj => {
+  return {
+    normal: normalXML,
+    grayscale: grayscaleXML,
+  };
+};
 
 const badgeXMLs: badgeXMLObj = {
   'Ceiling Fans': XMLs.ceilingFansXML,

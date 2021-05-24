@@ -1,35 +1,71 @@
-import ceilingFansXML from './ceilingFans';
-import smartThermostatXML from './smartThermostat';
-import ledLightsXML from './ledLights';
-import insulatedCellularShadesXML from './insulCellularShades';
-import washingMachinesXML from './washingMachines';
-import dryersXML from './dryers';
-import laundryLineXML from './laundryLine';
-import refrigeratorXML from './refrigerator';
-import energyMonitoringSystemXML from './energyMonitoringSystem';
-import naturalSiteXML from './naturalSite';
-import rainwaterHarvestingSystemXML from './rainwaterHarvestingSystem';
-import shortenedShowerXML from './shortenedShower';
-import compostXML from './compost';
-import cookingCirculationXML from './cookingCirculation';
-import lowerThermostatXML from './lowerThermostat';
-import ductsSealedXML from './ductsSealed';
-import airSealedHomeXML from './airSealedHome';
-import homeInsulStandardXML from './homeInsulStandard';
-import builtLandscapeXML from './builtLandscape';
-import exteriorDeckXML from './exteriorDeck';
-import homeInsulRecycledMaterialXML from './homeInsulRecycledMaterial';
-import homeInsulBattOrLooseFillXML from './homeInsulBattOrLooseFill';
-import energyAuditXML from './energyAudit';
-import homeCertifiedXML from './homeCertified';
-import ductworkPressureBalanceXML from './ductworkPressureBalance';
-import hvacAirFlowXML from './hvacAirFlow';
-import energyOffsetXML from './energyOffset';
-import batteryStorageXML from './batteryStorage';
-import fastChargingStationXML from './fastChargingStation';
-import heatPumpWaterHeaterXML from './heatPumpWaterHeater';
-import tanklessWaterHeaterXML from './tanklessWaterHeater';
-import condensingWaterHeaterXML from './condensingWaterHeater';
+import { ceilingFansXML, grayCeilingFansXML } from './ceilingFans';
+import { smartThermostatXML, graySmartThermostatXML } from './smartThermostat';
+import { ledLightsXML, grayLedLightsXML } from './ledLights';
+import {
+  insulatedCellularShadesXML,
+  grayInsulatedCellularShadesXML,
+} from './insulCellularShades';
+import { washingMachinesXML, grayWashingMachinesXML } from './washingMachines';
+import { dryersXML, grayDryersXML } from './dryers';
+import { laundryLineXML, grayLaundryLineXML } from './laundryLine';
+import { refrigeratorXML, grayRefrigeratorXML } from './refrigerator';
+import {
+  energyMonitoringSystemXML,
+  grayEnergyMonitoringSystemXML,
+} from './energyMonitoringSystem';
+import { naturalSiteXML, grayNaturalSiteXML } from './naturalSite';
+import {
+  rainwaterHarvestingSystemXML,
+  grayRainwaterHarvestingSystemXML,
+} from './rainwaterHarvestingSystem';
+import { shortenedShowerXML, grayShortenedShowerXML } from './shortenedShower';
+import { compostXML, grayCompostXML } from './compost';
+import {
+  cookingCirculationXML,
+  grayCookingCirculationXML,
+} from './cookingCirculation';
+import { lowerThermostatXML, grayLowerThermostatXML } from './lowerThermostat';
+import { ductsSealedXML, grayDuctsSealedXML } from './ductsSealed';
+import { airSealedHomeXML, grayAirSealedHomeXML } from './airSealedHome';
+import {
+  homeInsulStandardXML,
+  grayHomeInsulStandardXML,
+} from './homeInsulStandard';
+import { builtLandscapeXML, grayBuiltLandscapeXML } from './builtLandscape';
+import { exteriorDeckXML, grayExteriorDeckXML } from './exteriorDeck';
+import {
+  homeInsulRecycledMaterialXML,
+  grayHomeInsulRecycledMaterialXML,
+} from './homeInsulRecycledMaterial';
+import {
+  homeInsulBattOrLooseFillXML,
+  grayHomeInsulBattOrLooseFillXML,
+} from './homeInsulBattOrLooseFill';
+import { energyAuditXML, grayEnergyAuditXML } from './energyAudit';
+import { homeCertifiedXML, grayHomeCertifiedXML } from './homeCertified';
+import {
+  ductworkPressureBalanceXML,
+  grayDuctworkPressureBalanceXML,
+} from './ductworkPressureBalance';
+import { hvacAirFlowXML, grayHVACAirFlowXML } from './hvacAirFlow';
+import { energyOffsetXML, grayEnergyOffsetXML } from './energyOffset';
+import { batteryStorageXML, grayBatteryStorageXML } from './batteryStorage';
+import {
+  fastChargingStationXML,
+  grayFastChargingStationXML,
+} from './fastChargingStation';
+import {
+  heatPumpWaterHeaterXML,
+  grayHeatPumpWaterHeaterXML,
+} from './heatPumpWaterHeater';
+import {
+  tanklessWaterHeaterXML,
+  grayTanklessWaterHeaterXML,
+} from './tanklessWaterHeater';
+import {
+  condensingWaterHeaterXML,
+  grayCondensingWaterHeaterXML,
+} from './condensingWaterHeater';
 
 export {
   ceilingFansXML,
@@ -64,4 +100,36 @@ export {
   heatPumpWaterHeaterXML,
   tanklessWaterHeaterXML,
   condensingWaterHeaterXML,
+  grayCeilingFansXML,
+  graySmartThermostatXML,
+  grayLedLightsXML,
+  grayInsulatedCellularShadesXML,
+  grayWashingMachinesXML,
+  grayDryersXML,
+  grayLaundryLineXML,
+  grayRefrigeratorXML,
+  grayEnergyMonitoringSystemXML,
+  grayNaturalSiteXML,
+  grayRainwaterHarvestingSystemXML,
+  grayShortenedShowerXML,
+  grayCompostXML,
+  grayCookingCirculationXML,
+  grayLowerThermostatXML,
+  grayDuctsSealedXML,
+  grayAirSealedHomeXML,
+  grayHomeInsulStandardXML,
+  grayBuiltLandscapeXML,
+  grayExteriorDeckXML,
+  grayHomeInsulRecycledMaterialXML,
+  grayHomeInsulBattOrLooseFillXML,
+  grayEnergyAuditXML,
+  grayHomeCertifiedXML,
+  grayDuctworkPressureBalanceXML,
+  grayHVACAirFlowXML,
+  grayEnergyOffsetXML,
+  grayBatteryStorageXML,
+  grayFastChargingStationXML,
+  grayHeatPumpWaterHeaterXML,
+  grayTanklessWaterHeaterXML,
+  grayCondensingWaterHeaterXML,
 };
