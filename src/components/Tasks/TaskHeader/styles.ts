@@ -28,21 +28,13 @@ const styles = StyleSheet.create({
   dropdownWrapper: {
     paddingTop: 10,
     flexDirection: 'row',
-    minHeight: '30%',
+    justifyContent: 'space-evenly',
+    minWidth: '100%',
   },
   dropdownContainer: {
-    width: '125%',
+    width: '25%',
     height: '80%',
-  },
-  dropdownBox: {
-    paddingHorizontal: 2,
-    paddingVertical: 1,
-  },
-  dropdownLabel: {
-    fontSize: 12,
-  },
-  dropdownItem: {
-    justifyContent: 'flex-start',
+    backgroundColor: 'white',
   },
 });
 

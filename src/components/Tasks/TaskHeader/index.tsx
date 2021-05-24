@@ -51,18 +51,24 @@ const TaskHeader = () => {
           label="Level"
           data={options.levels}
           onChangeText={value => updateFilters('level', value)}
+          containerStyle={styles.dropdownContainer}
+          itemCount={options.levels.length}
         />
         <Dropdown
           itemColor="rgba(0, 0, 0, .54)"
           label="Category"
           data={options.categories}
           onChangeText={value => updateFilters('category', value)}
+          containerStyle={styles.dropdownContainer}
+          itemCount={options.categories.length}
         />
         <Dropdown
           itemColor="rgba(0, 0, 0, .54)"
           label="Cost"
-          data={options.categories}
+          data={options.costs}
           onChangeText={value => updateFilters('cost', value)}
+          containerStyle={styles.dropdownContainer}
+          itemCount={options.costs.length}
         />
       </View>
     </View>
