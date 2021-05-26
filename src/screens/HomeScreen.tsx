@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Text, View } from 'react-native';
 import SvgContainer from '../components/SvgContainer';
 import { QuestionContext } from '../contexts/QuestionsContext';
@@ -38,17 +38,24 @@ export const HomeScreen = () => {
 
   return (
     <View>
-      {badgesList.map(badge => {
+      {badgesList.map((badge, index) => {
         if (badge !== undefined) {
-          return <SvgContainer badgeTitle={badge} height="40" width="40" />;
+          return (
+            <SvgContainer
+              badgeTitle={badge}
+              height="40"
+              width="40"
+              key={index} // eslint-disable-line react/no-array-index-key
+            />
+          );
         }
-        return <Text>No Badge Found</Text>;
+        return <Fragment key={index} />; // eslint-disable-line react/no-array-index-key
       })}
-      {completedTextList.map(text => {
+      {completedTextList.map((text, index) => {
         if (text !== undefined) {
-          return <Text>{text}</Text>;
+          return <Text key={index}>{text}</Text>; // eslint-disable-line react/no-array-index-key
         }
-        return <Text>No Badge Found</Text>;
+        return <Fragment key={index} />; // eslint-disable-line react/no-array-index-key
       })}
     </View>
   );
