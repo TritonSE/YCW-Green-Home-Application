@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ProfilePage1 } from '../components/Profile/ProfilePage1';
+import { ProfilePage } from '../components/Profile/ProfilePage';
 import { SettingsScreen } from '../components/Profile/SettingsScreen';
 import Onboarding from '../components/Onboarding/Onboarding';
 import { UserContext } from '../contexts/UserContext';
@@ -29,7 +29,7 @@ export function ProfileScreen() {
       >
         <Stack.Screen
           name="Profile"
-          component={ProfilePage1}
+          component={ProfilePage}
           options={{ headerShown: false }}
         />
         <Stack.Screen

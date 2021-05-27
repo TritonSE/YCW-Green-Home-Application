@@ -7,7 +7,7 @@ import ProfileHeader from '../ProfileHeader';
 import ProfileContainer from '../ProfileContainer';
 import HomeContainer from '../HomeContainer';
 
-export function ProfilePage1() {
+export function ProfilePage() {
   return (
     <KeyboardAwareScrollView
       keyboardOpeningTime={0}
