@@ -77,10 +77,6 @@ export const customGetUser = /* GraphQL */ `
             annualElectricalEnergyUsage
             annualGasPropaneEnergyUsage
             annualWaterUsage
-            createdAt
-            updatedAt
-            owner
-            homeowners
           }
         }
       }
