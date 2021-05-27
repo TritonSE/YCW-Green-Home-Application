@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Auth } from 'aws-amplify';
+import API from '@aws-amplify/api';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { AppContext } from '../../../contexts/AppContext';
 import { UserContext } from '../../../contexts/UserContext';
+import { updateHome } from '../../../graphql/mutations';
 
 import SettingsBox from '../SettingsBox';
 
@@ -40,22 +42,6 @@ const SettingsContainer = () => {
   const signOut = async () => {
     try {
       await Auth.signOut();
-      setUserState({
-        _deleted: null,
-        _lastChangedAt: 0,
-        _version: 1,
-        createdAt: '',
-        displayName: '',
-        homes: {
-          items: [],
-          nextToken: null,
-          startedAt: null,
-        },
-        id: '',
-        owner: '',
-        updatedAt: '',
-        username: '',
-      });
       setAppState('Auth');
     } catch (error) {
       console.error('Error signing out: ', error);
