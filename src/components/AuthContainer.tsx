@@ -30,9 +30,9 @@ function App(): JSX.Element | null {
       });
       setUserState(result.data.getUser);
     };
-    getUserData();
 
     if (userState.id === '') {
+      getUserData();
       setAppState('Loading');
     } else if (userState.homes.items.length === 0 && appState !== 'App') {
       setAppState('Onboarding');
