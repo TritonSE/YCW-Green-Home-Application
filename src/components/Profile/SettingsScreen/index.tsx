@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
-import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import SettingsHeader from '../SettingsHeader';
@@ -15,10 +14,10 @@ export function SettingsScreen() {
       contentContainerStyle={{ height: 800 }}
       scrollToOverflowEnabled
     >
-      <View>
+      <>
         <SettingsHeader />
         <SettingsContainer />
-      </View>
+      </>
     </KeyboardAwareScrollView>
   );
 }
