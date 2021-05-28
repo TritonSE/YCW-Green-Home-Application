@@ -1,9 +1,18 @@
 /* eslint-disable import/prefer-default-export */
-import React, { Fragment, useContext } from 'react';
-import { Text, View } from 'react-native';
-import SvgContainer from '../components/SvgContainer';
+import React, { useContext } from 'react';
+import { View } from 'react-native';
+
+import HomeHeader from '../components/Home/HomeHeader';
+import { HomeRecentActivity } from '../components/Home/HomeRecentActivity';
 import { QuestionContext } from '../contexts/QuestionsContext';
 import { ResponseContext } from '../contexts/ResponseContext';
+import styles from '../styles/HomeScreenStyles';
+import { Home } from '../models';
+
+export interface BadgeTitleRewardText {
+  badgeTitle: string;
+  rewardText: string;
+}
 
 export const HomeScreen = () => {
   const { questionState } = useContext(QuestionContext);
@@ -22,41 +31,28 @@ export const HomeScreen = () => {
     return 1;
   });
 
-  const badgesList = sortedResponses.map(response => {
-    const questionObject = questionState.items.find(
-      question => question.id === response.questionID,
-    );
-    return questionObject?.title;
-  });
+  const badgeCompletedTextList: (BadgeTitleRewardText | undefined)[] =
+    sortedResponses.map(response => {
+      const questionObject = questionState.items.find(
+        question => question.id === response.questionID,
+      );
 
-  const completedTextList = sortedResponses.map(response => {
-    const questionObject = questionState.items.find(
-      question => question.id === response.questionID,
-    );
-    return questionObject?.rewardText;
-  });
+      if (questionObject === null || questionObject === undefined) {
+        return undefined;
+      }
+
+      const badgeCompletedTextObj: BadgeTitleRewardText = {
+        badgeTitle: questionObject.title,
+        rewardText: questionObject.rewardText,
+      };
+
+      return badgeCompletedTextObj;
+    });
 
   return (
-    <View>
-      {badgesList.map((badge, index) => {
-        if (badge !== undefined) {
-          return (
-            <SvgContainer
-              badgeTitle={badge}
-              height="40"
-              width="40"
-              key={index} // eslint-disable-line react/no-array-index-key
-            />
-          );
-        }
-        return <Fragment key={index} />; // eslint-disable-line react/no-array-index-key
-      })}
-      {completedTextList.map((text, index) => {
-        if (text !== undefined) {
-          return <Text key={index}>{text}</Text>; // eslint-disable-line react/no-array-index-key
-        }
-        return <Fragment key={index} />; // eslint-disable-line react/no-array-index-key
-      })}
+    <View style={styles.header}>
+      <HomeHeader />
+      <HomeRecentActivity badgeCompletedTextList={badgeCompletedTextList} />
     </View>
   );
 };
