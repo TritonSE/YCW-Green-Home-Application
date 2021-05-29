@@ -14,10 +14,7 @@ export function ProfileScreen() {
   const { userState } = useContext(UserContext);
 
   // workaround to parse data that may be undefined - to change?
-  const homes = userState.homes.items;
-  const homesString = JSON.stringify(homes);
-  const homesJSON = JSON.parse(homesString);
-  const { home } = homesJSON[0];
+  const homeProp = userState.homes.items[0].home;
 
   return (
     <NavigationContainer independent>
@@ -39,7 +36,7 @@ export function ProfileScreen() {
         />
         <Stack.Screen
           name="Onboarding"
-          children={() => <Onboarding homeInformation={home} />} // eslint-disable-line react/no-children-prop
+          children={() => <Onboarding homeInformation={homeProp} />} // eslint-disable-line react/no-children-prop
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
