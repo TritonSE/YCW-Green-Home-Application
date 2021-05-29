@@ -38,7 +38,7 @@ const TaskCard: React.FC<Task> = ({
       <View style={styles.card}>
         <View style={styles.cardHeader}>
           <View style={styles.title}>
-            <Text adjustsFontSizeToFit style={styles.titleText}>
+            <Text numberOfLines={3} style={styles.titleText}>
               {title}
             </Text>
           </View>
@@ -50,7 +50,13 @@ const TaskCard: React.FC<Task> = ({
           <Text>{CostTextToSymbol[cost]}</Text>
         </View>
         <View style={styles.question}>
-          <Text style={styles.questionText}>{questionText}</Text>
+          <Text
+            numberOfLines={3}
+            ellipsizeMode="tail"
+            style={styles.questionText}
+          >
+            {questionText}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

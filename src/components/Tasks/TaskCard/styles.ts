@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: '#FFFFFF',
     borderRadius: 20,
-    // borderRadius: 5,
     paddingLeft: 10,
   },
   cardHeader: {
