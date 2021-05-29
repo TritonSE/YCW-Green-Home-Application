@@ -9,7 +9,6 @@ import Onboarding from './Onboarding/Onboarding';
 import AuthenticatorTheme from '../styles/AuthenticatorTheme';
 import { AppContext } from '../contexts/AppContext';
 import NavFlow from './NavContainer';
-import { getUser } from '../graphql/queries';
 import { UserContext } from '../contexts/UserContext';
 import { QuestionProvider } from '../contexts/QuestionsContext';
 import { customGetUser } from '../customQueries';
