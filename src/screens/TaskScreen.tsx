@@ -15,7 +15,7 @@ const TaskScreen: React.FC<Props> = ({ tasks }) => {
   const { isTaskCompletionRendered } = useContext(TaskContext);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'red' }}>
+    <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.header}>
         <TaskHeader />
         <ScrollView contentContainerStyle={styles.container}>
