@@ -17,38 +17,98 @@ const xmlsToObj = (normalXML: string, grayscaleXML: string): xmlObj => {
 };
 
 const badgeXMLs: badgeXMLObj = {
-  'Ceiling Fans': XMLs.ceilingFansXML,
-  'Smart Thermostat': XMLs.smartThermostatXML,
-  'LED Lights': XMLs.ledLightsXML,
-  'Insulated Cellular Shades': XMLs.insulatedCellularShadesXML,
-  'Washing Machines': XMLs.washingMachinesXML,
-  Dryers: XMLs.dryersXML,
-  'Laundry Line': XMLs.laundryLineXML,
-  Refrigerator: XMLs.refrigeratorXML,
-  'Energy Monitoring System': XMLs.energyMonitoringSystemXML,
-  'Natural Site': XMLs.naturalSiteXML,
-  'Rainwater Harvesting System': XMLs.rainwaterHarvestingSystemXML,
-  'Shortened Shower': XMLs.shortenedShowerXML,
-  Compost: XMLs.compostXML,
-  'Cooking Circulation': XMLs.cookingCirculationXML,
-  'Lower Thermostat': XMLs.lowerThermostatXML,
-  'Ducts Sealed': XMLs.ductsSealedXML,
-  'Air Sealed Home': XMLs.airSealedHomeXML,
-  'Home Insulation Standard': XMLs.homeInsulStandardXML,
-  'Built Landscape': XMLs.builtLandscapeXML,
-  'Exterior Deck': XMLs.exteriorDeckXML,
-  'Home Insulation Recycled Material': XMLs.homeInsulRecycledMaterialXML,
-  'Home Insulation Batt or Loose-fill': XMLs.homeInsulBattOrLooseFillXML,
-  'Energy Audit': XMLs.energyAuditXML,
-  "Home's Certified": XMLs.homeCertifiedXML,
-  'Ductwork Pressure Balance': XMLs.ductworkPressureBalanceXML,
-  'HVAC Air Flow': XMLs.hvacAirFlowXML,
-  'Energy Offset': XMLs.energyOffsetXML,
-  'Battery Storage': XMLs.batteryStorageXML,
-  'Fast Charging Station': XMLs.fastChargingStationXML,
-  'Heat Pump Water Heater': XMLs.heatPumpWaterHeaterXML,
-  'Tankless Water Heater': XMLs.tanklessWaterHeaterXML,
-  'Condensing Water Heater': XMLs.condensingWaterHeaterXML,
+  'Ceiling Fans': xmlsToObj(XMLs.ceilingFansXML, XMLs.grayCeilingFansXML),
+  'Smart Thermostat': xmlsToObj(
+    XMLs.smartThermostatXML,
+    XMLs.graySmartThermostatXML,
+  ),
+  'LED Lights': xmlsToObj(XMLs.ledLightsXML, XMLs.grayLedLightsXML),
+  'Insulated Cellular Shades': xmlsToObj(
+    XMLs.insulatedCellularShadesXML,
+    XMLs.grayInsulatedCellularShadesXML,
+  ),
+  'Washing Machines': xmlsToObj(
+    XMLs.washingMachinesXML,
+    XMLs.grayWashingMachinesXML,
+  ),
+  Dryers: xmlsToObj(XMLs.dryersXML, XMLs.grayDryersXML),
+  'Laundry Line': xmlsToObj(XMLs.laundryLineXML, XMLs.grayLaundryLineXML),
+  Refrigerator: xmlsToObj(XMLs.refrigeratorXML, XMLs.grayRefrigeratorXML),
+  'Energy Monitoring System': xmlsToObj(
+    XMLs.energyMonitoringSystemXML,
+    XMLs.grayEnergyMonitoringSystemXML,
+  ),
+  'Natural Site': xmlsToObj(XMLs.naturalSiteXML, XMLs.grayNaturalSiteXML),
+  'Rainwater Harvesting System': xmlsToObj(
+    XMLs.rainwaterHarvestingSystemXML,
+    XMLs.grayRainwaterHarvestingSystemXML,
+  ),
+  'Shortened Shower': xmlsToObj(
+    XMLs.shortenedShowerXML,
+    XMLs.grayShortenedShowerXML,
+  ),
+  Compost: xmlsToObj(XMLs.compostXML, XMLs.grayCompostXML),
+  'Cooking Circulation': xmlsToObj(
+    XMLs.cookingCirculationXML,
+    XMLs.grayCookingCirculationXML,
+  ),
+  'Lower Thermostat': xmlsToObj(
+    XMLs.lowerThermostatXML,
+    XMLs.grayLowerThermostatXML,
+  ),
+  'Ducts Sealed': xmlsToObj(XMLs.ductsSealedXML, XMLs.grayDuctsSealedXML),
+  'Air Sealed Home': xmlsToObj(
+    XMLs.airSealedHomeXML,
+    XMLs.grayAirSealedHomeXML,
+  ),
+  'Home Insulation Standard': xmlsToObj(
+    XMLs.homeInsulStandardXML,
+    XMLs.grayHomeInsulStandardXML,
+  ),
+  'Built Landscape': xmlsToObj(
+    XMLs.builtLandscapeXML,
+    XMLs.grayBuiltLandscapeXML,
+  ),
+  'Exterior Deck': xmlsToObj(XMLs.exteriorDeckXML, XMLs.grayExteriorDeckXML),
+  'Home Insulation Recycled Material': xmlsToObj(
+    XMLs.homeInsulRecycledMaterialXML,
+    XMLs.grayHomeInsulRecycledMaterialXML,
+  ),
+  'Home Insulation Batt or Loose-fill': xmlsToObj(
+    XMLs.homeInsulBattOrLooseFillXML,
+    XMLs.grayHomeInsulBattOrLooseFillXML,
+  ),
+  'Energy Audit': xmlsToObj(XMLs.energyAuditXML, XMLs.grayEnergyAuditXML),
+  "Home's certified": xmlsToObj(
+    XMLs.homeCertifiedXML,
+    XMLs.grayHomeCertifiedXML,
+  ),
+  'Ductwork Pressure Balance': xmlsToObj(
+    XMLs.ductworkPressureBalanceXML,
+    XMLs.grayDuctworkPressureBalanceXML,
+  ),
+  'HVAC Air Flow': xmlsToObj(XMLs.hvacAirFlowXML, XMLs.grayHVACAirFlowXML),
+  'Energy Offset': xmlsToObj(XMLs.energyOffsetXML, XMLs.grayEnergyOffsetXML),
+  'Battery Storage': xmlsToObj(
+    XMLs.batteryStorageXML,
+    XMLs.grayBatteryStorageXML,
+  ),
+  'Fast Charging Station': xmlsToObj(
+    XMLs.fastChargingStationXML,
+    XMLs.grayFastChargingStationXML,
+  ),
+  'Heat Pump Water Heater': xmlsToObj(
+    XMLs.heatPumpWaterHeaterXML,
+    XMLs.grayHeatPumpWaterHeaterXML,
+  ),
+  'Tankless Water Heater': xmlsToObj(
+    XMLs.tanklessWaterHeaterXML,
+    XMLs.grayTanklessWaterHeaterXML,
+  ),
+  'Condensing Water Heater': xmlsToObj(
+    XMLs.condensingWaterHeaterXML,
+    XMLs.grayCondensingWaterHeaterXML,
+  ),
 };
 
 export default badgeXMLs;
