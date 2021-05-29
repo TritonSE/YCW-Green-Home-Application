@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
 import styles from './styles';
+import { ResponseContext } from '../../../contexts/ResponseContext';
 
 import HomeCard from '../HomeCard';
 
 const HomeContainer = () => {
-  const badgeNumber = 10;
+  const { responseState } = useContext(ResponseContext);
+  const badgeNumber = responseState.items.length;
 
   return (
     <View style={styles.mainContainer}>

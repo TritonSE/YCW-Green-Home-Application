@@ -18,9 +18,11 @@ const styles = StyleSheet.create({
   },
   number: {
     padding: 15,
+    minWidth: 53,
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   numberCircle: {
     marginTop: 20,
