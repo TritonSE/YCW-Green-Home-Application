@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import API from '@aws-amplify/api';
 import { View, Text } from 'react-native';
@@ -8,7 +8,6 @@ import styles from './styles';
 import { AppContext } from '../../../contexts/AppContext';
 import { UserContext } from '../../../contexts/UserContext';
 import { updateHome } from '../../../graphql/mutations';
-
 import SettingsBox from '../SettingsBox';
 
 const SettingsContainer = () => {
@@ -43,6 +42,22 @@ const SettingsContainer = () => {
     try {
       await Auth.signOut();
       setAppState('Auth');
+      setUserState({
+        _deleted: null,
+        _lastChangedAt: 0,
+        _version: 1,
+        createdAt: '',
+        displayName: '',
+        homes: {
+          items: [],
+          nextToken: null,
+          startedAt: null,
+        },
+        id: '',
+        owner: '',
+        updatedAt: '',
+        username: '',
+      });
     } catch (error) {
       console.error('Error signing out: ', error);
     }
@@ -56,7 +71,12 @@ const SettingsContainer = () => {
     <View>
       {/* account section */}
       <View style={styles.account}>
-        <Text style={styles.title}>ACCOUNT</Text>
+        <Text
+          style={styles.title}
+          //  onPress={updateHomeInfo}
+        >
+          ACCOUNT
+        </Text>
         {/* table */}
         <SettingsBox
           type="Input"
