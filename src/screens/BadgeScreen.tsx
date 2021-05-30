@@ -1,16 +1,20 @@
 /* eslint-disable import/prefer-default-export */
 import React, { useContext } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 // import { AppContext } from '../contexts/AppContext';
 import { NavigationContainer } from '@react-navigation/native';
 import {
   createStackNavigator,
+  StackNavigationProp,
   StackScreenProps,
 } from '@react-navigation/stack';
-import { styles } from '../styles/BadgeScreenStyles';
+import styles from '../styles/BadgeScreenStyles';
 // import { printIntrospectionSchema } from 'graphql';
 // import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 import { ResponseContext } from '../contexts/ResponseContext';
+import { QuestionContext } from '../contexts/QuestionsContext';
+// import { Question } from '../models';
+import SVGContainer from '../components/SvgContainer';
 
 /** ALL THE OTHER THINGS */
 
@@ -23,7 +27,64 @@ type BadgeStackParams = {
   Detail: { badgeName: string };
 };
 const BadgeStack = createStackNavigator<BadgeStackParams>();
-type Props = StackScreenProps<BadgeStackParams, 'Collection'>;
+type HomeProps = StackScreenProps<BadgeStackParams, 'Home'>;
+type CollectionProps = StackScreenProps<BadgeStackParams, 'Collection'>;
+type DetailProps = StackScreenProps<BadgeStackParams, 'Detail'>;
+type BadgeButtonProps = {
+  stacknav: StackNavigationProp<BadgeStackParams, 'Home'>;
+  badgeLevel: string;
+};
+type Badge = { id: string; title: string; level: string };
+
+function GetBadges() {
+  const { responseState } = useContext(ResponseContext);
+  const { questionState } = useContext(QuestionContext);
+
+  const responseMap = new Map(
+    responseState.items.map(response => [response.questionID, response]),
+  );
+
+  const answeredBadges: Badge[] = questionState.items.filter(question =>
+    responseMap.has(question.id),
+  );
+  const unansweredBadges: Badge[] = questionState.items.filter(
+    question => !responseMap.has(question.id),
+  );
+
+  const starterBadgesAnswered: Badge[] = answeredBadges.filter(
+    badge => badge.level === 'STARTER',
+  );
+  const starterBadgesUnanswered: Badge[] = unansweredBadges.filter(
+    badge => badge.level === 'STARTER',
+  );
+  const intermediateBadgesAnswered: Badge[] = answeredBadges.filter(
+    badge => badge.level === 'INTERMEDIATE',
+  );
+  const intermediateBadgesUnanswered: Badge[] = unansweredBadges.filter(
+    badge => badge.level === 'INTERMEDIATE',
+  );
+  const guruBadgesAnswered: Badge[] = answeredBadges.filter(
+    badge => badge.level === 'GURU',
+  );
+  const guruBadgesUnanswered: Badge[] = unansweredBadges.filter(
+    badge => badge.level === 'GURU',
+  );
+
+  return {
+    Starter: {
+      answeredBadges: starterBadgesAnswered,
+      unansweredBadges: starterBadgesUnanswered,
+    },
+    Intermediate: {
+      answeredBadges: intermediateBadgesAnswered,
+      unansweredBadges: intermediateBadgesUnanswered,
+    },
+    Guru: {
+      answeredBadges: guruBadgesAnswered,
+      unansweredBadges: guruBadgesUnanswered,
+    },
+  };
+}
 
 /**
  * returns the light green header that remains on the first two badge screens
@@ -47,17 +108,15 @@ function Header() {
  * stacknav: stack navigator prop
  * badgeLevel: the difficulty category ("Starer", "Intermediate", "Guru")
  */
-function BadgeButton({ props }: any) {
+function BadgeButton({ stacknav, badgeLevel }: BadgeButtonProps) {
   return (
     <TouchableOpacity
       style={styles.button}
-      onPress={() =>
-        props.stacknav.push('Collection', { level: props.badgeLevel })
-      }
+      onPress={() => stacknav.push('Collection', { level: badgeLevel })}
     >
       <View style={{ flexDirection: 'row' }}>
         <View style={{ flex: 1 }}>
-          <Text style={styles.badgeLevelText}>{props.badgeLevel}</Text>
+          <Text style={styles.badgeLevelText}>{badgeLevel}</Text>
         </View>
         <View>
           <Text style={styles.viewAllText}>View All +</Text>
@@ -76,7 +135,7 @@ function BadgeButton({ props }: any) {
  * @params
  * navigation: the stack navigator navigation prop
  */
-function BadgeHome({ navigation }: Props) {
+function BadgeHome({ navigation }: HomeProps) {
   return (
     <View style={styles.homePage}>
       <BadgeButton stacknav={navigation} badgeLevel="Starter" />
@@ -94,19 +153,56 @@ function BadgeHome({ navigation }: Props) {
  * navigation: the stack navigator navigaton prop
  * route: the route prop that includes the level (starter, intermediate, guru) in its params field
  */
-function BadgeCollection({ navigation, route }: Props) {
+function BadgeCollection({ navigation, route }: CollectionProps) {
   const badgeLevel = route.params.level;
+  const badgeInfo = GetBadges();
+  let badges = badgeInfo.Starter;
+  if (badgeLevel === 'Intermediate') {
+    badges = badgeInfo.Intermediate;
+  } else if (badgeLevel === 'Guru') {
+    badges = badgeInfo.Guru;
+  }
+
   return (
     <View>
-      <Text style={styles.badgeLevelText}>{badgeLevel}</Text>
-      {/* <TouchableOpacity
-        style={{backgroundColor: 'red', borderRadius: 100, width: 50, height: 50, marginTop: 20, marginLeft: 20}}
-        onPress={() => navigation.push('Detail', { badgeName: 'tmp' })}
-        >
-        <Text></Text>
-        <Text>  TMP</Text>
-      </TouchableOpacity> */}
-      <Text>{}</Text>
+      <ScrollView>
+        <Text style={styles.badgeLevelText}>{badgeLevel}</Text>
+        <View style={styles.badgeContainer}>
+          {badges.answeredBadges.map(badge => (
+            <TouchableOpacity
+              key={badge.id}
+              style={styles.badgeIcons}
+              onPress={() =>
+                navigation.push('Detail', { badgeName: badge.title })
+              }
+            >
+              <SVGContainer
+                key={badge.id}
+                badgeTitle={badge.title}
+                height="75"
+                width="75"
+              />
+            </TouchableOpacity>
+          ))}
+          {badges.unansweredBadges.map(badge => (
+            <TouchableOpacity
+              key={badge.id}
+              style={styles.badgeIcons}
+              onPress={() =>
+                navigation.push('Detail', { badgeName: badge.title })
+              }
+            >
+              <SVGContainer
+                key={badge.id}
+                badgeTitle={badge.title}
+                height="75"
+                width="75"
+                grayscale
+              />
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -118,11 +214,11 @@ function BadgeCollection({ navigation, route }: Props) {
  * @params
  * props.badgeName: the name of the badge to display the congrats screen for
  */
-function BadgeDetail(props: any) {
+function BadgeDetail({ route }: DetailProps) {
   return (
-    <View
-      style={{ backgroundColor: '#86C5BE', height: '100%', width: '100%' }}
-    />
+    <View>
+      <Text style={{ fontSize: 50 }}>{route.params.badgeName}</Text>
+    </View>
   );
 }
 
