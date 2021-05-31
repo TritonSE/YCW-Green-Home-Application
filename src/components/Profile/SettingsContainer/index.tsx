@@ -67,14 +67,44 @@ const SettingsContainer = () => {
     navigation.navigate('Onboarding');
   };
 
+  const updateHomeInfo = async () => {
+    const response = {
+      id: userState.homes.items[0].homeID,
+      addressLine1: address,
+      addressLine2: address2,
+    };
+    console.log(response);
+    const result: any = await API.graphql({
+      query: updateHome,
+      variables: { input: response },
+    });
+    console.log(result);
+    if (!result.error) {
+      console.log('no error');
+      setUserState({
+        ...userState,
+        homes: {
+          ...userState.homes,
+          items: [
+            {
+              ...userState.homes.items[0],
+              home: {
+                ...userState.homes.items[0].home,
+                ...response,
+              },
+            },
+          ],
+        },
+      });
+      console.log(userState);
+    }
+  };
+
   return (
     <View>
       {/* account section */}
       <View style={styles.account}>
-        <Text
-          style={styles.title}
-          //  onPress={updateHomeInfo}
-        >
+        <Text style={styles.title} onPress={updateHomeInfo}>
           ACCOUNT
         </Text>
         {/* table */}
