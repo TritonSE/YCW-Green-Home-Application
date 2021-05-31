@@ -1,5 +1,5 @@
 /* Styles for the Badge Screen pages (add more if needed) */
-import { StyleSheet, TextStyle, ViewStyle, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   // background green header that contains the title texts
@@ -57,21 +57,30 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 20,
     marginTop: 20,
+    marginBottom: 10,
   },
 
   badgeContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'flex-start',
     marginLeft: 20,
-    marginRight: 20,
+    marginRight: 0,
     flex: 2,
   },
 
   badgeIcons: {
-    marginLeft: 90,
-    marginTop: 20,
-    marginRight: 90,
+    marginLeft: 5,
+    marginTop: 15,
+    marginRight: 7.5,
+    flexDirection: 'row',
+  },
+
+  badgePreview: {
+    marginLeft: 15,
+    marginRight: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 

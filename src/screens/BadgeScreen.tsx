@@ -57,6 +57,14 @@ function GetBadges() {
   const starterBadgesUnanswered: Badge[] = unansweredBadges.filter(
     badge => badge.level === 'STARTER',
   );
+
+  /** THE FOLLOWING SHOULD BE REMOVED AFTER INSULATED CELLULAR SHADES FIX * */
+  for (let i = 0; i < starterBadgesUnanswered.length; i += 1) {
+    if (starterBadgesUnanswered[i].title === 'Insular Cellular Shades') {
+      starterBadgesUnanswered[i].title = 'Insulated Cellular Shades';
+    }
+  }
+
   const intermediateBadgesAnswered: Badge[] = answeredBadges.filter(
     badge => badge.level === 'INTERMEDIATE',
   );
@@ -74,14 +82,19 @@ function GetBadges() {
     Starter: {
       answeredBadges: starterBadgesAnswered,
       unansweredBadges: starterBadgesUnanswered,
+      allBadges: starterBadgesAnswered.concat(starterBadgesUnanswered),
     },
     Intermediate: {
       answeredBadges: intermediateBadgesAnswered,
       unansweredBadges: intermediateBadgesUnanswered,
+      allBadges: intermediateBadgesAnswered.concat(
+        intermediateBadgesUnanswered,
+      ),
     },
     Guru: {
       answeredBadges: guruBadgesAnswered,
       unansweredBadges: guruBadgesUnanswered,
+      allBadges: guruBadgesAnswered.concat(guruBadgesUnanswered),
     },
   };
 }
@@ -109,6 +122,18 @@ function Header() {
  * badgeLevel: the difficulty category ("Starer", "Intermediate", "Guru")
  */
 function BadgeButton({ stacknav, badgeLevel }: BadgeButtonProps) {
+  const badgesInfo = GetBadges();
+  let badges = badgesInfo.Starter;
+  if (badgeLevel === 'INTERMEDIATE') {
+    badges = badgesInfo.Intermediate;
+  } else if (badgeLevel === 'GURU') {
+    badges = badgesInfo.Guru;
+  }
+  let badgePreview = badges.allBadges;
+  if (badgePreview.length > 4) {
+    badgePreview = badgePreview.slice(0, 4);
+  }
+
   return (
     <TouchableOpacity
       style={styles.button}
@@ -121,6 +146,17 @@ function BadgeButton({ stacknav, badgeLevel }: BadgeButtonProps) {
         <View>
           <Text style={styles.viewAllText}>View All +</Text>
         </View>
+      </View>
+      <View style={styles.badgePreview}>
+        {badgePreview.map(badge => (
+          <SVGContainer
+            key={badge.id}
+            badgeTitle={badge.title}
+            height="75"
+            width="75"
+            grayscale={badges.unansweredBadges.indexOf(badge) !== -1}
+          />
+        ))}
       </View>
     </TouchableOpacity>
   );
@@ -138,9 +174,9 @@ function BadgeButton({ stacknav, badgeLevel }: BadgeButtonProps) {
 function BadgeHome({ navigation }: HomeProps) {
   return (
     <View style={styles.homePage}>
-      <BadgeButton stacknav={navigation} badgeLevel="Starter" />
-      <BadgeButton stacknav={navigation} badgeLevel="Intermediate" />
-      <BadgeButton stacknav={navigation} badgeLevel="Guru" />
+      <BadgeButton stacknav={navigation} badgeLevel="STARTER" />
+      <BadgeButton stacknav={navigation} badgeLevel="INTERMEDIATE" />
+      <BadgeButton stacknav={navigation} badgeLevel="GURU" />
     </View>
   );
 }
@@ -157,9 +193,9 @@ function BadgeCollection({ navigation, route }: CollectionProps) {
   const badgeLevel = route.params.level;
   const badgeInfo = GetBadges();
   let badges = badgeInfo.Starter;
-  if (badgeLevel === 'Intermediate') {
+  if (badgeLevel === 'INTERMEDIATE') {
     badges = badgeInfo.Intermediate;
-  } else if (badgeLevel === 'Guru') {
+  } else if (badgeLevel === 'GURU') {
     badges = badgeInfo.Guru;
   }
 
@@ -168,7 +204,7 @@ function BadgeCollection({ navigation, route }: CollectionProps) {
       <ScrollView>
         <Text style={styles.badgeLevelText}>{badgeLevel}</Text>
         <View style={styles.badgeContainer}>
-          {badges.answeredBadges.map(badge => (
+          {badges.allBadges.map(badge => (
             <TouchableOpacity
               key={badge.id}
               style={styles.badgeIcons}
@@ -181,23 +217,7 @@ function BadgeCollection({ navigation, route }: CollectionProps) {
                 badgeTitle={badge.title}
                 height="75"
                 width="75"
-              />
-            </TouchableOpacity>
-          ))}
-          {badges.unansweredBadges.map(badge => (
-            <TouchableOpacity
-              key={badge.id}
-              style={styles.badgeIcons}
-              onPress={() =>
-                navigation.push('Detail', { badgeName: badge.title })
-              }
-            >
-              <SVGContainer
-                key={badge.id}
-                badgeTitle={badge.title}
-                height="75"
-                width="75"
-                grayscale
+                grayscale={badges.unansweredBadges.indexOf(badge) !== -1}
               />
             </TouchableOpacity>
           ))}
@@ -218,6 +238,7 @@ function BadgeDetail({ route }: DetailProps) {
   return (
     <View>
       <Text style={{ fontSize: 50 }}>{route.params.badgeName}</Text>
+      <Text>TODO</Text>
     </View>
   );
 }
@@ -226,7 +247,7 @@ function BadgeDetail({ route }: DetailProps) {
  * @returns home page screen including navigation options to view different badge levels
  * and see each badge in greater detail
  */
-export function BadgeScreen() {
+export function BadgeScreen(): JSX.Element | null {
   // const { appState } = useContext(AppContext)
 
   return (
@@ -246,6 +267,7 @@ export function BadgeScreen() {
           options={{
             headerTitle: props => <Header />,
             headerStyle: styles.header,
+            headerBackTitle: '',
           }}
         />
         <BadgeStack.Screen
@@ -253,7 +275,7 @@ export function BadgeScreen() {
           component={BadgeDetail}
           options={{
             headerTitle: 'CONGRATULATIONS',
-            headerTruncatedBackTitle: 'false',
+            headerBackTitle: '',
             headerStyle: styles.header,
           }}
         />
