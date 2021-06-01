@@ -4,7 +4,7 @@ import Logo from '../assets/logo';
 
 import SplashScreenStyles from '../styles/SplashScreenStyles';
 
-export default function SplashScreen(): JSX.Element | null {
+const SplashScreen = (): JSX.Element | null => {
   return (
     <View style={SplashScreenStyles.logoContainer}>
       <Logo
@@ -14,4 +14,6 @@ export default function SplashScreen(): JSX.Element | null {
       />
     </View>
   );
-}
+};
+
+export default SplashScreen;
