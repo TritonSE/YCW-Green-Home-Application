@@ -17,7 +17,7 @@ const TaskBoard: React.FC<Props> = ({ tasks }) => {
     ? tasks
     : tasks.filter(task => {
         if (filters.level && filters.level !== task.level) return false;
-        if (filters.category && filters.category in task.categories)
+        if (filters.category && !task.categories.includes(filters.category))
           return false;
         if (filters.cost && filters.cost !== task.cost) return false;
         return true;
@@ -36,7 +36,20 @@ const TaskBoard: React.FC<Props> = ({ tasks }) => {
     />
   ));
 
-  return <View style={styles.container}>{taskComponents}</View>;
+  const populatedTaskBoard = (
+    <View style={styles.populatedTaskBoard}>{taskComponents}</View>
+  );
+  const emptyTaskBoard = (
+    <View style={styles.emptyTaskBoard}>
+      <Text style={styles.emptyTaskText}>No Tasks Remaining!</Text>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      {taskComponents.length > 0 ? populatedTaskBoard : emptyTaskBoard}
+    </View>
+  );
 };
 
 export default TaskBoard;

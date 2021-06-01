@@ -11,7 +11,6 @@ const TaskHeader = () => {
   const { filters, setFilters } = useContext(TaskContext);
 
   const updateFilters = (filter: string, value: string) => {
-    console.log(`${filter}: ${value}`);
     setFilters({
       ...filters,
       [filter]: value,

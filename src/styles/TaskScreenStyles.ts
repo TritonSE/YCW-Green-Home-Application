@@ -1,12 +1,14 @@
 import { StyleSheet } from 'react-native';
+import colors from '../common/colors';
 
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
+    backgroundColor: colors.whiteSecondary,
   },
   container: {
     flexGrow: 1,
-    backgroundColor: 'rgb(250,250,250)',
+    paddingBottom: 20,
   },
   header: {
     zIndex: 10,
