@@ -9,6 +9,7 @@ interface Props {
   place?: string;
   valueInput?: string;
   setInput?: React.Dispatch<React.SetStateAction<string>>;
+  updateOnChange?: NativeSyntheticEvent<TextInputChangeEventData>;
   text?: string;
   password?: boolean;
 }
@@ -19,6 +20,7 @@ const SettingsBox: React.FC<Props> = ({
   place,
   valueInput,
   setInput,
+  updateOnChange,
   text,
   password,
 }) => {
@@ -31,6 +33,7 @@ const SettingsBox: React.FC<Props> = ({
           placeholder={place}
           value={valueInput}
           onChangeText={setInput}
+          onBlur={updateOnChange}
           secureTextEntry={password}
         />
       )}

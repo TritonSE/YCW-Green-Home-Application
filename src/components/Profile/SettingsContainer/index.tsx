@@ -72,15 +72,13 @@ const SettingsContainer = () => {
       id: userState.homes.items[0].homeID,
       addressLine1: address,
       addressLine2: address2,
+      _version: userState.homes.items[0].home._version, // eslint-disable-line no-underscore-dangle
     };
-    console.log(response);
     const result: any = await API.graphql({
       query: updateHome,
       variables: { input: response },
     });
-    console.log(result);
     if (!result.error) {
-      console.log('no error');
       setUserState({
         ...userState,
         homes: {
@@ -96,7 +94,6 @@ const SettingsContainer = () => {
           ],
         },
       });
-      console.log(userState);
     }
   };
 
@@ -104,9 +101,7 @@ const SettingsContainer = () => {
     <View>
       {/* account section */}
       <View style={styles.account}>
-        <Text style={styles.title} onPress={updateHomeInfo}>
-          ACCOUNT
-        </Text>
+        <Text style={styles.title}>ACCOUNT</Text>
         {/* table */}
         <SettingsBox
           type="Input"
@@ -136,6 +131,7 @@ const SettingsContainer = () => {
           place="Current Address"
           valueInput={address}
           setInput={setAddress}
+          updateOnChange={updateHomeInfo}
         />
         <SettingsBox
           type="Input"
@@ -143,6 +139,7 @@ const SettingsContainer = () => {
           place="Current Address Line 2"
           valueInput={address2}
           setInput={setAddress2}
+          updateOnChange={updateHomeInfo}
         />
         <SettingsBox
           type="Input"
