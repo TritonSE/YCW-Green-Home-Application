@@ -63,9 +63,10 @@ const styles = StyleSheet.create({
   badgeContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    marginLeft: 20,
-    marginRight: 0,
+    // justifyContent: 'flex-start',
+    justifyContent: 'space-between',
+    marginLeft: 15,
+    marginRight: 15,
     flex: 2,
   },
 
@@ -74,6 +75,16 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginRight: 7.5,
     flexDirection: 'row',
+  },
+
+  bufferIcons: {
+    marginLeft: 5,
+    marginTop: 15,
+    marginRight: 7.5,
+    flexDirection: 'row',
+    width: 75,
+    height: 75,
+    opacity: 0,
   },
 
   badgePreview: {

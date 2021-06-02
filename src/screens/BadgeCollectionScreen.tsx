@@ -13,6 +13,8 @@ import SvgContainer from '../components/SvgContainer';
 export function BadgeCollection({ navigation, route }: CollectionProps) {
   const badgeLevel = route.params.level;
   const badges = GetBadges(badgeLevel);
+  // to make the badges display in 4 columns
+  const bufferArr = Array.from(Array(4).keys());
 
   return (
     <View>
@@ -35,6 +37,9 @@ export function BadgeCollection({ navigation, route }: CollectionProps) {
                 grayscale={badges.unansweredBadges.indexOf(badge) !== -1}
               />
             </TouchableOpacity>
+          ))}
+          {bufferArr.map(num => (
+            <View key={num} style={styles.bufferIcons} />
           ))}
         </View>
       </ScrollView>
