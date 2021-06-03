@@ -30,18 +30,23 @@ function App(): JSX.Element | null {
       setUserState(result.data.getUser);
       setAppState('Loading');
     };
-    if (userState.id === '') {
-      getUserData();
-    } else if (userState.homes.items.length === 0 && appState !== 'App') {
-      setAppState('Onboarding');
-    } else {
-      setAppState('App');
+    if (appState !== 'Onboarding Edit') {
+      if (userState.id === '') {
+        getUserData();
+      } else if (userState.homes.items.length === 0 && appState !== 'App') {
+        setAppState('Onboarding');
+      } else {
+        setAppState('App');
+      }
     }
   }, [appState, setAppState, userState, setUserState]);
 
   return (
     <NavigationContainer>
       {appState === 'Onboarding' && <Onboarding />}
+      {appState === 'Onboarding Edit' && (
+        <Onboarding homeInformation={userState.homes.items[0].home} />
+      )}
       {appState === 'App' && (
         <SafeAreaView style={{ flex: 1 }}>
           <QuestionProvider>

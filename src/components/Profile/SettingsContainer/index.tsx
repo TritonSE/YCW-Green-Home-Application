@@ -64,7 +64,7 @@ const SettingsContainer = () => {
   };
 
   const onboardingPage = () => {
-    navigation.navigate('Onboarding');
+    setAppState('Onboarding Edit');
   };
 
   const updateHomeInfo = async () => {

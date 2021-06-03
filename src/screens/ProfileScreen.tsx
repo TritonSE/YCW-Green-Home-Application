@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ProfilePage } from '../components/Profile/ProfilePage';
 import { SettingsScreen } from '../components/Profile/SettingsScreen';
-import Onboarding from '../components/Onboarding/Onboarding';
 import { UserContext } from '../contexts/UserContext';
 
 const Stack = createStackNavigator();
@@ -32,11 +31,6 @@ export function ProfileScreen() {
         <Stack.Screen
           name="Settings"
           component={SettingsScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Onboarding"
-          children={() => <Onboarding homeInformation={homeProp} />} // eslint-disable-line react/no-children-prop
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
