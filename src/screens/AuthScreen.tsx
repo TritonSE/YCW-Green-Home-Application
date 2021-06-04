@@ -6,7 +6,7 @@ import AuthContainer from '../components/AuthContainer';
 import { AppContext } from '../contexts/AppContext';
 import AuthScreenStyles from '../styles/AuthScreenStyles';
 
-export default function AuthScreen(): JSX.Element | null {
+const AuthScreen = (): JSX.Element | null => {
   const { appState } = useContext(AppContext);
 
   return (
@@ -24,4 +24,6 @@ export default function AuthScreen(): JSX.Element | null {
       <AuthContainer />
     </KeyboardAwareScrollView>
   );
-}
+};
+
+export default AuthScreen;
