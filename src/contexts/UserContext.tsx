@@ -4,41 +4,42 @@ import React, {
   SetStateAction,
   useState,
 } from 'react';
+import { HomeOwner } from '../models';
 
 interface UserState {
   userState: {
-    _deleted: null;
-    _lastChangedAt: 0;
-    _version: 1;
-    createdAt: '';
-    displayName: '';
+    _deleted: boolean | null;
+    _lastChangedAt: number;
+    _version: number;
+    createdAt: string;
+    displayName: string;
     homes: {
-      items: [];
-      nextToken: null;
-      startedAt: null;
+      items: HomeOwner[];
+      nextToken: string;
+      startedAt: string;
     };
-    id: '';
-    owner: '';
-    updatedAt: '';
-    username: '';
+    id: string;
+    owner: string;
+    updatedAt: string;
+    username: string;
   };
   setUserState:
     | Dispatch<
         SetStateAction<{
-          _deleted: null;
-          _lastChangedAt: 0;
-          _version: 1;
-          createdAt: '';
-          displayName: '';
+          _deleted: boolean | null;
+          _lastChangedAt: number;
+          _version: number;
+          createdAt: string;
+          displayName: string;
           homes: {
-            items: [];
-            nextToken: null;
-            startedAt: null;
+            items: HomeOwner[];
+            nextToken: string;
+            startedAt: string;
           };
-          id: '';
-          owner: '';
-          updatedAt: '';
-          username: '';
+          id: string;
+          owner: string;
+          updatedAt: string;
+          username: string;
         }>
       >
     | (() => void);
@@ -53,8 +54,8 @@ const initialState: UserState = {
     displayName: '',
     homes: {
       items: [],
-      nextToken: null,
-      startedAt: null,
+      nextToken: '',
+      startedAt: '',
     },
     id: '',
     owner: '',

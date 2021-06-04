@@ -1,11 +1,10 @@
-/* eslint-disable import/prefer-default-export */
 import React, { useContext } from 'react';
 import { Button, View } from 'react-native';
 import { Auth } from 'aws-amplify';
 import { AppContext } from '../contexts/AppContext';
 import { UserContext } from '../contexts/UserContext';
 
-export function ProfileScreen() {
+const ProfileScreen = () => {
   const { setAppState } = useContext(AppContext);
   const { setUserState } = useContext(UserContext);
 
@@ -39,4 +38,6 @@ export function ProfileScreen() {
       <Button title="Sign Out" onPress={signOut} />
     </View>
   );
-}
+};
+
+export default ProfileScreen;

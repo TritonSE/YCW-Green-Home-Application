@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { BadgeStack, Header } from '../components/BadgeContainer';
@@ -46,3 +45,5 @@ export function BadgeScreen(): JSX.Element | null {
     </NavigationContainer>
   );
 }
+
+export default BadgeScreen;
