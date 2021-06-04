@@ -32,6 +32,7 @@ export const HomeRecentActivity = ({
           const { badgeTitle, rewardText } = recentActivity;
           return (
             <HomeRecentActivityItem
+              key={badgeTitle}
               badgeTitle={badgeTitle}
               rewardText={rewardText}
             />
