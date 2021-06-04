@@ -13,7 +13,7 @@ import styles from '../styles/BadgeScreenStyles';
 type BadgeStackParams = {
   Home: undefined;
   Collection: { level: string };
-  Detail: { badgeName: string };
+  Detail: { badgeName: string; level: string };
 };
 type Badge = { id: string; title: string; level: string };
 type BadgePreviewProps = {

@@ -26,7 +26,10 @@ export function BadgeCollection({ navigation, route }: CollectionProps) {
               key={badge.id}
               style={styles.badgeIcons}
               onPress={() =>
-                navigation.push('Detail', { badgeName: badge.title })
+                navigation.push('Detail', {
+                  badgeName: badge.title,
+                  level: route.params.level,
+                })
               }
             >
               <SvgContainer

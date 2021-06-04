@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { BadgeStack, Header } from '../components/BadgeContainer';
 import { BadgeHome } from '../screens/BadgeHomeScreen';
 import { BadgeCollection } from '../screens/BadgeCollectionScreen';
-import { BadgeDetail } from '../screens/BadgeDetailScreen';
+import { BadgeDetailScreen } from '../screens/BadgeDetailScreen';
 import styles from '../styles/BadgeScreenStyles';
 
 /**
@@ -33,15 +33,7 @@ export function BadgeScreen(): JSX.Element | null {
             headerBackTitle: '',
           }}
         />
-        <BadgeStack.Screen
-          name="Detail"
-          component={BadgeDetail}
-          options={{
-            headerTitle: 'CONGRATULATIONS',
-            headerBackTitle: '',
-            headerStyle: styles.header,
-          }}
-        />
+        <BadgeStack.Screen name="Detail" component={BadgeDetailScreen} />
       </BadgeStack.Navigator>
     </NavigationContainer>
   );

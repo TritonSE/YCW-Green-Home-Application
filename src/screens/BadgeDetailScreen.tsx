@@ -1,16 +1,26 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { DetailProps } from '../components/BadgeContainer';
+import ProgressHeader from '../components/Progress/ProgressHeader/index';
+import BadgeDetails from '../components/Progress/BadgeDetails/index';
 
 /**
  * @TODO Needs to be implemented
  */
-export function BadgeDetail({ route }: DetailProps) {
+export function BadgeDetailScreen({ navigation, route }: DetailProps) {
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return (
-    <View>
-      <Text style={{ fontSize: 50 }}>{route.params.badgeName}</Text>
-      <Text>Congratulations</Text>
+    <View style={{ flex: 1 }}>
+      <ProgressHeader headerText="CONGRATULATIONS" backButton={goBack} />
+      <BadgeDetails
+        badgeTitle={route.params.badgeName}
+        dateEarned="Placeholder"
+        difficulty={route.params.level}
+      />
     </View>
   );
 }
