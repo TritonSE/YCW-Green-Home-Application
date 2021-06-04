@@ -5,6 +5,8 @@ import { BadgeTitleRewardText } from '../../HomeContainer';
 import HomeRecentActivityItem from '../HomeRecentActivityItem';
 import styles from './styles';
 
+/* eslint-disable react/no-array-index-key */
+
 export interface HomeRecentActivityProps {
   badgeCompletedTextList: (BadgeTitleRewardText | undefined)[];
 }
@@ -28,16 +30,18 @@ export const HomeRecentActivity = ({
 
     return (
       <View style={styles.container}>
-        {recentActivityList.slice(0, itemsToRender).map(recentActivity => {
-          const { badgeTitle, rewardText } = recentActivity;
-          return (
-            <HomeRecentActivityItem
-              key={badgeTitle}
-              badgeTitle={badgeTitle}
-              rewardText={rewardText}
-            />
-          );
-        })}
+        {recentActivityList
+          .slice(0, itemsToRender)
+          .map((recentActivity, index) => {
+            const { badgeTitle, rewardText } = recentActivity;
+            return (
+              <HomeRecentActivityItem
+                key={`${badgeTitle}_${index}`}
+                badgeTitle={badgeTitle}
+                rewardText={rewardText}
+              />
+            );
+          })}
         {canDisplayViewAll ? (
           <Button onPress={() => setViewAll(true)} title="VIEW ALL" />
         ) : (
@@ -63,5 +67,5 @@ export const HomeRecentActivity = ({
     );
   };
 
-  return viewAll ? <StaticRecentActivity /> : <ScrollableRecentActivity />;
+  return viewAll ? <ScrollableRecentActivity /> : <StaticRecentActivity />;
 };

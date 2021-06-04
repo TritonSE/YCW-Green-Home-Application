@@ -14,7 +14,7 @@ export const HomeContainer = () => {
   const { responseState } = useContext(ResponseContext);
 
   const positiveResponse = responseState.items.filter(
-    response => response.answer === 'Yes',
+    response => response.answer === 'Yes' || response.answer === 'Y',
   );
 
   const sortedResponses = positiveResponse.sort((a, b) => {
