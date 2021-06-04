@@ -14,25 +14,14 @@ import styles from '../styles/BadgeScreenStyles';
 export function BadgeScreen(): JSX.Element | null {
   return (
     <NavigationContainer independent>
-      <BadgeStack.Navigator>
+      <BadgeStack.Navigator screenOptions={{ headerShown: false }}>
+        <BadgeStack.Screen name="Home" component={BadgeHome} />
+        <BadgeStack.Screen name="Collection" component={BadgeCollection} />
         <BadgeStack.Screen
-          name="Home"
-          component={BadgeHome}
-          options={{
-            headerTitle: props => <Header />,
-            headerStyle: styles.header,
-          }}
+          name="Detail"
+          component={BadgeDetailScreen}
+          options={{ headerShown: false }}
         />
-        <BadgeStack.Screen
-          name="Collection"
-          component={BadgeCollection}
-          options={{
-            headerTitle: props => <Header />,
-            headerStyle: styles.header,
-            headerBackTitle: '',
-          }}
-        />
-        <BadgeStack.Screen name="Detail" component={BadgeDetailScreen} />
       </BadgeStack.Navigator>
     </NavigationContainer>
   );

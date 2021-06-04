@@ -17,12 +17,17 @@ const ProgressHeader: React.FC<IHeaderProps> = ({
 }) => {
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={backButton} style={styles.iconContainer}>
-        <Ionicons name="ios-arrow-back" size={24} />
-      </TouchableOpacity>
+      {/* Only render the back button if necessary! */}
+      {backButton && (
+        <TouchableOpacity onPress={backButton} style={styles.iconContainer}>
+          <Ionicons name="chevron-back-outline" size={24} />
+        </TouchableOpacity>
+      )}
       <View style={styles.headerTextContainer}>
         <Text style={styles.headerText}>{headerText}</Text>
-        {headerSubtext && <Text>{headerSubtext}</Text>}
+        {headerSubtext && (
+          <Text style={styles.headerSubtext}>{headerSubtext}</Text>
+        )}
       </View>
       {/* The view below provides padding to center the title text. */}
       <View style={styles.headerPadding} />

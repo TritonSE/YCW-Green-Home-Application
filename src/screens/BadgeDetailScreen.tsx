@@ -18,7 +18,7 @@ export function BadgeDetailScreen({ navigation, route }: DetailProps) {
       <ProgressHeader headerText="CONGRATULATIONS" backButton={goBack} />
       <BadgeDetails
         badgeTitle={route.params.badgeName}
-        dateEarned="Placeholder"
+        dateEarned="Date Earned Placeholder"
         difficulty={route.params.level}
       />
     </View>

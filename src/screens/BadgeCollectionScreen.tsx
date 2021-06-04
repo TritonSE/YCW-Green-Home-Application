@@ -3,6 +3,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import styles from '../styles/BadgeScreenStyles';
 import { GetBadges, CollectionProps } from '../components/BadgeContainer';
+import ProgressHeader from '../components/Progress/ProgressHeader/index';
 import SvgContainer from '../components/SvgContainer';
 
 /**
@@ -11,14 +12,29 @@ import SvgContainer from '../components/SvgContainer';
  * @returns a scroll view screen of badges based on badge level
  */
 export function BadgeCollection({ navigation, route }: CollectionProps) {
+  // header strings
+  const header = 'BADGE COLLECTION';
+  const headerSub =
+    'Complete more tasks to unlock a new badge and make your home more green!';
+
   const badgeLevel = route.params.level;
   const badges = GetBadges(badgeLevel);
   // to make the badges display in 4 columns
   const bufferArr = Array.from(Array(4).keys());
 
+  // back button functionality
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <View>
       <ScrollView>
+        <ProgressHeader
+          headerText={header}
+          headerSubtext={headerSub}
+          backButton={goBack}
+        />
         <Text style={styles.badgeLevelText}>{badgeLevel}</Text>
         <View style={styles.badgeContainer}>
           {badges.allBadges.map(badge => (

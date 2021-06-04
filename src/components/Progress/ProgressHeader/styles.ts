@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 12,
     justifyContent: 'center',
+    marginVertical: '5%',
   },
   headerText: {
     fontSize: 24,
@@ -20,12 +21,16 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   headerSubtext: {
+    color: 'white',
     fontSize: 16,
     fontWeight: '400',
-    color: 'white',
+    textAlign: 'center',
+    marginHorizontal: '5%',
+    marginTop: '2.5%',
   },
   iconContainer: {
     flex: 1,
+    marginVertical: '5%',
   },
 });
 
