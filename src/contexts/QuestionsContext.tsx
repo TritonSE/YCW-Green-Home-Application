@@ -10,7 +10,7 @@ interface QuestionState {
     items: [
       {
         cost: string;
-        categories: [string];
+        categories: string[];
         questionText: string;
         level: string;
         id: string;
@@ -25,7 +25,7 @@ interface QuestionState {
           items: [
             {
               cost: string;
-              categories: [string];
+              categories: string[];
               questionText: string;
               level: string;
               id: string;
@@ -43,7 +43,7 @@ const initialState: QuestionState = {
     items: [
       {
         cost: '',
-        categories: [''],
+        categories: [],
         questionText: '',
         level: '',
         id: '',

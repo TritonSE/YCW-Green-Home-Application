@@ -12,7 +12,6 @@ import NavFlow from './NavContainer';
 import { getUser } from '../graphql/queries';
 import { UserContext } from '../contexts/UserContext';
 import { QuestionProvider } from '../contexts/QuestionsContext';
-import { customResponses } from '../customQueries';
 import { ResponseProvider } from '../contexts/ResponseContext';
 
 Auth.configure({ mandatorySignIn: true });
@@ -29,11 +28,10 @@ function App(): JSX.Element | null {
         variables: { id: user.attributes.sub },
       });
       setUserState(result.data.getUser);
-    };
-    getUserData();
-
-    if (userState.id === '') {
       setAppState('Loading');
+    };
+    if (userState.id === '') {
+      getUserData();
     } else if (userState.homes.items.length === 0 && appState !== 'App') {
       setAppState('Onboarding');
     } else {

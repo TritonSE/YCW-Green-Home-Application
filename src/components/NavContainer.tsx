@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import API from '@aws-amplify/api';
+import TaskContainer from './TaskContainer';
 import {
   HomeScreen,
   TaskScreen,
@@ -33,11 +34,12 @@ export default function NavFlow() {
   const { setResponseState } = useContext(ResponseContext);
   const { userState } = useContext(UserContext);
   useEffect(() => {
-    const getQuestions = async () => {
+    const getQuestionsAndResponses = async () => {
       const result: any = await API.graphql({
         query: customListQuestions,
       });
       setQuestionState({ items: result.data.listQuestions.items });
+
       const responses: any = await API.graphql({
         query: customResponses,
         variables: { filter: { homeID: userState.homes.items[0].home.id } },
@@ -47,8 +49,7 @@ export default function NavFlow() {
         setResponseState({ items: responses.data.listResponses.items });
       }
     };
-
-    getQuestions();
+    getQuestionsAndResponses();
   }, [setQuestionState, setResponseState, userState]);
   return (
     <Tab.Navigator
@@ -64,7 +65,7 @@ export default function NavFlow() {
       }}
     >
       <Tab.Screen name={NavRoutes.HOME} component={HomeScreen} />
-      <Tab.Screen name={NavRoutes.TASKS} component={TaskScreen} />
+      <Tab.Screen name={NavRoutes.TASKS} component={TaskContainer} />
       <Tab.Screen name={NavRoutes.PROGRESS} component={BadgeScreen} />
       <Tab.Screen name={NavRoutes.ME} component={ProfileScreen} />
     </Tab.Navigator>
