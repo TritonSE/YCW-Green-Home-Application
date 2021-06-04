@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, ScrollView, View } from 'react-native';
 
-import { BadgeTitleRewardText } from '../../../screens/HomeScreen';
+import { BadgeTitleRewardText } from '../../HomeContainer';
 import HomeRecentActivityItem from '../HomeRecentActivityItem';
 import styles from './styles';
 
