@@ -23,6 +23,10 @@ const ProgressHeader: React.FC<IHeaderProps> = ({
           <Ionicons name="chevron-back-outline" size={24} />
         </TouchableOpacity>
       )}
+      {/* Fix alignment issue when no back button */}
+      {!backButton && (
+        <Ionicons style={{opacity:0}} name="chevron-back-outline" size={24} />
+      )}
       <View style={styles.headerTextContainer}>
         <Text style={styles.headerText}>{headerText}</Text>
         {headerSubtext && (

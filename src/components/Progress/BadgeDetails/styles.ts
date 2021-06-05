@@ -6,15 +6,21 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  badgePadding: {
+    marginTop: '10%'
+  },
   badgeTitleText: {
     color: 'white',
-    fontWeight: '700',
+    fontWeight: '600',
     fontSize: 30,
+    marginTop: '10%',
+    textAlign: 'center'
   },
   buttonContainer: {
     alignSelf: 'stretch',
     flexDirection: 'row',
     justifyContent: 'center',
+    margin: '20%'
   },
   buttonPadding: {
     width: 20,
@@ -34,6 +40,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: '500',
+    marginTop: '10%'
   },
   difficultyText: {
     backgroundColor: '#BFE3D5',
@@ -41,6 +48,7 @@ const styles = StyleSheet.create({
     color: '#377067',
     overflow: 'hidden',
     padding: 5,
+    marginTop: 10
   },
 });
 

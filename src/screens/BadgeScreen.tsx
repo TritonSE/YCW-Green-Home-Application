@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { BadgeStack, Header } from '../components/BadgeContainer';
+import { BadgeStack } from '../components/BadgeContainer';
 import { BadgeHome } from '../screens/BadgeHomeScreen';
 import { BadgeCollection } from '../screens/BadgeCollectionScreen';
 import { BadgeDetailScreen } from '../screens/BadgeDetailScreen';
-import styles from '../styles/BadgeScreenStyles';
 
 /**
  * @returns the badge screen; starts on the badge home with preview

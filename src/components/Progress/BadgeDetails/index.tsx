@@ -21,11 +21,12 @@ const BadgeDetails: React.FC<IBadgeDetailsProps> = ({
 
   return (
     <View style={styles.badgeDetailsContainer}>
+      <View style={styles.badgePadding}></View>
       <SvgContainer badgeTitle={badgeTitle} height="150" width="150" />
       <Text style={styles.badgeTitleText}>{badgeTitle}</Text>
       <Text style={styles.difficultyText}>{difficulty}</Text>
       <Text style={styles.dateEarnedText}>Keep up the good work!</Text>
-      <Text style={styles.dateEarnedText}>{dateEarned}</Text>
+      <Text style={styles.dateEarnedText}>Earned on {dateEarned}</Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={underDevelopment}>
           <Text style={styles.buttonText}>Delete</Text>

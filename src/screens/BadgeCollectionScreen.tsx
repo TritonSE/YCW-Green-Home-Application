@@ -37,7 +37,7 @@ export function BadgeCollection({ navigation, route }: CollectionProps) {
         />
         <Text style={styles.badgeLevelText}>{badgeLevel}</Text>
         <View style={styles.badgeContainer}>
-          {badges.allBadges.map(badge => (
+          {badges.answeredBadges.map(badge => (
             <TouchableOpacity
               key={badge.id}
               style={styles.badgeIcons}
@@ -53,9 +53,19 @@ export function BadgeCollection({ navigation, route }: CollectionProps) {
                 badgeTitle={badge.title}
                 height="75"
                 width="75"
-                grayscale={badges.unansweredBadges.indexOf(badge) !== -1}
               />
             </TouchableOpacity>
+          ))}
+          {badges.unansweredBadges.map(badge => (
+            <View key={badge.id} style={styles.badgeIcons}>
+              <SvgContainer
+                key={badge.id}
+                badgeTitle={badge.title}
+                height="75"
+                width="75"
+                grayscale
+              />
+            </View>
           ))}
           {bufferArr.map(num => (
             <View key={num} style={styles.bufferIcons} />

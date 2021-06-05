@@ -39,19 +39,11 @@ export function GetBadges(badgeLevel: string) {
 
   const answeredBadges: Badge[] = questionState.items.filter(
     question => responseMap.has(question.id) && question.level === badgeLevel,
-  );
+  );  
   const unansweredBadges: Badge[] = questionState.items.filter(
     question => !responseMap.has(question.id) && question.level === badgeLevel,
   );
   const allBadges: Badge[] = answeredBadges.concat(unansweredBadges);
-
-  /** THE FOLLOWING SHOULD BE REMOVED AFTER INSULATED CELLULAR SHADES FIX * */
-  for (let i = 0; i < allBadges.length; i += 1) {
-    if (allBadges[i].title === 'Insular Cellular Shades') {
-      allBadges[i].title = 'Insulated Cellular Shades';
-    }
-  }
-  /* to here */
 
   return {
     answeredBadges,
@@ -60,19 +52,6 @@ export function GetBadges(badgeLevel: string) {
   };
 }
 
-/**
- * @returns the header for the home and collection screens
- */
-export function Header() {
-  return (
-    <View>
-      <Text style={styles.titleText}>BADGE COLLECTION</Text>
-      <Text style={styles.subTitleText}>
-        Complete more tasks to unlock a new badge and make your home more green!
-      </Text>
-    </View>
-  );
-}
 
 /**
  * @param stacknav: the navigator to go between badge pages

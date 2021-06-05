@@ -13,6 +13,7 @@ export function BadgeHome({ navigation }: HomeProps) {
   const header = 'BADGE COLLECTION';
   const headerSub =
     'Complete more tasks to unlock a new badge and make your home more green!';
+
   return (
     <View style={styles.homePage}>
       <ProgressHeader headerText={header} headerSubtext={headerSub} />
