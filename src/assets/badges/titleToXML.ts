@@ -79,7 +79,7 @@ const badgeXMLs: badgeXMLObj = {
     XMLs.grayHomeInsulBattOrLooseFillXML,
   ),
   'Energy Audit': xmlsToObj(XMLs.energyAuditXML, XMLs.grayEnergyAuditXML),
-  "Home's certified": xmlsToObj(
+  "Home's Certified": xmlsToObj(
     XMLs.homeCertifiedXML,
     XMLs.grayHomeCertifiedXML,
   ),

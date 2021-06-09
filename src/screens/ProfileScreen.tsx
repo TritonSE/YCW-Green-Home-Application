@@ -1,6 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import * as React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ProfilePage } from '../components/Profile/ProfilePage';
@@ -9,11 +8,8 @@ import { UserContext } from '../contexts/UserContext';
 
 const Stack = createStackNavigator();
 
-export function ProfileScreen() {
+const ProfileScreen = () => {
   const { userState } = useContext(UserContext);
-
-  // workaround to parse data that may be undefined - to change?
-  const homeProp = userState.homes.items[0].home;
 
   return (
     <NavigationContainer independent>
@@ -36,4 +32,6 @@ export function ProfileScreen() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
+
+export default ProfileScreen;
