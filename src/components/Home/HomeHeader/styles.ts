@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#86C5BE',
     paddingTop: Platform.OS === 'ios' ? paddingTop.ios : paddingTop.android,
-    height: 184,
+    height: 100,
     left: 0,
     display: 'flex',
     flexDirection: 'column',

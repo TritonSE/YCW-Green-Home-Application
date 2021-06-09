@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, ScrollView, View } from 'react-native';
+import { Text, ScrollView, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { BadgeTitleRewardText } from '../../HomeContainer';
 import HomeRecentActivityItem from '../HomeRecentActivityItem';
@@ -30,6 +31,14 @@ export const HomeRecentActivity = ({
 
     return (
       <View style={styles.container}>
+        <Text
+          style={{
+            ...styles.title,
+            alignSelf: 'flex-start',
+          }}
+        >
+          RECENT ACTIVITY
+        </Text>
         {recentActivityList
           .slice(0, itemsToRender)
           .map((recentActivity, index) => {
@@ -42,10 +51,17 @@ export const HomeRecentActivity = ({
               />
             );
           })}
-        {canDisplayViewAll ? (
-          <Button onPress={() => setViewAll(true)} title="VIEW ALL" />
-        ) : (
-          <></>
+        {canDisplayViewAll && (
+          <View style={{ paddingTop: 25 }}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setViewAll(true);
+              }}
+            >
+              <Text style={styles.buttonText}>View All</Text>
+            </TouchableOpacity>
+          </View>
         )}
       </View>
     );
@@ -53,17 +69,21 @@ export const HomeRecentActivity = ({
 
   const ScrollableRecentActivity = () => {
     return (
-      <ScrollView>
-        {recentActivityList.map(recentActivity => {
-          const { badgeTitle, rewardText } = recentActivity;
-          return (
-            <HomeRecentActivityItem
-              badgeTitle={badgeTitle}
-              rewardText={rewardText}
-            />
-          );
-        })}
-      </ScrollView>
+      <View>
+        <Text style={styles.title}>RECENT ACTIVITY</Text>
+        <ScrollView style={{ marginLeft: '3%' }}>
+          {recentActivityList.map((recentActivity, index) => {
+            const { badgeTitle, rewardText } = recentActivity;
+            return (
+              <HomeRecentActivityItem
+                badgeTitle={badgeTitle}
+                rewardText={rewardText}
+                key={`${badgeTitle}_${index}`}
+              />
+            );
+          })}
+        </ScrollView>
+      </View>
     );
   };
 
