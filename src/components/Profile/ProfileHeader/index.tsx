@@ -14,9 +14,7 @@ const ProfileHeader = () => {
 
   return (
     <View style={styles.settings}>
-      <TouchableOpacity onPress={() => console.log('info')}>
-        <Ionicons name="information-circle-outline" size={20} color="white" />
-      </TouchableOpacity>
+      <Text> </Text>
       <Text style={styles.pageHeader}>PROFILE</Text>
       <TouchableOpacity onPress={settingsPage}>
         <Ionicons name="settings" size={20} color="white" />

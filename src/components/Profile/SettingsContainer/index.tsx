@@ -104,26 +104,16 @@ const SettingsContainer = () => {
         <Text style={styles.title}>ACCOUNT</Text>
         {/* table */}
         <SettingsBox
-          type="Input"
+          type="Text"
           icon="person-circle-outline"
           place="Name"
-          valueInput={name}
-          setInput={setName}
+          text={name}
         />
         <SettingsBox
-          type="Input"
+          type="Text"
           icon="mail-outline"
           place="Email"
-          valueInput={email}
-          setInput={setEmail}
-        />
-        <SettingsBox
-          type="Input"
-          icon="lock-closed-outline"
-          place="Password"
-          valueInput={password}
-          setInput={setPassword}
-          password
+          text={email}
         />
         <SettingsBox
           type="Input"
@@ -140,13 +130,6 @@ const SettingsContainer = () => {
           valueInput={address2}
           setInput={setAddress2}
           updateOnChange={updateHomeInfo}
-        />
-        <SettingsBox
-          type="Input"
-          icon="home-outline"
-          place="Current Home Name"
-          valueInput={homeName}
-          setInput={setHomeName}
         />
         <SettingsBox type="Text" icon="share-outline" text="Export Data" />
         <View style={styles.buttonView}>
