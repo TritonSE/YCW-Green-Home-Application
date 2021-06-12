@@ -1,42 +1,36 @@
+/* eslint-disable import/prefer-default-export */
 import React, { useContext } from 'react';
-import { Button, View } from 'react-native';
-import { Auth } from 'aws-amplify';
-import { AppContext } from '../contexts/AppContext';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { ProfilePage } from '../components/Profile/ProfilePage';
+import { SettingsScreen } from '../components/Profile/SettingsScreen';
 import { UserContext } from '../contexts/UserContext';
 
-const ProfileScreen = () => {
-  const { setAppState } = useContext(AppContext);
-  const { setUserState } = useContext(UserContext);
+const Stack = createStackNavigator();
 
-  const signOut = async () => {
-    try {
-      await Auth.signOut();
-      setUserState({
-        _deleted: null,
-        _lastChangedAt: 0,
-        _version: 1,
-        createdAt: '',
-        displayName: '',
-        homes: {
-          items: [],
-          nextToken: null,
-          startedAt: null,
-        },
-        id: '',
-        owner: '',
-        updatedAt: '',
-        username: '',
-      });
-      setAppState('Auth');
-    } catch (error) {
-      console.error('Error signing out: ', error);
-    }
-  };
+const ProfileScreen = () => {
+  const { userState } = useContext(UserContext);
 
   return (
-    <View>
-      <Button title="Sign Out" onPress={signOut} />
-    </View>
+    <NavigationContainer independent>
+      <Stack.Navigator
+        initialRouteName="Profile"
+        screenOptions={{
+          gestureEnabled: true,
+        }}
+      >
+        <Stack.Screen
+          name="Profile"
+          component={ProfilePage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

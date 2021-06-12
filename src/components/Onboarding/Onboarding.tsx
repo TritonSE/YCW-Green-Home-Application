@@ -13,7 +13,7 @@ import {
   updateHome,
 } from '../../graphql/mutations';
 import { CreateHomeInput } from '../../API';
-import { getUser } from '../../graphql/queries';
+import { customGetUser } from '../../customQueries';
 import { UserContext } from '../../contexts/UserContext';
 
 const Stack = createStackNavigator();
@@ -54,7 +54,7 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
 
       const user = await Auth.currentAuthenticatedUser();
       const userData: any = await API.graphql({
-        query: getUser,
+        query: customGetUser,
         variables: { id: user.attributes.sub },
       });
       setUserState(userData.data.getUser);
