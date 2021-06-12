@@ -23,6 +23,7 @@ export const HomeRecentActivity = ({
     item => item !== undefined,
   ) as BadgeTitleRewardText[];
 
+  // displays the recent activity and the view all button
   const StaticRecentActivity = () => {
     const canDisplayViewAll = recentActivityCount > MAX_STATIC_ACTIVITY_COUNT;
     const itemsToRender = canDisplayViewAll
@@ -67,6 +68,7 @@ export const HomeRecentActivity = ({
     );
   };
 
+  // displays all the recent badges in a scroll view
   const ScrollableRecentActivity = () => {
     return (
       <View>
@@ -87,5 +89,6 @@ export const HomeRecentActivity = ({
     );
   };
 
+  // displays the correct component based on if the view all button has been pressed
   return viewAll ? <ScrollableRecentActivity /> : <StaticRecentActivity />;
 };
