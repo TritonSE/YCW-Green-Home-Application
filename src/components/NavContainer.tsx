@@ -2,17 +2,14 @@ import React, { useContext, useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import API from '@aws-amplify/api';
-import TaskContainer from './TaskContainer';
-import {
-  HomeScreen,
-  TaskScreen,
-  BadgeScreen,
-  ProfileScreen,
-} from '../screens/index';
+
+import { BadgeScreen, ProfileScreen } from '../screens/index';
 import { customListQuestions, customResponses } from '../customQueries';
 import { QuestionContext } from '../contexts/QuestionsContext';
 import { ResponseContext } from '../contexts/ResponseContext';
 import { UserContext } from '../contexts/UserContext';
+import TaskContainer from './TaskContainer';
+import { HomeContainer } from './HomeContainer';
 
 const Tab = createBottomTabNavigator();
 
@@ -64,7 +61,7 @@ export default function NavFlow() {
         inactiveTintColor: 'gray',
       }}
     >
-      <Tab.Screen name={NavRoutes.HOME} component={HomeScreen} />
+      <Tab.Screen name={NavRoutes.HOME} component={HomeContainer} />
       <Tab.Screen name={NavRoutes.TASKS} component={TaskContainer} />
       <Tab.Screen name={NavRoutes.PROGRESS} component={BadgeScreen} />
       <Tab.Screen name={NavRoutes.ME} component={ProfileScreen} />
