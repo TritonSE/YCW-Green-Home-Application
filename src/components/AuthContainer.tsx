@@ -9,9 +9,9 @@ import Onboarding from './Onboarding/Onboarding';
 import AuthenticatorTheme from '../styles/AuthenticatorTheme';
 import { AppContext } from '../contexts/AppContext';
 import NavFlow from './NavContainer';
-import { getUser } from '../graphql/queries';
 import { UserContext } from '../contexts/UserContext';
 import { QuestionProvider } from '../contexts/QuestionsContext';
+import { customGetUser } from '../customQueries';
 import { ResponseProvider } from '../contexts/ResponseContext';
 
 Auth.configure({ mandatorySignIn: true });
@@ -24,24 +24,29 @@ function App(): JSX.Element | null {
     const getUserData = async () => {
       const user = await Auth.currentAuthenticatedUser();
       const result: any = await API.graphql({
-        query: getUser,
+        query: customGetUser,
         variables: { id: user.attributes.sub },
       });
       setUserState(result.data.getUser);
       setAppState('Loading');
     };
-    if (userState.id === '') {
-      getUserData();
-    } else if (userState.homes.items.length === 0 && appState !== 'App') {
-      setAppState('Onboarding');
-    } else {
-      setAppState('App');
+    if (appState !== 'Onboarding Edit') {
+      if (userState.id === '') {
+        getUserData();
+      } else if (userState.homes.items.length === 0 && appState !== 'App') {
+        setAppState('Onboarding');
+      } else {
+        setAppState('App');
+      }
     }
   }, [appState, setAppState, userState, setUserState]);
 
   return (
     <NavigationContainer>
       {appState === 'Onboarding' && <Onboarding />}
+      {appState === 'Onboarding Edit' && (
+        <Onboarding homeInformation={userState.homes.items[0].home} />
+      )}
       {appState === 'App' && (
         <SafeAreaView style={{ flex: 1 }}>
           <QuestionProvider>
