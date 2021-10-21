@@ -109,6 +109,7 @@ const badgeXMLs: badgeXMLObj = {
     XMLs.condensingWaterHeaterXML,
     XMLs.grayCondensingWaterHeaterXML,
   ),
+  'News Book': xmlsToObj(XMLs.newsBookXML, XMLs.grayCondensingWaterHeaterXML),
 };
 
 export default badgeXMLs;

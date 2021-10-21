@@ -221,7 +221,7 @@ export type UpdateHomeOwnerInput = {
 };
 
 export type DeleteHomeOwnerInput = {
-  id?: string | null,
+  id: string,
   _version?: number | null,
 };
 
@@ -367,7 +367,7 @@ export type UpdateHomeInput = {
 };
 
 export type DeleteHomeInput = {
-  id?: string | null,
+  id: string,
   _version?: number | null,
 };
 
@@ -423,7 +423,7 @@ export type UpdateQuestionInput = {
 };
 
 export type DeleteQuestionInput = {
-  id?: string | null,
+  id: string,
   _version?: number | null,
 };
 
@@ -456,7 +456,7 @@ export type UpdateResponseInput = {
 };
 
 export type DeleteResponseInput = {
-  id?: string | null,
+  id: string,
   _version?: number | null,
 };
 
@@ -1800,49 +1800,6 @@ export type DeleteResponseMutation = {
   } | null,
 };
 
-export type ListUsersQueryVariables = {
-  filter?: ModelUserFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListUsersQuery = {
-  listUsers?:  {
-    __typename: "ModelUserConnection",
-    items?:  Array< {
-      __typename: "User",
-      id: string,
-      username: string,
-      displayName: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-      homes?:  {
-        __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
-          __typename: "HomeOwner",
-          id: string,
-          homeID: string,
-          homeOwnerID: string,
-          _version: number,
-          _deleted?: boolean | null,
-          _lastChangedAt: number,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null > | null,
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
 export type GetUserQueryVariables = {
   id?: string,
 };
@@ -1920,6 +1877,49 @@ export type GetUserQuery = {
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
+  } | null,
+};
+
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
+    items?:  Array< {
+      __typename: "User",
+      id: string,
+      username: string,
+      displayName: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+      homes?:  {
+        __typename: "ModelHomeOwnerConnection",
+        items?:  Array< {
+          __typename: "HomeOwner",
+          id: string,
+          homeID: string,
+          homeOwnerID: string,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null > | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -2047,87 +2047,6 @@ export type SyncHomeOwnersQuery = {
           startedAt?: number | null,
         } | null,
       },
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type ListHomesQueryVariables = {
-  filter?: ModelHomeFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListHomesQuery = {
-  listHomes?:  {
-    __typename: "ModelHomeConnection",
-    items?:  Array< {
-      __typename: "Home",
-      id: string,
-      addressLine1?: string | null,
-      addressLine2?: string | null,
-      city?: string | null,
-      addressState?: string | null,
-      country?: string | null,
-      zipcode: string,
-      yearBuilt?: number | null,
-      outDoorArea?: number | null,
-      livableArea: number,
-      bedroomCount: number,
-      bathroomCount?: number | null,
-      heatingFuelType?: HeatingFuelType | null,
-      heaterAge?: AgeType | null,
-      waterHeaterFuelType?: WaterHeaterFuelType | null,
-      waterHeaterAge?: AgeType | null,
-      hasAirConditioner?: boolean | null,
-      hasPool?: boolean | null,
-      hasHotTub?: boolean | null,
-      annualElectricalEnergyUsage?: number | null,
-      annualGasPropaneEnergyUsage?: number | null,
-      annualWaterUsage?: number | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      homeOwners?:  {
-        __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
-          __typename: "HomeOwner",
-          id: string,
-          homeID: string,
-          homeOwnerID: string,
-          _version: number,
-          _deleted?: boolean | null,
-          _lastChangedAt: number,
-          createdAt: string,
-          updatedAt: string,
-          owner?: string | null,
-        } | null > | null,
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      owner?: string | null,
-      homeowners?: string | null,
-      responses?:  {
-        __typename: "ModelResponseConnection",
-        items?:  Array< {
-          __typename: "Response",
-          id: string,
-          homeID: string,
-          questionID: string,
-          answer: string,
-          createdAt: string,
-          _version: number,
-          _deleted?: boolean | null,
-          _lastChangedAt: number,
-          updatedAt: string,
-          owner?: string | null,
-        } | null > | null,
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -2300,6 +2219,87 @@ export type GetHomeQuery = {
   } | null,
 };
 
+export type ListHomesQueryVariables = {
+  filter?: ModelHomeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListHomesQuery = {
+  listHomes?:  {
+    __typename: "ModelHomeConnection",
+    items?:  Array< {
+      __typename: "Home",
+      id: string,
+      addressLine1?: string | null,
+      addressLine2?: string | null,
+      city?: string | null,
+      addressState?: string | null,
+      country?: string | null,
+      zipcode: string,
+      yearBuilt?: number | null,
+      outDoorArea?: number | null,
+      livableArea: number,
+      bedroomCount: number,
+      bathroomCount?: number | null,
+      heatingFuelType?: HeatingFuelType | null,
+      heaterAge?: AgeType | null,
+      waterHeaterFuelType?: WaterHeaterFuelType | null,
+      waterHeaterAge?: AgeType | null,
+      hasAirConditioner?: boolean | null,
+      hasPool?: boolean | null,
+      hasHotTub?: boolean | null,
+      annualElectricalEnergyUsage?: number | null,
+      annualGasPropaneEnergyUsage?: number | null,
+      annualWaterUsage?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      homeOwners?:  {
+        __typename: "ModelHomeOwnerConnection",
+        items?:  Array< {
+          __typename: "HomeOwner",
+          id: string,
+          homeID: string,
+          homeOwnerID: string,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          createdAt: string,
+          updatedAt: string,
+          owner?: string | null,
+        } | null > | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+      owner?: string | null,
+      homeowners?: string | null,
+      responses?:  {
+        __typename: "ModelResponseConnection",
+        items?:  Array< {
+          __typename: "Response",
+          id: string,
+          homeID: string,
+          questionID: string,
+          answer: string,
+          createdAt: string,
+          _version: number,
+          _deleted?: boolean | null,
+          _lastChangedAt: number,
+          updatedAt: string,
+          owner?: string | null,
+        } | null > | null,
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
 export type SyncHomesQueryVariables = {
   filter?: ModelHomeFilterInput | null,
   limit?: number | null,
@@ -2382,6 +2382,29 @@ export type SyncHomesQuery = {
   } | null,
 };
 
+export type GetQuestionQueryVariables = {
+  id?: string,
+};
+
+export type GetQuestionQuery = {
+  getQuestion?:  {
+    __typename: "Question",
+    id: string,
+    title: string,
+    questionText: string,
+    rewardText: string,
+    level: Level,
+    cost: Cost,
+    categories: Array< Category >,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
 export type ListQuestionsQueryVariables = {
   filter?: ModelQuestionFilterInput | null,
   limit?: number | null,
@@ -2409,29 +2432,6 @@ export type ListQuestionsQuery = {
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
-  } | null,
-};
-
-export type GetQuestionQueryVariables = {
-  id?: string,
-};
-
-export type GetQuestionQuery = {
-  getQuestion?:  {
-    __typename: "Question",
-    id: string,
-    title: string,
-    questionText: string,
-    rewardText: string,
-    level: Level,
-    cost: Cost,
-    categories: Array< Category >,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 

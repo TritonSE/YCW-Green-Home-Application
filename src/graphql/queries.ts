@@ -2,44 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        username
-        displayName
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-        homes {
-          items {
-            id
-            homeID
-            homeOwnerID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -109,6 +71,44 @@ export const getUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        username
+        displayName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -232,80 +232,6 @@ export const syncHomeOwners = /* GraphQL */ `
             nextToken
             startedAt
           }
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const listHomes = /* GraphQL */ `
-  query ListHomes(
-    $filter: ModelHomeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listHomes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        addressLine1
-        addressLine2
-        city
-        addressState
-        country
-        zipcode
-        yearBuilt
-        outDoorArea
-        livableArea
-        bedroomCount
-        bathroomCount
-        heatingFuelType
-        heaterAge
-        waterHeaterFuelType
-        waterHeaterAge
-        hasAirConditioner
-        hasPool
-        hasHotTub
-        annualElectricalEnergyUsage
-        annualGasPropaneEnergyUsage
-        annualWaterUsage
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        homeOwners {
-          items {
-            id
-            homeID
-            homeOwnerID
-            _version
-            _deleted
-            _lastChangedAt
-            createdAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
-        }
-        owner
-        homeowners
-        responses {
-          items {
-            id
-            homeID
-            questionID
-            answer
-            createdAt
-            _version
-            _deleted
-            _lastChangedAt
-            updatedAt
-            owner
-          }
-          nextToken
-          startedAt
         }
       }
       nextToken
@@ -467,6 +393,80 @@ export const getHome = /* GraphQL */ `
     }
   }
 `;
+export const listHomes = /* GraphQL */ `
+  query ListHomes(
+    $filter: ModelHomeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listHomes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        addressLine1
+        addressLine2
+        city
+        addressState
+        country
+        zipcode
+        yearBuilt
+        outDoorArea
+        livableArea
+        bedroomCount
+        bathroomCount
+        heatingFuelType
+        heaterAge
+        waterHeaterFuelType
+        waterHeaterAge
+        hasAirConditioner
+        hasPool
+        hasHotTub
+        annualElectricalEnergyUsage
+        annualGasPropaneEnergyUsage
+        annualWaterUsage
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        homeOwners {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        owner
+        homeowners
+        responses {
+          items {
+            id
+            homeID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const syncHomes = /* GraphQL */ `
   query SyncHomes(
     $filter: ModelHomeFilterInput
@@ -547,6 +547,25 @@ export const syncHomes = /* GraphQL */ `
     }
   }
 `;
+export const getQuestion = /* GraphQL */ `
+  query GetQuestion($id: ID!) {
+    getQuestion(id: $id) {
+      id
+      title
+      questionText
+      rewardText
+      level
+      cost
+      categories
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
 export const listQuestions = /* GraphQL */ `
   query ListQuestions(
     $filter: ModelQuestionFilterInput
@@ -571,25 +590,6 @@ export const listQuestions = /* GraphQL */ `
       }
       nextToken
       startedAt
-    }
-  }
-`;
-export const getQuestion = /* GraphQL */ `
-  query GetQuestion($id: ID!) {
-    getQuestion(id: $id) {
-      id
-      title
-      questionText
-      rewardText
-      level
-      cost
-      categories
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      owner
     }
   }
 `;
