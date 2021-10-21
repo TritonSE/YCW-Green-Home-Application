@@ -66,7 +66,7 @@ import {
   condensingWaterHeaterXML,
   grayCondensingWaterHeaterXML,
 } from './condensingWaterHeater';
-import { newsBookXML } from './newsBook';
+import newsBookXML from './newsBook';
 
 export {
   newsBookXML,
