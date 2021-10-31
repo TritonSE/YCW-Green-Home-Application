@@ -41,18 +41,21 @@ export const HomeNews = ({
         >
           NEWS
         </Text>
-        {recentActivityList
-          .slice(0, itemsToRender)
-          .map((recentActivity, index) => {
-            const { badgeTitle, rewardText } = recentActivity;
-            return (
-              <HomeNewsItem
-                key={`TEST_${index}`}
-                newsTitle="Test Title"
-                newsText="This is a news article that has a very long text and would hopefully go to the next line. Here is some extra text to see if the container will expand."
-              />
-            );
-          })}
+        <HomeNewsItem
+          key="TEST_1"
+          newsTitle="Get Out There!"
+          newsText="It all begins with an idea."
+        />
+        <HomeNewsItem
+          key="TEST_2"
+          newsTitle="Why Deserts Matter Too"
+          newsText="It all begins with an idea."
+        />
+        <HomeNewsItem
+          key="TEST_3"
+          newsTitle="New Hope in Old Appalachia"
+          newsText="It all begins with an idea."
+        />
         {canDisplayViewAll && (
           <View style={{ paddingTop: 25 }}>
             <TouchableOpacity
