@@ -45,16 +45,19 @@ export const HomeNews = ({
           key="TEST_1"
           newsTitle="Get Out There!"
           newsText="It all begins with an idea."
+          link="https://www.google.com/"
         />
         <HomeNewsItem
           key="TEST_2"
           newsTitle="Why Deserts Matter Too"
           newsText="It all begins with an idea."
+          link="https://www.google.com/"
         />
         <HomeNewsItem
           key="TEST_3"
           newsTitle="New Hope in Old Appalachia"
           newsText="It all begins with an idea."
+          link="https://www.google.com/"
         />
         {canDisplayViewAll && (
           <View style={{ paddingTop: 25 }}>

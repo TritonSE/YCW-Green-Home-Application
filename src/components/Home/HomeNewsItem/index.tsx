@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Linking } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import SvgContainer from '../../SvgContainer';
 import styles from './styles';
@@ -12,24 +13,37 @@ const badgeMetadata = {
 interface HomeNewsItemProps {
   newsTitle: string;
   newsText: string;
+  link: string;
 }
 
-const HomeNewsItem = ({ newsTitle, newsText }: HomeNewsItemProps) => {
+const openLink = (url: string) => {
+  Linking.canOpenURL(url).then(supported => {
+    if (supported) {
+      Linking.openURL(url);
+    } else {
+      console.log(`Don't know how to open URI: ${url}`);
+    }
+  });
+};
+
+const HomeNewsItem = ({ newsTitle, newsText, link }: HomeNewsItemProps) => {
   return (
     <View style={styles.container}>
-      <View style={styles.rowContainer}>
-        <View style={{ padding: 20 }}>
-          <SvgContainer
-            badgeTitle="News Book"
-            height={badgeMetadata.height}
-            width={badgeMetadata.width}
-          />
+      <TouchableOpacity onPress={() => openLink(link)}>
+        <View style={styles.rowContainer}>
+          <View style={{ padding: 20 }}>
+            <SvgContainer
+              badgeTitle="News Book"
+              height={badgeMetadata.height}
+              width={badgeMetadata.width}
+            />
+          </View>
+          <Text style={styles.newsText}>
+            <Text style={styles.newsTitle}>{newsTitle}: </Text>
+            {newsText}
+          </Text>
         </View>
-        <Text style={styles.newsText}>
-          <Text style={styles.newsTitle}>{newsTitle}: </Text>
-          {newsText}
-        </Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
