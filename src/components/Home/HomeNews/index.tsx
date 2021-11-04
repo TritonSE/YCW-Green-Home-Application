@@ -1,93 +1,104 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, ScrollView, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
-import { BadgeTitleRewardText } from '../../HomeContainer';
-import HomeRecentActivityItem from '../HomeRecentActivityItem';
 import HomeNewsItem from '../HomeNewsItem';
 import styles from './styles';
 
 /* eslint-disable react/no-array-index-key */
 
-export interface HomeRecentActivityProps {
-  badgeCompletedTextList: (BadgeTitleRewardText | undefined)[];
+const MAX_STATIC_NEWS_COUNT = 2;
+
+interface NewsItem {
+  datePosted: string;
+  link: string;
+  article: string;
+  excerpt: string;
+  title: string;
+  author: string;
 }
 
-const MAX_STATIC_ACTIVITY_COUNT = 4;
+const getNewsItems = async () => {
+  try {
+    const res = await fetch(
+      'https://3vmaot03ul.execute-api.us-west-1.amazonaws.com/articles',
+    );
+    if (res.status === 200) {
+      const data = await res.json();
+      return data;
+    }
+    return null;
+  } catch (err) {
+    console.error(`Error getting news items: ${err}`);
+    return null;
+  }
+};
 
-export const HomeNews = ({
-  badgeCompletedTextList,
-}: HomeRecentActivityProps) => {
+const HomeNews = () => {
+  const [news, setNews] = useState<NewsItem[]>([]);
   const [viewAll, setViewAll] = useState(false);
-  const recentActivityCount = badgeCompletedTextList.length;
-  const recentActivityList = badgeCompletedTextList.filter(
-    item => item !== undefined,
-  ) as BadgeTitleRewardText[];
+  const recentNewsCount = news.length;
 
-  // displays the recent activity and the view all button
-  const StaticRecentActivity = () => {
-    const canDisplayViewAll = recentActivityCount > MAX_STATIC_ACTIVITY_COUNT;
+  useEffect(() => {
+    getNewsItems().then(newsItems => {
+      const sorted = newsItems.Items.sort((a: NewsItem, b: NewsItem) =>
+        Date.parse(a.datePosted) > Date.parse(b.datePosted) ? 1 : -1,
+      );
+      setNews(sorted);
+    });
+  }, []);
+
+  // displays the recent news and the view all button
+  const StaticRecentNews = () => {
+    const canDisplayViewAll = recentNewsCount > MAX_STATIC_NEWS_COUNT;
     const itemsToRender = canDisplayViewAll
-      ? MAX_STATIC_ACTIVITY_COUNT
-      : recentActivityCount;
+      ? MAX_STATIC_NEWS_COUNT
+      : recentNewsCount;
 
     return (
       <View style={styles.container}>
-        <Text
-          style={{
-            ...styles.title,
-            alignSelf: 'flex-start',
-          }}
-        >
-          NEWS
-        </Text>
-        <HomeNewsItem
-          key="TEST_1"
-          newsTitle="Get Out There!"
-          newsText="It all begins with an idea."
-          link="https://www.google.com/"
-        />
-        <HomeNewsItem
-          key="TEST_2"
-          newsTitle="Why Deserts Matter Too"
-          newsText="It all begins with an idea."
-          link="https://www.google.com/"
-        />
-        <HomeNewsItem
-          key="TEST_3"
-          newsTitle="New Hope in Old Appalachia"
-          newsText="It all begins with an idea."
-          link="https://www.google.com/"
-        />
-        {canDisplayViewAll && (
-          <View style={{ paddingTop: 25 }}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                setViewAll(true);
-              }}
-            >
-              <Text style={styles.buttonText}>View All</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={{ ...styles.title, flex: 1 }}>NEWS</Text>
+          {canDisplayViewAll && (
+            <View style={{ alignSelf: 'flex-end', marginRight: '3%', flex: 0 }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setViewAll(true);
+                }}
+              >
+                <Text style={styles.buttonText}>View All +</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+        {news.slice(0, itemsToRender).map(recentNews => {
+          const { title, excerpt, link } = recentNews;
+          return (
+            <HomeNewsItem
+              key={link}
+              newsTitle={title}
+              newsText={excerpt}
+              link={link}
+            />
+          );
+        })}
       </View>
     );
   };
 
-  // displays all the recent badges in a scroll view
-  const ScrollableRecentActivity = () => {
+  // displays all the recent news in a scroll view
+  const ScrollableRecentNews = () => {
     return (
       <View>
-        <Text style={styles.title}>RECENT ACTIVITY</Text>
+        <Text style={styles.title}>NEWS</Text>
         <ScrollView style={{ marginLeft: '3%' }}>
-          {recentActivityList.map((recentActivity, index) => {
-            const { badgeTitle, rewardText } = recentActivity;
+          {news.map(recentNews => {
+            const { title, link, excerpt } = recentNews;
             return (
-              <HomeRecentActivityItem
-                badgeTitle={badgeTitle}
-                rewardText={rewardText}
-                key={`${badgeTitle}_${index}`}
+              <HomeNewsItem
+                key={link}
+                newsTitle={title}
+                newsText={excerpt}
+                link={link}
               />
             );
           })}
@@ -97,5 +108,7 @@ export const HomeNews = ({
   };
 
   // displays the correct component based on if the view all button has been pressed
-  return viewAll ? <ScrollableRecentActivity /> : <StaticRecentActivity />;
+  return viewAll ? <ScrollableRecentNews /> : <StaticRecentNews />;
 };
+
+export default HomeNews;

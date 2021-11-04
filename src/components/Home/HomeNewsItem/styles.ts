@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   newsText: {
-    padding: 10,
-    paddingLeft: 0,
+    paddingLeft: 15,
+    paddingRight: 10,
     fontSize: 17,
     flexWrap: 'wrap',
     flexShrink: 1,
