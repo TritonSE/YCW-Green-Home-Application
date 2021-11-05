@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Text, ScrollView, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import HomeNewsItem from '../HomeNewsItem';
 import styles from './styles';
 
@@ -8,7 +9,7 @@ import styles from './styles';
 
 const MAX_STATIC_NEWS_COUNT = 2;
 
-interface NewsItem {
+export interface NewsItem {
   datePosted: string;
   link: string;
   article: string;
@@ -33,7 +34,11 @@ const getNewsItems = async () => {
   }
 };
 
-const HomeNews = () => {
+interface HomeNewsProps {
+  navigation?: any;
+}
+
+const HomeNews = ({ navigation }: HomeNewsProps) => {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [viewAll, setViewAll] = useState(false);
   const recentNewsCount = news.length;
@@ -62,7 +67,8 @@ const HomeNews = () => {
             <View style={{ alignSelf: 'flex-end', marginRight: '3%', flex: 0 }}>
               <TouchableOpacity
                 onPress={() => {
-                  setViewAll(true);
+                  // setViewAll(true);
+                  navigation.navigate('News View All', { news });
                 }}
               >
                 <Text style={styles.buttonText}>View All +</Text>

@@ -2,7 +2,23 @@ import React, { useContext } from 'react';
 
 import { QuestionContext } from '../contexts/QuestionsContext';
 import { ResponseContext } from '../contexts/ResponseContext';
-import HomeScreen from '../screens/HomeScreen';
+import {
+  createStackNavigator,
+  StackScreenProps,
+} from '@react-navigation/stack';
+import { NewsItem } from '../components/Home/HomeNews';
+import HomeMainScreen from '../screens/HomeMainScreen';
+
+type HomeStackParams = {
+  Home: undefined;
+  HomeNews: undefined;
+  HomeNewsViewAll: { news: NewsItem[] };
+};
+export type NewsViewAllProps = StackScreenProps<
+  HomeStackParams,
+  'HomeNewsViewAll'
+>;
+export const HomeStack = createStackNavigator<HomeStackParams>();
 
 export interface BadgeTitleRewardText {
   badgeTitle: string;
@@ -29,25 +45,23 @@ export const HomeContainer = () => {
   });
 
   // matches recent badges with reward text
-  const badgeCompletedTextList: (
-    | BadgeTitleRewardText
-    | undefined
-  )[] = sortedResponses.map(response => {
-    const questionObject = questionState.items.find(
-      question => question.id === response.questionID,
-    );
+  const badgeCompletedTextList: (BadgeTitleRewardText | undefined)[] =
+    sortedResponses.map(response => {
+      const questionObject = questionState.items.find(
+        question => question.id === response.questionID,
+      );
 
-    if (questionObject === null || questionObject === undefined) {
-      return undefined;
-    }
+      if (questionObject === null || questionObject === undefined) {
+        return undefined;
+      }
 
-    const badgeCompletedTextObj: BadgeTitleRewardText = {
-      badgeTitle: questionObject.title,
-      rewardText: questionObject.rewardText,
-    };
+      const badgeCompletedTextObj: BadgeTitleRewardText = {
+        badgeTitle: questionObject.title,
+        rewardText: questionObject.rewardText,
+      };
 
-    return badgeCompletedTextObj;
-  });
+      return badgeCompletedTextObj;
+    });
 
-  return <HomeScreen badgeCompletedTextList={badgeCompletedTextList} />;
+  return <HomeMainScreen badgeCompletedTextList={badgeCompletedTextList} />;
 };
