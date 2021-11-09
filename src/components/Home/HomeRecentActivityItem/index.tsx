@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-
-import { BadgeTitleRewardText } from '../../HomeContainer';
+import { BadgeTitleRewardText } from '../../../screens/HomeScreen';
 import SvgContainer from '../../SvgContainer';
 import styles from './styles';
 

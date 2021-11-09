@@ -1,19 +1,20 @@
 /* eslint-disable import/prefer-default-export */
 import React, { useContext } from 'react';
 import { View } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { QuestionContext } from '../contexts/QuestionsContext';
 import { ResponseContext } from '../contexts/ResponseContext';
-import { BadgeTitleRewardText } from '../components/HomeContainer';
+import { BadgeTitleRewardText, HomeStackParams } from './HomeScreen';
 import HomeHeader from '../components/Home/HomeHeader';
 import HomeNews from '../components/Home/HomeNews';
 import { HomeRecentActivity } from '../components/Home/HomeRecentActivity';
 import styles from '../styles/HomeScreenStyles';
 
 interface HomeScreenProps {
-  navigation: any;
+  navigation: StackNavigationProp<HomeStackParams, 'Home'>;
 }
 
-const HomeMainScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+const HomeMainScreen = ({ navigation }: HomeScreenProps) => {
   const { questionState } = useContext(QuestionContext);
   const { responseState } = useContext(ResponseContext);
 

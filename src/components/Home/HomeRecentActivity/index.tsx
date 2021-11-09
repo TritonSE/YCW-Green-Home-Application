@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { BadgeTitleRewardText } from '../../HomeContainer';
+import { BadgeTitleRewardText } from '../../../screens/HomeScreen';
 import HomeRecentActivityItem from '../HomeRecentActivityItem';
 import styles from './styles';
 
@@ -36,7 +36,7 @@ export const HomeRecentActivity = ({
           <View style={{ alignSelf: 'flex-end', marginRight: '3%', flex: 0 }}>
             <TouchableOpacity
               onPress={() => {
-                navigation.push('Activities', { recentActivityList });
+                navigation.push('RecentActivities', { recentActivityList });
               }}
             >
               <Text style={styles.buttonText}>View All +</Text>

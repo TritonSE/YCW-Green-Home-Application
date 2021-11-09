@@ -1,14 +1,19 @@
 import React from 'react';
 import { Text, ScrollView, View } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import HomeRecentActivityItem from '../HomeRecentActivityItem';
-import { BadgeTitleRewardText } from '../../HomeContainer';
+import {
+  BadgeTitleRewardText,
+  HomeStackParams,
+} from '../../../screens/HomeScreen';
 import styles from './styles';
 
 /* eslint-disable react/no-array-index-key */
 
 type HomeRecentActivityViewAllProps = {
-  route: any;
-  navigation: any;
+  route: RouteProp<HomeStackParams, 'RecentActivities'>;
+  navigation: StackNavigationProp<HomeStackParams, 'RecentActivities'>;
 };
 
 const HomeRecentActivityViewAll = ({

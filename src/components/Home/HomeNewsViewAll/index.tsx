@@ -1,5 +1,8 @@
 import React from 'react';
 import { Text, ScrollView, View } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { HomeStackParams } from '../../../screens/HomeScreen';
 import HomeNewsItem from '../HomeNewsItem';
 import { NewsItem } from '../HomeNews';
 import styles from './styles';
@@ -7,8 +10,8 @@ import styles from './styles';
 /* eslint-disable react/no-array-index-key */
 
 type HomeNewsViewAllProps = {
-  route: any;
-  navigation: any;
+  route: RouteProp<HomeStackParams, 'News'>;
+  navigation: StackNavigationProp<HomeStackParams, 'News'>;
 };
 
 const HomeNewsViewAll = ({ route, navigation }: HomeNewsViewAllProps) => {
