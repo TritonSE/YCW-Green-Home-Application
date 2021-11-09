@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonText: { color: 'white', fontSize: 16, fontWeight: 'bold' },
+  buttonText: { color: '#353935', fontSize: 12, fontWeight: '400' },
   title: {
     fontSize: 16,
     paddingLeft: '2%',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, ScrollView, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import HomeNewsItem from '../HomeNewsItem';
 import styles from './styles';
@@ -8,7 +8,7 @@ import styles from './styles';
 
 const MAX_STATIC_NEWS_COUNT = 2;
 
-interface NewsItem {
+export interface NewsItem {
   datePosted: string;
   link: string;
   article: string;
@@ -33,10 +33,11 @@ const getNewsItems = async () => {
   }
 };
 
-const HomeNews = () => {
+const HomeNews = ({ navigation }: any) => {
   const [news, setNews] = useState<NewsItem[]>([]);
-  const [viewAll, setViewAll] = useState(false);
   const recentNewsCount = news.length;
+  const canDisplayViewAll = recentNewsCount > MAX_STATIC_NEWS_COUNT;
+  const itemsToRender = MAX_STATIC_NEWS_COUNT;
 
   useEffect(() => {
     getNewsItems().then(newsItems => {
@@ -47,68 +48,35 @@ const HomeNews = () => {
     });
   }, []);
 
-  // displays the recent news and the view all button
-  const StaticRecentNews = () => {
-    const canDisplayViewAll = recentNewsCount > MAX_STATIC_NEWS_COUNT;
-    const itemsToRender = canDisplayViewAll
-      ? MAX_STATIC_NEWS_COUNT
-      : recentNewsCount;
-
-    return (
-      <View style={styles.container}>
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={{ ...styles.title, flex: 1 }}>NEWS</Text>
-          {canDisplayViewAll && (
-            <View style={{ alignSelf: 'flex-end', marginRight: '3%', flex: 0 }}>
-              <TouchableOpacity
-                onPress={() => {
-                  setViewAll(true);
-                }}
-              >
-                <Text style={styles.buttonText}>View All +</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
-        {news.slice(0, itemsToRender).map(recentNews => {
-          const { title, excerpt, link } = recentNews;
-          return (
-            <HomeNewsItem
-              key={link}
-              newsTitle={title}
-              newsText={excerpt}
-              link={link}
-            />
-          );
-        })}
+  return (
+    <View style={styles.container}>
+      <View style={{ flexDirection: 'row' }}>
+        <Text style={{ ...styles.title, flex: 1 }}>NEWS</Text>
+        {canDisplayViewAll && (
+          <View style={{ alignSelf: 'flex-end', marginRight: '3%', flex: 0 }}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.push('News', { news });
+              }}
+            >
+              <Text style={styles.buttonText}>View All +</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
-    );
-  };
-
-  // displays all the recent news in a scroll view
-  const ScrollableRecentNews = () => {
-    return (
-      <View>
-        <Text style={styles.title}>NEWS</Text>
-        <ScrollView style={{ marginLeft: '3%' }}>
-          {news.map(recentNews => {
-            const { title, link, excerpt } = recentNews;
-            return (
-              <HomeNewsItem
-                key={link}
-                newsTitle={title}
-                newsText={excerpt}
-                link={link}
-              />
-            );
-          })}
-        </ScrollView>
-      </View>
-    );
-  };
-
-  // displays the correct component based on if the view all button has been pressed
-  return viewAll ? <ScrollableRecentNews /> : <StaticRecentNews />;
+      {news.slice(0, itemsToRender).map(recentNews => {
+        const { title, excerpt, link } = recentNews;
+        return (
+          <HomeNewsItem
+            key={link}
+            newsTitle={title}
+            newsText={excerpt}
+            link={link}
+          />
+        );
+      })}
+    </View>
+  );
 };
 
 export default HomeNews;

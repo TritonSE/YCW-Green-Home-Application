@@ -1,24 +1,23 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
-import { View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { HomeStack } from '../components/HomeContainer';
+import HomeMainScreen from '../screens/HomeMainScreen';
+import HomeNewsViewAll from '../components/Home/HomeNewsViewAll';
+import HomeRecentActivityViewAll from '../components/Home/HomeRecentActivityViewAll';
 
-import HomeHeader from '../components/Home/HomeHeader';
-import HomeNews from '../components/Home/HomeNews';
-import { HomeRecentActivity } from '../components/Home/HomeRecentActivity';
-import { BadgeTitleRewardText } from '../components/HomeContainer';
-import styles from '../styles/HomeScreenStyles';
-
-interface HomeScreenProps {
-  badgeCompletedTextList: (BadgeTitleRewardText | undefined)[];
-}
-
-const HomeScreen: React.FC<HomeScreenProps> = ({ badgeCompletedTextList }) => {
+const HomeScreen = () => {
   return (
-    <View style={styles.header}>
-      <HomeHeader />
-      <HomeNews />
-      <HomeRecentActivity badgeCompletedTextList={badgeCompletedTextList} />
-    </View>
+    <NavigationContainer independent>
+      <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+        <HomeStack.Screen name="Home" component={HomeMainScreen} />
+        <HomeStack.Screen name="News" component={HomeNewsViewAll} />
+        <HomeStack.Screen
+          name="Activities"
+          component={HomeRecentActivityViewAll}
+        />
+      </HomeStack.Navigator>
+    </NavigationContainer>
   );
 };
 
