@@ -9,7 +9,7 @@ import { QuestionContext } from '../contexts/QuestionsContext';
 import { ResponseContext } from '../contexts/ResponseContext';
 import { UserContext } from '../contexts/UserContext';
 import TaskContainer from './TaskContainer';
-import { HomeContainer } from './HomeContainer';
+import HomeContainer from './HomeContainer';
 
 const Tab = createBottomTabNavigator();
 
