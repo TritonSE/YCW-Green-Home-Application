@@ -13,7 +13,6 @@ export function ProfilePage() {
       keyboardOpeningTime={0}
       extraScrollHeight={25}
       enableOnAndroid
-      contentContainerStyle={{ height: 600 }}
       scrollToOverflowEnabled
     >
       <StatusBar backgroundColor="#86C5BE" barStyle="dark-content" />

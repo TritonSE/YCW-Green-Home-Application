@@ -9,10 +9,14 @@ const styles = StyleSheet.create({
   homeCard: {
     margin: 8,
     padding: 10,
-    height: 100,
-    width: 140,
+    height: 'auto',
+    width: '42%',
     borderRadius: 5,
     backgroundColor: '#FAFAFA',
+  },
+  homeCardSelected: {
+    borderColor: '#377067',
+    borderWidth: 2,
   },
   homeColor: {
     width: '25%',
