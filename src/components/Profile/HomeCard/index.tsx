@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import { Text, View } from 'react-native';
 import styles from './styles';
-import { UserContext } from '../../../contexts/UserContext';
 
-const HomeCard = () => {
-  const { userState } = useContext(UserContext);
+type HomeCardProps = {
+  streetAddress: string;
+  city: string;
+  state: string;
+  zip: string;
+};
 
-  // workaround to parse data that may be undefined - to change?
-  const homes = userState.homes.items;
-  const homesString = JSON.stringify(homes);
-  const homesJSON = JSON.parse(homesString);
-  const addressName = homesJSON[0].home.addressLine1.split(' ')[1];
-  const addressLine = `${homesJSON[0].home.addressLine1}\n${homesJSON[0].home.city}, ${homesJSON[0].home.addressState} ${homesJSON[0].home.zipcode}`;
+const HomeCard = ({ streetAddress, city, state, zip }: HomeCardProps) => {
+  const addressName = streetAddress.split(' ')[1];
+  const addressLine = `${streetAddress}\n${city}, ${state} ${zip}`;
 
   return (
     <View style={styles.homeCard}>
