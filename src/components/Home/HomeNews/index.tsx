@@ -41,9 +41,11 @@ const HomeNews = ({ navigation }: any) => {
 
   useEffect(() => {
     getNewsItems().then(newsItems => {
-      const sorted = newsItems.Items.sort((a: NewsItem, b: NewsItem) =>
-        Date.parse(a.datePosted) > Date.parse(b.datePosted) ? 1 : -1,
-      );
+      const sorted = newsItems.Items.sort((a: NewsItem, b: NewsItem) => {
+        if (Date.parse(a.datePosted) > Date.parse(b.datePosted)) return 1;
+        if (a.title.toLowerCase() > b.title.toLowerCase()) return 1;
+        return -1;
+      });
       setNews(sorted);
     });
   }, []);
