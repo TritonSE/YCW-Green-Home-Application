@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';
 
 // import SplashScreen from './screens/SplashScreen';
@@ -20,6 +20,8 @@ Amplify.configure({
     disabled: true,
   },
 });
+
+Auth.configure(awsconfig);
 
 export default function App(): JSX.Element | null {
   return (
