@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
 type HomeCardProps = {
+  index: number;
   streetAddress: string;
   city: string;
   state: string;
@@ -11,7 +12,16 @@ type HomeCardProps = {
   onPress: () => void;
 };
 
+const colors = [
+  styles.red,
+  styles.darkGreen,
+  styles.green,
+  styles.turquoise,
+  styles.lightTurquoise,
+];
+
 const HomeCard = ({
+  index,
   streetAddress,
   city,
   state,
@@ -24,12 +34,13 @@ const HomeCard = ({
   const cardStyle = selected
     ? [styles.homeCard, styles.homeCardSelected]
     : styles.homeCard;
+  const colorStyle = colors[index % colors.length];
 
   return (
     <TouchableOpacity style={cardStyle} onPress={onPress}>
       <View style={styles.homeSpacing}>
         <Text style={styles.homeName}>{addressName}</Text>
-        <View style={styles.homeColor} />
+        <View style={[styles.homeColor, colorStyle]} />
       </View>
       <Text style={styles.address}>{addressLine}</Text>
     </TouchableOpacity>

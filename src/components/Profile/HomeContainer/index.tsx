@@ -73,13 +73,13 @@ const HomeContainer = () => {
           return (
             <HomeCard
               key={home.id}
+              index={index}
               streetAddress={addressLine1}
               city={city}
               state={addressState}
               zip={zipcode}
               selected={selected}
               onPress={() => {
-                console.log('switch');
                 setSelection(index);
               }}
             />

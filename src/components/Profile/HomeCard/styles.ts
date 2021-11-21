@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     width: '25%',
     height: 30,
     borderRadius: 50,
-    backgroundColor: '#E96661',
   },
   homeName: {
     fontSize: 15,
@@ -34,6 +33,21 @@ const styles = StyleSheet.create({
   homeSpacing: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  red: {
+    backgroundColor: '#E96661',
+  },
+  darkGreen: {
+    backgroundColor: '#377067',
+  },
+  green: {
+    backgroundColor: '#6BA177',
+  },
+  turquoise: {
+    backgroundColor: '#86C5BE',
+  },
+  lightTurquoise: {
+    backgroundColor: '#BFE3D5',
   },
 });
 
