@@ -23,10 +23,12 @@ function App(): JSX.Element | null {
   useEffect(() => {
     const getUserData = async () => {
       const user = await Auth.currentAuthenticatedUser();
+
       const result: any = await API.graphql({
         query: customGetUser,
         variables: { id: user.attributes.sub },
       });
+
       setUserState(result.data.getUser);
       setAppState('Loading');
     };
@@ -47,6 +49,7 @@ function App(): JSX.Element | null {
       {appState === 'Onboarding Edit' && (
         <Onboarding homeInformation={userState.homes.items[0].home} />
       )}
+      {console.log('USER STATE IS: \n', userState)}
       {appState === 'App' && (
         <SafeAreaView style={{ flex: 1 }}>
           <QuestionProvider>

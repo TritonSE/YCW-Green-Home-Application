@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
+import { AppContext } from '../../../contexts/AppContext';
 import { ResponseContext } from '../../../contexts/ResponseContext';
 import { UserContext } from '../../../contexts/UserContext';
 
@@ -8,6 +9,7 @@ import HomeCard from '../HomeCard';
 import AddHomeCard from '../AddHomeCard';
 
 const HomeContainer = () => {
+  const { setAppState } = useContext(AppContext);
   const { responseState } = useContext(ResponseContext);
   const { userState } = useContext(UserContext);
   const [selection, setSelection] = useState(0);
@@ -51,6 +53,11 @@ const HomeContainer = () => {
     },
   ];
 
+  const onboardingPage = () => {
+    console.log('Changing app state to onboarding edit');
+    setAppState('Onboarding Edit');
+  };
+
   return (
     <View style={styles.mainContainer}>
       <View style={styles.mainLayout}>
@@ -62,7 +69,7 @@ const HomeContainer = () => {
       <View style={styles.line} />
       <Text style={styles.homeTitle}>SWITCH HOME</Text>
       <View style={styles.homesLayout}>
-        {TEST_HOMES.map((home, index) => {
+        {homes.map((home, index) => {
           const {
             addressLine1 = '',
             city = '',
@@ -80,11 +87,40 @@ const HomeContainer = () => {
               zip={zipcode}
               selected={selected}
               onPress={() => {
+                // open the edit home page
+                console.log('switch');
                 setSelection(index);
+                console.log(index);
+                console.log('calling');
+                onboardingPage();
               }}
             />
           );
         })}
+
+        {/* {TEST_HOMES.map((home, index) => {
+          const {
+            addressLine1 = '',
+            city = '',
+            addressState = '',
+            zipcode,
+          } = home;
+          const selected = index === selection;
+          return (
+            <HomeCard
+              key={home.id}
+              streetAddress={addressLine1}
+              city={city}
+              state={addressState}
+              zip={zipcode}
+              selected={selected}
+              onPress={() => {
+                console.log('switch');
+                setSelection(index);
+              }}
+            />
+          );
+        })} */}
         <AddHomeCard />
       </View>
       <View style={styles.buttonView}>

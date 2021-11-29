@@ -7,7 +7,7 @@ const AddHomeCard = () => {
   const { setAppState } = useContext(AppContext);
 
   const onboardingPage = () => {
-    setAppState('Onboarding Edit');
+    setAppState('Onboarding');
   };
 
   return (
