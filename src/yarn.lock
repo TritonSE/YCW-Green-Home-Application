@@ -7,8 +7,8 @@
   resolved "https://registry.yarnpkg.com/@aws-amplify/analytics/-/analytics-4.0.22.tgz#05240931220fda8be9babc0674ea4301aa876e1c"
   integrity sha512-pbj1CedBW35y3rStVv4GtxjNVBMZZoMu0DBj3XOzqeapXn0XFh0LprPGk4Pz3uqaIVQCMN34UNI/a62z04AbTw==
   dependencies:
-    "@aws-amplify/cache" "3.1.56"
-    "@aws-amplify/core" "3.8.23"
+    "@aws-amplify/cache" "3.1.57"
+    "@aws-amplify/core" "3.8.24"
     "@aws-sdk/client-firehose" "3.6.1"
     "@aws-sdk/client-kinesis" "3.6.1"
     "@aws-sdk/client-personalize-events" "3.6.1"
@@ -74,19 +74,19 @@
   dependencies:
     "@aws-amplify/core" "3.8.13"
 
-"@aws-amplify/cache@3.1.57":
-  version "3.1.57"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/cache/-/cache-3.1.57.tgz#12ed42ba6b0a08c25c7714ec4f955c9c6ed622f3"
-  integrity sha512-BSizxpLeOwZ3rDSznP+PUTxSvdmlSctyBEp5UFa5/m9KKTr/+RKjP0W2xk2thAS9faFiVaXvocf2B/RDs4GqDg==
-  dependencies:
-    "@aws-amplify/core" "3.8.22"
-
 "@aws-amplify/cache@3.1.56":
   version "3.1.56"
   resolved "https://registry.yarnpkg.com/@aws-amplify/cache/-/cache-3.1.56.tgz#744e0224af6ef503cb6710a77544c1768a33bfbc"
   integrity sha512-hUMTLCzrurIXxbC8odttKw/9OvqjzKj6Uxkr8BpAstDN/4t/jDXTii35HlIBTkr+6ai9QXbLgNQIGs1Tcj8QSw==
   dependencies:
     "@aws-amplify/core" "3.8.23"
+
+"@aws-amplify/cache@3.1.57":
+  version "3.1.57"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/cache/-/cache-3.1.57.tgz#12ed42ba6b0a08c25c7714ec4f955c9c6ed622f3"
+  integrity sha512-BSizxpLeOwZ3rDSznP+PUTxSvdmlSctyBEp5UFa5/m9KKTr/+RKjP0W2xk2thAS9faFiVaXvocf2B/RDs4GqDg==
+  dependencies:
+    "@aws-amplify/core" "3.8.24"
 
 "@aws-amplify/core@3.8.13":
   version "3.8.13"
@@ -98,6 +98,32 @@
     "@aws-sdk/credential-provider-cognito-identity" "1.0.0-rc.4"
     "@aws-sdk/types" "1.0.0-rc.3"
     "@aws-sdk/util-hex-encoding" "1.0.0-rc.3"
+    universal-cookie "^4.0.4"
+    zen-observable-ts "0.8.19"
+
+"@aws-amplify/core@3.8.22":
+  version "3.8.22"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-3.8.22.tgz#9a872772b6ac90f9474eadbcb178430739ee0bfb"
+  integrity sha512-Plw0Gr6ik223bjBch/YicIUAhYTIEc8W3hx52u8jawpGMi1bcwmNAiuMMBvlSl50edbhmPgIw24GtyZNHLYDgQ==
+  dependencies:
+    "@aws-crypto/sha256-js" "1.0.0-alpha.0"
+    "@aws-sdk/client-cognito-identity" "3.6.1"
+    "@aws-sdk/credential-provider-cognito-identity" "3.6.1"
+    "@aws-sdk/types" "3.6.1"
+    "@aws-sdk/util-hex-encoding" "3.6.1"
+    universal-cookie "^4.0.4"
+    zen-observable-ts "0.8.19"
+
+"@aws-amplify/core@3.8.23":
+  version "3.8.23"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-3.8.23.tgz#8dd9689a7ffbdb652c781912c565d786c7dd2d62"
+  integrity sha512-AZib0DMrk7isNyqaSA+BJgnWotGEY/mXnWfg7mSMWuc4fsJKLXzijLaqu9btrrADtX6v0QtQthd/7+W+Qn1Hlg==
+  dependencies:
+    "@aws-crypto/sha256-js" "1.0.0-alpha.0"
+    "@aws-sdk/client-cognito-identity" "3.6.1"
+    "@aws-sdk/credential-provider-cognito-identity" "3.6.1"
+    "@aws-sdk/types" "3.6.1"
+    "@aws-sdk/util-hex-encoding" "3.6.1"
     universal-cookie "^4.0.4"
     zen-observable-ts "0.8.19"
 
@@ -144,7 +170,7 @@
   resolved "https://registry.yarnpkg.com/@aws-amplify/interactions/-/interactions-3.3.34.tgz#4d713c8e9ad37691d59fb3a63a47154d40317d33"
   integrity sha512-152FEwVqtfJ8rDi0VGzqL4CSu44QCiRTHpKyacWMPcxdC6E0DtVdzcNgo94fenpJIQi2LyKuN8UZvK+NnMDENg==
   dependencies:
-    "@aws-amplify/core" "3.8.23"
+    "@aws-amplify/core" "3.8.24"
     "@aws-sdk/client-lex-runtime-service" "3.6.1"
 
 "@aws-amplify/predictions@3.2.34":
@@ -152,8 +178,8 @@
   resolved "https://registry.yarnpkg.com/@aws-amplify/predictions/-/predictions-3.2.34.tgz#92dacd77ce61c3e9c4d40dd655b820ed2215a8bd"
   integrity sha512-PObKVaW9sq3jnRpY85w6Ns38UItD66R0Yy+HsvcRfNBjIOOQT1bqvEEqLQZad0zP3hBSxnNGvdze4ye3oQZuwg==
   dependencies:
-    "@aws-amplify/core" "3.8.23"
-    "@aws-amplify/storage" "3.4.1"
+    "@aws-amplify/core" "3.8.24"
+    "@aws-amplify/storage" "3.4.4"
     "@aws-sdk/client-comprehend" "3.6.1"
     "@aws-sdk/client-polly" "3.6.1"
     "@aws-sdk/client-rekognition" "3.6.1"
@@ -190,12 +216,26 @@
     events "^3.1.0"
     sinon "^7.5.0"
 
+"@aws-amplify/storage@3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/storage/-/storage-3.4.1.tgz#7b42accd3cc89ab0bb5d7ee5dcb850f772e575ef"
+  integrity sha512-wMImRZMLZqK6eKMf75LKBa4SgPP0VlxSwUGBG9nGZ0xNoCmYEyv4dgTA0sgpW2C9cbNLViPCNMJOtBvycL0VPA==
+  dependencies:
+    "@aws-amplify/core" "3.8.23"
+    "@aws-sdk/client-s3" "3.6.1"
+    "@aws-sdk/s3-request-presigner" "3.6.1"
+    "@aws-sdk/util-create-request" "3.6.1"
+    "@aws-sdk/util-format-url" "3.6.1"
+    axios "0.21.1"
+    events "^3.1.0"
+    sinon "^7.5.0"
+
 "@aws-amplify/storage@3.4.4":
   version "3.4.4"
   resolved "https://registry.yarnpkg.com/@aws-amplify/storage/-/storage-3.4.4.tgz#f73aa7c49f198d3934c765d704586af695776619"
   integrity sha512-Qwh3G0e1UiqDTMnKgkxpM7BPoL9FozfGc2m1yWGT+VFbmVBZmuQyo1p3ENVgIbghQ/TqLpj447mg0Xfl4bZ3cQ==
   dependencies:
-    "@aws-amplify/core" "3.8.23"
+    "@aws-amplify/core" "3.8.24"
     "@aws-sdk/client-s3" "3.6.1"
     "@aws-sdk/s3-request-presigner" "3.6.1"
     "@aws-sdk/util-create-request" "3.6.1"
@@ -249,7 +289,7 @@
   resolved "https://registry.yarnpkg.com/@aws-amplify/xr/-/xr-2.2.34.tgz#c991fe6585193b1d5074a6b2748d3036661b0990"
   integrity sha512-EooROlYAPQ6ty5lB7tRjXiXPtTIMsgDXidKUmNG8UPMbjbSYGQUVWA8TSYc18tJ/zYyiDYHCFH7MzIzv425FNQ==
   dependencies:
-    "@aws-amplify/core" "3.8.23"
+    "@aws-amplify/core" "3.8.24"
 
 "@aws-crypto/crc32@^1.0.0":
   version "1.0.0"
@@ -3264,14 +3304,6 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@callstack/react-theme-provider@^3.0.6":
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/@callstack/react-theme-provider/-/react-theme-provider-3.0.6.tgz#7dac483037e27e28676bdf1431ba87b88f21118f"
-  integrity sha512-wwKMXfmklfogpalNZT0W+jh76BIquiYUiQHOaPmt/PCyCEP/E6rP+e7Uie6mBZrfkea9WJYJ+mus6r+45JAEhg==
-  dependencies:
-    deepmerge "^3.2.0"
-    hoist-non-react-statics "^3.3.0"
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
@@ -3488,19 +3520,7 @@
   dependencies:
     cross-spawn "^6.0.5"
 
-"@expo/vector-icons@^12.0.0":
-  version "12.0.5"
-  resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-12.0.5.tgz#bc508ad05fb7e9a3e008704977cfec6c18aa7728"
-  integrity sha512-zWvHBmkpbi1KrPma6Y+r/bsGI6MjbM1MBSe6W9A4uYMLhNI5NR4JtTnqxhf7g1XdpaDtBdv5aOWKEx4d5rxnhg==
-  dependencies:
-    lodash.frompairs "^4.0.1"
-    lodash.isequal "^4.5.0"
-    lodash.isstring "^4.0.1"
-    lodash.omit "^4.5.0"
-    lodash.pick "^4.4.0"
-    lodash.template "^4.5.0"
-
-"@expo/vector-icons@^12.0.5":
+"@expo/vector-icons@^12.0.0", "@expo/vector-icons@^12.0.5":
   version "12.0.5"
   resolved "https://registry.yarnpkg.com/@expo/vector-icons/-/vector-icons-12.0.5.tgz#bc508ad05fb7e9a3e008704977cfec6c18aa7728"
   integrity sha512-zWvHBmkpbi1KrPma6Y+r/bsGI6MjbM1MBSe6W9A4uYMLhNI5NR4JtTnqxhf7g1XdpaDtBdv5aOWKEx4d5rxnhg==
@@ -4545,22 +4565,6 @@
   integrity sha512-34Hr3XnmUSJbUVDxIw/e7dhQn2BJZhJmlAaPyPwfTQyuVS9mV/CeyghFcXyvkJXxI7notQJz8mF8FeCVvloJrA==
   dependencies:
     "@types/react" "^16"
-
-"@types/react-native-vector-icons@^6.4.6":
-  version "6.4.6"
-  resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.6.tgz#848e3b14572def56212cafbf5cb1254b445bfb41"
-  integrity sha512-lAyxNfMd5L1xZvXWsGcJmNegDf61TAp40uL6ashNNWj9W3IrDJO59L9+9inh0Y2MsEZpLTdxzVU8Unb4/0FQng==
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-native@*":
-  version "0.64.10"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.10.tgz#5eb6a72c77ce0f7e6e14b19c61a6bc585975eef5"
-  integrity sha512-3Kb9QM5/WZ6p58yZ7VPbvjvi6Wc/ZkESgJhKso1gKkNuHBe/4WL6586R2JRDiz9Tsxal9lMnbj3fligBVGl8PA==
-  dependencies:
-    "@types/prop-types" "*"
-    "@types/scheduler" "*"
-    csstype "^3.0.2"
 
 "@types/react-native@~0.63.2":
   version "0.63.52"
@@ -6268,7 +6272,7 @@ color-support@^1.1.3:
   resolved "https://registry.yarnpkg.com/color-support/-/color-support-1.1.3.tgz#93834379a1cc9a0c61f82f52f0d04322251bd5a2"
   integrity sha512-qiBjkpbMLO/HL68y+lh4q0/O1MZFj2RX6X/KmMa3+gJD3z+WwI1ZzDHysvqHGS3mP6mznPckpXmw1nI9cJjyRg==
 
-color@^3.1.2, color@^3.1.3:
+color@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/color/-/color-3.1.3.tgz#ca67fb4e7b97d611dcde39eceed422067d91596e"
   integrity sha512-xgXAcTHa2HeFCGLE9Xs/R82hujGtu9Jd9x4NW3T34+OMs7VoPsjwzRczKHvTAHeJwWFwX5j15+MgAppE8ztObQ==
@@ -8344,7 +8348,7 @@ hermes-profile-transformer@^0.0.6:
   dependencies:
     source-map "^0.7.3"
 
-hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
+hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -10834,7 +10838,7 @@ open@^6.2.0:
   dependencies:
     is-wsl "^1.1.0"
 
-opencollective-postinstall@^2.0.2, opencollective-postinstall@^2.0.3:
+opencollective-postinstall@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
   integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
@@ -11365,7 +11369,7 @@ prompts@^2.0.1, prompts@^2.2.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -11524,20 +11528,6 @@ react-native-dropdown-picker@^4.0.2:
   dependencies:
     react-native-vector-icons "^7.0.0"
 
-react-native-elements@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-3.4.1.tgz#74ea15a9369b05abf4f7421f0ce236ca01fedfe1"
-  integrity sha512-SPotW75psW1qyZgtiWuiKSTASdd4yNYvf6/vgO6nyl2kEgZG5nP5wtFxL/GsUVxwHh7yc8xnJ3J9pkApa7p9lQ==
-  dependencies:
-    "@types/react-native-vector-icons" "^6.4.6"
-    color "^3.1.2"
-    deepmerge "^4.2.2"
-    hoist-non-react-statics "^3.3.2"
-    lodash.isequal "^4.5.0"
-    opencollective-postinstall "^2.0.3"
-    react-native-ratings "^7.3.0"
-    react-native-size-matters "^0.3.1"
-
 react-native-gesture-handler@~1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.8.0.tgz#18f61f51da50320f938957b0ee79bc58f47449dc"
@@ -11555,7 +11545,7 @@ react-native-get-random-values@^1.4.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
-react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.3.0, react-native-iphone-x-helper@^1.3.1:
+react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.3.0:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.3.1.tgz#20c603e9a0e765fd6f97396638bdeb0e5a60b010"
   integrity sha512-HOf0jzRnq2/aFUcdCJ9w9JGzN3gdEg0zFE4FyYlp4jtidqU03D5X7ZegGKfT1EWteR0gPBGp9ye5T5FvSWi9Yg==
@@ -11573,58 +11563,12 @@ react-native-loading-view@^1.0.1:
   resolved "https://registry.yarnpkg.com/react-native-loading-view/-/react-native-loading-view-1.0.1.tgz#11cc82949281f0ea778977cf7bbf48dd17259e39"
   integrity sha512-smDetk4H2P2ybCv00TN0Wjd93bgmuQmla3qvLIxsV4FR9V3jNB99P7+5DgtO9HvwRV2dJZt5rDeBudeKToP4sw==
 
-react-native-material-buttons-no-proptypes@^0.6.0:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/react-native-material-buttons-no-proptypes/-/react-native-material-buttons-no-proptypes-0.6.2.tgz#f42598c56a3637086f0e3b7eeb245114774bd7fe"
-  integrity sha512-u0mhPRG7ZCaOIf9avxI7MUGhle/jh5UhcShFyDjWr5CQHfhEk4/nGY2s3qs6l0zhg8aQ9WWgTuEQsp2iLKZBSg==
-  dependencies:
-    react-native-material-ripple "^0.9.1"
-
-react-native-material-dropdown-no-proptypes@^0.11.3:
-  version "0.11.3"
-  resolved "https://registry.yarnpkg.com/react-native-material-dropdown-no-proptypes/-/react-native-material-dropdown-no-proptypes-0.11.3.tgz#59d5fda96637e27fd5574c85ec0cd879749540a1"
-  integrity sha512-f7psipWWp1vnjbG0VzLBoMJQMoKGqORcTSpHBmFxA6ipf1lAVOEPvMXZFOnx6Vek19SFldp8GTgWjk/biWgTpw==
-  dependencies:
-    react-native-material-buttons-no-proptypes "^0.6.0"
-    react-native-material-ripple "^0.8.0"
-
-react-native-material-ripple@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/react-native-material-ripple/-/react-native-material-ripple-0.8.0.tgz#b8c24e6fdea2af2a21e8468b1f40b35483019e2f"
-  integrity sha1-uMJOb96iryoh6EaLH0CzVIMBni8=
-  dependencies:
-    prop-types "^15.5.10"
-
-react-native-material-ripple@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/react-native-material-ripple/-/react-native-material-ripple-0.9.1.tgz#db1ad9dd7cf97011e4cd8475ae2041ade0f891cb"
-  integrity sha512-dHjARdKoGD3LXwPh2TkURabywM5BfdpKc/AHplJTfBMalhVZ2bc7iJoJmNhNnmT/TZ+B3szL6uV1mO7Pv8zNeA==
-  dependencies:
-    prop-types "^15.5.10"
-
-react-native-paper@^4.8.1:
-  version "4.9.1"
-  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-4.9.1.tgz#9b2aadcb1bd48ff6825641df60821e20e0cc8276"
-  integrity sha512-vGgNvQE/GlNSjwJw+1LW0yoULTh7enxln16bYfOoI9Xiz1NOKxhfyQN0/LlZn7JFhRdbXW+3+6yMBJ50Emt+ng==
-  dependencies:
-    "@callstack/react-theme-provider" "^3.0.6"
-    color "^3.1.2"
-    react-native-iphone-x-helper "^1.3.1"
-
 react-native-progress@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-4.1.2.tgz#ffb2264ddfeba409c730e36a9791bb7bbe07a00d"
   integrity sha512-sFHs6k6npWDOyvQoL2NeyOyHb+q1s8iOAOeyzoObN77zkxOAsgJt9FcSJLRq70Mw7qSGNJMFDqCgvYR1huYRwQ==
   dependencies:
     "@react-native-community/art" "^1.1.2"
-    prop-types "^15.7.2"
-
-react-native-ratings@^7.3.0:
-  version "7.6.1"
-  resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-7.6.1.tgz#b3d8a99a0c12fd6874f7e3c0e492089543d837c8"
-  integrity sha512-V3y19iIifwemMr87KfovFIIzy/Rotqcds9k+ECaayQvrlucm/mXFC69R8xl/NivEdnxX7K87iurigByhpE37EQ==
-  dependencies:
-    lodash "^4.17.15"
     prop-types "^15.7.2"
 
 react-native-reanimated@~1.13.0:
@@ -11643,11 +11587,6 @@ react-native-screens@~2.15.0:
   version "2.15.2"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.15.2.tgz#a449700e895b462937211ec72ed6f09652758f06"
   integrity sha512-CagNf2APXkVoRlF3Mugr264FbKbrBg9eXUkqhIPVeZB8EsdS8XPrnt99yj/pzmT+yJMBY0dGrjXT8+68WYh6YQ==
-
-react-native-size-matters@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz#24d0cfc335a2c730f6d58bd7b43ea5a41be4b49f"
-  integrity sha512-mKOfBLIBFBcs9br1rlZDvxD5+mAl8Gfr5CounwJtxI6Z82rGrMO+Kgl9EIg3RMVf3G855a85YVqHJL2f5EDRlw==
 
 react-native-svg-transformer@^0.14.3:
   version "0.14.3"

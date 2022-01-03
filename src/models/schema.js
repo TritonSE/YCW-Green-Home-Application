@@ -430,7 +430,8 @@ export const schema = {
                     "attributes": [],
                     "association": {
                         "connectionType": "HAS_ONE",
-                        "associatedWith": "id"
+                        "associatedWith": "id",
+                        "targetName": "questionID"
                     }
                 },
                 "answer": {
@@ -709,5 +710,5 @@ export const schema = {
             }
         }
     },
-    "version": "5f619279978114f011e75ede198a4aa8"
+    "version": "6fe8968c42e769e57a29ed63c0ed8b1f"
 };
