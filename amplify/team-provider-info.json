@@ -1,0 +1,60 @@
+{
+  "devenv": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yourclearway-devenv-01341-authRole",
+      "UnauthRoleArn": "arn:aws:iam::506173601430:role/amplify-yourclearway-devenv-01341-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::506173601430:role/amplify-yourclearway-devenv-01341-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-yourclearway-devenv-01341-deployment",
+      "UnauthRoleName": "amplify-yourclearway-devenv-01341-unauthRole",
+      "StackName": "amplify-yourclearway-devenv-01341",
+      "StackId": "arn:aws:cloudformation:us-west-2:506173601430:stack/amplify-yourclearway-devenv-01341/7fd0b8e0-733c-11ec-895f-064a2aad87df",
+      "AmplifyAppId": "dimr97ah3agc5"
+    },
+    "categories": {
+      "function": {
+        "questionslist": {
+          "deploymentBucketName": "amplify-yourclearway-devenv-01341-deployment",
+          "s3Key": "amplify-builds/questionslist-59552b6233355a636963-build.zip"
+        },
+        "userCognitoTrigger": {
+          "deploymentBucketName": "amplify-yourclearway-devenv-01341-deployment",
+          "s3Key": "amplify-builds/userCognitoTrigger-67677844303275304d78-build.zip"
+        }
+      },
+      "auth": {
+        "yourclearway677feefc": {},
+        "userPoolGroups": {}
+      }
+    }
+  },
+  "devel": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yourclearway-devel-145659-authRole",
+      "UnauthRoleArn": "arn:aws:iam::506173601430:role/amplify-yourclearway-devel-145659-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::506173601430:role/amplify-yourclearway-devel-145659-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-yourclearway-devel-145659-deployment",
+      "UnauthRoleName": "amplify-yourclearway-devel-145659-unauthRole",
+      "StackName": "amplify-yourclearway-devel-145659",
+      "StackId": "arn:aws:cloudformation:us-west-2:506173601430:stack/amplify-yourclearway-devel-145659/5fad6380-758d-11ec-8d63-02d5fabd30ef",
+      "AmplifyAppId": "dimr97ah3agc5"
+    },
+    "categories": {
+      "function": {
+        "questionslist": {
+          "deploymentBucketName": "amplify-yourclearway-devel-145659-deployment",
+          "s3Key": "amplify-builds/questionslist-59552b6233355a636963-build.zip"
+        },
+        "userCognitoTrigger": {
+          "deploymentBucketName": "amplify-yourclearway-devel-145659-deployment",
+          "s3Key": "amplify-builds/userCognitoTrigger-67677844303275304d78-build.zip"
+        }
+      },
+      "auth": {
+        "yourclearway677feefc": {},
+        "userPoolGroups": {}
+      }
+    }
+  }
+}

@@ -84,14 +84,84 @@ export type User = {
   updatedAt?: string,
   owner?: string | null,
   homes?: ModelHomeOwnerConnection,
+  responses?: ModelUserResponseConnection,
 };
 
 export type ModelHomeOwnerConnection = {
   __typename: "ModelHomeOwnerConnection",
-  items?:  Array<HomeOwner | null > | null,
+  items?:  Array<HomeOwner | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
+
+export type ModelUserResponseConnection = {
+  __typename: "ModelUserResponseConnection",
+  items?:  Array<UserResponse | null >,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type UserResponse = {
+  __typename: "UserResponse",
+  id?: string,
+  userID?: string,
+  questionID?: string,
+  answer?: string,
+  createdAt?: string,
+  _version?: number,
+  _deleted?: boolean | null,
+  _lastChangedAt?: number,
+  updatedAt?: string,
+  user?: User,
+  question?: Question,
+  owner?: string | null,
+};
+
+export type Question = {
+  __typename: "Question",
+  id?: string,
+  title?: string,
+  questionText?: string,
+  rewardText?: string,
+  level?: Level,
+  cost?: Cost,
+  categories?: Array< Category >,
+  type?: ResponseType,
+  _version?: number,
+  _deleted?: boolean | null,
+  _lastChangedAt?: number,
+  createdAt?: string,
+  updatedAt?: string,
+  owner?: string | null,
+};
+
+export enum Level {
+  STARTER = "STARTER",
+  INTERMEDIATE = "INTERMEDIATE",
+  GURU = "GURU",
+}
+
+
+export enum Cost {
+  ONE = "ONE",
+  TWO = "TWO",
+  THREE = "THREE",
+}
+
+
+export enum Category {
+  ENERGY = "ENERGY",
+  RESILIENCY = "RESILIENCY",
+  HEALTH = "HEALTH",
+  WATER = "WATER",
+}
+
+
+export enum ResponseType {
+  USER = "USER",
+  HOME = "HOME",
+}
+
 
 export type Home = {
   __typename: "Home",
@@ -153,7 +223,7 @@ export enum WaterHeaterFuelType {
 
 export type ModelResponseConnection = {
   __typename: "ModelResponseConnection",
-  items?:  Array<Response | null > | null,
+  items?:  Array<Response | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -173,45 +243,6 @@ export type Response = {
   question?: Question,
   owner?: string | null,
 };
-
-export type Question = {
-  __typename: "Question",
-  id?: string,
-  title?: string,
-  questionText?: string,
-  rewardText?: string,
-  level?: Level,
-  cost?: Cost,
-  categories?: Array< Category >,
-  _version?: number,
-  _deleted?: boolean | null,
-  _lastChangedAt?: number,
-  createdAt?: string,
-  updatedAt?: string,
-  owner?: string | null,
-};
-
-export enum Level {
-  STARTER = "STARTER",
-  INTERMEDIATE = "INTERMEDIATE",
-  GURU = "GURU",
-}
-
-
-export enum Cost {
-  ONE = "ONE",
-  TWO = "TWO",
-  THREE = "THREE",
-}
-
-
-export enum Category {
-  ENERGY = "ENERGY",
-  RESILIENCY = "RESILIENCY",
-  HEALTH = "HEALTH",
-  WATER = "WATER",
-}
-
 
 export type UpdateHomeOwnerInput = {
   id: string,
@@ -379,6 +410,7 @@ export type CreateQuestionInput = {
   level: Level,
   cost: Cost,
   categories: Array< Category >,
+  type: ResponseType,
   _version?: number | null,
 };
 
@@ -389,6 +421,7 @@ export type ModelQuestionConditionInput = {
   level?: ModelLevelInput | null,
   cost?: ModelCostInput | null,
   categories?: ModelCategoryListInput | null,
+  type?: ModelResponseTypeInput | null,
   and?: Array< ModelQuestionConditionInput | null > | null,
   or?: Array< ModelQuestionConditionInput | null > | null,
   not?: ModelQuestionConditionInput | null,
@@ -411,6 +444,11 @@ export type ModelCategoryListInput = {
   notContains?: Category | null,
 };
 
+export type ModelResponseTypeInput = {
+  eq?: ResponseType | null,
+  ne?: ResponseType | null,
+};
+
 export type UpdateQuestionInput = {
   id: string,
   title?: string | null,
@@ -419,6 +457,7 @@ export type UpdateQuestionInput = {
   level?: Level | null,
   cost?: Cost | null,
   categories?: Array< Category > | null,
+  type?: ResponseType | null,
   _version?: number | null,
 };
 
@@ -471,7 +510,7 @@ export type ModelUserFilterInput = {
 
 export type ModelUserConnection = {
   __typename: "ModelUserConnection",
-  items?:  Array<User | null > | null,
+  items?:  Array<User | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -515,7 +554,7 @@ export type ModelHomeFilterInput = {
 
 export type ModelHomeConnection = {
   __typename: "ModelHomeConnection",
-  items?:  Array<Home | null > | null,
+  items?:  Array<Home | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -528,6 +567,7 @@ export type ModelQuestionFilterInput = {
   level?: ModelLevelInput | null,
   cost?: ModelCostInput | null,
   categories?: ModelCategoryListInput | null,
+  type?: ModelResponseTypeInput | null,
   and?: Array< ModelQuestionFilterInput | null > | null,
   or?: Array< ModelQuestionFilterInput | null > | null,
   not?: ModelQuestionFilterInput | null,
@@ -535,7 +575,7 @@ export type ModelQuestionFilterInput = {
 
 export type ModelQuestionConnection = {
   __typename: "ModelQuestionConnection",
-  items?:  Array<Question | null > | null,
+  items?:  Array<Question | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -596,7 +636,7 @@ export type CreateHomeOwnerMutation = {
       owner?: string | null,
       homes?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -607,7 +647,7 @@ export type CreateHomeOwnerMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -644,7 +684,7 @@ export type CreateHomeOwnerMutation = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -655,7 +695,7 @@ export type CreateHomeOwnerMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -663,7 +703,7 @@ export type CreateHomeOwnerMutation = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -675,7 +715,7 @@ export type CreateHomeOwnerMutation = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -712,7 +752,7 @@ export type UpdateHomeOwnerMutation = {
       owner?: string | null,
       homes?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -723,7 +763,7 @@ export type UpdateHomeOwnerMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -760,7 +800,7 @@ export type UpdateHomeOwnerMutation = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -771,7 +811,7 @@ export type UpdateHomeOwnerMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -779,7 +819,7 @@ export type UpdateHomeOwnerMutation = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -791,7 +831,7 @@ export type UpdateHomeOwnerMutation = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -828,7 +868,7 @@ export type DeleteHomeOwnerMutation = {
       owner?: string | null,
       homes?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -839,7 +879,7 @@ export type DeleteHomeOwnerMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -876,7 +916,7 @@ export type DeleteHomeOwnerMutation = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -887,7 +927,7 @@ export type DeleteHomeOwnerMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -895,7 +935,7 @@ export type DeleteHomeOwnerMutation = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -907,7 +947,7 @@ export type DeleteHomeOwnerMutation = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -952,7 +992,7 @@ export type CreateHomeMutation = {
     updatedAt: string,
     homeOwners?:  {
       __typename: "ModelHomeOwnerConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "HomeOwner",
         id: string,
         homeID: string,
@@ -1007,7 +1047,7 @@ export type CreateHomeMutation = {
           owner?: string | null,
           homeowners?: string | null,
         },
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1015,7 +1055,7 @@ export type CreateHomeMutation = {
     homeowners?: string | null,
     responses?:  {
       __typename: "ModelResponseConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Response",
         id: string,
         homeID: string,
@@ -1075,7 +1115,7 @@ export type CreateHomeMutation = {
           owner?: string | null,
         } | null,
         owner?: string | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1119,7 +1159,7 @@ export type UpdateHomeMutation = {
     updatedAt: string,
     homeOwners?:  {
       __typename: "ModelHomeOwnerConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "HomeOwner",
         id: string,
         homeID: string,
@@ -1174,7 +1214,7 @@ export type UpdateHomeMutation = {
           owner?: string | null,
           homeowners?: string | null,
         },
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1182,7 +1222,7 @@ export type UpdateHomeMutation = {
     homeowners?: string | null,
     responses?:  {
       __typename: "ModelResponseConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Response",
         id: string,
         homeID: string,
@@ -1242,7 +1282,7 @@ export type UpdateHomeMutation = {
           owner?: string | null,
         } | null,
         owner?: string | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1286,7 +1326,7 @@ export type DeleteHomeMutation = {
     updatedAt: string,
     homeOwners?:  {
       __typename: "ModelHomeOwnerConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "HomeOwner",
         id: string,
         homeID: string,
@@ -1341,7 +1381,7 @@ export type DeleteHomeMutation = {
           owner?: string | null,
           homeowners?: string | null,
         },
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1349,7 +1389,7 @@ export type DeleteHomeMutation = {
     homeowners?: string | null,
     responses?:  {
       __typename: "ModelResponseConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Response",
         id: string,
         homeID: string,
@@ -1409,7 +1449,7 @@ export type DeleteHomeMutation = {
           owner?: string | null,
         } | null,
         owner?: string | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1536,7 +1576,7 @@ export type CreateResponseMutation = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -1547,7 +1587,7 @@ export type CreateResponseMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1555,7 +1595,7 @@ export type CreateResponseMutation = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -1567,7 +1607,7 @@ export type CreateResponseMutation = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1640,7 +1680,7 @@ export type UpdateResponseMutation = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -1651,7 +1691,7 @@ export type UpdateResponseMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1659,7 +1699,7 @@ export type UpdateResponseMutation = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -1671,7 +1711,7 @@ export type UpdateResponseMutation = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1744,7 +1784,7 @@ export type DeleteResponseMutation = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -1755,7 +1795,7 @@ export type DeleteResponseMutation = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1763,7 +1803,7 @@ export type DeleteResponseMutation = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -1775,7 +1815,7 @@ export type DeleteResponseMutation = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -1818,7 +1858,7 @@ export type GetUserQuery = {
     owner?: string | null,
     homes?:  {
       __typename: "ModelHomeOwnerConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "HomeOwner",
         id: string,
         homeID: string,
@@ -1873,7 +1913,7 @@ export type GetUserQuery = {
           owner?: string | null,
           homeowners?: string | null,
         },
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -1889,7 +1929,7 @@ export type ListUsersQueryVariables = {
 export type ListUsersQuery = {
   listUsers?:  {
     __typename: "ModelUserConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "User",
       id: string,
       username: string,
@@ -1902,7 +1942,7 @@ export type ListUsersQuery = {
       owner?: string | null,
       homes?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -1913,11 +1953,11 @@ export type ListUsersQuery = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -1933,7 +1973,7 @@ export type SyncUsersQueryVariables = {
 export type SyncUsersQuery = {
   syncUsers?:  {
     __typename: "ModelUserConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "User",
       id: string,
       username: string,
@@ -1946,7 +1986,7 @@ export type SyncUsersQuery = {
       owner?: string | null,
       homes?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -1957,11 +1997,11 @@ export type SyncUsersQuery = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -1977,7 +2017,7 @@ export type SyncHomeOwnersQueryVariables = {
 export type SyncHomeOwnersQuery = {
   syncHomeOwners?:  {
     __typename: "ModelHomeOwnerConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "HomeOwner",
       id: string,
       homeID: string,
@@ -2047,7 +2087,7 @@ export type SyncHomeOwnersQuery = {
           startedAt?: number | null,
         } | null,
       },
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -2089,7 +2129,7 @@ export type GetHomeQuery = {
     updatedAt: string,
     homeOwners?:  {
       __typename: "ModelHomeOwnerConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "HomeOwner",
         id: string,
         homeID: string,
@@ -2144,7 +2184,7 @@ export type GetHomeQuery = {
           owner?: string | null,
           homeowners?: string | null,
         },
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -2152,7 +2192,7 @@ export type GetHomeQuery = {
     homeowners?: string | null,
     responses?:  {
       __typename: "ModelResponseConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Response",
         id: string,
         homeID: string,
@@ -2212,7 +2252,7 @@ export type GetHomeQuery = {
           owner?: string | null,
         } | null,
         owner?: string | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -2228,7 +2268,7 @@ export type ListHomesQueryVariables = {
 export type ListHomesQuery = {
   listHomes?:  {
     __typename: "ModelHomeConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Home",
       id: string,
       addressLine1?: string | null,
@@ -2259,7 +2299,7 @@ export type ListHomesQuery = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -2270,7 +2310,7 @@ export type ListHomesQuery = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2278,7 +2318,7 @@ export type ListHomesQuery = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -2290,11 +2330,11 @@ export type ListHomesQuery = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -2310,7 +2350,7 @@ export type SyncHomesQueryVariables = {
 export type SyncHomesQuery = {
   syncHomes?:  {
     __typename: "ModelHomeConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Home",
       id: string,
       addressLine1?: string | null,
@@ -2341,7 +2381,7 @@ export type SyncHomesQuery = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -2352,7 +2392,7 @@ export type SyncHomesQuery = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2360,7 +2400,7 @@ export type SyncHomesQuery = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -2372,11 +2412,11 @@ export type SyncHomesQuery = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -2414,7 +2454,7 @@ export type ListQuestionsQueryVariables = {
 export type ListQuestionsQuery = {
   listQuestions?:  {
     __typename: "ModelQuestionConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Question",
       id: string,
       title: string,
@@ -2429,7 +2469,7 @@ export type ListQuestionsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -2445,7 +2485,7 @@ export type SyncQuestionsQueryVariables = {
 export type SyncQuestionsQuery = {
   syncQuestions?:  {
     __typename: "ModelQuestionConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Question",
       id: string,
       title: string,
@@ -2460,7 +2500,7 @@ export type SyncQuestionsQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -2513,7 +2553,7 @@ export type GetResponseQuery = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -2524,7 +2564,7 @@ export type GetResponseQuery = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2532,7 +2572,7 @@ export type GetResponseQuery = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -2544,7 +2584,7 @@ export type GetResponseQuery = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2578,7 +2618,7 @@ export type ListResponsesQueryVariables = {
 export type ListResponsesQuery = {
   listResponses?:  {
     __typename: "ModelResponseConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Response",
       id: string,
       homeID: string,
@@ -2648,7 +2688,7 @@ export type ListResponsesQuery = {
         owner?: string | null,
       } | null,
       owner?: string | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -2666,7 +2706,7 @@ export type GetResponsesByCreatedAtQueryVariables = {
 export type GetResponsesByCreatedAtQuery = {
   getResponsesByCreatedAt?:  {
     __typename: "ModelResponseConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Response",
       id: string,
       homeID: string,
@@ -2736,7 +2776,7 @@ export type GetResponsesByCreatedAtQuery = {
         owner?: string | null,
       } | null,
       owner?: string | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -2752,7 +2792,7 @@ export type SyncResponsesQueryVariables = {
 export type SyncResponsesQuery = {
   syncResponses?:  {
     __typename: "ModelResponseConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Response",
       id: string,
       homeID: string,
@@ -2822,7 +2862,7 @@ export type SyncResponsesQuery = {
         owner?: string | null,
       } | null,
       owner?: string | null,
-    } | null > | null,
+    } | null >,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
@@ -2856,7 +2896,7 @@ export type OnCreateHomeOwnerSubscription = {
       owner?: string | null,
       homes?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -2867,7 +2907,7 @@ export type OnCreateHomeOwnerSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2904,7 +2944,7 @@ export type OnCreateHomeOwnerSubscription = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -2915,7 +2955,7 @@ export type OnCreateHomeOwnerSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2923,7 +2963,7 @@ export type OnCreateHomeOwnerSubscription = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -2935,7 +2975,7 @@ export type OnCreateHomeOwnerSubscription = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -2971,7 +3011,7 @@ export type OnUpdateHomeOwnerSubscription = {
       owner?: string | null,
       homes?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -2982,7 +3022,7 @@ export type OnUpdateHomeOwnerSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -3019,7 +3059,7 @@ export type OnUpdateHomeOwnerSubscription = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -3030,7 +3070,7 @@ export type OnUpdateHomeOwnerSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -3038,7 +3078,7 @@ export type OnUpdateHomeOwnerSubscription = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -3050,7 +3090,7 @@ export type OnUpdateHomeOwnerSubscription = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -3086,7 +3126,7 @@ export type OnDeleteHomeOwnerSubscription = {
       owner?: string | null,
       homes?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -3097,7 +3137,7 @@ export type OnDeleteHomeOwnerSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -3134,7 +3174,7 @@ export type OnDeleteHomeOwnerSubscription = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -3145,7 +3185,7 @@ export type OnDeleteHomeOwnerSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -3153,7 +3193,7 @@ export type OnDeleteHomeOwnerSubscription = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -3165,7 +3205,7 @@ export type OnDeleteHomeOwnerSubscription = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -3210,7 +3250,7 @@ export type OnCreateHomeSubscription = {
     updatedAt: string,
     homeOwners?:  {
       __typename: "ModelHomeOwnerConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "HomeOwner",
         id: string,
         homeID: string,
@@ -3265,7 +3305,7 @@ export type OnCreateHomeSubscription = {
           owner?: string | null,
           homeowners?: string | null,
         },
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -3273,7 +3313,7 @@ export type OnCreateHomeSubscription = {
     homeowners?: string | null,
     responses?:  {
       __typename: "ModelResponseConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Response",
         id: string,
         homeID: string,
@@ -3333,7 +3373,7 @@ export type OnCreateHomeSubscription = {
           owner?: string | null,
         } | null,
         owner?: string | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -3377,7 +3417,7 @@ export type OnUpdateHomeSubscription = {
     updatedAt: string,
     homeOwners?:  {
       __typename: "ModelHomeOwnerConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "HomeOwner",
         id: string,
         homeID: string,
@@ -3432,7 +3472,7 @@ export type OnUpdateHomeSubscription = {
           owner?: string | null,
           homeowners?: string | null,
         },
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -3440,7 +3480,7 @@ export type OnUpdateHomeSubscription = {
     homeowners?: string | null,
     responses?:  {
       __typename: "ModelResponseConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Response",
         id: string,
         homeID: string,
@@ -3500,7 +3540,7 @@ export type OnUpdateHomeSubscription = {
           owner?: string | null,
         } | null,
         owner?: string | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -3544,7 +3584,7 @@ export type OnDeleteHomeSubscription = {
     updatedAt: string,
     homeOwners?:  {
       __typename: "ModelHomeOwnerConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "HomeOwner",
         id: string,
         homeID: string,
@@ -3599,7 +3639,7 @@ export type OnDeleteHomeSubscription = {
           owner?: string | null,
           homeowners?: string | null,
         },
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -3607,7 +3647,7 @@ export type OnDeleteHomeSubscription = {
     homeowners?: string | null,
     responses?:  {
       __typename: "ModelResponseConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Response",
         id: string,
         homeID: string,
@@ -3667,7 +3707,7 @@ export type OnDeleteHomeSubscription = {
           owner?: string | null,
         } | null,
         owner?: string | null,
-      } | null > | null,
+      } | null >,
       nextToken?: string | null,
       startedAt?: number | null,
     } | null,
@@ -3778,7 +3818,7 @@ export type OnCreateResponseSubscription = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -3789,7 +3829,7 @@ export type OnCreateResponseSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -3797,7 +3837,7 @@ export type OnCreateResponseSubscription = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -3809,7 +3849,7 @@ export type OnCreateResponseSubscription = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -3881,7 +3921,7 @@ export type OnUpdateResponseSubscription = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -3892,7 +3932,7 @@ export type OnUpdateResponseSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -3900,7 +3940,7 @@ export type OnUpdateResponseSubscription = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -3912,7 +3952,7 @@ export type OnUpdateResponseSubscription = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -3984,7 +4024,7 @@ export type OnDeleteResponseSubscription = {
       updatedAt: string,
       homeOwners?:  {
         __typename: "ModelHomeOwnerConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "HomeOwner",
           id: string,
           homeID: string,
@@ -3995,7 +4035,7 @@ export type OnDeleteResponseSubscription = {
           createdAt: string,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,
@@ -4003,7 +4043,7 @@ export type OnDeleteResponseSubscription = {
       homeowners?: string | null,
       responses?:  {
         __typename: "ModelResponseConnection",
-        items?:  Array< {
+        items:  Array< {
           __typename: "Response",
           id: string,
           homeID: string,
@@ -4015,7 +4055,7 @@ export type OnDeleteResponseSubscription = {
           _lastChangedAt: number,
           updatedAt: string,
           owner?: string | null,
-        } | null > | null,
+        } | null >,
         nextToken?: string | null,
         startedAt?: number | null,
       } | null,

@@ -21,6 +21,11 @@ const Category = {
   "WATER": "WATER"
 };
 
+const ResponseType = {
+  "USER": "USER",
+  "HOME": "HOME"
+};
+
 const HeatingFuelType = {
   "GAS": "GAS",
   "ELECTRIC": "ELECTRIC",
@@ -41,7 +46,7 @@ const WaterHeaterFuelType = {
   "OTHER": "OTHER"
 };
 
-const { User, HomeOwner, Home, Response, Question, S3Object } = initSchema(schema);
+const { User, HomeOwner, Home, Response, Question, UserResponse, S3Object } = initSchema(schema);
 
 export {
   User,
@@ -49,9 +54,11 @@ export {
   Home,
   Response,
   Question,
+  UserResponse,
   Level,
   Cost,
   Category,
+  ResponseType,
   HeatingFuelType,
   AgeType,
   WaterHeaterFuelType,

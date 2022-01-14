@@ -37,6 +37,20 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "homeOwner"
                     }
+                },
+                "responses": {
+                    "name": "responses",
+                    "isArray": true,
+                    "type": {
+                        "model": "UserResponse"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "user"
+                    }
                 }
             },
             "syncable": true,
@@ -570,6 +584,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": [],
                     "isArrayNullable": false
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": {
+                        "enum": "ResponseType"
+                    },
+                    "isRequired": true,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -627,6 +650,128 @@ export const schema = {
                     }
                 }
             ]
+        },
+        "UserResponse": {
+            "name": "UserResponse",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "questionID": {
+                    "name": "questionID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "userID"
+                    }
+                },
+                "question": {
+                    "name": "question",
+                    "isArray": false,
+                    "type": {
+                        "model": "Question"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
+                        "targetName": "questionID"
+                    }
+                },
+                "answer": {
+                    "name": "answer",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "UserResponses",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userID",
+                            "questionID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCreatedAt",
+                        "fields": [
+                            "userID",
+                            "createdAt"
+                        ],
+                        "queryField": "getUserResponsesByCreatedAt"
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "Admin"
+                                ],
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
         }
     },
     "enums": {
@@ -653,6 +798,13 @@ export const schema = {
                 "RESILIENCY",
                 "HEALTH",
                 "WATER"
+            ]
+        },
+        "ResponseType": {
+            "name": "ResponseType",
+            "values": [
+                "USER",
+                "HOME"
             ]
         },
         "HeatingFuelType": {
@@ -710,5 +862,5 @@ export const schema = {
             }
         }
     },
-    "version": "6fe8968c42e769e57a29ed63c0ed8b1f"
+    "version": "a424dd6aa51a3b18387a1d5beed77cee"
 };
