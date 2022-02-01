@@ -9,10 +9,14 @@ const styles = StyleSheet.create({
   homeCard: {
     margin: 8,
     padding: 10,
-    height: 100,
-    width: 140,
+    height: 'auto',
+    width: '42%',
     borderRadius: 5,
     backgroundColor: '#FAFAFA',
+  },
+  homeCardSelected: {
+    borderColor: '#377067',
+    borderWidth: 2,
   },
   homeColor: {
     width: '25%',
@@ -30,6 +34,21 @@ const styles = StyleSheet.create({
   homeSpacing: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  red: {
+    backgroundColor: '#E96661',
+  },
+  darkGreen: {
+    backgroundColor: '#377067',
+  },
+  green: {
+    backgroundColor: '#6BA177',
+  },
+  turquoise: {
+    backgroundColor: '#86C5BE',
+  },
+  lightTurquoise: {
+    backgroundColor: '#BFE3D5',
   },
 });
 

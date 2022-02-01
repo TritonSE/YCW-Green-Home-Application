@@ -38,6 +38,22 @@ export const onCreateHomeOwner = /* GraphQL */ `
           nextToken
           startedAt
         }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
       }
       owner
       home {
@@ -141,6 +157,22 @@ export const onUpdateHomeOwner = /* GraphQL */ `
           nextToken
           startedAt
         }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
       }
       owner
       home {
@@ -238,6 +270,22 @@ export const onDeleteHomeOwner = /* GraphQL */ `
             _deleted
             _lastChangedAt
             createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
             updatedAt
             owner
           }
@@ -450,6 +498,7 @@ export const onCreateHome = /* GraphQL */ `
             level
             cost
             categories
+            type
             _version
             _deleted
             _lastChangedAt
@@ -604,6 +653,7 @@ export const onUpdateHome = /* GraphQL */ `
             level
             cost
             categories
+            type
             _version
             _deleted
             _lastChangedAt
@@ -758,6 +808,7 @@ export const onDeleteHome = /* GraphQL */ `
             level
             cost
             categories
+            type
             _version
             _deleted
             _lastChangedAt
@@ -783,6 +834,7 @@ export const onCreateQuestion = /* GraphQL */ `
       level
       cost
       categories
+      type
       _version
       _deleted
       _lastChangedAt
@@ -802,6 +854,7 @@ export const onUpdateQuestion = /* GraphQL */ `
       level
       cost
       categories
+      type
       _version
       _deleted
       _lastChangedAt
@@ -821,6 +874,7 @@ export const onDeleteQuestion = /* GraphQL */ `
       level
       cost
       categories
+      type
       _version
       _deleted
       _lastChangedAt
@@ -912,6 +966,7 @@ export const onCreateResponse = /* GraphQL */ `
         level
         cost
         categories
+        type
         _version
         _deleted
         _lastChangedAt
@@ -1005,6 +1060,7 @@ export const onUpdateResponse = /* GraphQL */ `
         level
         cost
         categories
+        type
         _version
         _deleted
         _lastChangedAt
@@ -1098,6 +1154,229 @@ export const onDeleteResponse = /* GraphQL */ `
         level
         cost
         categories
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
+    }
+  }
+`;
+export const onCreateUserResponse = /* GraphQL */ `
+  subscription OnCreateUserResponse($owner: String) {
+    onCreateUserResponse(owner: $owner) {
+      id
+      userID
+      questionID
+      answer
+      createdAt
+      _version
+      _deleted
+      _lastChangedAt
+      updatedAt
+      user {
+        id
+        username
+        displayName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      question {
+        id
+        title
+        questionText
+        rewardText
+        level
+        cost
+        categories
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
+    }
+  }
+`;
+export const onUpdateUserResponse = /* GraphQL */ `
+  subscription OnUpdateUserResponse($owner: String) {
+    onUpdateUserResponse(owner: $owner) {
+      id
+      userID
+      questionID
+      answer
+      createdAt
+      _version
+      _deleted
+      _lastChangedAt
+      updatedAt
+      user {
+        id
+        username
+        displayName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      question {
+        id
+        title
+        questionText
+        rewardText
+        level
+        cost
+        categories
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
+    }
+  }
+`;
+export const onDeleteUserResponse = /* GraphQL */ `
+  subscription OnDeleteUserResponse($owner: String) {
+    onDeleteUserResponse(owner: $owner) {
+      id
+      userID
+      questionID
+      answer
+      createdAt
+      _version
+      _deleted
+      _lastChangedAt
+      updatedAt
+      user {
+        id
+        username
+        displayName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      question {
+        id
+        title
+        questionText
+        rewardText
+        level
+        cost
+        categories
+        type
         _version
         _deleted
         _lastChangedAt

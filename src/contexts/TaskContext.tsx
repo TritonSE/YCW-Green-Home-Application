@@ -32,6 +32,7 @@ export const initialSelectedTask: Task = {
   title: '',
   questionText: '',
   rewardText: '',
+  type: '',
 };
 
 const initialFilters: TaskFilters = {

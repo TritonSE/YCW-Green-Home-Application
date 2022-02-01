@@ -43,6 +43,8 @@ interface UserState {
         }>
       >
     | (() => void);
+  currentHome: number;
+  setCurrentHome: Dispatch<SetStateAction<number>> | (() => void);
 }
 
 const initialState: UserState = {
@@ -63,18 +65,23 @@ const initialState: UserState = {
     username: '',
   },
   setUserState: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+  currentHome: 0,
+  setCurrentHome: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
 };
 
 export const UserContext = createContext<UserState>(initialState);
 
 export const UserProvider: React.FC = ({ children }) => {
   const [userState, setUserState] = useState(initialState.userState);
+  const [currentHome, setCurrentHome] = useState(initialState.currentHome);
 
   return (
     <UserContext.Provider
       value={{
         userState,
         setUserState,
+        currentHome,
+        setCurrentHome,
       }}
     >
       {children}

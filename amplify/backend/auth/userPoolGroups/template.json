@@ -1,311 +1,299 @@
 {
-    "AWSTemplateFormatVersion": "2010-09-09",
-    "Parameters": {
-        "authyourclearway677feefcUserPoolId": {
-            "Type": "String",
-            "Default": "authyourclearway677feefcUserPoolId"
-        },
-        
-        "authyourclearway677feefcIdentityPoolId": {
-            "Type": "String",
-            "Default": "authyourclearway677feefcIdentityPoolId"
-        },
-        
-        "authyourclearway677feefcAppClientID": {
-            "Type": "String",
-            "Default": "authyourclearway677feefcAppClientID"
-        },
-        "authyourclearway677feefcAppClientIDWeb": {
-            "Type": "String",
-            "Default": "authyourclearway677feefcAppClientIDWeb"
-        },
-        "AuthRoleArn": {
-            "Type": "String"
-        },
-        "UnauthRoleArn": {
-            "Type": "String"
-        },
-        "env": {
-            "Type": "String"
-        }
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "authyourclearway677feefcUserPoolId": {
+      "Type": "String",
+      "Default": "authyourclearway677feefcUserPoolId"
     },
-    "Conditions": {
-        "ShouldNotCreateEnvResources": {
-            "Fn::Equals": [
-                {
-                    "Ref": "env"
-                },
-                "NONE"
-            ]
-        }
+    "authyourclearway677feefcIdentityPoolId": {
+      "Type": "String",
+      "Default": "authyourclearway677feefcIdentityPoolId"
     },
-    "Resources": {
-    
-        "devGroup": {
-          "Type" : "AWS::Cognito::UserPoolGroup",
-          "Properties" : {
-              "GroupName" : "dev",
-              "Precedence" : 1,
-              
-              "RoleArn" : {
-                "Fn::GetAtt": [
-                    "devGroupRole",
-                    "Arn"
-                ]
-              },
-              
-              "UserPoolId" : {
+    "authyourclearway677feefcAppClientID": {
+      "Type": "String",
+      "Default": "authyourclearway677feefcAppClientID"
+    },
+    "authyourclearway677feefcAppClientIDWeb": {
+      "Type": "String",
+      "Default": "authyourclearway677feefcAppClientIDWeb"
+    },
+    "AuthRoleArn": {
+      "Type": "String"
+    },
+    "UnauthRoleArn": {
+      "Type": "String"
+    },
+    "env": {
+      "Type": "String"
+    }
+  },
+  "Conditions": {
+    "ShouldNotCreateEnvResources": {
+      "Fn::Equals": [
+        {
+          "Ref": "env"
+        },
+        "NONE"
+      ]
+    }
+  },
+  "Resources": {
+    "devGroup": {
+      "Type": "AWS::Cognito::UserPoolGroup",
+      "Properties": {
+        "GroupName": "dev",
+        "Precedence": 1,
+        "RoleArn": {
+          "Fn::GetAtt": [
+            "devGroupRole",
+            "Arn"
+          ]
+        },
+        "UserPoolId": {
+          "Ref": "authyourclearway677feefcUserPoolId"
+        }
+      }
+    },
+    "devGroupRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": {
+          "Fn::Join": [
+            "",
+            [
+              {
                 "Ref": "authyourclearway677feefcUserPoolId"
+              },
+              "-devGroupRole"
+            ]
+          ]
+        },
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "",
+              "Effect": "Allow",
+              "Principal": {
+                "Federated": "cognito-identity.amazonaws.com"
+              },
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": {
+                "StringEquals": {
+                  "cognito-identity.amazonaws.com:aud": {
+                    "Ref": "authyourclearway677feefcIdentityPoolId"
+                  }
+                },
+                "ForAnyValue:StringLike": {
+                  "cognito-identity.amazonaws.com:amr": "authenticated"
+                }
               }
             }
-        },
-        
-        "devGroupRole": {
-            "Type": "AWS::IAM::Role",
-            "Properties": {
-                "RoleName":{
-                    "Fn::Join": [
-                        "",
-                        [
-                          {
-                            "Ref": "authyourclearway677feefcUserPoolId"
-                          },
-                          "-devGroupRole"
-                        ]
-                    ]
-                },
-                "AssumeRolePolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                        {
-                            "Sid": "",
-                            "Effect": "Allow",
-                            "Principal": {
-                                "Federated": "cognito-identity.amazonaws.com"
-                            },
-                            "Action": "sts:AssumeRoleWithWebIdentity",
-                            "Condition": {
-                              "StringEquals": {"cognito-identity.amazonaws.com:aud": {"Ref":"authyourclearway677feefcIdentityPoolId"}},
-                              "ForAnyValue:StringLike": {"cognito-identity.amazonaws.com:amr": "authenticated"}
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-     
-    
-    
-        "LambdaExecutionRole": {
-            "Type": "AWS::IAM::Role",
-            "Properties": {
-                "RoleName": {
-                    "Fn::If": [
-                        "ShouldNotCreateEnvResources",
-                        {
-                           
-                        },
-                        {
-
-                            "Fn::Join": [
-                                "",
-                                [
-
-                                  "yourclearway677feefc",
-                                  "-ExecutionRole-",
-                                  {
-                                    "Ref": "env"
-                                  }
-                                ]
-                            ]
-                        }
-                    ]
-                },
-                "AssumeRolePolicyDocument": {
-                    "Version": "2012-10-17",
-                    "Statement": [
-                        {
-                            "Effect": "Allow",
-                            "Principal": {
-                                "Service": [
-                                    "lambda.amazonaws.com"
-                                ]
-                            },
-                            "Action": [
-                                "sts:AssumeRole"
-                            ]
-                        }
-                    ]
-                },
-                "Policies": [
-                    {
-                        "PolicyName": "UserGroupLogPolicy",
-                        "PolicyDocument": {
-                            "Version": "2012-10-17",
-                            "Statement": [
-                                {
-                                    "Effect": "Allow",
-                                    "Action": [
-                                        "logs:CreateLogGroup",
-                                        "logs:CreateLogStream",
-                                        "logs:PutLogEvents"
-                                    ],
-                                    "Resource": "arn:aws:logs:*:*:*"
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "PolicyName": "UserGroupExecutionPolicy",
-                        "PolicyDocument": {
-                            "Version": "2012-10-17",
-                            "Statement": [
-                                {
-                                    "Effect": "Allow",
-                                    "Action": [
-                                        "cognito-identity:SetIdentityPoolRoles",
-                                        "cognito-identity:ListIdentityPools",
-                                        "cognito-identity:describeIdentityPool"
-
-                                    ],
-                                    "Resource": "*"
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "PolicyName": "UserGroupPassRolePolicy",
-                        "PolicyDocument": {
-                            "Version": "2012-10-17",
-                            "Statement": [
-                                {
-                                    "Effect": "Allow",
-                                    "Action": [
-                                        "iam:PassRole"
-                                    ],
-                                    "Resource": "*"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
-        },
-        "RoleMapFunction": {
-            "Type": "AWS::Lambda::Function",
-            "DependsOn": ["LambdaExecutionRole"],
-            "Properties": {
-                "Code": {
-                    "ZipFile": {
-                        "Fn::Join": [
-                            "\n",
-                            [
-                                "const response = require('cfn-response');",
-                                "const AWS = require('aws-sdk');",
-                                "exports.handler = (event, context) => {",
-                                "if (event.RequestType == 'Delete') {",
-                                "    response.send(event, context, response.SUCCESS, {message: 'Request type delete'})",
-                                "};",
-                                "if (event.RequestType == 'Create' || event.RequestType == 'Update') {",
-                                "    let { identityPoolId, appClientID, appClientIDWeb, userPoolId, region }  = event.ResourceProperties;",
-                                "    try {",
-                                "       const cognitoidentity = new AWS.CognitoIdentity();",
-                                "       let params = {",
-                                "           IdentityPoolId: identityPoolId,",
-                                "           Roles: {",
-                                "               'authenticated': event.ResourceProperties.AuthRoleArn,",
-                                "               'unauthenticated': event.ResourceProperties.UnauthRoleArn,",
-                                "           },",
-                                "           RoleMappings: {}",
-                                "       };",
-                                "       if (appClientIDWeb) {",
-                                "           params.RoleMappings[`cognito-idp.${region}.amazonaws.com/${userPoolId}:${appClientIDWeb}`] = {",
-                                "               Type: 'Token',",
-                                "               AmbiguousRoleResolution: 'AuthenticatedRole',",
-                                "           }",
-                                "       }",
-                                "       if (appClientID) {",
-                                "           params.RoleMappings[`cognito-idp.${region}.amazonaws.com/${userPoolId}:${appClientID}`] = {",
-                                "               Type: 'Token',",
-                                "               AmbiguousRoleResolution: 'AuthenticatedRole',",
-                                "           }",
-                                "       }",
-                                "    cognitoidentity.setIdentityPoolRoles(params).promise();",
-                                "    response.send(event, context, response.SUCCESS, {message: 'Successfully updated identity pool.'})",
-                                "    } catch(err) {",
-
-                                "        response.send(event, context, response.FAILED, {message: 'Error updating identity pool'});",
-                                "    }",
-                                "   };",
-                                "};"
-
-                            ]
-                        ]
-                    }
-                },
-                "Handler": "index.handler",
-                "Runtime": "nodejs12.x",
-                "Timeout": "300",
-                "Role": {
-                    "Fn::GetAtt": [
-                        "LambdaExecutionRole",
-                        "Arn"
-                    ]
-                }
-            }
-        },
-        "RoleMapFunctionInput": {
-            "Type": "Custom::LambdaCallout",
-            "Properties": {
-                "ServiceToken": {
-                    "Fn::GetAtt": [
-                        "RoleMapFunction",
-                        "Arn"
-                    ]
-                },
-                "AuthRoleArn": {
-                    "Ref": "AuthRoleArn"
-                },
-                "UnauthRoleArn":  {
-                    "Ref": "UnauthRoleArn"
-                },
-                "identityPoolId": {
-                    "Ref": "authyourclearway677feefcIdentityPoolId"
-                },
-                "userPoolId": {
-                    "Ref": "authyourclearway677feefcUserPoolId"
-                },
-                "appClientIDWeb": {
-                    "Ref": "authyourclearway677feefcAppClientIDWeb"
-                },
-                "appClientID": {
-                    "Ref": "authyourclearway677feefcAppClientID"
-                },
-                "region": {
-                    "Ref": "AWS::Region"
-                },
-                "env": {
-                    "Ref": "env"
-                }
-            },
-            "DependsOn": ["RoleMapFunction"]
+          ]
         }
-   
+      }
     },
-    
-    "Outputs": {
-      
-        "devGroupRole": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "devGroupRole",
-                    "Arn"
+    "LambdaExecutionRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName": {
+          "Fn::If": [
+            "ShouldNotCreateEnvResources",
+            {},
+            {
+              "Fn::Join": [
+                "",
+                [
+                  "yourclearway677feefc",
+                  "-ExecutionRole-",
+                  {
+                    "Ref": "env"
+                  }
                 ]
+              ]
             }
-        
+          ]
+        },
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "UserGroupLogPolicy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogGroup",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": "arn:aws:logs:*:*:*"
+                }
+              ]
+            }
+          },
+          {
+            "PolicyName": "UserGroupExecutionPolicy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "cognito-identity:SetIdentityPoolRoles",
+                    "cognito-identity:ListIdentityPools",
+                    "cognito-identity:describeIdentityPool"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          },
+          {
+            "PolicyName": "UserGroupPassRolePolicy",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "iam:PassRole"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "RoleMapFunction": {
+      "Type": "AWS::Lambda::Function",
+      "DependsOn": [
+        "LambdaExecutionRole"
+      ],
+      "Properties": {
+        "Code": {
+          "ZipFile": {
+            "Fn::Join": [
+              "\n",
+              [
+                "const response = require('cfn-response');",
+                "const AWS = require('aws-sdk');",
+                "exports.handler = (event, context) => {",
+                "if (event.RequestType == 'Delete') {",
+                "    response.send(event, context, response.SUCCESS, {message: 'Request type delete'})",
+                "};",
+                "if (event.RequestType == 'Create' || event.RequestType == 'Update') {",
+                "    let { identityPoolId, appClientID, appClientIDWeb, userPoolId, region }  = event.ResourceProperties;",
+                "    try {",
+                "       const cognitoidentity = new AWS.CognitoIdentity();",
+                "       let params = {",
+                "           IdentityPoolId: identityPoolId,",
+                "           Roles: {",
+                "               'authenticated': event.ResourceProperties.AuthRoleArn,",
+                "               'unauthenticated': event.ResourceProperties.UnauthRoleArn,",
+                "           },",
+                "           RoleMappings: {}",
+                "       };",
+                "       if (appClientIDWeb) {",
+                "           params.RoleMappings[`cognito-idp.${region}.amazonaws.com/${userPoolId}:${appClientIDWeb}`] = {",
+                "               Type: 'Token',",
+                "               AmbiguousRoleResolution: 'AuthenticatedRole',",
+                "           }",
+                "       }",
+                "       if (appClientID) {",
+                "           params.RoleMappings[`cognito-idp.${region}.amazonaws.com/${userPoolId}:${appClientID}`] = {",
+                "               Type: 'Token',",
+                "               AmbiguousRoleResolution: 'AuthenticatedRole',",
+                "           }",
+                "       }",
+                "    cognitoidentity.setIdentityPoolRoles(params).promise();",
+                "    response.send(event, context, response.SUCCESS, {message: 'Successfully updated identity pool.'})",
+                "    } catch(err) {",
+                "        response.send(event, context, response.FAILED, {message: 'Error updating identity pool'});",
+                "    }",
+                "   };",
+                "};"
+              ]
+            ]
+          }
+        },
+        "Handler": "index.handler",
+        "Runtime": "nodejs12.x",
+        "Timeout": "300",
+        "Role": {
+          "Fn::GetAtt": [
+            "LambdaExecutionRole",
+            "Arn"
+          ]
         }
-        
-      
+      }
+    },
+    "RoleMapFunctionInput": {
+      "Type": "Custom::LambdaCallout",
+      "Properties": {
+        "ServiceToken": {
+          "Fn::GetAtt": [
+            "RoleMapFunction",
+            "Arn"
+          ]
+        },
+        "AuthRoleArn": {
+          "Ref": "AuthRoleArn"
+        },
+        "UnauthRoleArn": {
+          "Ref": "UnauthRoleArn"
+        },
+        "identityPoolId": {
+          "Ref": "authyourclearway677feefcIdentityPoolId"
+        },
+        "userPoolId": {
+          "Ref": "authyourclearway677feefcUserPoolId"
+        },
+        "appClientIDWeb": {
+          "Ref": "authyourclearway677feefcAppClientIDWeb"
+        },
+        "appClientID": {
+          "Ref": "authyourclearway677feefcAppClientID"
+        },
+        "region": {
+          "Ref": "AWS::Region"
+        },
+        "env": {
+          "Ref": "env"
+        }
+      },
+      "DependsOn": [
+        "RoleMapFunction"
+      ]
     }
-    
+  },
+  "Outputs": {
+    "devGroupRole": {
+      "Value": {
+        "Fn::GetAtt": [
+          "devGroupRole",
+          "Arn"
+        ]
+      }
+    }
+  },
+  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"AmplifyAdmin\",\"createdWith\":\"7.6.5\",\"stackType\":\"auth-Cognito-UserPool-Groups\",\"metadata\":{}}"
 }

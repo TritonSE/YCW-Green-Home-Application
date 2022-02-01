@@ -16,6 +16,7 @@ interface QuestionState {
         id: string;
         title: string;
         rewardText: string;
+        type: string;
       },
     ];
   };
@@ -31,6 +32,7 @@ interface QuestionState {
               id: string;
               title: string;
               rewardText: string;
+              type: string;
             },
           ];
         }>
@@ -49,6 +51,7 @@ const initialState: QuestionState = {
         id: '',
         title: '',
         rewardText: '',
+        type: '',
       },
     ],
   },

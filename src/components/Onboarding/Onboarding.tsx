@@ -61,7 +61,10 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
     };
 
     if (page === 'submit') {
+      console.log('page: ', page);
       addHome();
+      // removes submit state so onboarding page can be used again later
+      setPage('');
       setAppState('App');
     }
   }, [page, homeData, setAppState, homeInformation, setUserState]);

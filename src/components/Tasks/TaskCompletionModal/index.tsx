@@ -8,10 +8,11 @@ import SvgContainer from '../../SvgContainer';
 import { toProperCase, CostTextToSymbol } from '../../../utils';
 import { TaskContext } from '../../../contexts/TaskContext';
 import styles from './styles';
-import { createResponse } from '../../../graphql/mutations';
+import { createResponse, createUserResponse } from '../../../graphql/mutations';
 import { UserContext } from '../../../contexts/UserContext';
 import { CreateResponseMutation } from '../../../API';
 import { ResponseContext } from '../../../contexts/ResponseContext';
+import { ResponseType } from '../../../models/index';
 
 const TaskCompletionModal: React.FC = () => {
   const {
@@ -19,34 +20,67 @@ const TaskCompletionModal: React.FC = () => {
     setIsTaskCompletionRendered,
     isTaskCompletionRendered,
   } = useContext(TaskContext);
-  const { userState } = useContext(UserContext);
+  const { userState, currentHome } = useContext(UserContext);
   const { responseState, setResponseState } = useContext(ResponseContext);
   const [isCompleted, setIsCompleted] = useState(false);
   const { level, categories, cost, questionText } = selectedTask;
 
   const completeCurrentTask = async () => {
-    const response = {
-      homeID: userState.homes.items[0].id,
+    const homeResponse = {
+      homeID: userState.homes.items[currentHome].home.id,
       questionID: selectedTask.id,
       answer: 'Y',
     };
-    const result: any = await API.graphql({
-      query: createResponse,
-      variables: { input: response },
-    });
-    const { id, createdAt } = result.data.createResponse;
-    if (!result.error) {
-      setResponseState({
-        items: [
-          ...responseState.items,
-          {
-            id,
-            createdAt,
-            ...response,
-          },
-        ],
+
+    // TODO: implement user vs. home specific responses
+    const userResponse = {
+      userId: userState.id,
+      questionID: selectedTask.id,
+      answer: 'Y',
+    };
+
+    const questionIsHome = selectedTask.type === ResponseType.HOME;
+
+    if (questionIsHome) {
+      const result: any = await API.graphql({
+        query: createResponse,
+        variables: { input: homeResponse },
       });
+      const { id, createdAt } = result.data.createResponse;
+      if (!result.error) {
+        setResponseState({
+          items: [
+            ...responseState.items,
+            {
+              id,
+              createdAt,
+              ...homeResponse,
+            },
+          ],
+        });
+      }
+    } else {
+      // TODO: implement createUserResponse correctly
+      // this is a placeholder
+      const result: any = await API.graphql({
+        query: createUserResponse,
+        variables: { input: userResponse },
+      });
+      const { id, createdAt } = result.data.createUserResponse;
+      if (!result.error) {
+        setResponseState({
+          items: [
+            ...responseState.items,
+            {
+              id,
+              createdAt,
+              ...homeResponse,
+            },
+          ],
+        });
+      }
     }
+
     setIsTaskCompletionRendered(false);
   };
 

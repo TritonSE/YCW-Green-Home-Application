@@ -13,7 +13,7 @@ import SettingsBox from '../SettingsBox';
 const SettingsContainer = () => {
   const navigation = useNavigation();
   const { setAppState } = useContext(AppContext);
-  const { userState, setUserState } = useContext(UserContext);
+  const { userState, setUserState, currentHome } = useContext(UserContext);
 
   // workaround to parse data that may be undefined - to change?
   const homes = userState.homes.items;
@@ -69,7 +69,7 @@ const SettingsContainer = () => {
 
   const updateHomeInfo = async () => {
     const response = {
-      id: userState.homes.items[0].homeID,
+      id: userState.homes.items[0].home.id,
       addressLine1: address,
       addressLine2: address2,
       _version: userState.homes.items[0].home._version, // eslint-disable-line no-underscore-dangle

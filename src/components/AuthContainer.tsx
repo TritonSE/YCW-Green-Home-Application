@@ -18,7 +18,7 @@ Auth.configure({ mandatorySignIn: true });
 
 function App(): JSX.Element | null {
   const { appState, setAppState } = useContext(AppContext);
-  const { userState, setUserState } = useContext(UserContext);
+  const { userState, setUserState, currentHome } = useContext(UserContext);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -33,8 +33,14 @@ function App(): JSX.Element | null {
     if (appState !== 'Onboarding Edit') {
       if (userState.id === '') {
         getUserData();
-      } else if (userState.homes.items.length === 0 && appState !== 'App') {
-        setAppState('Onboarding');
+      } else if (appState !== 'App') {
+        if (userState.homes.items.length === 0) {
+          setAppState('Onboarding');
+        } else if (appState === 'Auth') {
+          setAppState('App');
+        } else {
+          setAppState('Onboarding Add');
+        }
       } else {
         setAppState('App');
       }
@@ -43,9 +49,11 @@ function App(): JSX.Element | null {
 
   return (
     <NavigationContainer>
+      {console.log(`in auth: ${appState}`)}
       {appState === 'Onboarding' && <Onboarding />}
+      {appState === 'Onboarding Add' && <Onboarding />}
       {appState === 'Onboarding Edit' && (
-        <Onboarding homeInformation={userState.homes.items[0].home} />
+        <Onboarding homeInformation={userState.homes.items[currentHome].home} />
       )}
       {appState === 'App' && (
         <SafeAreaView style={{ flex: 1 }}>

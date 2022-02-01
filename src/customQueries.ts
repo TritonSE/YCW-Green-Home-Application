@@ -10,6 +10,7 @@ export const customListQuestions = /* GraphQL */ `
         id
         title
         rewardText
+        type
       }
     }
   }
