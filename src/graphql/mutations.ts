@@ -41,6 +41,22 @@ export const createHomeOwner = /* GraphQL */ `
           nextToken
           startedAt
         }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
       }
       owner
       home {
@@ -147,6 +163,22 @@ export const updateHomeOwner = /* GraphQL */ `
           nextToken
           startedAt
         }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
       }
       owner
       home {
@@ -247,6 +279,22 @@ export const deleteHomeOwner = /* GraphQL */ `
             _deleted
             _lastChangedAt
             createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
             updatedAt
             owner
           }
@@ -462,6 +510,7 @@ export const createHome = /* GraphQL */ `
             level
             cost
             categories
+            type
             _version
             _deleted
             _lastChangedAt
@@ -619,6 +668,7 @@ export const updateHome = /* GraphQL */ `
             level
             cost
             categories
+            type
             _version
             _deleted
             _lastChangedAt
@@ -776,6 +826,7 @@ export const deleteHome = /* GraphQL */ `
             level
             cost
             categories
+            type
             _version
             _deleted
             _lastChangedAt
@@ -804,6 +855,7 @@ export const createQuestion = /* GraphQL */ `
       level
       cost
       categories
+      type
       _version
       _deleted
       _lastChangedAt
@@ -826,6 +878,7 @@ export const updateQuestion = /* GraphQL */ `
       level
       cost
       categories
+      type
       _version
       _deleted
       _lastChangedAt
@@ -848,6 +901,7 @@ export const deleteQuestion = /* GraphQL */ `
       level
       cost
       categories
+      type
       _version
       _deleted
       _lastChangedAt
@@ -942,6 +996,7 @@ export const createResponse = /* GraphQL */ `
         level
         cost
         categories
+        type
         _version
         _deleted
         _lastChangedAt
@@ -1038,6 +1093,7 @@ export const updateResponse = /* GraphQL */ `
         level
         cost
         categories
+        type
         _version
         _deleted
         _lastChangedAt
@@ -1134,6 +1190,238 @@ export const deleteResponse = /* GraphQL */ `
         level
         cost
         categories
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
+    }
+  }
+`;
+export const createUserResponse = /* GraphQL */ `
+  mutation CreateUserResponse(
+    $input: CreateUserResponseInput!
+    $condition: ModelUserResponseConditionInput
+  ) {
+    createUserResponse(input: $input, condition: $condition) {
+      id
+      userID
+      questionID
+      answer
+      createdAt
+      _version
+      _deleted
+      _lastChangedAt
+      updatedAt
+      user {
+        id
+        username
+        displayName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      question {
+        id
+        title
+        questionText
+        rewardText
+        level
+        cost
+        categories
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
+    }
+  }
+`;
+export const updateUserResponse = /* GraphQL */ `
+  mutation UpdateUserResponse(
+    $input: UpdateUserResponseInput!
+    $condition: ModelUserResponseConditionInput
+  ) {
+    updateUserResponse(input: $input, condition: $condition) {
+      id
+      userID
+      questionID
+      answer
+      createdAt
+      _version
+      _deleted
+      _lastChangedAt
+      updatedAt
+      user {
+        id
+        username
+        displayName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      question {
+        id
+        title
+        questionText
+        rewardText
+        level
+        cost
+        categories
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
+    }
+  }
+`;
+export const deleteUserResponse = /* GraphQL */ `
+  mutation DeleteUserResponse(
+    $input: DeleteUserResponseInput!
+    $condition: ModelUserResponseConditionInput
+  ) {
+    deleteUserResponse(input: $input, condition: $condition) {
+      id
+      userID
+      questionID
+      answer
+      createdAt
+      _version
+      _deleted
+      _lastChangedAt
+      updatedAt
+      user {
+        id
+        username
+        displayName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      question {
+        id
+        title
+        questionText
+        rewardText
+        level
+        cost
+        categories
+        type
         _version
         _deleted
         _lastChangedAt

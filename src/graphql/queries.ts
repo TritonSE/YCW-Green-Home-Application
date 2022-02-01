@@ -71,6 +71,49 @@ export const getUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+      responses {
+        items {
+          id
+          userID
+          questionID
+          answer
+          createdAt
+          _version
+          _deleted
+          _lastChangedAt
+          updatedAt
+          user {
+            id
+            username
+            displayName
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          question {
+            id
+            title
+            questionText
+            rewardText
+            level
+            cost
+            categories
+            type
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          owner
+        }
+        nextToken
+        startedAt
+      }
     }
   }
 `;
@@ -100,6 +143,22 @@ export const listUsers = /* GraphQL */ `
             _deleted
             _lastChangedAt
             createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
             updatedAt
             owner
           }
@@ -150,6 +209,22 @@ export const syncUsers = /* GraphQL */ `
           nextToken
           startedAt
         }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
       }
       nextToken
       startedAt
@@ -189,6 +264,10 @@ export const syncHomeOwners = /* GraphQL */ `
           updatedAt
           owner
           homes {
+            nextToken
+            startedAt
+          }
+          responses {
             nextToken
             startedAt
           }
@@ -378,6 +457,7 @@ export const getHome = /* GraphQL */ `
             level
             cost
             categories
+            type
             _version
             _deleted
             _lastChangedAt
@@ -557,6 +637,7 @@ export const getQuestion = /* GraphQL */ `
       level
       cost
       categories
+      type
       _version
       _deleted
       _lastChangedAt
@@ -581,6 +662,7 @@ export const listQuestions = /* GraphQL */ `
         level
         cost
         categories
+        type
         _version
         _deleted
         _lastChangedAt
@@ -614,6 +696,7 @@ export const syncQuestions = /* GraphQL */ `
         level
         cost
         categories
+        type
         _version
         _deleted
         _lastChangedAt
@@ -708,6 +791,7 @@ export const getResponse = /* GraphQL */ `
         level
         cost
         categories
+        type
         _version
         _deleted
         _lastChangedAt
@@ -783,6 +867,7 @@ export const listResponses = /* GraphQL */ `
           level
           cost
           categories
+          type
           _version
           _deleted
           _lastChangedAt
@@ -871,6 +956,7 @@ export const getResponsesByCreatedAt = /* GraphQL */ `
           level
           cost
           categories
+          type
           _version
           _deleted
           _lastChangedAt
@@ -955,6 +1041,274 @@ export const syncResponses = /* GraphQL */ `
           level
           cost
           categories
+          type
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getUserResponse = /* GraphQL */ `
+  query GetUserResponse($id: ID!) {
+    getUserResponse(id: $id) {
+      id
+      userID
+      questionID
+      answer
+      createdAt
+      _version
+      _deleted
+      _lastChangedAt
+      updatedAt
+      user {
+        id
+        username
+        displayName
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        homes {
+          items {
+            id
+            homeID
+            homeOwnerID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+        responses {
+          items {
+            id
+            userID
+            questionID
+            answer
+            createdAt
+            _version
+            _deleted
+            _lastChangedAt
+            updatedAt
+            owner
+          }
+          nextToken
+          startedAt
+        }
+      }
+      question {
+        id
+        title
+        questionText
+        rewardText
+        level
+        cost
+        categories
+        type
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+      }
+      owner
+    }
+  }
+`;
+export const listUserResponses = /* GraphQL */ `
+  query ListUserResponses(
+    $filter: ModelUserResponseFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUserResponses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        questionID
+        answer
+        createdAt
+        _version
+        _deleted
+        _lastChangedAt
+        updatedAt
+        user {
+          id
+          username
+          displayName
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+          homes {
+            nextToken
+            startedAt
+          }
+          responses {
+            nextToken
+            startedAt
+          }
+        }
+        question {
+          id
+          title
+          questionText
+          rewardText
+          level
+          cost
+          categories
+          type
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getUserResponsesByCreatedAt = /* GraphQL */ `
+  query GetUserResponsesByCreatedAt(
+    $userID: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelUserResponseFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    getUserResponsesByCreatedAt(
+      userID: $userID
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userID
+        questionID
+        answer
+        createdAt
+        _version
+        _deleted
+        _lastChangedAt
+        updatedAt
+        user {
+          id
+          username
+          displayName
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+          homes {
+            nextToken
+            startedAt
+          }
+          responses {
+            nextToken
+            startedAt
+          }
+        }
+        question {
+          id
+          title
+          questionText
+          rewardText
+          level
+          cost
+          categories
+          type
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncUserResponses = /* GraphQL */ `
+  query SyncUserResponses(
+    $filter: ModelUserResponseFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUserResponses(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userID
+        questionID
+        answer
+        createdAt
+        _version
+        _deleted
+        _lastChangedAt
+        updatedAt
+        user {
+          id
+          username
+          displayName
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+          homes {
+            nextToken
+            startedAt
+          }
+          responses {
+            nextToken
+            startedAt
+          }
+        }
+        question {
+          id
+          title
+          questionText
+          rewardText
+          level
+          cost
+          categories
+          type
           _version
           _deleted
           _lastChangedAt

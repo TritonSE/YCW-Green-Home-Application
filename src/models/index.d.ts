@@ -19,6 +19,11 @@ export enum Category {
   WATER = "WATER"
 }
 
+export enum ResponseType {
+  USER = "USER",
+  HOME = "HOME"
+}
+
 export enum HeatingFuelType {
   GAS = "GAS",
   ELECTRIC = "ELECTRIC",
@@ -51,6 +56,7 @@ export declare class User {
   readonly username: string;
   readonly displayName: string;
   readonly homes?: (HomeOwner | null)[];
+  readonly responses?: (UserResponse | null)[];
   constructor(init: ModelInit<User>);
   static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
 }
@@ -111,6 +117,18 @@ export declare class Question {
   readonly level: Level | keyof typeof Level;
   readonly cost: Cost | keyof typeof Cost;
   readonly categories: Category[] | keyof typeof Category;
+  readonly type: ResponseType | keyof typeof ResponseType;
   constructor(init: ModelInit<Question>);
   static copyOf(source: Question, mutator: (draft: MutableModel<Question>) => MutableModel<Question> | void): Question;
+}
+
+export declare class UserResponse {
+  readonly id: string;
+  readonly questionID: string;
+  readonly user?: User;
+  readonly question?: Question;
+  readonly answer: string;
+  readonly createdAt: string;
+  constructor(init: ModelInit<UserResponse>);
+  static copyOf(source: UserResponse, mutator: (draft: MutableModel<UserResponse>) => MutableModel<UserResponse> | void): UserResponse;
 }

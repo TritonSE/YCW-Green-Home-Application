@@ -5,6 +5,7 @@ type User
     username: AWSEmail! # email address is used as an username
     displayName: String! # display this name on the frontend so email is not exposed
     homes: [HomeOwner] @connection(keyName: "byHomeOwner", fields: ["id"])
+    responses: [UserResponse] @connection(keyName: "byUser", fields: ["id"])
 }
 
 # Create a join model and disable queries as we don't need them
@@ -92,6 +93,11 @@ enum Cost {
     THREE
 }
 
+enum ResponseType {
+    USER
+    HOME
+}
+
 # All questions currently are of type yes/no
 type Question 
     @model 
@@ -108,6 +114,7 @@ type Question
     level: Level!
     cost: Cost!
     categories: [Category!]!
+    type: ResponseType!
 }
 
 # A home's response to a question
@@ -119,6 +126,28 @@ type Question
 #         items {
 #             id
 #             homeID
+#             questionID
+#             answer
+#             createdAt
+#             updatedAt
+#             question {
+#                 id
+#                 title
+#             }
+#         }
+#     }
+# }   
+
+
+# A User's response to a question
+# query all of a User's responses: user.responses (a user has responses for some questions)
+# query all of a question's responses: question.responses (a question has responses from various users, p.s. currently not needed for user app, but might be helpful for future analytics)
+# sort recent activities by createdAt:
+# query GetRecentUserActivities {
+#     getUserResponsesByCreatedAt(userID: "some_user_id", limit: 10, sortDirection: DESC) {
+#         items {
+#             id
+#             userID
 #             questionID
 #             answer
 #             createdAt
@@ -148,6 +177,23 @@ type Response
     createdAt: AWSDateTime!
 }
 
+type UserResponse 
+    @model
+    @key(name: "byUser", fields: ["userID", "questionID"]) 
+    @key(name: "byCreatedAt", fields: ["userID", "createdAt"], queryField: "getUserResponsesByCreatedAt")
+    @auth(rules: [
+        { allow: owner }, # defaults to use the "owner" field
+        { allow: groups, groups: ["Admin"] }  # Admin users can access any operation
+    ]) {
+    id: ID!
+    userID: ID!
+    questionID: ID!
+    user: User @connection(fields: ["userID"])
+    question: Question @connection(fields: ["questionID"])
+    answer: String!
+    createdAt: AWSDateTime!
+}
+
 # used to hold info for any assets/images in S3
 # will be used for future image uploads (user generated/dynamic assets)
 type S3Object {
@@ -155,3 +201,4 @@ type S3Object {
     region: String!
     key: String!
 }
+

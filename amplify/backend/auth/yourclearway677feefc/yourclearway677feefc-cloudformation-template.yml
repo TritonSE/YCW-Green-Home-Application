@@ -164,7 +164,9 @@ Resources:
         Ref: smsVerificationMessage
       SmsConfiguration:
         SnsCallerArn:
-          Fn::GetAtt: SNSRole.Arn
+          Fn::GetAtt:
+            - SNSRole
+            - Arn
         ExternalId: yourcl677feefc_role_external_id
   UserPoolClientWeb:
     Type: AWS::Cognito::UserPoolClient
@@ -263,7 +265,9 @@ Resources:
             Action:
               - cognito-idp:DescribeUserPoolClient
             Resource:
-              Fn::GetAtt: UserPool.Arn
+              Fn::GetAtt:
+                - UserPool
+                - Arn
     DependsOn: UserPoolClientLambda
   UserPoolClientLogPolicy:
     Type: AWS::IAM::Policy
@@ -294,7 +298,9 @@ Resources:
     Type: Custom::LambdaCallout
     Properties:
       ServiceToken:
-        Fn::GetAtt: UserPoolClientLambda.Arn
+        Fn::GetAtt:
+          - UserPoolClientLambda
+          - Arn
       clientId:
         Ref: UserPoolClient
       userpoolId:
@@ -352,7 +358,9 @@ Outputs:
     Description: Id for the identity pool
   IdentityPoolName:
     Value:
-      Fn::GetAtt: IdentityPool.Name
+      Fn::GetAtt:
+        - IdentityPool
+        - Name
   UserPoolId:
     Value:
       Ref: UserPool
@@ -370,4 +378,8 @@ Outputs:
     Description: The user pool app client id
   AppClientSecret:
     Value:
-      Fn::GetAtt: UserPoolClientInputs.appSecret
+      Fn::GetAtt:
+        - UserPoolClientInputs
+        - appSecret
+Description: >-
+  {"createdOn":"Linux","createdBy":"Amplify","createdWith":"7.6.9","stackType":"auth-Cognito","metadata":{}}
