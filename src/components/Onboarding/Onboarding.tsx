@@ -26,7 +26,7 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
   const [page, setPage] = useState('');
   const [homeData, setHomeData] = useState(homeInformation ?? homeInfo);
   const { setAppState } = useContext(AppContext);
-  const { setUserState } = useContext(UserContext);
+  const { setUserState, setCurrentHome } = useContext(UserContext);
 
   useEffect(() => {
     const addHome = async () => {
@@ -58,16 +58,28 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
         variables: { id: user.attributes.sub },
       });
       setUserState(userData.data.getUser);
+
+      const newHomeId = result.data.createHome.id;
+      const newHomeIndex = userData.data.getUser.homes.items.findIndex(
+        (homeOwner: any) => homeOwner.home.id === newHomeId,
+      );
+      setCurrentHome(newHomeIndex);
     };
 
     if (page === 'submit') {
-      console.log('page: ', page);
       addHome();
       // removes submit state so onboarding page can be used again later
       setPage('');
       setAppState('App');
     }
-  }, [page, homeData, setAppState, homeInformation, setUserState]);
+  }, [
+    page,
+    homeData,
+    setAppState,
+    homeInformation,
+    setUserState,
+    setCurrentHome,
+  ]);
 
   return (
     <Stack.Navigator>

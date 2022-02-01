@@ -40,7 +40,7 @@ export default function NavFlow() {
       const responses: any = await API.graphql({
         query: customResponses,
         variables: {
-          filter: { homeID: userState.homes.items[0].home.id },
+          filter: { homeID: userState.homes.items[currentHome].home.id },
         },
       });
 
@@ -49,7 +49,7 @@ export default function NavFlow() {
       }
     };
     getQuestionsAndResponses();
-  }, [setQuestionState, setResponseState, userState]);
+  }, [setQuestionState, setResponseState, userState, currentHome]);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
