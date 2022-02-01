@@ -295,5 +295,5 @@
       }
     }
   },
-  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"AmplifyAdmin\",\"createdWith\":\"7.6.5\",\"stackType\":\"auth-Cognito-UserPool-Groups\",\"metadata\":{}}"
+  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"7.6.9\",\"stackType\":\"auth-Cognito-UserPool-Groups\",\"metadata\":{}}"
 }
