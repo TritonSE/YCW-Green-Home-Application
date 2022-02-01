@@ -18,6 +18,8 @@ const HomeContainer = () => {
   const homes = userState.homes.items.map(homeOwner => homeOwner.home);
 
   const removeHome = async (index: number) => {
+    // TODO: continue working on delete home implementation
+    // copied over from will's branch
     const homeOwner = userState.homes.items[index];
     const { home } = homeOwner;
     await API.graphql({
