@@ -29,7 +29,7 @@ const NavRoutesToIcon = {
 export default function NavFlow() {
   const { setQuestionState } = useContext(QuestionContext);
   const { setResponseState } = useContext(ResponseContext);
-  const { userState } = useContext(UserContext);
+  const { userState, currentHome } = useContext(UserContext);
   useEffect(() => {
     const getQuestionsAndResponses = async () => {
       const result: any = await API.graphql({
@@ -39,7 +39,9 @@ export default function NavFlow() {
 
       const responses: any = await API.graphql({
         query: customResponses,
-        variables: { filter: { homeID: userState.homes.items[0].home.id } },
+        variables: {
+          filter: { homeID: userState.homes.items[currentHome].home.id },
+        },
       });
 
       if (responses.data.listResponses.items.length !== 0) {
@@ -47,7 +49,7 @@ export default function NavFlow() {
       }
     };
     getQuestionsAndResponses();
-  }, [setQuestionState, setResponseState, userState]);
+  }, [setQuestionState, setResponseState, userState, currentHome]);
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

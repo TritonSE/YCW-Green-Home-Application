@@ -19,8 +19,8 @@ const SettingsContainer = () => {
   const homes = userState.homes.items;
   const homesString = JSON.stringify(homes);
   const homesJSON = JSON.parse(homesString);
-  const { home } = homesJSON[0];
-  const curHomeName = homesJSON[0].home.addressLine1.split(' ')[1];
+  const { home } = homesJSON[currentHome];
+  const curHomeName = homesJSON[currentHome].home.addressLine1.split(' ')[1];
 
   const [homeData] = useState(home);
   const [name, setName] = useState(String(userState.displayName));
@@ -69,10 +69,10 @@ const SettingsContainer = () => {
 
   const updateHomeInfo = async () => {
     const response = {
-      id: userState.homes.items[0].home.id,
+      id: userState.homes.items[currentHome].home.id,
       addressLine1: address,
       addressLine2: address2,
-      _version: userState.homes.items[0].home._version, // eslint-disable-line no-underscore-dangle
+      _version: userState.homes.items[currentHome].home._version, // eslint-disable-line no-underscore-dangle
     };
     const result: any = await API.graphql({
       query: updateHome,
@@ -85,9 +85,9 @@ const SettingsContainer = () => {
           ...userState.homes,
           items: [
             {
-              ...userState.homes.items[0],
+              ...userState.homes.items[currentHome],
               home: {
-                ...userState.homes.items[0].home,
+                ...userState.homes.items[currentHome].home,
                 ...response,
               },
             },

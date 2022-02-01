@@ -86,7 +86,6 @@ const HomeContainer = () => {
               zip={zipcode}
               selected={selected}
               onPress={() => {
-                console.log('current home index = ', index);
                 setCurrentHome(index);
               }}
             />
