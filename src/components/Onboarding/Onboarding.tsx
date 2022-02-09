@@ -57,13 +57,12 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
         query: customGetUser,
         variables: { id: user.attributes.sub },
       });
-      setUserState(userData.data.getUser);
 
-      const newHomeId = result.data.createHome.id;
-      const newHomeIndex = userData.data.getUser.homes.items.findIndex(
-        (homeOwner: any) => homeOwner.home.id === newHomeId,
+      const notDeletedHomes = userData.data.getUser.homes.items.filter(
+        (homeOwner: any) => homeOwner.home._deleted !== true,
       );
-      setCurrentHome(newHomeIndex);
+      userData.data.getUser.homes.items = notDeletedHomes;
+      setUserState(userData.data.getUser);
     };
 
     if (page === 'submit') {

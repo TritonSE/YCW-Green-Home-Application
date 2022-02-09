@@ -27,9 +27,16 @@ function App(): JSX.Element | null {
         query: customGetUser,
         variables: { id: user.attributes.sub },
       });
+
+      const notDeletedHomes = result.data.getUser.homes.items.filter(
+        (homeOwner: any) => homeOwner.home._deleted !== true,
+      );
+      result.data.getUser.homes.items = notDeletedHomes;
+
       setUserState(result.data.getUser);
       setAppState('Loading');
     };
+
     if (appState !== 'Onboarding Edit') {
       if (userState.id === '') {
         getUserData();
@@ -49,7 +56,6 @@ function App(): JSX.Element | null {
 
   return (
     <NavigationContainer>
-      {console.log(`in auth: ${appState}`)}
       {appState === 'Onboarding' && <Onboarding />}
       {appState === 'Onboarding Add' && <Onboarding />}
       {appState === 'Onboarding Edit' && (

@@ -14,29 +14,49 @@ const HomeContainer = () => {
   const { responseState } = useContext(ResponseContext);
   const { userState, setUserState, currentHome, setCurrentHome } =
     useContext(UserContext);
-  const badgeNumber = responseState.items.length;
+
+  const currhomeId = userState.homes.items[currentHome].home.id;
+  const badges = responseState.items.filter(
+    response => response.homeID === currhomeId,
+  );
+  const badgeNumber = badges.length;
   const homes = userState.homes.items.map(homeOwner => homeOwner.home);
 
   const removeHome = async (index: number) => {
-    // TODO: finish delete home implementation
-    // copied over from will's branch
-    const homeOwner = userState.homes.items[index];
-    const { home } = homeOwner;
-    await API.graphql({
-      query: deleteHomeOwner,
-      variables: { input: { id: homeOwner.id } },
-    });
-    await API.graphql({
-      query: deleteHome,
-      variables: { input: { id: home.id } },
-    });
+    const numHomes = userState.homes.items.length;
+    const canDelete = numHomes > 1;
+    if (canDelete) {
+      const homeOwner = userState.homes.items[index];
+      const { home } = homeOwner;
+      await API.graphql({
+        query: deleteHome,
+        variables: { input: { id: home.id, _version: home._version } },
+      });
+      await API.graphql({
+        query: deleteHomeOwner,
+        variables: {
+          input: { id: homeOwner.id, _version: homeOwner._version },
+        },
+      });
+      setCurrentHome(0);
 
-    const user = await Auth.currentAuthenticatedUser();
-    const userData: any = await API.graphql({
-      query: customGetUser,
-      variables: { id: user.attributes.sub },
-    });
-    setUserState(userData.data.getUser);
+      const user = await Auth.currentAuthenticatedUser();
+      const userData: any = await API.graphql({
+        query: customGetUser,
+        variables: { id: user.attributes.sub },
+      });
+
+      const notDeletedHomes = userData.data.getUser.homes.items.filter(
+        (homeOwner: any) => homeOwner.home._deleted !== true,
+      );
+      userData.data.getUser.homes.items = notDeletedHomes;
+      setUserState(userData.data.getUser);
+    } else {
+      // covers the case when user tries to delete all homes (causes error with loading home screen so prevent this)
+      Alert.alert(
+        'You cannot delete this home. You need at least 1 in your profile.',
+      );
+    }
   };
 
   const deleteHomePrompt = () => {

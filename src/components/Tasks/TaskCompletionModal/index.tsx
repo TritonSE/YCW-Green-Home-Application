@@ -13,6 +13,7 @@ import { UserContext } from '../../../contexts/UserContext';
 import { CreateResponseMutation } from '../../../API';
 import { ResponseContext } from '../../../contexts/ResponseContext';
 import { ResponseType } from '../../../models/index';
+import { UserResponseContext } from '../../../contexts/UserResponseContext';
 
 const TaskCompletionModal: React.FC = () => {
   const {
@@ -26,22 +27,16 @@ const TaskCompletionModal: React.FC = () => {
   const { level, categories, cost, questionText } = selectedTask;
 
   const completeCurrentTask = async () => {
-    const homeResponse = {
-      homeID: userState.homes.items[currentHome].home.id,
-      questionID: selectedTask.id,
-      answer: 'Y',
-    };
-
     // TODO: implement user vs. home specific responses
-    const userResponse = {
-      userId: userState.id,
-      questionID: selectedTask.id,
-      answer: 'Y',
-    };
-
     const questionIsHome = selectedTask.type === ResponseType.HOME;
 
     if (questionIsHome) {
+      const homeResponse = {
+        homeID: userState.homes.items[currentHome].home.id,
+        questionID: selectedTask.id,
+        answer: 'Y',
+      };
+
       const result: any = await API.graphql({
         query: createResponse,
         variables: { input: homeResponse },
@@ -62,23 +57,24 @@ const TaskCompletionModal: React.FC = () => {
     } else {
       // TODO: implement createUserResponse correctly
       // this is a placeholder
+      const userResponse = {
+        userId: userState.id,
+        questionID: selectedTask.id,
+        answer: 'Y',
+      };
+
       const result: any = await API.graphql({
         query: createUserResponse,
         variables: { input: userResponse },
       });
-      const { id, createdAt } = result.data.createUserResponse;
-      if (!result.error) {
-        setResponseState({
-          items: [
-            ...responseState.items,
-            {
-              id,
-              createdAt,
-              ...homeResponse,
-            },
-          ],
-        });
-      }
+      const { userId, createdAt } = result.data.createUserResponse;
+      // TODO: set user response state
+      // if (!result.error) {
+      //   setUserResponseState({
+      //     items: [
+      //     ],
+      //   });
+      // }
     }
 
     setIsTaskCompletionRendered(false);

@@ -94,6 +94,17 @@ const SettingsContainer = () => {
           ],
         },
       });
+
+      const notDeletedHomes = userState.homes.items.filter(
+        (homeOwner: any) => homeOwner.home._deleted !== true,
+      );
+      setUserState({
+        ...userState,
+        homes: {
+          ...userState.homes,
+          items: notDeletedHomes,
+        },
+      });
     }
   };
 
