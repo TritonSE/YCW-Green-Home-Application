@@ -68,16 +68,19 @@ const SettingsContainer = () => {
   };
 
   const updateHomeInfo = async () => {
+    console.log('before creating response');
     const response = {
       id: userState.homes.items[currentHome].home.id,
       addressLine1: address,
       addressLine2: address2,
-      _version: userState.homes.items[currentHome].home._version, // eslint-disable-line no-underscore-dangle
+      // _version: userState.homes.items[currentHome].home._version, // eslint-disable-line no-underscore-dangle
     };
+    console.log('after creating response');
     const result: any = await API.graphql({
       query: updateHome,
       variables: { input: response },
     });
+    console.log('after running graphql and getting result');
     if (!result.error) {
       setUserState({
         ...userState,

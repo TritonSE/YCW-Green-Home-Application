@@ -32,9 +32,13 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
     const addHome = async () => {
       let result: any;
       if (homeInformation !== undefined) {
+        // updateHomeInput does not have a _deleted field, so we remove it from the input
+        // created a copy in case we need the original HomeData object in the future
+        const homeDataCopy = homeData;
+        delete homeDataCopy._deleted;
         result = await API.graphql({
           query: updateHome,
-          variables: { input: homeData },
+          variables: { input: homeDataCopy },
         });
       } else {
         result = await API.graphql({

@@ -387,7 +387,6 @@ export type UpdateHomeInput = {
   annualGasPropaneEnergyUsage?: number | null;
   annualWaterUsage?: number | null;
   _version?: number | null;
-  _deleted?: boolean | null;
 };
 
 export type DeleteHomeInput = {
