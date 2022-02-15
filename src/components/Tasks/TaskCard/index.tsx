@@ -15,6 +15,7 @@ const TaskCard: React.FC<Task> = ({
   categories,
   cost,
   rewardText,
+  type,
 }) => {
   const { setIsTaskCompletionRendered, setSelectedTask } =
     useContext(TaskContext);
@@ -28,6 +29,7 @@ const TaskCard: React.FC<Task> = ({
       categories,
       cost,
       rewardText,
+      type,
     });
     setIsTaskCompletionRendered(true);
   };

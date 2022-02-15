@@ -26,15 +26,19 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
   const [page, setPage] = useState('');
   const [homeData, setHomeData] = useState(homeInformation ?? homeInfo);
   const { setAppState } = useContext(AppContext);
-  const { setUserState } = useContext(UserContext);
+  const { setUserState, setCurrentHome } = useContext(UserContext);
 
   useEffect(() => {
     const addHome = async () => {
       let result: any;
       if (homeInformation !== undefined) {
+        // updateHomeInput does not have a _deleted field, so we remove it from the input
+        // created a copy in case we need the original HomeData object in the future
+        const homeDataCopy = homeData;
+        delete homeDataCopy._deleted;
         result = await API.graphql({
           query: updateHome,
-          variables: { input: homeData },
+          variables: { input: homeDataCopy },
         });
       } else {
         result = await API.graphql({
@@ -57,14 +61,28 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
         query: customGetUser,
         variables: { id: user.attributes.sub },
       });
+
+      const notDeletedHomes = userData.data.getUser.homes.items.filter(
+        (homeOwner: any) => homeOwner.home._deleted !== true,
+      );
+      userData.data.getUser.homes.items = notDeletedHomes;
       setUserState(userData.data.getUser);
     };
 
     if (page === 'submit') {
       addHome();
+      // removes submit state so onboarding page can be used again later
+      setPage('');
       setAppState('App');
     }
-  }, [page, homeData, setAppState, homeInformation, setUserState]);
+  }, [
+    page,
+    homeData,
+    setAppState,
+    homeInformation,
+    setUserState,
+    setCurrentHome,
+  ]);
 
   return (
     <Stack.Navigator>

@@ -13,14 +13,14 @@ import SettingsBox from '../SettingsBox';
 const SettingsContainer = () => {
   const navigation = useNavigation();
   const { setAppState } = useContext(AppContext);
-  const { userState, setUserState } = useContext(UserContext);
+  const { userState, setUserState, currentHome } = useContext(UserContext);
 
   // workaround to parse data that may be undefined - to change?
   const homes = userState.homes.items;
   const homesString = JSON.stringify(homes);
   const homesJSON = JSON.parse(homesString);
-  const { home } = homesJSON[0];
-  const curHomeName = homesJSON[0].home.addressLine1.split(' ')[1];
+  const { home } = homesJSON[currentHome];
+  const curHomeName = homesJSON[currentHome].home.addressLine1.split(' ')[1];
 
   const [homeData] = useState(home);
   const [name, setName] = useState(String(userState.displayName));
@@ -68,16 +68,19 @@ const SettingsContainer = () => {
   };
 
   const updateHomeInfo = async () => {
+    console.log('before creating response');
     const response = {
-      id: userState.homes.items[0].homeID,
+      id: userState.homes.items[currentHome].home.id,
       addressLine1: address,
       addressLine2: address2,
-      _version: userState.homes.items[0].home._version, // eslint-disable-line no-underscore-dangle
+      // _version: userState.homes.items[currentHome].home._version, // eslint-disable-line no-underscore-dangle
     };
+    console.log('after creating response');
     const result: any = await API.graphql({
       query: updateHome,
       variables: { input: response },
     });
+    console.log('after running graphql and getting result');
     if (!result.error) {
       setUserState({
         ...userState,
@@ -85,13 +88,24 @@ const SettingsContainer = () => {
           ...userState.homes,
           items: [
             {
-              ...userState.homes.items[0],
+              ...userState.homes.items[currentHome],
               home: {
-                ...userState.homes.items[0].home,
+                ...userState.homes.items[currentHome].home,
                 ...response,
               },
             },
           ],
+        },
+      });
+
+      const notDeletedHomes = userState.homes.items.filter(
+        (homeOwner: any) => homeOwner.home._deleted !== true,
+      );
+      setUserState({
+        ...userState,
+        homes: {
+          ...userState.homes,
+          items: notDeletedHomes,
         },
       });
     }
