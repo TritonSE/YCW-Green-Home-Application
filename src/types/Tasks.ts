@@ -6,6 +6,7 @@ export interface Task {
   categories: string[];
   cost: string;
   rewardText: string;
+  type: string;
 }
 
 export interface CompletedTask {

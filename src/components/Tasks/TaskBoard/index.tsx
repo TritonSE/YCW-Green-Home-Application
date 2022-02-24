@@ -33,6 +33,7 @@ const TaskBoard: React.FC<Props> = ({ tasks }) => {
       cost={task.cost}
       categories={task.categories}
       questionText={task.questionText}
+      type={task.type}
     />
   ));
 

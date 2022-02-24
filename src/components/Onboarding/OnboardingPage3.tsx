@@ -104,6 +104,7 @@ const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
               dropDownStyle={{ width: '90%' }}
               itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
+              defaultValue={homeData.heaterAge}
               onChangeItem={item => setHeaterAge(item.value)}
               onOpen={() => setPicker1(true)}
               onClose={() => setPicker1(false)}
@@ -121,6 +122,7 @@ const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
                 dropDownStyle={{ width: '90%' }}
                 itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
                 placeholder=""
+                defaultValue={homeData.waterHeaterFuelType}
                 onChangeItem={item => setWaterFuelType(item.value)}
                 onOpen={() => setPicker2(true)}
                 onClose={() => setPicker2(false)}
@@ -142,6 +144,7 @@ const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
                 dropDownStyle={{ width: '90%' }}
                 itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
                 placeholder=""
+                defaultValue={homeData.waterHeaterAge}
                 onChangeItem={item => setWaterHeaterAge(item.value)}
               />
             ) : (
@@ -167,6 +170,7 @@ const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
               dropDownStyle={{ width: '90%' }}
               itemStyle={{ justifyContent: 'flex-start', paddingLeft: '2%' }}
               placeholder=""
+              defaultValue={homeData.heatingFuelType}
               onChangeItem={item => setHeatingFuelType(item.value)}
             />
             <TouchableOpacity style={styles.button} onPress={nextPage}>

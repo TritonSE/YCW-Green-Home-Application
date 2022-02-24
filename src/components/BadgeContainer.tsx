@@ -7,6 +7,7 @@ import {
 } from '@react-navigation/stack';
 import { ResponseContext } from '../contexts/ResponseContext';
 import { QuestionContext } from '../contexts/QuestionsContext';
+import { UserContext } from '../contexts/UserContext';
 import SvgContainer from '../components/SvgContainer';
 import styles from '../styles/BadgeScreenStyles';
 
@@ -30,11 +31,18 @@ export const BadgeStack = createStackNavigator<BadgeStackParams>();
  * @returns answered, unanswered, and all badges as a list of type badge
  */
 export function GetBadges(badgeLevel: string) {
+  const { userState, currentHome } = useContext(UserContext);
   const { responseState } = useContext(ResponseContext);
   const { questionState } = useContext(QuestionContext);
 
+  // filter out badges that are not associated with current house
+  const currhomeId = userState.homes.items[currentHome].home.id;
+  const newResponseState = responseState.items.filter(
+    response => response.homeID === currhomeId,
+  );
+
   const responseMap = new Map(
-    responseState.items.map(response => [response.questionID, response]),
+    newResponseState.map(response => [response.questionID, response]),
   );
 
   const answeredBadges: Badge[] = questionState.items.filter(

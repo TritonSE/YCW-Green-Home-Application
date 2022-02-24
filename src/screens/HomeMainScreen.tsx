@@ -4,6 +4,7 @@ import { View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { QuestionContext } from '../contexts/QuestionsContext';
 import { ResponseContext } from '../contexts/ResponseContext';
+import { UserContext } from '../contexts/UserContext';
 import { BadgeTitleRewardText, HomeStackParams } from './HomeScreen';
 import HomeHeader from '../components/Home/HomeHeader';
 import HomeNews from '../components/Home/HomeNews';
@@ -15,12 +16,17 @@ interface HomeScreenProps {
 }
 
 const HomeMainScreen = ({ navigation }: HomeScreenProps) => {
+  const { userState, currentHome } = useContext(UserContext);
   const { questionState } = useContext(QuestionContext);
   const { responseState } = useContext(ResponseContext);
 
+  const currhomeId = userState.homes.items[currentHome].home.id;
+
   // filters out negative responses
   const positiveResponse = responseState.items.filter(
-    response => response.answer === 'Yes' || response.answer === 'Y',
+    response =>
+      (response.answer === 'Yes' || response.answer === 'Y') &&
+      response.homeID === currhomeId,
   );
 
   // sorts response by date

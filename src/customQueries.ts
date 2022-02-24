@@ -10,6 +10,7 @@ export const customListQuestions = /* GraphQL */ `
         id
         title
         rewardText
+        type
       }
     }
   }
@@ -41,6 +42,7 @@ export const customGetUser = /* GraphQL */ `
       homes {
         items {
           id
+          _version
           homeID
           homeOwnerID
           createdAt
@@ -55,6 +57,7 @@ export const customGetUser = /* GraphQL */ `
           }
           owner
           home {
+            _deleted
             id
             addressLine1
             addressLine2
