@@ -37,20 +37,12 @@ function App(): JSX.Element | null {
       setAppState('Loading');
     };
 
-    if (appState !== 'Onboarding Edit') {
-      if (userState.id === '') {
-        getUserData();
-      } else if (appState !== 'App') {
-        if (userState.homes.items.length === 0) {
-          setAppState('Onboarding');
-        } else if (appState === 'Auth') {
-          setAppState('App');
-        } else {
-          setAppState('Onboarding Add');
-        }
-      } else {
-        setAppState('App');
-      }
+    if (!userState.id) {
+      getUserData();
+    } else if (userState.homes.items.length === 0) {
+      setAppState('Onboarding');
+    } else if (appState === 'Auth') {
+      setAppState('App');
     }
   }, [appState, setAppState, userState, setUserState]);
 

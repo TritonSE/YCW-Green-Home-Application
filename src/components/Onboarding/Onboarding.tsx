@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { API, Auth } from 'aws-amplify';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppContext } from '../../contexts/AppContext';
@@ -23,66 +23,50 @@ interface Props {
 }
 
 const Onboarding: React.FC<Props> = ({ homeInformation }) => {
-  const [page, setPage] = useState('');
   const [homeData, setHomeData] = useState(homeInformation ?? homeInfo);
   const { setAppState } = useContext(AppContext);
-  const { setUserState, setCurrentHome } = useContext(UserContext);
+  const { setUserState } = useContext(UserContext);
 
-  useEffect(() => {
-    const addHome = async () => {
-      let result: any;
-      if (homeInformation !== undefined) {
-        // updateHomeInput does not have a _deleted field, so we remove it from the input
-        // created a copy in case we need the original HomeData object in the future
-        const homeDataCopy = homeData;
-        delete homeDataCopy._deleted;
-        result = await API.graphql({
-          query: updateHome,
-          variables: { input: homeDataCopy },
-        });
-      } else {
-        result = await API.graphql({
-          query: createHome,
-          variables: { input: homeData },
-        });
-        await API.graphql({
-          query: createHomeOwner,
-          variables: {
-            input: {
-              homeID: result.data.createHome.id,
-              homeOwnerID: result.data.createHome.owner,
-            },
-          },
-        });
-      }
-
-      const user = await Auth.currentAuthenticatedUser();
-      const userData: any = await API.graphql({
-        query: customGetUser,
-        variables: { id: user.attributes.sub },
+  const addHome = useCallback(async (newHomeData: CreateHomeInput) => {
+    let result: any;
+    if (homeInformation !== undefined) {
+      // updateHomeInput does not have a _deleted field, so we remove it from the input
+      // created a copy in case we need the original HomeData object in the future
+      const homeDataCopy = newHomeData;
+      delete homeDataCopy._deleted;
+      result = await API.graphql({
+        query: updateHome,
+        variables: { input: homeDataCopy },
       });
-
-      const notDeletedHomes = userData.data.getUser.homes.items.filter(
-        (homeOwner: any) => homeOwner.home._deleted !== true,
-      );
-      userData.data.getUser.homes.items = notDeletedHomes;
-      setUserState(userData.data.getUser);
-    };
-
-    if (page === 'submit') {
-      addHome();
-      // removes submit state so onboarding page can be used again later
-      setPage('');
-      setAppState('App');
+    } else {
+      result = await API.graphql({
+        query: createHome,
+        variables: { input: newHomeData },
+      });
+      await API.graphql({
+        query: createHomeOwner,
+        variables: {
+          input: {
+            homeID: result.data.createHome.id,
+            homeOwnerID: result.data.createHome.owner,
+          },
+        },
+      });
     }
-  }, [
-    page,
-    homeData,
-    setAppState,
-    homeInformation,
-    setUserState,
-    setCurrentHome,
-  ]);
+
+    const user = await Auth.currentAuthenticatedUser();
+    const userData: any = await API.graphql({
+      query: customGetUser,
+      variables: { id: user.attributes.sub },
+    });
+
+    const notDeletedHomes = userData.data.getUser.homes.items.filter(
+      (homeOwner: any) => homeOwner.home._deleted !== true,
+    );
+    userData.data.getUser.homes.items = notDeletedHomes;
+    setUserState(userData.data.getUser);
+    setAppState('App');
+  }, [setAppState, homeInformation, setUserState]);
 
   return (
     <Stack.Navigator>
@@ -106,9 +90,9 @@ const Onboarding: React.FC<Props> = ({ homeInformation }) => {
         // eslint-disable-next-line react/no-children-prop
         children={() => (
           <Page4
-            setPage={setPage}
             setHomeData={setHomeData}
             homeData={homeData}
+            submitHomeInfo={addHome}
           />
         )}
         options={{ headerShown: false }}

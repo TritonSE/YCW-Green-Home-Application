@@ -10,12 +10,12 @@ import styles from '../../styles/OnboardingStyles';
 import { CreateHomeInput } from '../../API';
 
 interface Props {
-  setPage(page: string): void;
   setHomeData({}): void;
   homeData: CreateHomeInput;
+  submitHomeInfo(homeData: CreateHomeInput): void;
 }
 
-const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
+const Page4: React.FC<Props> = ({ setHomeData, homeData, submitHomeInfo }) => {
   const [annualElectricalEnergyUsage, setElectricEnergyUsage] = useState(
     String(homeData.annualElectricalEnergyUsage),
   );
@@ -48,11 +48,10 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
 
   const nextPage = () => {
     setIsLoading(true);
-    setPage('submit');
-    setHomeData({
+    submitHomeInfo({
       ...homeData,
-      annualElectricalEnergyUsage,
-      annualGasPropaneEnergyUsage,
+      annualElectricalEnergyUsage: parseInt(annualElectricalEnergyUsage, 10),
+      annualGasPropaneEnergyUsage: parseInt(annualGasPropaneEnergyUsage, 10),
       hasAirConditioner: hasAirConditioner === 'Yes',
       hasPool: hasPool === 'Yes',
       hasHotTub: hasHotTub === 'Yes',
