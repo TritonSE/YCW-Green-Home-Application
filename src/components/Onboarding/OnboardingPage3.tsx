@@ -19,13 +19,16 @@ interface Props {
 }
 
 const Page3: React.FC<Props> = ({ setHomeData, homeData }) => {
-  const [heatingFuelType, setHeatingFuelType] = useState<HeatingFuelType>();
-  const [heaterAge, setHeaterAge] = useState<AgeType>();
-  const [
-    waterHeaterFuelType,
-    setWaterFuelType,
-  ] = useState<WaterHeaterFuelType>();
-  const [waterHeaterAge, setWaterHeaterAge] = useState<AgeType>();
+  const [heatingFuelType, setHeatingFuelType] =
+    useState<HeatingFuelType | null>(homeData.heatingFuelType ?? null);
+  const [heaterAge, setHeaterAge] = useState<AgeType | null>(
+    homeData.heaterAge ?? null,
+  );
+  const [waterHeaterFuelType, setWaterFuelType] =
+    useState<WaterHeaterFuelType | null>(homeData.waterHeaterFuelType ?? null);
+  const [waterHeaterAge, setWaterHeaterAge] = useState<AgeType | null>(
+    homeData.waterHeaterAge ?? null,
+  );
   const [annualWaterUsage, setWaterUse] = useState(
     String(homeData.annualWaterUsage),
   );

@@ -22,9 +22,11 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
   const [annualGasPropaneEnergyUsage, setGasUsage] = useState(
     String(homeData.annualGasPropaneEnergyUsage),
   );
-  const [hasAirConditioner, setAC] = useState(homeData.hasAirConditioner);
-  const [hasPool, setPool] = useState(homeData.hasPool);
-  const [hasHotTub, setHotTub] = useState(homeData.hasHotTub);
+  const [hasAirConditioner, setAC] = useState(
+    homeData.hasAirConditioner ? 'Yes' : 'No',
+  );
+  const [hasPool, setPool] = useState(homeData.hasPool ? 'Yes' : 'No');
+  const [hasHotTub, setHotTub] = useState(homeData.hasHotTub ? 'Yes' : 'No');
 
   const [picker1, setPicker1] = useState(false);
   const [picker2, setPicker2] = useState(false);
@@ -38,9 +40,9 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       ...homeData,
       annualElectricalEnergyUsage: parseInt(annualElectricalEnergyUsage, 10),
       annualGasPropaneEnergyUsage: parseInt(annualGasPropaneEnergyUsage, 10),
-      hasAirConditioner,
-      hasPool,
-      hasHotTub,
+      hasAirConditioner: hasAirConditioner === 'Yes',
+      hasPool: hasPool === 'Yes',
+      hasHotTub: hasHotTub === 'Yes',
     });
   };
 
@@ -51,9 +53,9 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
       ...homeData,
       annualElectricalEnergyUsage,
       annualGasPropaneEnergyUsage,
-      hasAirConditioner,
-      hasPool,
-      hasHotTub,
+      hasAirConditioner: hasAirConditioner === 'Yes',
+      hasPool: hasPool === 'Yes',
+      hasHotTub: hasHotTub === 'Yes',
     });
   };
 
@@ -133,7 +135,6 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                   items={[
                     { label: 'Yes', value: 'Yes' },
                     { label: 'No', value: 'No' },
-                    { label: 'Unsure', value: 'Unsure' },
                   ]}
                   dropDownStyle={{ width: '90%' }}
                   itemStyle={{
@@ -142,7 +143,7 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                   }}
                   placeholder=""
                   onChangeItem={item => setAC(item.value)}
-                  defaultValue={homeData.hasAirConditioner}
+                  defaultValue={homeData.hasAirConditioner ? 'Yes' : 'No'}
                   onOpen={() => setPicker1(true)}
                   onClose={() => setPicker1(false)}
                 />
@@ -155,7 +156,6 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                     items={[
                       { label: 'Yes', value: 'Yes' },
                       { label: 'No', value: 'No' },
-                      { label: 'Unsure', value: 'Unsure' },
                     ]}
                     dropDownStyle={{ width: '90%' }}
                     itemStyle={{
@@ -166,7 +166,7 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                     onChangeItem={item => setPool(item.value)}
                     onOpen={() => setPicker2(true)}
                     onClose={() => setPicker2(false)}
-                    defaultValue={homeData.hasPool}
+                    defaultValue={homeData.hasPool ? 'Yes' : 'No'}
                   />
                 ) : (
                   <Text style={{ height: 40 }} />
@@ -179,7 +179,6 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                     items={[
                       { label: 'Yes', value: 'Yes' },
                       { label: 'No', value: 'No' },
-                      { label: 'Unsure', value: 'Unsure' },
                     ]}
                     dropDownStyle={{ width: '90%' }}
                     itemStyle={{
@@ -188,7 +187,7 @@ const Page4: React.FC<Props> = ({ setPage, setHomeData, homeData }) => {
                     }}
                     placeholder=""
                     onChangeItem={item => setHotTub(item.value)}
-                    defaultValue={homeData.hasHotTub}
+                    defaultValue={homeData.hasHotTub ? 'Yes' : 'No'}
                   />
                 ) : (
                   <Text style={{ height: 40 }} />
