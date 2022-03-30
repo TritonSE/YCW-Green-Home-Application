@@ -14,7 +14,7 @@ import styles from '../styles/BadgeScreenStyles';
 type BadgeStackParams = {
   Home: undefined;
   Collection: { level: string };
-  Detail: { badgeName: string; level: string };
+  Detail: { badgeName: string; dateEarned: string; level: string };
 };
 type Badge = { id: string; title: string; level: string };
 type BadgePreviewProps = {
@@ -54,6 +54,7 @@ export function GetBadges(badgeLevel: string) {
   const allBadges: Badge[] = answeredBadges.concat(unansweredBadges);
 
   return {
+    responseMap,
     answeredBadges,
     unansweredBadges,
     allBadges,

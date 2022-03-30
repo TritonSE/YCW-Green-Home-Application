@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 import badgeXMLs from '../assets/badges/titleToXML';
@@ -24,5 +25,9 @@ export default function SvgContainer({
   const badgeXMLObj = badgeXMLs[badgeTitle];
   const svgXML = grayscale ? badgeXMLObj.grayscale : badgeXMLObj.normal;
 
-  return <SvgXml xml={svgXML} width={width} height={height} />;
+  return (
+    <View style={{ opacity: grayscale ? 0.3 : 1.0 }}>
+      <SvgXml xml={svgXML} width={width} height={height} />
+    </View>
+  );
 }

@@ -44,6 +44,7 @@ export function BadgeCollection({ navigation, route }: CollectionProps) {
               onPress={() =>
                 navigation.push('Detail', {
                   badgeName: badge.title,
+                  dateEarned: badges.responseMap.get(badge.id)?.createdAt ?? '',
                   level: route.params.level,
                 })
               }
