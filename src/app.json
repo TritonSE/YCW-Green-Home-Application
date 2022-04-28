@@ -3,14 +3,15 @@
   "displayName": "Your Clear Way",
   "expo": {
     "name": "YourClearWay",
-    "slug": "frontend",
+    "slug": "yourClearWay",
     "splash": {
       "image": "./images/splash_icon.png",
       "resizeMode": "contain"
     },
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"]
+  },
+  "ios": {
+    "bundleIdentifier": "com.yourclearway.ycw"
   }
 }
